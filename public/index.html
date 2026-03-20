@@ -11,12 +11,13 @@
   <!-- NAV -->
   <nav id="topnav">
     <div class="nav-left">
-      <span class="logo">∿ EO</span>
+      <span class="logo">&there4; EO</span>
       <span class="logo-text">Emergent Ontology</span>
     </div>
     <div class="nav-right">
-      <button id="theme-btn" onclick="toggleTheme()" title="Toggle theme">◐</button>
-      <button id="search-btn" onclick="openSearch()" title="Search (⌘K)">⌕</button>
+      <button id="theme-btn" onclick="toggleTheme()" title="Toggle theme">&#x25D0;</button>
+      <button id="search-btn" onclick="openSearch()" title="Search (&#x2318;K)">&#x2315;</button>
+      <a href="/admin/" style="font-size:.85rem;color:var(--accent);margin-left:8px;text-decoration:none">Admin</a>
     </div>
   </nav>
 
@@ -58,41 +59,13 @@
 
     <!-- ARTICLE VIEW -->
     <section id="article-view" class="hidden">
-      <button class="back-btn" onclick="goBack()">← Back</button>
+      <button class="back-btn" onclick="goBack()">&larr; Back</button>
       <article id="article-content"></article>
       <aside id="related-articles"></aside>
     </section>
 
-    <!-- EDITOR -->
-    <section id="editor-view" class="hidden">
-      <button class="back-btn" onclick="goBack()">← Back</button>
-      <h2 id="editor-title">New Article</h2>
-      <form id="editor-form" onsubmit="return saveArticle(event)">
-        <label>Title<input id="ed-title" required></label>
-        <label>Slug<input id="ed-slug" placeholder="auto-generated"></label>
-        <label>Level
-          <select id="ed-level">
-            <option value="101">101</option>
-            <option value="201">201</option>
-            <option value="301">301</option>
-            <option value="401">401</option>
-          </select>
-        </label>
-        <label>Tags <small>(comma-separated)</small><input id="ed-tags"></label>
-        <label>Keywords <small>(comma-separated)</small><input id="ed-keywords"></label>
-        <label>Body <small>(Markdown supported)</small>
-          <textarea id="ed-body" rows="20"></textarea>
-        </label>
-        <div class="editor-actions">
-          <button type="submit" class="btn primary">Save</button>
-          <button type="button" class="btn" onclick="goBack()">Cancel</button>
-        </div>
-      </form>
-    </section>
+    <!-- EDITOR (removed - use /admin/ instead) -->
   </main>
-
-  <!-- FAB: New Article -->
-  <button id="fab" onclick="openEditor()" title="New Article">+</button>
 
   <script src="app.js"></script>
 </body>

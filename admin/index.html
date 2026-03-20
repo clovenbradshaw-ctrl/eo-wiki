@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EO Admin</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f9f9fb;--bg3:#f3f3f8;
+  --ink:#18181b;--ink2:#52525b;--ink3:#a1a1aa;
+  --border:#e4e4e7;--border2:#d4d4d8;
+  --purple:#6366f1;--purple-bg:#eef2ff;--purple-text:#4338ca;
+  --green:#10b981;--green-bg:#ecfdf5;--green-text:#047857;
+  --red:#ef4444;--red-bg:#fef2f2;--red-text:#b91c1c;
+  --yellow:#f59e0b;--yellow-bg:#fffbeb;--yellow-text:#b45309;
+  --radius:8px;
+}
+[data-theme="dark"]{
+  --bg:#111;--bg2:#1a1a1a;--bg3:#222;
+  --ink:#e8e8e8;--ink2:#aaa;--ink3:#777;
+  --border:#2a2a2a;--border2:#333;
+  --purple-bg:#1e1a3a;--purple-text:#a29bfe;
+  --green-bg:#0d2818;--green-text:#6ee7b7;
+  --red-bg:#2d1111;--red-text:#fca5a5;
+  --yellow-bg:#2d2011;--yellow-text:#fcd34d;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg2);color:var(--ink);font-size:14px;line-height:1.5;min-height:100vh}
+a{color:var(--purple);text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* ── Login ── */
+.login-wrap{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px}
+.login-box{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:32px;width:100%;max-width:380px;box-shadow:0 4px 24px rgba(0,0,0,.06)}
+.login-box h1{font-size:20px;font-weight:600;margin-bottom:4px}
+.login-box p{color:var(--ink3);font-size:13px;margin-bottom:20px}
+.login-box label{display:block;font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:4px}
+.login-box input{width:100%;height:38px;border:1px solid var(--border2);border-radius:var(--radius);padding:0 12px;font-size:14px;font-family:inherit;color:var(--ink);background:var(--bg);outline:none;margin-bottom:16px}
+.login-box input:focus{border-color:var(--purple)}
+.login-error{color:var(--red-text);font-size:13px;margin-bottom:12px;display:none}
+.btn{height:36px;padding:0 18px;border:1px solid var(--border2);border-radius:var(--radius);background:var(--bg);color:var(--ink2);font-size:13px;font-family:inherit;cursor:pointer;font-weight:500;transition:all .12s}
+.btn:hover{border-color:var(--purple);color:var(--purple)}
+.btn-primary{background:var(--purple);color:#fff;border-color:var(--purple)}
+.btn-primary:hover{opacity:.9}
+.btn-danger{background:var(--red);color:#fff;border-color:var(--red)}
+.btn-danger:hover{opacity:.9}
+.btn-sm{height:30px;padding:0 12px;font-size:12px}
+
+/* ── Layout ── */
+.app{display:none}
+.topbar{background:var(--bg);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:sticky;top:0;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-logo{font-size:14px;font-weight:600;color:var(--purple);display:flex;align-items:center;gap:8px}
+.topbar-logo span{width:26px;height:26px;background:var(--purple);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:600}
+.topbar-right{display:flex;align-items:center;gap:8px}
+.page{max-width:1200px;margin:0 auto;padding:24px}
+
+/* ── Controls ── */
+.controls{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.search-input{flex:1;min-width:200px;height:36px;border:1px solid var(--border2);border-radius:var(--radius);padding:0 12px;font-size:13px;font-family:inherit;color:var(--ink);background:var(--bg);outline:none}
+.search-input:focus{border-color:var(--purple)}
+.filter-group{display:flex;gap:4px}
+.fbtn{height:30px;padding:0 12px;border:1px solid var(--border2);border-radius:6px;background:var(--bg);color:var(--ink2);font-size:12px;font-family:inherit;cursor:pointer;white-space:nowrap;transition:all .1s}
+.fbtn:hover{border-color:var(--border2);background:var(--bg3)}
+.fbtn.on{background:var(--purple);color:#fff;border-color:var(--purple)}
+
+/* ── Stats ── */
+.stats{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.stat{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:12px 16px;flex:1;min-width:120px}
+.stat-val{font-size:22px;font-weight:700;color:var(--ink)}
+.stat-lbl{font-size:12px;color:var(--ink3);margin-top:2px}
+
+/* ── Table ── */
+.table-wrap{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:11px;font-weight:600;color:var(--ink3);letter-spacing:.04em;text-transform:uppercase;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--bg2);cursor:pointer;user-select:none;white-space:nowrap}
+th:hover{color:var(--ink)}
+td{padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--bg2)}
+.td-title{font-weight:500;color:var(--ink);cursor:pointer}
+.td-title:hover{color:var(--purple)}
+.badge{display:inline-block;padding:1px 8px;border-radius:100px;font-size:11px;font-weight:500}
+.badge-pub{background:var(--green-bg);color:var(--green-text)}
+.badge-draft{background:var(--yellow-bg);color:var(--yellow-text)}
+.badge-archived{background:var(--bg3);color:var(--ink3)}
+.badge-type{background:var(--purple-bg);color:var(--purple-text)}
+.td-tags{display:flex;gap:4px;flex-wrap:wrap}
+.td-tag{padding:1px 6px;border:1px solid var(--border);border-radius:4px;font-size:11px;color:var(--ink3)}
+.td-actions{display:flex;gap:4px}
+
+/* ── Editor Overlay ── */
+.editor-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.4);overflow-y:auto;padding:40px 20px}
+.editor-overlay.open{display:block}
+.editor-panel{background:var(--bg);border-radius:12px;max-width:900px;margin:0 auto;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.editor-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.editor-header h2{font-size:18px;font-weight:600}
+.editor-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--ink3);line-height:1}
+.editor-close:hover{color:var(--ink)}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--ink2);margin-bottom:4px;letter-spacing:.02em}
+.field input,.field select{width:100%;height:36px;border:1px solid var(--border2);border-radius:var(--radius);padding:0 12px;font-size:13px;font-family:inherit;color:var(--ink);background:var(--bg);outline:none}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--purple)}
+.field textarea{width:100%;border:1px solid var(--border2);border-radius:var(--radius);padding:10px 12px;font-size:13px;font-family:'JetBrains Mono',monospace;color:var(--ink);background:var(--bg);outline:none;resize:vertical;line-height:1.6}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.editor-actions{display:flex;gap:8px;justify-content:space-between;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.editor-actions-left{display:flex;gap:8px}
+.editor-actions-right{display:flex;gap:8px}
+
+/* ── Revisions ── */
+.revisions{margin-top:20px;border-top:1px solid var(--border);padding-top:16px}
+.revisions h3{font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:10px}
+.rev-item{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}
+.rev-item:last-child{border-bottom:none}
+.rev-time{color:var(--ink3);min-width:140px}
+.rev-summary{color:var(--ink2);flex:1}
+.rev-btn{color:var(--purple);cursor:pointer;border:none;background:none;font-size:12px;font-family:inherit}
+.rev-btn:hover{text-decoration:underline}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .field-row,.field-row3{grid-template-columns:1fr}
+  .stats{flex-direction:column}
+  table{font-size:12px}
+  th,td{padding:8px 10px}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="loginView">
+  <div class="login-box">
+    <h1>EO Admin</h1>
+    <p>Enter password to manage content</p>
+    <label for="pw">Password</label>
+    <input type="password" id="pw" placeholder="Admin password" autofocus>
+    <div class="login-error" id="loginErr">Invalid password</div>
+    <button class="btn btn-primary" style="width:100%" onclick="doLogin()">Sign In</button>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="appView">
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo"><span>EO</span> Admin</div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-sm" onclick="toggleTheme()">Theme</button>
+      <a class="btn btn-sm" href="/" target="_blank">View Site</a>
+      <button class="btn btn-sm" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="stats" id="stats"></div>
+
+    <div class="controls">
+      <input class="search-input" id="search" type="text" placeholder="Search by title or slug...">
+      <div class="filter-group" id="typeFilters"></div>
+      <button class="btn btn-primary btn-sm" onclick="openEditor()">+ New</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th onclick="sortBy('title')">Title</th>
+            <th onclick="sortBy('content_type')">Type</th>
+            <th onclick="sortBy('status')">Status</th>
+            <th onclick="sortBy('level')">Level</th>
+            <th onclick="sortBy('tags')">Tags</th>
+            <th onclick="sortBy('updated_at')">Updated</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- EDITOR OVERLAY -->
+<div class="editor-overlay" id="editorOverlay">
+  <div class="editor-panel">
+    <div class="editor-header">
+      <h2 id="editorTitle">New Content</h2>
+      <button class="editor-close" onclick="closeEditor()">&times;</button>
+    </div>
+
+    <div class="field-row">
+      <div class="field"><label>Title</label><input id="ed-title" required></div>
+      <div class="field"><label>Slug</label><input id="ed-slug" placeholder="auto-generated"></div>
+    </div>
+    <div class="field-row3">
+      <div class="field">
+        <label>Content Type</label>
+        <select id="ed-type">
+          <option value="wiki">Wiki</option>
+          <option value="blog">Blog</option>
+          <option value="page">Page</option>
+          <option value="experiment">Experiment</option>
+          <option value="document">Document</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Status</label>
+        <select id="ed-status">
+          <option value="draft">Draft</option>
+          <option value="published">Published</option>
+          <option value="archived">Archived</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Level</label>
+        <select id="ed-level">
+          <option value="101">101</option>
+          <option value="201">201</option>
+          <option value="301">301</option>
+          <option value="401">401</option>
+          <option value="operator">operator</option>
+        </select>
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>Tags (comma-separated)</label><input id="ed-tags"></div>
+      <div class="field"><label>Keywords (comma-separated)</label><input id="ed-keywords"></div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>Visibility</label>
+        <select id="ed-visibility">
+          <option value="public">Public</option>
+          <option value="private">Private</option>
+        </select>
+      </div>
+      <div class="field"><label>Display Name</label><input id="ed-displayname"></div>
+    </div>
+    <div class="field">
+      <label>Body (HTML / Markdown)</label>
+      <textarea id="ed-body" rows="20"></textarea>
+    </div>
+    <div class="field">
+      <label>Revision Summary</label>
+      <input id="ed-summary" placeholder="What changed?" maxlength="120">
+    </div>
+
+    <div id="revisions"></div>
+
+    <div class="editor-actions">
+      <div class="editor-actions-left">
+        <button class="btn btn-danger btn-sm" id="deleteBtn" onclick="doDelete()" style="display:none">Delete</button>
+      </div>
+      <div class="editor-actions-right">
+        <button class="btn" onclick="closeEditor()">Cancel</button>
+        <button class="btn btn-primary" onclick="doSave()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────
+let password = '';
+let entries = [];
+let sortField = 'updated_at';
+let sortDir = -1;
+let filterType = '';
+let editingRecordId = null;
+
+// ── Auth ───────────────────────────────────────────────────
+function doLogin() {
+  password = document.getElementById('pw').value;
+  fetch('/api/auth/verify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ password })
+  }).then(r => {
+    if (!r.ok) throw new Error('Invalid');
+    return r.json();
+  }).then(() => {
+    localStorage.setItem('eo-pw', password);
+    showApp();
+  }).catch(() => {
+    document.getElementById('loginErr').style.display = 'block';
+    password = '';
+  });
+}
+
+function doLogout() {
+  password = '';
+  localStorage.removeItem('eo-pw');
+  document.getElementById('appView').style.display = 'none';
+  document.getElementById('loginView').style.display = 'flex';
+  document.getElementById('pw').value = '';
+}
+
+function showApp() {
+  document.getElementById('loginView').style.display = 'none';
+  document.getElementById('appView').style.display = 'block';
+  loadContent();
+}
+
+// Check saved session
+(function() {
+  const saved = localStorage.getItem('eo-pw');
+  if (saved) {
+    password = saved;
+    fetch('/api/auth/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: saved })
+    }).then(r => {
+      if (r.ok) showApp();
+      else { localStorage.removeItem('eo-pw'); password = ''; }
+    });
+  }
+  // Theme
+  const t = localStorage.getItem('eo-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', t);
+})();
+
+document.getElementById('pw').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('eo-theme', next);
+}
+
+// ── API helpers ────────────────────────────────────────────
+function api(method, path, body) {
+  const opts = {
+    method,
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + password }
+  };
+  if (body) opts.body = JSON.stringify({ ...body, password });
+  return fetch(path, opts).then(r => {
+    if (!r.ok) return r.json().then(e => Promise.reject(e));
+    return r.json();
+  });
+}
+
+// ── Content ────────────────────────────────────────────────
+function loadContent() {
+  api('GET', '/api/admin/content').then(data => {
+    entries = data;
+    renderStats();
+    renderTypeFilters();
+    renderTable();
+  }).catch(e => {
+    console.error('Failed to load:', e);
+    if (e.error === 'Unauthorized') doLogout();
+  });
+}
+
+function renderStats() {
+  const total = entries.length;
+  const pub = entries.filter(e => e.status === 'published').length;
+  const draft = entries.filter(e => e.status === 'draft').length;
+  const types = [...new Set(entries.map(e => e.content_type))].length;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat"><div class="stat-val">${total}</div><div class="stat-lbl">Total</div></div>
+    <div class="stat"><div class="stat-val">${pub}</div><div class="stat-lbl">Published</div></div>
+    <div class="stat"><div class="stat-val">${draft}</div><div class="stat-lbl">Drafts</div></div>
+    <div class="stat"><div class="stat-val">${types}</div><div class="stat-lbl">Content Types</div></div>
+  `;
+}
+
+function renderTypeFilters() {
+  const types = ['', ...new Set(entries.map(e => e.content_type))].sort();
+  document.getElementById('typeFilters').innerHTML = types.map(t =>
+    `<button class="fbtn${filterType===t?' on':''}" onclick="setFilter('${t}')">${t||'All'}</button>`
+  ).join('');
+}
+
+function setFilter(t) {
+  filterType = t;
+  renderTypeFilters();
+  renderTable();
+}
+
+function sortBy(field) {
+  if (sortField === field) sortDir *= -1;
+  else { sortField = field; sortDir = 1; }
+  renderTable();
+}
+
+function renderTable() {
+  const q = document.getElementById('search').value.toLowerCase();
+  let rows = entries.filter(e => {
+    if (filterType && e.content_type !== filterType) return false;
+    if (q && !e.title.toLowerCase().includes(q) && !e.slug.toLowerCase().includes(q)) return false;
+    return true;
+  });
+  rows.sort((a, b) => {
+    let va = a[sortField] || '', vb = b[sortField] || '';
+    if (typeof va === 'string') va = va.toLowerCase();
+    if (typeof vb === 'string') vb = vb.toLowerCase();
+    if (Array.isArray(va)) va = va.join(',');
+    if (Array.isArray(vb)) vb = vb.join(',');
+    return va < vb ? -sortDir : va > vb ? sortDir : 0;
+  });
+  document.getElementById('tbody').innerHTML = rows.map(r => {
+    const statusClass = r.status === 'published' ? 'badge-pub' : r.status === 'draft' ? 'badge-draft' : 'badge-archived';
+    const tags = (r.tags || []).slice(0, 3).map(t => `<span class="td-tag">${esc(t)}</span>`).join('');
+    return `<tr>
+      <td class="td-title" onclick="openEditor('${r.record_id}')">${esc(r.title)}</td>
+      <td><span class="badge badge-type">${r.content_type}</span></td>
+      <td><span class="badge ${statusClass}">${r.status}</span></td>
+      <td>${r.level || ''}</td>
+      <td><div class="td-tags">${tags}</div></td>
+      <td>${timeAgo(r.updated_at)}</td>
+      <td><div class="td-actions">
+        <button class="btn btn-sm" onclick="openEditor('${r.record_id}')">Edit</button>
+        <button class="btn btn-sm" onclick="toggleStatus('${r.record_id}')">${r.status==='published'?'Unpublish':'Publish'}</button>
+      </div></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="7" style="text-align:center;color:var(--ink3);padding:40px">No content found</td></tr>';
+}
+
+document.getElementById('search').addEventListener('input', renderTable);
+
+// ── Editor ─────────────────────────────────────────────────
+function openEditor(recordId) {
+  editingRecordId = recordId || null;
+  document.getElementById('editorTitle').textContent = recordId ? 'Edit Content' : 'New Content';
+  document.getElementById('deleteBtn').style.display = recordId ? 'inline-flex' : 'none';
+  document.getElementById('revisions').innerHTML = '';
+  // Reset fields
+  document.getElementById('ed-title').value = '';
+  document.getElementById('ed-slug').value = '';
+  document.getElementById('ed-type').value = 'wiki';
+  document.getElementById('ed-status').value = 'draft';
+  document.getElementById('ed-level').value = '101';
+  document.getElementById('ed-tags').value = '';
+  document.getElementById('ed-keywords').value = '';
+  document.getElementById('ed-visibility').value = 'public';
+  document.getElementById('ed-displayname').value = '';
+  document.getElementById('ed-body').value = '';
+  document.getElementById('ed-summary').value = '';
+
+  if (recordId) {
+    api('GET', '/api/admin/content/' + encodeURIComponent(recordId)).then(data => {
+      document.getElementById('ed-title').value = data.title || '';
+      document.getElementById('ed-slug').value = data.slug || '';
+      document.getElementById('ed-type').value = data.content_type || 'wiki';
+      document.getElementById('ed-status').value = data.status || 'draft';
+      document.getElementById('ed-level').value = data.level || '101';
+      document.getElementById('ed-tags').value = (data.tags || []).join(', ');
+      document.getElementById('ed-keywords').value = (data.keywords || []).join(', ');
+      document.getElementById('ed-visibility').value = data.visibility || 'public';
+      document.getElementById('ed-displayname').value = data.display_name || '';
+      document.getElementById('ed-body').value = data.body || '';
+      // Revisions
+      if (data.revisions && data.revisions.length) {
+        document.getElementById('revisions').innerHTML = `
+          <div class="revisions">
+            <h3>Revisions (${data.revisions.length})</h3>
+            ${data.revisions.map(r => `
+              <div class="rev-item">
+                <span class="rev-time">${new Date(r.created_at).toLocaleString()}</span>
+                <span class="rev-summary">${esc(r.summary || 'No summary')}</span>
+                <button class="rev-btn" onclick="restoreRevision(this)" data-content="${encodeURIComponent(r.content||'')}">Restore</button>
+              </div>
+            `).join('')}
+          </div>`;
+      }
+    }).catch(e => alert('Failed to load: ' + (e.error || e.message)));
+  }
+
+  document.getElementById('editorOverlay').classList.add('open');
+}
+
+function closeEditor() {
+  document.getElementById('editorOverlay').classList.remove('open');
+  editingRecordId = null;
+}
+
+function restoreRevision(btn) {
+  document.getElementById('ed-body').value = decodeURIComponent(btn.dataset.content);
+}
+
+function slugify(s) {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+// Auto-generate slug from title
+document.getElementById('ed-title').addEventListener('input', function() {
+  if (!editingRecordId) {
+    document.getElementById('ed-slug').value = slugify(this.value);
+  }
+});
+
+function doSave() {
+  const title = document.getElementById('ed-title').value.trim();
+  const slug = document.getElementById('ed-slug').value.trim() || slugify(title);
+  if (!title || !slug) return alert('Title and slug are required');
+
+  const payload = {
+    title,
+    slug,
+    content_type: document.getElementById('ed-type').value,
+    status: document.getElementById('ed-status').value,
+    level: document.getElementById('ed-level').value,
+    tags: document.getElementById('ed-tags').value.split(',').map(s => s.trim()).filter(Boolean),
+    keywords: document.getElementById('ed-keywords').value.split(',').map(s => s.trim()).filter(Boolean),
+    visibility: document.getElementById('ed-visibility').value,
+    display_name: document.getElementById('ed-displayname').value,
+    body: document.getElementById('ed-body').value,
+    summary: document.getElementById('ed-summary').value || (editingRecordId ? 'Updated' : 'Initial creation'),
+    password
+  };
+
+  const method = editingRecordId ? 'PUT' : 'POST';
+  const url = editingRecordId
+    ? '/api/admin/content/' + encodeURIComponent(editingRecordId)
+    : '/api/admin/content';
+
+  api(method, url, payload).then(() => {
+    closeEditor();
+    loadContent();
+  }).catch(e => alert('Save failed: ' + (e.error || e.message)));
+}
+
+function doDelete() {
+  if (!editingRecordId) return;
+  if (!confirm('Delete this content permanently?')) return;
+  api('DELETE', '/api/admin/content/' + encodeURIComponent(editingRecordId))
+    .then(() => { closeEditor(); loadContent(); })
+    .catch(e => alert('Delete failed: ' + (e.error || e.message)));
+}
+
+function toggleStatus(recordId) {
+  const entry = entries.find(e => e.record_id === recordId);
+  if (!entry) return;
+  const newStatus = entry.status === 'published' ? 'draft' : 'published';
+  api('PUT', '/api/admin/content/' + encodeURIComponent(recordId), {
+    status: newStatus, summary: newStatus === 'published' ? 'Published' : 'Unpublished', password
+  }).then(() => loadContent())
+    .catch(e => alert('Failed: ' + (e.error || e.message)));
+}
+
+// ── Helpers ────────────────────────────────────────────────
+function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+function timeAgo(ts) {
+  if (!ts) return '';
+  const s = Math.floor((Date.now() - new Date(ts + 'Z').getTime()) / 1000);
+  if (s < 60) return 'just now';
+  if (s < 3600) return Math.floor(s/60) + 'm ago';
+  if (s < 86400) return Math.floor(s/3600) + 'h ago';
+  if (s < 604800) return Math.floor(s/86400) + 'd ago';
+  return new Date(ts).toLocaleDateString();
+}
+
+// Close editor on Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeEditor(); });
+</script>
+</body>
+</html>
