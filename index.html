@@ -1000,6 +1000,210 @@
   .sr-btn-replace-all:hover { opacity: 0.85; }
   .sr-btn-replace-all:disabled { opacity: 0.4; cursor: not-allowed; }
 
+  /* ─── EO-WIDGET IFRAMES ─── */
+  .eo-widget-frame {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin: 1.4em 0;
+    background: #fff;
+    display: block;
+  }
+
+  /* ─── CHANGELOG PANEL ─── */
+  .cl-panel {
+    display: none;
+    position: fixed;
+    top: 0; right: 0;
+    width: 440px;
+    height: 100vh;
+    background: #fff;
+    border-left: 1px solid var(--border);
+    box-shadow: -8px 0 32px rgba(0,0,0,0.08);
+    z-index: 150;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .cl-panel.open { display: flex; }
+  .cl-header {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .cl-header h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cl-header h3 i { font-size: 18px; color: var(--text-tertiary); }
+  .cl-close {
+    background: none; border: none; cursor: pointer;
+    color: var(--text-tertiary); font-size: 20px; padding: 2px; display: flex;
+  }
+  .cl-close:hover { color: var(--text); }
+  .cl-filter {
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .cl-filter select {
+    font-family: inherit; font-size: 12px;
+    padding: 4px 8px; border: 1px solid var(--border);
+    border-radius: var(--radius); background: var(--bg);
+    color: var(--text); flex: 1;
+  }
+  .cl-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+  }
+  .cl-list::-webkit-scrollbar { width: 3px; }
+  .cl-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .cl-entry {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border-light);
+    transition: background var(--transition);
+  }
+  .cl-entry:hover { background: var(--bg); }
+  .cl-entry-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+  .cl-op {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    background: var(--bg-code-inline);
+    color: var(--holon);
+  }
+  .cl-op.op-ALT { color: var(--emanon); }
+  .cl-op.op-INS { color: #2d8a4e; }
+  .cl-op.op-NUL { color: var(--protogon); }
+  .cl-op.op-REC { color: var(--holon); }
+  .cl-subject {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .cl-time {
+    font-size: 10px;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+  .cl-predicate {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-family: 'IBM Plex Mono', monospace;
+    margin-bottom: 6px;
+  }
+  .cl-actions {
+    display: flex;
+    gap: 6px;
+  }
+  .cl-btn {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .cl-btn:hover { background: var(--bg-nav); color: var(--text); }
+  .cl-btn i { font-size: 12px; }
+  .cl-btn-revert { border-color: var(--holon); color: var(--holon); }
+  .cl-btn-revert:hover { background: var(--holon); color: #fff; }
+  .cl-empty { padding: 40px 20px; text-align: center; color: var(--text-tertiary); font-size: 13px; }
+
+  /* ─── WIDGET EDITOR MODAL ─── */
+  .widget-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 32, 48, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 250;
+    align-items: center;
+    justify-content: center;
+  }
+  .widget-modal-overlay.show { display: flex; }
+  .widget-modal {
+    background: #fff;
+    border-radius: 8px;
+    width: 680px;
+    max-width: 95vw;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.18);
+    overflow: hidden;
+  }
+  .widget-modal-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .widget-modal-header h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .widget-modal-body {
+    flex: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .widget-modal-body textarea {
+    flex: 1;
+    width: 100%;
+    padding: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    background: var(--bg-code);
+    color: var(--code-text);
+    border: none;
+    resize: none;
+    outline: none;
+    min-height: 400px;
+  }
+  .widget-modal-footer {
+    padding: 12px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .widget-modal-footer .hint {
+    font-size: 11px;
+    color: var(--text-tertiary);
+  }
+
   @media (max-width: 768px) {
     .nav { width: 240px; min-width: 240px; }
     .content-area { padding: 32px 24px 80px; }
@@ -1034,6 +1238,7 @@
       <button class="filter-btn" data-filter="draft">Draft</button>
       <button class="filter-btn" data-filter="archived">Archived</button>
       <button class="filter-btn" id="srBtn" style="display:none;margin-left:auto;border-color:var(--emanon);color:var(--emanon);" onclick="openSR(); event.stopPropagation();"><i class="ph ph-magnifying-glass" style="font-size:12px;vertical-align:-1px;"></i> S&amp;R</button>
+      <button class="filter-btn" id="clBtn" style="display:none;border-color:var(--holon);color:var(--holon);" onclick="openChangelog(); event.stopPropagation();"><i class="ph ph-clock-counter-clockwise" style="font-size:12px;vertical-align:-1px;"></i> Log</button>
     </div>
     <div class="nav-filter-row nav-tag-row" id="navTagRow"></div>
   </div>
@@ -1094,6 +1299,48 @@
   </div>
   <div class="sr-count" id="srCount" style="display:none;"></div>
   <div class="sr-results" id="srResults"></div>
+</div>
+
+<div class="cl-panel" id="clPanel">
+  <div class="cl-header">
+    <h3><i class="ph ph-clock-counter-clockwise"></i> Change Log</h3>
+    <button class="cl-close" onclick="closeChangelog()"><i class="ph ph-x"></i></button>
+  </div>
+  <div class="cl-filter">
+    <select id="clFilter" onchange="loadChangelog()">
+      <option value="">All pages</option>
+    </select>
+    <button class="btn" onclick="loadChangelog()" style="padding:4px 8px;font-size:11px;"><i class="ph ph-arrow-clockwise"></i></button>
+  </div>
+  <div class="cl-list" id="clList">
+    <div class="cl-empty">Load changelog to see history.</div>
+  </div>
+</div>
+
+<div class="widget-modal-overlay" id="widgetModalOverlay">
+  <div class="widget-modal">
+    <div class="widget-modal-header">
+      <h3><i class="ph ph-code-block" style="color:var(--holon);margin-right:4px;"></i> Widget Editor</h3>
+      <button class="cl-close" onclick="closeWidgetModal()"><i class="ph ph-x"></i></button>
+    </div>
+    <div class="widget-modal-body">
+      <textarea id="widgetCode" placeholder="<!-- Write full HTML/CSS/JS here. It renders in a sandboxed iframe. -->
+<style>
+  body { font-family: sans-serif; margin: 20px; }
+</style>
+<div id='app'></div>
+<script>
+  // Your interactive widget code
+<\/script>"></textarea>
+    </div>
+    <div class="widget-modal-footer">
+      <span class="hint"><i class="ph ph-info"></i> Runs sandboxed. Use &lt;eo-widget&gt; tags in HTML.</span>
+      <div style="display:flex;gap:8px;">
+        <button class="btn" onclick="closeWidgetModal()">Cancel</button>
+        <button class="btn btn-save" onclick="insertWidget()"><i class="ph ph-plus"></i> Insert</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -1163,6 +1410,63 @@ async function postRecord(payload) {
   return res.json();
 }
 
+/* POST change log entry to /eowiki */
+async function postChangeLog(op, subject, predicate, value, context) {
+  const body = {
+    op,          // EO operator: ALT, INS, NUL, etc.
+    subject,     // record_id being changed
+    predicate,   // what changed: "meta.title", "current_revision.content", etc.
+    value,       // new value (stringified if object)
+    context,     // JSON string: { before, after, rev_id, timestamp }
+  };
+  if (adminPassword) body.XANO_PASSWORD = adminPassword;
+  try {
+    const res = await fetch(`${API}/eowiki`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) console.warn('Changelog POST failed:', res.status);
+    else return res.json();
+  } catch (e) {
+    console.warn('Changelog POST error:', e);
+  }
+}
+
+/* Fetch changelog entries (newest first) */
+async function fetchChangeLog(subject) {
+  // Try fetching from the eowiki GET endpoint filtered by subject
+  try {
+    const url = subject
+      ? `${API}/eowiki?subject=${encodeURIComponent(subject)}`
+      : `${API}/eowiki`;
+    const res = await fetch(url);
+    if (!res.ok) return [];
+    const data = await res.json();
+    const items = data.items || data;
+    return Array.isArray(items) ? items : [];
+  } catch { return []; }
+}
+
+/**
+ * Log a structured change using EO notation.
+ * @param {string} recordId - e.g. "wiki:emanon"
+ * @param {string} field - what changed: "values", "meta.title", "meta.status", etc.
+ * @param {*} before - old value
+ * @param {*} after - new value
+ * @param {string} op - EO operator: ALT (edit), INS (create), NUL (delete), REC (revert)
+ */
+function logChange(recordId, field, before, after, op = 'ALT') {
+  const ctx = JSON.stringify({
+    before: typeof before === 'string' ? before : JSON.stringify(before),
+    after: typeof after === 'string' ? after : JSON.stringify(after),
+    timestamp: new Date().toISOString(),
+  });
+  const val = typeof after === 'string' ? after.slice(0, 5000) : JSON.stringify(after).slice(0, 5000);
+  // Fire and forget — don't block saves
+  postChangeLog(op, recordId, field, val, ctx);
+}
+
 /* ═══════════════════════
    PARSE
    ═══════════════════════ */
@@ -1206,7 +1510,9 @@ function showLogin() {
     document.getElementById('loginLabel').textContent = 'log in';
     document.querySelector('#loginBtn i').className = 'ph ph-sign-in';
     document.getElementById('srBtn').style.display = 'none';
+    document.getElementById('clBtn').style.display = 'none';
     closeSR();
+    closeChangelog();
     currentFilter = 'all';
     currentTag = null;
     document.querySelectorAll('.nav-status-row .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
@@ -1235,6 +1541,7 @@ function doLogin() {
   document.getElementById('loginLabel').textContent = 'log out';
   document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
   document.getElementById('srBtn').style.display = '';
+  document.getElementById('clBtn').style.display = '';
   renderTagButtons();
   renderList();
   renderGetStarted();
@@ -1271,6 +1578,17 @@ function buildIndex(records) {
           content_type: 'wiki',
         };
       });
+  }
+
+  // Enrich entries with updated_at from full records
+  for (const entry of indexEntries) {
+    const rec = records.find(r => r.record_id === entry.content_id);
+    if (rec) {
+      const v = parseValues(rec.values);
+      const m = extractMeta(v);
+      if (m.updated_at) entry.updated_at = m.updated_at;
+      else if (rec.created_at) entry.updated_at = new Date(rec.created_at).toISOString();
+    }
   }
 
   renderTagButtons();
@@ -1377,12 +1695,21 @@ function renderList() {
 
 function renderNavItem(entry, isFav) {
   const safeId = entry.content_id.replace(/'/g, "\\'");
+  // For published: show relative time. For draft/archived: show status label.
+  let metaText;
+  if (entry.status === 'published' && entry.updated_at) {
+    metaText = formatTime(entry.updated_at);
+  } else if (entry.status === 'published') {
+    metaText = '';
+  } else {
+    metaText = entry.status;
+  }
   return `
     <div class="nav-item" data-id="${entry.content_id}" onclick="loadPage('${safeId}')">
       <div class="nav-item-title">${esc(entry.title)}</div>
       <div class="nav-item-meta">
         <span class="status-dot status-${entry.status}"></span>
-        ${entry.status}
+        ${metaText}
       </div>
       <button class="nav-fav ${isFav ? 'active' : ''}" onclick="toggleFav('${safeId}', event)" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
         <i class="ph ${isFav ? 'ph-star-fill' : 'ph-star'}"></i>
@@ -1454,6 +1781,18 @@ function injectIds(el) {
     wrap.className = 'table-wrap';
     table.parentNode.insertBefore(wrap, table);
     wrap.appendChild(table);
+  });
+  // Process <eo-widget> → sandboxed iframe
+  el.querySelectorAll('eo-widget').forEach(widget => {
+    const height = widget.getAttribute('height') || '300';
+    const code = widget.innerHTML;
+    const iframe = document.createElement('iframe');
+    iframe.className = 'eo-widget-frame';
+    iframe.style.height = height + 'px';
+    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+    iframe.setAttribute('frameborder', '0');
+    iframe.srcdoc = `<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><style>*{margin:0;box-sizing:border-box;}body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;}</style></head><body>${code}</body></html>`;
+    widget.replaceWith(iframe);
   });
 }
 
@@ -1571,7 +1910,7 @@ async function loadPage(contentId) {
         ${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}
         ${keywords.length ? '· ' + keywords.map(k => esc(k)).join(', ') : ''}
       </div>
-      ${isLoggedIn ? `<div class="article-actions"><button class="btn" onclick="toggleEdit()"><i class="ph ph-pencil-simple"></i> Edit</button></div>` : ''}
+      ${isLoggedIn ? `<div class="article-actions"><button class="btn" onclick="toggleEdit()"><i class="ph ph-pencil-simple"></i> Edit</button><button class="btn" onclick="openChangelogFor('${esc(contentId)}')"><i class="ph ph-clock-counter-clockwise"></i> History</button></div>` : ''}
     </div>
     <div class="article-body" id="articleBody">${bodyHtml}</div>
   `;
@@ -1682,6 +2021,7 @@ function renderEditor() {
   document.querySelector('.article-actions').innerHTML = `
     <button class="btn btn-save" id="saveBtn" onclick="saveEdit()"><i class="ph ph-floppy-disk"></i> Save</button>
     <button class="btn" onclick="cancelEdit()"><i class="ph ph-x"></i> Cancel</button>
+    <button class="btn" onclick="openWidgetModal()" style="margin-left:auto;"><i class="ph ph-code-block"></i> Widget</button>
   `;
 
   // Init Quill
@@ -1787,7 +2127,9 @@ async function saveEdit() {
     saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Saving…';
     try {
       const payload = { values: typeof currentRec.values === 'string' ? JSON.stringify(newValues) : newValues };
+      const oldVals = parseValues(currentRec.values);
       const updated = await patchRecord(currentRec.id, payload);
+      logChange(currentRec.record_id, 'values', oldVals, newValues, 'ALT');
       const idx = allRecords.findIndex(r => r.id === currentRec.id);
       if (idx !== -1) { allRecords[idx] = { ...allRecords[idx], ...updated }; currentRec = allRecords[idx]; }
       showToast('Saved');
@@ -1836,8 +2178,21 @@ async function saveEdit() {
   saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Saving…';
 
   try {
+    const oldVals = parseValues(currentRec.values);
+    const oldContent = extractContent(oldVals) || '';
+    const oldMeta = extractMeta(oldVals);
     const payload = { values: typeof currentRec.values === 'string' ? JSON.stringify(vals) : vals };
     const updated = await patchRecord(currentRec.id, payload);
+
+    // Log content change
+    if (oldContent !== newHtml) {
+      logChange(currentRec.record_id, 'current_revision.content', oldContent, newHtml, 'ALT');
+    }
+    // Log meta changes
+    if (oldMeta.title !== newTitle) logChange(currentRec.record_id, 'meta.title', oldMeta.title, newTitle, 'ALT');
+    if (oldMeta.status !== newStatus) logChange(currentRec.record_id, 'meta.status', oldMeta.status, newStatus, 'ALT');
+    if (JSON.stringify(oldMeta.tags) !== JSON.stringify(newTags)) logChange(currentRec.record_id, 'meta.tags', oldMeta.tags, newTags, 'ALT');
+
     const idx = allRecords.findIndex(r => r.id === currentRec.id);
     if (idx !== -1) { allRecords[idx] = { ...allRecords[idx], ...updated }; currentRec = allRecords[idx]; }
 
@@ -1867,6 +2222,239 @@ function cancelEdit() {
   quillInstance = null;
   editTab = 'wysiwyg';
   loadPage(currentRec.record_id);
+}
+
+/* ═══════════════════════
+   CHANGELOG PANEL
+   ═══════════════════════ */
+
+function openChangelog() {
+  document.getElementById('clPanel').classList.add('open');
+  // Populate filter dropdown with known pages
+  const sel = document.getElementById('clFilter');
+  const current = sel.value;
+  sel.innerHTML = '<option value="">All pages</option>' +
+    indexEntries.map(e => `<option value="${esc(e.content_id)}" ${current === e.content_id ? 'selected' : ''}>${esc(e.title)}</option>`).join('');
+  // If viewing an article, auto-select it
+  if (currentRec && !current) {
+    sel.value = currentRec.record_id;
+  }
+  loadChangelog();
+}
+
+function openChangelogFor(recordId) {
+  document.getElementById('clPanel').classList.add('open');
+  const sel = document.getElementById('clFilter');
+  sel.innerHTML = '<option value="">All pages</option>' +
+    indexEntries.map(e => `<option value="${esc(e.content_id)}" ${e.content_id === recordId ? 'selected' : ''}>${esc(e.title)}</option>`).join('');
+  sel.value = recordId;
+  loadChangelog();
+}
+
+function closeChangelog() {
+  document.getElementById('clPanel').classList.remove('open');
+}
+
+async function loadChangelog() {
+  const subject = document.getElementById('clFilter').value;
+  const listEl = document.getElementById('clList');
+  listEl.innerHTML = '<div class="cl-empty"><div class="spinner"></div><br>Loading…</div>';
+
+  const entries = await fetchChangeLog(subject);
+
+  if (!entries.length) {
+    listEl.innerHTML = '<div class="cl-empty">No changes logged yet.</div>';
+    return;
+  }
+
+  // Sort newest first
+  entries.sort((a, b) => (b.created_at || 0) - (a.created_at || 0));
+
+  listEl.innerHTML = entries.map(e => {
+    const ctx = safeParseJSON(e.context);
+    const ts = ctx.timestamp || (e.created_at ? new Date(e.created_at).toISOString() : '');
+    const timeStr = ts ? formatTime(ts) : '';
+    const subjectTitle = findTitle(e.subject);
+
+    return `
+      <div class="cl-entry" data-id="${e.id}">
+        <div class="cl-entry-head">
+          <span class="cl-op op-${esc(e.op || 'ALT')}">${esc(e.op || 'ALT')}</span>
+          <span class="cl-subject" title="${esc(e.subject)}">${esc(subjectTitle)}</span>
+          <span class="cl-time">${esc(timeStr)}</span>
+        </div>
+        <div class="cl-predicate">${esc(e.predicate || '')}</div>
+        <div class="cl-actions">
+          <button class="cl-btn" onclick="previewChange(${e.id}, event)"><i class="ph ph-eye"></i> View</button>
+          <button class="cl-btn cl-btn-revert" onclick="revertChange(${e.id}, event)"><i class="ph ph-arrow-counter-clockwise"></i> Revert</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function findTitle(recordId) {
+  const entry = indexEntries.find(e => e.content_id === recordId);
+  return entry ? entry.title : recordId || 'Unknown';
+}
+
+function formatTime(isoStr) {
+  try {
+    const d = new Date(isoStr);
+    const now = new Date();
+    const diff = now - d;
+    if (diff < 60000) return 'just now';
+    if (diff < 3600000) return Math.floor(diff / 60000) + 'm ago';
+    if (diff < 86400000) return Math.floor(diff / 3600000) + 'h ago';
+    if (diff < 604800000) return Math.floor(diff / 86400000) + 'd ago';
+    return d.toLocaleDateString();
+  } catch { return isoStr; }
+}
+
+function safeParseJSON(s) {
+  if (!s) return {};
+  if (typeof s === 'object') return s;
+  try { return JSON.parse(s); } catch { return {}; }
+}
+
+async function previewChange(changeId, event) {
+  event.stopPropagation();
+  // Fetch the full changelog entry and show before/after
+  const entries = await fetchChangeLog('');
+  const entry = entries.find(e => e.id === changeId);
+  if (!entry) { showToast('Entry not found', 'error'); return; }
+
+  const ctx = safeParseJSON(entry.context);
+  const before = ctx.before || '(empty)';
+  const after = ctx.after || '(empty)';
+
+  // Simple modal-like display in the changelog panel
+  const listEl = document.getElementById('clList');
+  const truncBefore = typeof before === 'string' ? before.slice(0, 2000) : JSON.stringify(before).slice(0, 2000);
+  const truncAfter = typeof after === 'string' ? after.slice(0, 2000) : JSON.stringify(after).slice(0, 2000);
+
+  const prevHtml = `
+    <div style="padding:16px 20px;">
+      <button class="btn" onclick="loadChangelog()" style="margin-bottom:12px;"><i class="ph ph-arrow-left"></i> Back</button>
+      <div class="edit-label">Operator</div>
+      <div style="margin-bottom:12px;"><span class="cl-op op-${esc(entry.op || 'ALT')}">${esc(entry.op || 'ALT')}</span> ${esc(entry.subject)} → <code style="font-size:11px;">${esc(entry.predicate)}</code></div>
+      <div class="edit-label">Before</div>
+      <pre style="background:var(--bg-code);color:var(--code-text);padding:12px;border-radius:4px;font-size:11px;max-height:200px;overflow:auto;margin-bottom:12px;white-space:pre-wrap;">${esc(truncBefore)}</pre>
+      <div class="edit-label">After</div>
+      <pre style="background:var(--bg-code);color:var(--code-text);padding:12px;border-radius:4px;font-size:11px;max-height:200px;overflow:auto;margin-bottom:12px;white-space:pre-wrap;">${esc(truncAfter)}</pre>
+      <button class="cl-btn cl-btn-revert" onclick="revertChange(${changeId}, event)"><i class="ph ph-arrow-counter-clockwise"></i> Revert to before</button>
+    </div>`;
+  listEl.innerHTML = prevHtml;
+}
+
+async function revertChange(changeId, event) {
+  event.stopPropagation();
+
+  // Fetch entry
+  const entries = await fetchChangeLog('');
+  const entry = entries.find(e => e.id === changeId);
+  if (!entry) { showToast('Entry not found', 'error'); return; }
+
+  const ctx = safeParseJSON(entry.context);
+  const beforeVal = ctx.before;
+  if (beforeVal === undefined || beforeVal === null) {
+    showToast('No before state to revert to', 'error');
+    return;
+  }
+
+  if (!confirm(`Revert ${entry.predicate} on ${findTitle(entry.subject)} to previous state?`)) return;
+
+  // Find the record
+  const rec = allRecords.find(r => r.record_id === entry.subject);
+  if (!rec) { showToast('Record not found in local data', 'error'); return; }
+
+  try {
+    // Fetch fresh
+    const fresh = await fetchRecord(rec.id);
+    const vals = parseValues(fresh.values);
+    const currentVal = getNestedValue(vals, entry.predicate);
+
+    // Apply the revert
+    let revertVal;
+    try { revertVal = JSON.parse(beforeVal); } catch { revertVal = beforeVal; }
+    setNestedValue(vals, entry.predicate, revertVal);
+
+    const payload = { values: typeof fresh.values === 'string' ? JSON.stringify(vals) : vals };
+    await patchRecord(rec.id, payload);
+
+    // Log the reversion itself (so it can also be reverted)
+    logChange(entry.subject, entry.predicate, currentVal, revertVal, 'REC');
+
+    // Update local cache
+    const idx = allRecords.findIndex(r => r.id === rec.id);
+    if (idx !== -1) allRecords[idx].values = typeof fresh.values === 'string' ? JSON.stringify(vals) : vals;
+
+    showToast('Reverted');
+    loadChangelog();
+
+    // Reload page if viewing this article
+    if (currentRec && currentRec.record_id === entry.subject) {
+      isEditing = false;
+      quillInstance = null;
+      loadPage(currentRec.record_id);
+    }
+  } catch (err) {
+    showToast('Revert failed: ' + err.message, 'error');
+  }
+}
+
+function getNestedValue(obj, path) {
+  return path.split('.').reduce((o, k) => (o && o[k] !== undefined) ? o[k] : undefined, obj);
+}
+
+function setNestedValue(obj, path, val) {
+  const keys = path.split('.');
+  let o = obj;
+  for (let i = 0; i < keys.length - 1; i++) {
+    if (!o[keys[i]] || typeof o[keys[i]] !== 'object') o[keys[i]] = {};
+    o = o[keys[i]];
+  }
+  o[keys[keys.length - 1]] = val;
+}
+
+/* ═══════════════════════
+   WIDGET EDITOR MODAL
+   ═══════════════════════ */
+
+function openWidgetModal() {
+  document.getElementById('widgetModalOverlay').classList.add('show');
+  document.getElementById('widgetCode').value = '';
+  setTimeout(() => document.getElementById('widgetCode').focus(), 80);
+}
+
+function closeWidgetModal() {
+  document.getElementById('widgetModalOverlay').classList.remove('show');
+}
+
+function insertWidget() {
+  const code = document.getElementById('widgetCode').value.trim();
+  if (!code) { showToast('Widget code is empty', 'error'); return; }
+
+  const tag = `<eo-widget height="400">\n${code}\n</eo-widget>`;
+
+  if (editTab === 'wysiwyg' && quillInstance) {
+    // Insert as HTML in Quill — Quill can't render iframes, so insert a placeholder
+    // Switch to HTML tab to insert cleanly
+    const currentHtml = quillInstance.root.innerHTML;
+    document.getElementById('editHtml').value = currentHtml + '\n\n' + tag;
+    switchEditTab('html');
+    showToast('Widget inserted in HTML tab');
+  } else if (editTab === 'html') {
+    const textarea = document.getElementById('editHtml');
+    const pos = textarea.selectionStart || textarea.value.length;
+    textarea.value = textarea.value.slice(0, pos) + '\n\n' + tag + '\n\n' + textarea.value.slice(pos);
+    showToast('Widget inserted');
+  } else {
+    showToast('Switch to Visual or HTML tab to insert widgets', 'error');
+    closeWidgetModal();
+    return;
+  }
+
+  closeWidgetModal();
 }
 
 /* ═══════════════════════
