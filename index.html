@@ -1,71 +1,2329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Emergent Ontology Wiki</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiential Ontology — Wiki</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script src="https://unpkg.com/@phosphor-icons/web"></script>
+<style>
+  :root {
+    --bg: #f7f8fb;
+    --bg-nav: #f0f2f6;
+    --bg-nav-hover: #e6e9f0;
+    --bg-nav-active: #f7f8fb;
+    --bg-code: #1e1a2e;
+    --bg-code-inline: #eae7f3;
+    --bg-blockquote: #eef0f5;
+
+    --text: #1a2030;
+    --text-secondary: #4a5568;
+    --text-tertiary: #8793a6;
+
+    --emanon: #3a7ca5;
+    --protogon: #b87333;
+    --holon: #6b4d8a;
+
+    --accent: var(--emanon);
+    --link: var(--emanon);
+    --code-text: #d4c6f0;
+    --code-comment: #7b6e99;
+
+    --published: #3a7ca5;
+    --draft: #b87333;
+    --archived: #8793a6;
+
+    --border: #dde1e9;
+    --border-light: #e8ecf2;
+
+    --radius: 4px;
+    --transition: 0.15s ease;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, system-ui, sans-serif;
+    font-size: 14px;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── NAV ─── */
+  .nav {
+    width: 280px;
+    min-width: 280px;
+    background: #fff;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .nav-header {
+    padding: 20px 18px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .nav-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.01em;
+  }
+  .nav-login-btn {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 0;
+    transition: color var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .nav-login-btn:hover { color: var(--text-secondary); }
+  .nav-login-btn i { font-size: 14px; }
+
+  .nav-back {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background var(--transition);
+    user-select: none;
+  }
+  .nav-back:hover { background: var(--bg-nav); }
+  .nav-back i { font-size: 16px; }
+  .nav.toc-mode .nav-back { display: flex; }
+  .nav.toc-mode .nav-filters { display: none; }
+  .nav.toc-mode .nav-title { font-size: 14px; }
+
+  .nav-filters {
+    padding: 10px 14px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .nav-filter-row {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-bottom: 10px;
+  }
+  .nav-filter-row:not(:last-child) {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .nav-filters.logged-out .nav-status-row { display: none; }
+
+  .filter-btn {
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .filter-btn:hover { background: var(--bg-nav); color: var(--text-secondary); }
+  .filter-btn.active {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+  }
+
+  .nav-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 0;
+  }
+  .nav-list::-webkit-scrollbar { width: 3px; }
+  .nav-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .nav-item {
+    padding: 8px 18px;
+    padding-right: 36px;
+    cursor: pointer;
+    transition: background var(--transition);
+    border-left: 2px solid transparent;
+    line-height: 1.35;
+    position: relative;
+  }
+  .nav-item:hover { background: var(--bg-nav); }
+  .nav-item.active {
+    background: var(--bg-nav);
+    border-left-color: var(--accent);
+  }
+  .nav-item-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .nav-item-meta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+  }
+  .status-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  .status-published { background: var(--published); }
+  .status-draft { background: var(--draft); }
+  .status-archived { background: var(--archived); }
+
+  /* Nav groups */
+  .nav-group-label {
+    padding: 14px 18px 5px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .nav-group-label i { font-size: 12px; }
+  .nav-group-label:first-child { padding-top: 10px; }
+  .nav-group-label.fav-label { color: var(--protogon); }
+
+  /* Favorite star */
+  .nav-fav {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--border);
+    font-size: 15px;
+    padding: 2px;
+    display: flex;
+    opacity: 0;
+    transition: opacity var(--transition), color var(--transition);
+  }
+  .nav-item:hover .nav-fav { opacity: 1; }
+  .nav-fav.active {
+    color: var(--protogon);
+    opacity: 1;
+  }
+  .nav-fav:hover { color: var(--protogon); }
+
+  /* TOC */
+  .toc-item {
+    padding: 6px 18px;
+    cursor: pointer;
+    transition: all var(--transition);
+    border-left: 2px solid transparent;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-tertiary);
+    line-height: 1.4;
+  }
+  .toc-item:hover { background: var(--bg-nav); color: var(--text); }
+  .toc-item.active {
+    border-left-color: var(--accent);
+    color: var(--text);
+    font-weight: 500;
+  }
+  .toc-item.depth-3 { padding-left: 32px; }
+  .toc-item.depth-4 { padding-left: 44px; font-size: 11px; }
+  .toc-label {
+    padding: 14px 18px 6px;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+  }
+
+  /* ─── MAIN ─── */
+  .main {
+    flex: 1;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+  .main::-webkit-scrollbar { width: 5px; }
+  .main::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .content-area {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 52px 48px 120px;
+  }
+
+  .welcome { padding-top: 16vh; }
+  .welcome h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .welcome p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    max-width: 460px;
+  }
+  .welcome-cycle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 480px;
+    margin-top: 16px;
+    min-height: 2.4em;
+    transition: opacity 0.5s ease;
+  }
+  .welcome-cycle .sigil {
+    font-size: 17px;
+    color: var(--emanon);
+    margin-right: 4px;
+  }
+  .welcome-cycle.fading { opacity: 0; }
+
+  /* Get Started grid */
+  .gs-section {
+    margin-top: 40px;
+  }
+  .gs-heading {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    margin-bottom: 14px;
+  }
+  .gs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .gs-card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 14px;
+    cursor: pointer;
+    transition: all var(--transition);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 88px;
+  }
+  .gs-card:hover {
+    border-color: var(--emanon);
+    box-shadow: 0 2px 12px rgba(58, 124, 165, 0.08);
+    transform: translateY(-1px);
+  }
+  .gs-sigil {
+    font-size: 20px;
+    line-height: 1;
+    color: var(--emanon);
+    font-weight: 400;
+  }
+  .gs-card-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.35;
+    flex: 1;
+  }
+  .gs-card-empty {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-style: italic;
+  }
+
+  /* Admin picker on card */
+  .gs-picker {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--border);
+    font-size: 14px;
+    padding: 2px;
+    display: none;
+    opacity: 0;
+    transition: opacity var(--transition), color var(--transition);
+  }
+  .gs-card:hover .gs-picker.admin-visible {
+    opacity: 1;
+  }
+  .gs-picker.admin-visible { display: flex; }
+  .gs-picker:hover { color: var(--text-secondary); }
+
+  /* Picker dropdown */
+  .gs-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 240px;
+    max-height: 260px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    z-index: 50;
+    display: none;
+    margin-top: 4px;
+  }
+  .gs-dropdown.open { display: block; }
+  .gs-dropdown-item {
+    padding: 7px 12px;
+    font-size: 12px;
+    color: var(--text);
+    cursor: pointer;
+    transition: background var(--transition);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .gs-dropdown-item:last-child { border-bottom: none; }
+  .gs-dropdown-item:hover { background: var(--bg-nav); }
+  .gs-dropdown-item.active { color: var(--emanon); font-weight: 500; }
+
+  @media (max-width: 600px) {
+    .gs-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .article-header {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .article-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: -0.02em;
+  }
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    flex-wrap: wrap;
+  }
+  .article-meta .tag {
+    background: #e4eef6;
+    color: var(--emanon);
+    padding: 1px 7px;
+    border-radius: var(--radius);
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .article-actions {
+    margin-top: 14px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 12px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .btn:hover { background: var(--bg-nav); color: var(--text); }
+  .btn i { font-size: 14px; }
+  .btn-save {
+    background: var(--emanon);
+    color: #fff;
+    border-color: var(--emanon);
+  }
+  .btn-save:hover { opacity: 0.85; }
+  .btn-save:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ─── ARTICLE BODY ─── */
+  .article-body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 15.5px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .article-body h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 2.2em 0 0.6em;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .article-body h2 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin: 2em 0 0.5em;
+    padding-top: 16px;
+    color: var(--text);
+    letter-spacing: -0.01em;
+  }
+  .article-body h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 1.6em 0 0.4em;
+    color: var(--text-secondary);
+  }
+  .article-body h4 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 1.4em 0 0.4em;
+    color: var(--text-tertiary);
+  }
+  .article-body p { margin-bottom: 1em; }
+  .article-body a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition);
+  }
+  .article-body a:hover { border-bottom-color: var(--link); }
+  .article-body strong { font-weight: 600; }
+  .article-body em { font-style: italic; }
+  .article-body ul, .article-body ol { margin: 0.8em 0; padding-left: 1.3em; }
+  .article-body li { margin-bottom: 0.35em; }
+
+  .article-body blockquote {
+    border-left: 2px solid var(--emanon);
+    padding: 10px 0 10px 18px;
+    margin: 1.4em 0;
+    background: var(--bg-blockquote);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    color: var(--text-secondary);
+    font-style: italic;
+  }
+
+  /* Code: purple theme */
+  .article-body code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85em;
+    background: var(--bg-code-inline);
+    color: var(--holon);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+  .article-body pre {
+    background: var(--bg-code);
+    padding: 18px 20px;
+    border-radius: 6px;
+    overflow-x: auto;
+    margin: 1.4em 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--code-text);
+    border: none;
+  }
+  .article-body pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  .article-body hr { border: none; border-top: 1px solid var(--border); margin: 2.2em 0; }
+
+  .article-body .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    margin: 1.4em 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .article-body table {
+    width: 100%;
+    min-width: 480px;
+    border-collapse: collapse;
+    margin: 0;
+    font-size: 13px;
+  }
+  .article-body th, .article-body td {
+    padding: 9px 14px;
+    border: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+    white-space: normal;
+  }
+  .article-body th {
+    background: var(--bg-nav);
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
+  .article-body img { max-width: 100%; border-radius: var(--radius); margin: 1em 0; }
+
+  /* ─── EDIT ─── */
+  .edit-section {
+    margin-bottom: 24px;
+  }
+  .edit-label {
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+    margin-bottom: 6px;
+  }
+  .edit-input {
+    width: 100%;
+    padding: 8px 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--text);
+    outline: none;
+  }
+  .edit-input:focus {
+    border-color: var(--emanon);
+    box-shadow: 0 0 0 2px rgba(58, 124, 165, 0.12);
+  }
+  .edit-input-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    padding: 10px 12px;
+  }
+  .edit-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 0;
+  }
+  .edit-row > div { flex: 1; }
+
+  .edit-select {
+    width: 100%;
+    padding: 8px 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--text);
+    outline: none;
+    cursor: pointer;
+  }
+  .edit-select:focus {
+    border-color: var(--emanon);
+    box-shadow: 0 0 0 2px rgba(58, 124, 165, 0.12);
+  }
+
+  /* Operator card picker */
+  .edit-op-grid {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .edit-op-btn {
+    width: 32px; height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #fff;
+    font-size: 16px;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .edit-op-btn:hover { border-color: var(--emanon); color: var(--emanon); }
+  .edit-op-btn.active {
+    background: var(--emanon);
+    border-color: var(--emanon);
+    color: #fff;
+  }
+  .edit-op-btn.occupied {
+    color: var(--border);
+    cursor: default;
+    opacity: 0.5;
+  }
+  .edit-op-btn.occupied.self {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  /* Quill overrides */
+  .ql-toolbar.ql-snow { border-color: var(--border); border-radius: var(--radius) var(--radius) 0 0; background: var(--bg-nav); }
+  .ql-container.ql-snow { border-color: var(--border); border-radius: 0 0 var(--radius) var(--radius); font-family: 'Plus Jakarta Sans', sans-serif; font-size: 14px; min-height: 400px; background: #fff; }
+  .ql-editor { min-height: 400px; line-height: 1.7; }
+  .ql-editor h1 { font-family: 'Outfit', sans-serif; font-size: 22px; }
+  .ql-editor h2 { font-family: 'Outfit', sans-serif; font-size: 18px; }
+  .ql-editor h3 { font-family: 'Outfit', sans-serif; font-size: 15px; }
+  .ql-editor pre.ql-syntax { background: var(--bg-code); color: var(--code-text); border-radius: 6px; }
+
+  /* Raw JSON fallback */
+  .edit-textarea {
+    width: 100%;
+    min-height: 300px;
+    padding: 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    background: var(--bg-code);
+    color: var(--code-text);
+    border: none;
+    border-radius: 6px;
+    resize: vertical;
+    outline: none;
+    tab-size: 2;
+  }
+  .edit-textarea:focus {
+    box-shadow: 0 0 0 2px rgba(58, 124, 165, 0.18);
+  }
+
+  .edit-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .edit-tab {
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 8px 14px;
+    border: none;
+    background: transparent;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    transition: all var(--transition);
+  }
+  .edit-tab:hover { color: var(--text-secondary); }
+  .edit-tab.active {
+    color: var(--emanon);
+    border-bottom-color: var(--emanon);
+  }
+
+  /* ─── LOGIN MODAL ─── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 32, 48, 0.35);
+    backdrop-filter: blur(2px);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 32px;
+    width: 320px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+  }
+  .modal h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .modal p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 18px;
+  }
+  .modal input[type="password"] {
+    width: 100%;
+    padding: 9px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    margin-bottom: 14px;
+  }
+  .modal input:focus { border-color: var(--emanon); box-shadow: 0 0 0 2px rgba(58, 124, 165, 0.12); }
+  .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+  .modal-error {
+    font-size: 12px;
+    color: var(--protogon);
+    margin-bottom: 10px;
+    display: none;
+  }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    font-size: 12px;
+    font-weight: 500;
+    color: #fff;
+    z-index: 100;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: all 0.2s;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateY(0); }
+  .toast-success { background: var(--published); }
+  .toast-error { background: var(--protogon); }
+
+  .loading { text-align: center; padding: 40px; color: var(--text-tertiary); font-size: 13px; }
+  .spinner {
+    display: inline-block;
+    width: 16px; height: 16px;
+    border: 2px solid var(--border);
+    border-top-color: var(--emanon);
+    border-radius: 50%;
+    animation: spin 0.5s linear infinite;
+    margin-bottom: 6px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .error { text-align: center; padding: 40px; color: var(--protogon); font-size: 13px; }
+
+  /* ─── SEARCH & REPLACE PANEL ─── */
+  .sr-panel {
+    display: none;
+    position: fixed;
+    top: 0; right: 0;
+    width: 420px;
+    height: 100vh;
+    background: #fff;
+    border-left: 1px solid var(--border);
+    box-shadow: -8px 0 32px rgba(0,0,0,0.08);
+    z-index: 150;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .sr-panel.open { display: flex; }
+
+  .sr-header {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sr-header h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .sr-header h3 i { font-size: 18px; color: var(--text-tertiary); }
+  .sr-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-tertiary);
+    font-size: 20px;
+    padding: 2px;
+    display: flex;
+  }
+  .sr-close:hover { color: var(--text); }
+
+  .sr-inputs {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .sr-field label {
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+  }
+  .sr-field input {
+    width: 100%;
+    padding: 8px 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+  }
+  .sr-field input:focus {
+    border-color: var(--emanon);
+    box-shadow: 0 0 0 2px rgba(58, 124, 165, 0.12);
+  }
+  .sr-options {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .sr-options label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+  .sr-options input[type="checkbox"] { accent-color: var(--emanon); }
+  .sr-actions {
+    display: flex;
+    gap: 8px;
+    padding-top: 4px;
+  }
+
+  .sr-results {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0;
+  }
+  .sr-results::-webkit-scrollbar { width: 3px; }
+  .sr-results::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .sr-result-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border-light);
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+  .sr-result-item:hover { background: var(--bg); }
+  .sr-result-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .sr-result-context {
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-all;
+    max-height: 60px;
+    overflow: hidden;
+  }
+  .sr-result-context mark {
+    background: #fde68a;
+    color: var(--text);
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+  .sr-count {
+    padding: 10px 20px;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sr-count strong { color: var(--text); }
+  .sr-replaced {
+    color: var(--published);
+    font-weight: 500;
+  }
+
+  .sr-btn-replace-all {
+    background: var(--protogon);
+    color: #fff;
+    border-color: var(--protogon);
+  }
+  .sr-btn-replace-all:hover { opacity: 0.85; }
+  .sr-btn-replace-all:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  @media (max-width: 768px) {
+    .nav { width: 240px; min-width: 240px; }
+    .content-area { padding: 32px 24px 80px; }
+    .article-title { font-size: 26px; }
+    .article-body { font-size: 14.5px; }
+  }
+  @media (max-width: 600px) {
+    body { flex-direction: column; }
+    .nav { width: 100%; min-width: 100%; height: auto; max-height: 40vh; border-right: none; border-bottom: 1px solid var(--border); }
+    .main { flex: 1; }
+    .sr-panel { width: 100%; }
+  }
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav id="topnav">
-    <div class="nav-left">
-      <span class="logo">&there4; EO</span>
-      <span class="logo-text">Emergent Ontology</span>
+<aside class="nav" id="nav">
+  <div class="nav-header">
+    <span class="nav-title" id="navTitle">Experiential Ontology</span>
+    <button class="nav-login-btn" id="loginBtn" onclick="showLogin()">
+      <i class="ph ph-sign-in"></i> <span id="loginLabel">log in</span>
+    </button>
+  </div>
+  <div class="nav-back" onclick="backToIndex()">
+    <i class="ph ph-arrow-left"></i>
+    <span>All pages</span>
+  </div>
+  <div class="nav-filters logged-out" id="navFilters">
+    <div class="nav-filter-row nav-status-row">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="published">Published</button>
+      <button class="filter-btn" data-filter="draft">Draft</button>
+      <button class="filter-btn" data-filter="archived">Archived</button>
+      <button class="filter-btn" id="srBtn" style="display:none;margin-left:auto;border-color:var(--emanon);color:var(--emanon);" onclick="openSR(); event.stopPropagation();"><i class="ph ph-magnifying-glass" style="font-size:12px;vertical-align:-1px;"></i> S&amp;R</button>
     </div>
-    <div class="nav-right">
-      <button id="theme-btn" onclick="toggleTheme()" title="Toggle theme">&#x25D0;</button>
-      <button id="search-btn" onclick="openSearch()" title="Search (&#x2318;K)">&#x2315;</button>
-    </div>
-  </nav>
+    <div class="nav-filter-row nav-tag-row" id="navTagRow"></div>
+  </div>
+  <div class="nav-list" id="navList">
+    <div class="loading"><div class="spinner"></div><br>Loading…</div>
+  </div>
+</aside>
 
-  <!-- SEARCH OVERLAY -->
-  <div id="search-overlay" class="overlay hidden" onclick="if(event.target===this)closeSearch()">
-    <div class="search-modal">
-      <input id="search-input" type="text" placeholder="Search articles..." oninput="renderList()">
-      <div id="search-results"></div>
+<main class="main" id="mainPanel">
+  <div class="content-area" id="contentArea">
+    <div class="welcome">
+      <h2>Experiential Ontology</h2>
+      <p>Select an article to begin reading.</p>
+      <div class="welcome-cycle" id="welcomeCycle"></div>
+      <div class="gs-section">
+        <div class="gs-heading">Get started</div>
+        <div class="gs-grid" id="gsGrid"></div>
+      </div>
     </div>
   </div>
+</main>
 
-  <!-- MAIN -->
-  <main id="app">
+<div class="modal-overlay" id="loginOverlay">
+  <div class="modal">
+    <h3>Log in</h3>
+    <p>Access draft and archived content.</p>
+    <div class="modal-error" id="loginError">Incorrect password.</div>
+    <input type="password" id="loginPassword" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+    <div class="modal-actions">
+      <button class="btn" onclick="hideLogin()">Cancel</button>
+      <button class="btn btn-save" onclick="doLogin()"><i class="ph ph-sign-in"></i> Log in</button>
+    </div>
+  </div>
+</div>
 
-    <!-- LIST VIEW -->
-    <section id="list-view">
-      <header class="page-header">
-        <h1>Wiki</h1>
-        <p class="subtitle">A living map of Emergent Ontology</p>
-      </header>
+<div class="sr-panel" id="srPanel">
+  <div class="sr-header">
+    <h3><i class="ph ph-magnifying-glass"></i> Search & Replace</h3>
+    <button class="sr-close" onclick="closeSR()"><i class="ph ph-x"></i></button>
+  </div>
+  <div class="sr-inputs">
+    <div class="sr-field">
+      <label>Find</label>
+      <input type="text" id="srFind" placeholder="Search text…" oninput="doSearch()">
+    </div>
+    <div class="sr-field">
+      <label>Replace with</label>
+      <input type="text" id="srReplace" placeholder="Replacement text…">
+    </div>
+    <div class="sr-options">
+      <label><input type="checkbox" id="srCaseSensitive"> Case sensitive</label>
+      <label><input type="checkbox" id="srContentOnly" checked> Content only (uncheck to include slugs &amp; meta)</label>
+    </div>
+    <div class="sr-actions">
+      <button class="btn" onclick="doSearch()"><i class="ph ph-magnifying-glass"></i> Search</button>
+      <button class="btn sr-btn-replace-all" id="srReplaceBtn" onclick="doReplaceAll()" disabled><i class="ph ph-swap"></i> Replace all</button>
+    </div>
+  </div>
+  <div class="sr-count" id="srCount" style="display:none;"></div>
+  <div class="sr-results" id="srResults"></div>
+</div>
 
-      <div class="controls">
-        <div class="filter-row">
-          <input id="filter-input" type="text" placeholder="Filter articles..." oninput="renderList()">
-        </div>
-        <div class="filter-row">
-          <div id="level-filters" class="pill-group"></div>
-          <div id="cluster-filters" class="pill-group"></div>
-        </div>
-        <div class="view-toggle">
-          <button class="vt active" data-view="grouped" onclick="setView('grouped')">Grouped</button>
-          <button class="vt" data-view="level" onclick="setView('level')">By Level</button>
-          <button class="vt" data-view="all" onclick="setView('all')">All</button>
-        </div>
+<div class="toast" id="toast"></div>
+
+<script>
+const API = 'https://xvkq-pq7i-idtl.n7d.xano.io/api:GGzWIVAW';
+
+let allRecords = [];
+let indexEntries = [];
+let currentFilter = 'all';
+let currentTag = null; // null = all tags
+let currentRec = null;
+let isEditing = false;
+let tocHeadings = [];
+let isLoggedIn = false;
+let adminPassword = '';
+
+/* ═══════════════════════
+   FETCH — paginated index
+   ═══════════════════════ */
+
+async function fetchAllPages() {
+  let all = [];
+  let page = 1;
+  while (true) {
+    const res = await fetch(`${API}/get_eowikicurrent?page=${page}`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const items = data.items || data;
+    if (Array.isArray(items)) all = all.concat(items);
+    if (!data.nextPage) break;
+    page = data.nextPage;
+  }
+  return all;
+}
+
+/* Fetch single record by numeric ID for full content */
+async function fetchRecord(numericId) {
+  const res = await fetch(`${API}/eowikicurrent/${numericId}`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return res.json();
+}
+
+/* PATCH with XANO_PASSWORD */
+async function patchRecord(numericId, payload) {
+  const body = { ...payload };
+  if (adminPassword) body.XANO_PASSWORD = adminPassword;
+  const res = await fetch(`${API}/eowikicurrent/${numericId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`PATCH ${res.status}: ${await res.text().catch(() => '')}`);
+  return res.json();
+}
+
+/* POST with XANO_PASSWORD */
+async function postRecord(payload) {
+  const body = { ...payload };
+  if (adminPassword) body.XANO_PASSWORD = adminPassword;
+  const res = await fetch(`${API}/eowikicurrent`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) throw new Error(`POST ${res.status}: ${await res.text().catch(() => '')}`);
+  return res.json();
+}
+
+/* ═══════════════════════
+   PARSE
+   ═══════════════════════ */
+
+function parseValues(raw) {
+  if (!raw) return {};
+  if (typeof raw === 'object') return raw;
+  try { return JSON.parse(raw); } catch { return {}; }
+}
+
+function deepParse(obj, key) {
+  if (!obj[key]) return null;
+  if (typeof obj[key] === 'object') return obj[key];
+  try { return JSON.parse(obj[key]); } catch { return null; }
+}
+
+function extractContent(vals) {
+  const rev = deepParse(vals, 'current_revision');
+  if (rev && rev.content) return rev.content;
+  return vals.body || vals.content || vals.html || vals.markdown || vals.text || null;
+}
+
+function extractMeta(vals) {
+  return deepParse(vals, 'meta') || {
+    title: vals.title,
+    status: vals.status,
+    tags: vals.tags || [],
+    keywords: vals.keywords || [],
+  };
+}
+
+/* ═══════════════════════
+   LOGIN
+   ═══════════════════════ */
+
+function showLogin() {
+  if (isLoggedIn) {
+    isLoggedIn = false;
+    adminPassword = '';
+    document.getElementById('navFilters').classList.add('logged-out');
+    document.getElementById('loginLabel').textContent = 'log in';
+    document.querySelector('#loginBtn i').className = 'ph ph-sign-in';
+    document.getElementById('srBtn').style.display = 'none';
+    closeSR();
+    currentFilter = 'all';
+    currentTag = null;
+    document.querySelectorAll('.nav-status-row .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+    renderTagButtons();
+    renderList();
+    renderGetStarted();
+    showToast('Logged out');
+    return;
+  }
+  document.getElementById('loginOverlay').classList.add('show');
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('loginError').style.display = 'none';
+  setTimeout(() => document.getElementById('loginPassword').focus(), 80);
+}
+
+function hideLogin() { document.getElementById('loginOverlay').classList.remove('show'); }
+
+function doLogin() {
+  const pw = document.getElementById('loginPassword').value;
+  if (!pw) return;
+  // Store password — we'll send it with PATCH calls and use it as auth
+  adminPassword = pw;
+  isLoggedIn = true;
+  hideLogin();
+  document.getElementById('navFilters').classList.remove('logged-out');
+  document.getElementById('loginLabel').textContent = 'log out';
+  document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
+  document.getElementById('srBtn').style.display = '';
+  renderTagButtons();
+  renderList();
+  renderGetStarted();
+  showToast('Logged in');
+}
+
+/* ═══════════════════════
+   INDEX & LIST
+   ═══════════════════════ */
+
+function buildIndex(records) {
+  allRecords = records;
+
+  const indexRec = records.find(r => r.record_id === 'site:index');
+  if (indexRec) {
+    const vals = parseValues(indexRec.values);
+    indexEntries = (vals.entries || []).filter(e =>
+      e.content_type === 'wiki' || e.content_type === 'document'
+    );
+  }
+
+  if (!indexEntries.length) {
+    indexEntries = records
+      .filter(r => r.record_id && (r.record_id.startsWith('wiki:') || r.record_id.startsWith('document:')))
+      .map(r => {
+        const v = parseValues(r.values);
+        const m = extractMeta(v);
+        return {
+          content_id: r.record_id,
+          title: m.title || r.displayName || r.record_id,
+          status: m.status || 'draft',
+          tags: m.tags || [],
+          keywords: m.keywords || [],
+          content_type: 'wiki',
+        };
+      });
+  }
+
+  renderTagButtons();
+  renderList();
+}
+
+function renderTagButtons() {
+  const row = document.getElementById('navTagRow');
+  if (!row) return;
+
+  // Collect tags from visible entries
+  let visible = indexEntries;
+  if (!isLoggedIn) visible = visible.filter(e => e.status === 'published');
+
+  const tagSet = new Set();
+  for (const e of visible) {
+    if (e.tags) e.tags.forEach(t => tagSet.add(t));
+  }
+  const tags = [...tagSet].sort((a, b) => String(a).localeCompare(String(b)));
+
+  if (!tags.length) {
+    row.innerHTML = '';
+    return;
+  }
+
+  row.innerHTML =
+    `<button class="filter-btn ${currentTag === null ? 'active' : ''}" data-tag="__all" onclick="setTag(null)">All</button>` +
+    tags.map(t =>
+      `<button class="filter-btn ${currentTag === t ? 'active' : ''}" data-tag="${esc(t)}" onclick="setTag('${esc(t)}')">${esc(t)}</button>`
+    ).join('');
+}
+
+function setTag(tag) {
+  currentTag = tag;
+  renderTagButtons();
+  renderList();
+}
+
+function renderList() {
+  const list = document.getElementById('navList');
+  let filtered = indexEntries;
+
+  if (!isLoggedIn) {
+    filtered = filtered.filter(e => e.status === 'published');
+  } else if (currentFilter !== 'all') {
+    filtered = filtered.filter(e => e.status === currentFilter);
+  }
+
+  // Tag filter
+  if (currentTag !== null) {
+    filtered = filtered.filter(e => e.tags && e.tags.includes(currentTag));
+  }
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="loading">No pages found.</div>';
+    return;
+  }
+
+  const favs = getFavorites();
+  const favorited = filtered.filter(e => favs.has(e.content_id));
+  const rest = filtered.filter(e => !favs.has(e.content_id));
+
+  // Group rest by first tag
+  const groups = new Map(); // tag → entries
+  const untagged = [];
+  for (const entry of rest) {
+    if (entry.tags && entry.tags.length) {
+      const tag = entry.tags[0];
+      if (!groups.has(tag)) groups.set(tag, []);
+      groups.get(tag).push(entry);
+    } else {
+      untagged.push(entry);
+    }
+  }
+
+  // Sort groups by tag name
+  const sortedTags = [...groups.keys()].sort((a, b) => String(a).localeCompare(String(b)));
+
+  let html = '';
+
+  // Favorites section
+  if (favorited.length) {
+    html += '<div class="nav-group-label fav-label"><i class="ph ph-star-fill"></i> Favorites</div>';
+    html += favorited.map(e => renderNavItem(e, true)).join('');
+  }
+
+  // Tag groups
+  for (const tag of sortedTags) {
+    const entries = groups.get(tag);
+    html += `<div class="nav-group-label">${esc(tag)}</div>`;
+    html += entries.map(e => renderNavItem(e, favs.has(e.content_id))).join('');
+  }
+
+  // Untagged
+  if (untagged.length) {
+    if (sortedTags.length || favorited.length) {
+      html += '<div class="nav-group-label">Uncategorized</div>';
+    }
+    html += untagged.map(e => renderNavItem(e, favs.has(e.content_id))).join('');
+  }
+
+  list.innerHTML = html;
+}
+
+function renderNavItem(entry, isFav) {
+  const safeId = entry.content_id.replace(/'/g, "\\'");
+  return `
+    <div class="nav-item" data-id="${entry.content_id}" onclick="loadPage('${safeId}')">
+      <div class="nav-item-title">${esc(entry.title)}</div>
+      <div class="nav-item-meta">
+        <span class="status-dot status-${entry.status}"></span>
+        ${entry.status}
       </div>
+      <button class="nav-fav ${isFav ? 'active' : ''}" onclick="toggleFav('${safeId}', event)" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
+        <i class="ph ${isFav ? 'ph-star-fill' : 'ph-star'}"></i>
+      </button>
+    </div>`;
+}
 
-      <div id="article-grid"></div>
-    </section>
+/* ═══════════════════════
+   FAVORITES (localStorage)
+   ═══════════════════════ */
 
-    <!-- ARTICLE VIEW -->
-    <section id="article-view" class="hidden">
-      <button class="back-btn" onclick="goBack()">&larr; Back</button>
-      <article id="article-content"></article>
-      <aside id="related-articles"></aside>
-    </section>
+const FAV_KEY = 'eo-wiki-favorites';
 
-    <!-- EDITOR (removed - use /admin/ instead) -->
-  </main>
+function getFavorites() {
+  try {
+    const raw = localStorage.getItem(FAV_KEY);
+    return new Set(raw ? JSON.parse(raw) : []);
+  } catch { return new Set(); }
+}
 
-  <script src="app.js"></script>
+function saveFavorites(set) {
+  try { localStorage.setItem(FAV_KEY, JSON.stringify([...set])); } catch {}
+}
+
+function toggleFav(contentId, event) {
+  event.stopPropagation();
+  const favs = getFavorites();
+  if (favs.has(contentId)) {
+    favs.delete(contentId);
+  } else {
+    favs.add(contentId);
+  }
+  saveFavorites(favs);
+  renderList();
+}
+
+/* ═══════════════════════
+   TOC
+   ═══════════════════════ */
+
+function buildToc(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  tocHeadings = [];
+  tmp.querySelectorAll('h1, h2, h3, h4').forEach((h, i) => {
+    tocHeadings.push({ id: 'h-' + i, text: h.textContent.trim(), depth: parseInt(h.tagName[1]) });
+  });
+}
+
+function renderToc() {
+  const list = document.getElementById('navList');
+  if (!tocHeadings.length) {
+    list.innerHTML = '<div class="loading" style="font-size:12px;">No headings.</div>';
+    return;
+  }
+  list.innerHTML = '<div class="toc-label">Contents</div>' +
+    tocHeadings.map(h => `
+      <div class="toc-item depth-${h.depth}" data-target="${h.id}" onclick="scrollToH('${h.id}')">
+        ${esc(h.text)}
+      </div>`).join('');
+}
+
+function injectIds(el) {
+  el.querySelectorAll('h1, h2, h3, h4').forEach((h, i) => { h.id = 'h-' + i; });
+  // Wrap tables in scrollable containers
+  el.querySelectorAll('table').forEach(table => {
+    if (table.parentElement.classList.contains('table-wrap')) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'table-wrap';
+    table.parentNode.insertBefore(wrap, table);
+    wrap.appendChild(table);
+  });
+}
+
+function scrollToH(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.querySelectorAll('.toc-item').forEach(t => t.classList.toggle('active', t.dataset.target === id));
+}
+
+function switchToToc(title) {
+  document.getElementById('nav').classList.add('toc-mode');
+  document.getElementById('navTitle').textContent = title;
+  renderToc();
+}
+
+function backToIndex() {
+  document.getElementById('nav').classList.remove('toc-mode');
+  document.getElementById('navTitle').textContent = 'Experiential Ontology';
+  currentRec = null;
+  isEditing = false;
+  tocHeadings = [];
+  renderList();
+  document.getElementById('contentArea').innerHTML = `
+    <div class="welcome">
+      <h2>Experiential Ontology</h2>
+      <p>Select an article to begin reading.</p>
+      <div class="welcome-cycle" id="welcomeCycle"></div>
+      <div class="gs-section">
+        <div class="gs-heading">Get started</div>
+        <div class="gs-grid" id="gsGrid"></div>
+      </div>
+    </div>`;
+  renderGetStarted();
+  startCycling();
+}
+
+/* ═══════════════════════
+   SCROLL SPY
+   ═══════════════════════ */
+
+function setupScrollSpy() {
+  const main = document.getElementById('mainPanel');
+  let ticking = false;
+  main.addEventListener('scroll', () => {
+    if (ticking || !tocHeadings.length) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const top = main.scrollTop + 100;
+      let active = tocHeadings[0]?.id;
+      for (const h of tocHeadings) {
+        const el = document.getElementById(h.id);
+        if (el && el.offsetTop <= top) active = h.id;
+      }
+      document.querySelectorAll('.toc-item').forEach(t => t.classList.toggle('active', t.dataset.target === active));
+      ticking = false;
+    });
+  });
+}
+
+/* ═══════════════════════
+   LOAD PAGE — fetch individual record
+   ═══════════════════════ */
+
+async function loadPage(contentId) {
+  isEditing = false;
+  stopCycling();
+  const area = document.getElementById('contentArea');
+  area.innerHTML = '<div class="loading"><div class="spinner"></div><br>Loading…</div>';
+
+  // Find in local cache first to get numeric ID
+  let rec = allRecords.find(r => r.record_id === contentId);
+  if (!rec) {
+    area.innerHTML = '<div class="error">Record not found.</div>';
+    return;
+  }
+
+  // Fetch fresh from individual endpoint for full content
+  try {
+    const fresh = await fetchRecord(rec.id);
+    // Update local cache
+    const idx = allRecords.findIndex(r => r.id === rec.id);
+    if (idx !== -1) allRecords[idx] = fresh;
+    rec = fresh;
+  } catch (e) {
+    // Fall back to cached version
+    console.warn('Individual fetch failed, using cached:', e.message);
+  }
+
+  currentRec = rec;
+  const vals = parseValues(rec.values);
+  const meta = extractMeta(vals);
+  const entry = indexEntries.find(e => e.content_id === contentId) || {};
+  const title = meta.title || entry.title || rec.displayName || contentId;
+  const status = meta.status || entry.status || 'unknown';
+  const tags = meta.tags || entry.tags || [];
+  const keywords = meta.keywords || [];
+
+  const htmlContent = extractContent(vals);
+
+  let bodyHtml;
+  if (htmlContent) {
+    bodyHtml = htmlContent;
+    buildToc(htmlContent);
+  } else {
+    bodyHtml = '<p style="color:var(--text-tertiary);">This page has no content yet.</p>';
+    tocHeadings = [];
+  }
+
+  area.innerHTML = `
+    <div class="article-header">
+      <h1 class="article-title">${esc(title)}</h1>
+      <div class="article-meta">
+        <span class="status-dot status-${status}"></span> ${esc(status)}
+        ${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}
+        ${keywords.length ? '· ' + keywords.map(k => esc(k)).join(', ') : ''}
+      </div>
+      ${isLoggedIn ? `<div class="article-actions"><button class="btn" onclick="toggleEdit()"><i class="ph ph-pencil-simple"></i> Edit</button></div>` : ''}
+    </div>
+    <div class="article-body" id="articleBody">${bodyHtml}</div>
+  `;
+
+  injectIds(document.getElementById('articleBody'));
+  switchToToc(title);
+  document.getElementById('mainPanel').scrollTop = 0;
+}
+
+/* ═══════════════════════
+   EDIT
+   ═══════════════════════ */
+
+let quillInstance = null;
+let editTab = 'wysiwyg'; // 'wysiwyg' | 'html' | 'json'
+
+function toggleEdit() {
+  if (!currentRec || !isLoggedIn) return;
+  if (!isEditing) {
+    isEditing = true;
+    renderEditor();
+  } else {
+    cancelEdit();
+  }
+}
+
+function renderEditor() {
+  const vals = parseValues(currentRec.values);
+  const meta = extractMeta(vals);
+  const htmlContent = extractContent(vals) || '';
+  const contentId = currentRec.record_id;
+
+  // Find which operator slot this article is in (if any)
+  const gsMapping = getGSMapping();
+  let assignedSlot = -1;
+  for (let i = 0; i < OPERATORS.length; i++) {
+    const mapped = gsMapping[i] || OPERATORS[i].defaultId;
+    if (mapped === contentId) { assignedSlot = i; break; }
+  }
+
+  // Which slots are taken by OTHER articles
+  const occupiedSlots = new Set();
+  for (let i = 0; i < OPERATORS.length; i++) {
+    const mapped = gsMapping[i] || OPERATORS[i].defaultId;
+    if (mapped !== contentId) occupiedSlots.add(i);
+  }
+
+  const bodyEl = document.getElementById('articleBody');
+  bodyEl.innerHTML = `
+    <div class="edit-section">
+      <div class="edit-label">Title</div>
+      <input class="edit-input edit-input-title" id="editTitle" value="${esc(meta.title || '')}">
+    </div>
+
+    <div class="edit-row edit-section">
+      <div>
+        <div class="edit-label">Status</div>
+        <select class="edit-select" id="editStatus">
+          <option value="draft" ${meta.status === 'draft' ? 'selected' : ''}>Draft</option>
+          <option value="published" ${meta.status === 'published' ? 'selected' : ''}>Published</option>
+          <option value="archived" ${meta.status === 'archived' ? 'selected' : ''}>Archived</option>
+        </select>
+      </div>
+      <div>
+        <div class="edit-label">Tags (comma-separated)</div>
+        <input class="edit-input" id="editTags" value="${esc((meta.tags || []).join(', '))}">
+      </div>
+    </div>
+
+    <div class="edit-section">
+      <div class="edit-label">Keywords (comma-separated)</div>
+      <input class="edit-input" id="editKeywords" value="${esc((meta.keywords || []).join(', '))}">
+    </div>
+
+    <div class="edit-section">
+      <div class="edit-label">Get Started card</div>
+      <div class="edit-op-grid" id="editOpGrid">
+        ${OPERATORS.map((op, i) => {
+          const isOccupied = occupiedSlots.has(i);
+          const isSelf = assignedSlot === i;
+          let cls = 'edit-op-btn';
+          if (isSelf) cls += ' active self';
+          else if (isOccupied) cls += ' occupied';
+          return `<button class="${cls}" data-slot="${i}" onclick="toggleOpSlot(${i})" title="${op.sigil}">${op.sigil}</button>`;
+        }).join('')}
+        <span style="font-size:11px;color:var(--text-tertiary);margin-left:8px;align-self:center;">${assignedSlot >= 0 ? 'Assigned to ' + OPERATORS[assignedSlot].sigil : 'Not assigned'}</span>
+      </div>
+    </div>
+
+    <div class="edit-section">
+      <div class="edit-tabs">
+        <button class="edit-tab ${editTab === 'wysiwyg' ? 'active' : ''}" onclick="switchEditTab('wysiwyg')"><i class="ph ph-text-aa"></i> Visual</button>
+        <button class="edit-tab ${editTab === 'html' ? 'active' : ''}" onclick="switchEditTab('html')"><i class="ph ph-code"></i> HTML</button>
+        <button class="edit-tab ${editTab === 'json' ? 'active' : ''}" onclick="switchEditTab('json')"><i class="ph ph-brackets-curly"></i> JSON</button>
+      </div>
+      <div id="editWysiwyg" style="${editTab === 'wysiwyg' ? '' : 'display:none;'}">
+        <div id="quillEditor"></div>
+      </div>
+      <div id="editHtmlWrap" style="${editTab === 'html' ? '' : 'display:none;'}">
+        <textarea class="edit-textarea" id="editHtml" style="min-height:400px;">${esc(htmlContent)}</textarea>
+      </div>
+      <div id="editJsonWrap" style="${editTab === 'json' ? '' : 'display:none;'}">
+        <textarea class="edit-textarea" id="editJson" style="min-height:400px;">${esc(JSON.stringify(vals, null, 2))}</textarea>
+      </div>
+    </div>
+  `;
+
+  document.querySelector('.article-actions').innerHTML = `
+    <button class="btn btn-save" id="saveBtn" onclick="saveEdit()"><i class="ph ph-floppy-disk"></i> Save</button>
+    <button class="btn" onclick="cancelEdit()"><i class="ph ph-x"></i> Cancel</button>
+  `;
+
+  // Init Quill
+  initQuill(htmlContent);
+}
+
+function initQuill(htmlContent) {
+  if (quillInstance) { quillInstance = null; }
+  const container = document.getElementById('quillEditor');
+  if (!container) return;
+
+  quillInstance = new Quill('#quillEditor', {
+    theme: 'snow',
+    modules: {
+      toolbar: [
+        [{ header: [1, 2, 3, false] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        ['link'],
+        ['clean'],
+      ],
+    },
+    placeholder: 'Write content…',
+  });
+
+  // Set HTML content
+  quillInstance.root.innerHTML = htmlContent;
+}
+
+function switchEditTab(tab) {
+  // Sync content between tabs before switching
+  if (editTab === 'wysiwyg' && quillInstance) {
+    const html = quillInstance.root.innerHTML;
+    document.getElementById('editHtml').value = html;
+  } else if (editTab === 'html') {
+    const html = document.getElementById('editHtml').value;
+    if (quillInstance) quillInstance.root.innerHTML = html;
+  }
+
+  editTab = tab;
+  document.querySelectorAll('.edit-tab').forEach((t, i) => {
+    const tabs = ['wysiwyg', 'html', 'json'];
+    t.classList.toggle('active', tabs[i] === tab);
+  });
+  document.getElementById('editWysiwyg').style.display = tab === 'wysiwyg' ? '' : 'none';
+  document.getElementById('editHtmlWrap').style.display = tab === 'html' ? '' : 'none';
+  document.getElementById('editJsonWrap').style.display = tab === 'json' ? '' : 'none';
+}
+
+function toggleOpSlot(slot) {
+  const mapping = getGSMapping();
+  const contentId = currentRec.record_id;
+
+  // Check if clicking self (unassign)
+  const currentlyMapped = mapping[slot] || OPERATORS[slot].defaultId;
+  if (currentlyMapped === contentId) {
+    // Unassign: reset to default
+    delete mapping[slot];
+    saveGSMapping(mapping);
+    renderEditor();
+    return;
+  }
+
+  // Check if occupied by another
+  const otherOccupied = Object.entries(mapping).find(([k, v]) => parseInt(k) === slot && v !== contentId);
+  if (otherOccupied) return; // occupied by another
+  if (!mapping[slot] && OPERATORS[slot].defaultId !== contentId) {
+    // Default is something else — check if that default is explicitly mapped elsewhere
+    // Just assign it
+  }
+
+  // First unassign this article from any other slot
+  for (let i = 0; i < OPERATORS.length; i++) {
+    if ((mapping[i] || OPERATORS[i].defaultId) === contentId) {
+      if (mapping[i]) delete mapping[i];
+      // If default points to us, set default to itself (we need to override)
+      if (OPERATORS[i].defaultId === contentId) {
+        mapping[i] = OPERATORS[i].defaultId; // keep default for now
+      }
+    }
+  }
+
+  // Assign to new slot
+  mapping[slot] = contentId;
+  saveGSMapping(mapping);
+  renderEditor();
+}
+
+async function saveEdit() {
+  const saveBtn = document.getElementById('saveBtn');
+
+  // If on JSON tab, use raw JSON
+  if (editTab === 'json') {
+    let newValues;
+    try {
+      newValues = JSON.parse(document.getElementById('editJson').value);
+    } catch (e) {
+      showToast('Invalid JSON: ' + e.message, 'error');
+      return;
+    }
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Saving…';
+    try {
+      const payload = { values: typeof currentRec.values === 'string' ? JSON.stringify(newValues) : newValues };
+      const updated = await patchRecord(currentRec.id, payload);
+      const idx = allRecords.findIndex(r => r.id === currentRec.id);
+      if (idx !== -1) { allRecords[idx] = { ...allRecords[idx], ...updated }; currentRec = allRecords[idx]; }
+      showToast('Saved');
+      isEditing = false;
+      quillInstance = null;
+      buildIndex(allRecords);
+      loadPage(currentRec.record_id);
+    } catch (err) {
+      showToast(err.message, 'error');
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = '<i class="ph ph-floppy-disk"></i> Save';
+    }
+    return;
+  }
+
+  // Get content from WYSIWYG or HTML tab
+  let newHtml;
+  if (editTab === 'wysiwyg' && quillInstance) {
+    newHtml = quillInstance.root.innerHTML;
+  } else {
+    newHtml = document.getElementById('editHtml').value;
+  }
+
+  // Get metadata
+  const newTitle = document.getElementById('editTitle').value.trim();
+  const newStatus = document.getElementById('editStatus').value;
+  const newTags = document.getElementById('editTags').value.split(',').map(t => t.trim()).filter(Boolean);
+  const newKeywords = document.getElementById('editKeywords').value.split(',').map(t => t.trim()).filter(Boolean);
+
+  // Build updated values
+  const vals = parseValues(currentRec.values);
+  const meta = extractMeta(vals) || {};
+  meta.title = newTitle;
+  meta.status = newStatus;
+  meta.tags = newTags;
+  meta.keywords = newKeywords;
+  vals.meta = meta;
+
+  // Update current_revision
+  const rev = deepParse(vals, 'current_revision') || {};
+  rev.content = newHtml;
+  rev.format = 'html';
+  vals.current_revision = rev;
+
+  saveBtn.disabled = true;
+  saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Saving…';
+
+  try {
+    const payload = { values: typeof currentRec.values === 'string' ? JSON.stringify(vals) : vals };
+    const updated = await patchRecord(currentRec.id, payload);
+    const idx = allRecords.findIndex(r => r.id === currentRec.id);
+    if (idx !== -1) { allRecords[idx] = { ...allRecords[idx], ...updated }; currentRec = allRecords[idx]; }
+
+    // Update index entries with new meta
+    const entryIdx = indexEntries.findIndex(e => e.content_id === currentRec.record_id);
+    if (entryIdx !== -1) {
+      indexEntries[entryIdx].title = newTitle;
+      indexEntries[entryIdx].status = newStatus;
+      indexEntries[entryIdx].tags = newTags;
+      indexEntries[entryIdx].keywords = newKeywords;
+    }
+
+    showToast('Saved');
+    isEditing = false;
+    quillInstance = null;
+    loadPage(currentRec.record_id);
+  } catch (err) {
+    showToast(err.message, 'error');
+    saveBtn.disabled = false;
+    saveBtn.innerHTML = '<i class="ph ph-floppy-disk"></i> Save';
+  }
+}
+
+function cancelEdit() {
+  if (!currentRec) return;
+  isEditing = false;
+  quillInstance = null;
+  editTab = 'wysiwyg';
+  loadPage(currentRec.record_id);
+}
+
+/* ═══════════════════════
+   UTIL
+   ═══════════════════════ */
+
+function esc(s) {
+  if (typeof s !== 'string') return String(s);
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = `toast toast-${type} show`;
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+/* ═══════════════════════
+   SEARCH & REPLACE
+   ═══════════════════════ */
+
+let srMatches = []; // { rec, field, context, count }
+
+function openSR() {
+  document.getElementById('srPanel').classList.add('open');
+  setTimeout(() => document.getElementById('srFind').focus(), 80);
+}
+
+function closeSR() {
+  document.getElementById('srPanel').classList.remove('open');
+  srMatches = [];
+}
+
+function doSearch() {
+  const query = document.getElementById('srFind').value;
+  if (!query || query.length < 2) {
+    document.getElementById('srResults').innerHTML = '';
+    document.getElementById('srCount').style.display = 'none';
+    document.getElementById('srReplaceBtn').disabled = true;
+    srMatches = [];
+    return;
+  }
+
+  const caseSensitive = document.getElementById('srCaseSensitive').checked;
+  const contentOnly = document.getElementById('srContentOnly').checked;
+  const flags = caseSensitive ? 'g' : 'gi';
+  const regex = new RegExp(escapeRegex(query), flags);
+
+  srMatches = [];
+
+  for (const rec of allRecords) {
+    if (rec.record_id === 'site:index' && contentOnly) continue;
+    const vals = parseValues(rec.values);
+    const meta = extractMeta(vals);
+    const content = extractContent(vals) || '';
+    const title = meta.title || rec.displayName || '';
+
+    // In content-only mode: search content + title + keywords
+    // In full mode: search entire values JSON
+    const searchTarget = contentOnly
+      ? [title, content, (meta.keywords || []).join(' ')].join('\n')
+      : JSON.stringify(vals);
+
+    const matches = searchTarget.match(regex);
+    if (!matches) continue;
+
+    // Build context snippet
+    const plain = contentOnly
+      ? title + '\n' + stripHtml(content)
+      : JSON.stringify(vals, null, 2);
+
+    const idx = caseSensitive ? plain.indexOf(query) : plain.toLowerCase().indexOf(query.toLowerCase());
+    let context = '';
+    if (idx !== -1) {
+      const start = Math.max(0, idx - 40);
+      const end = Math.min(plain.length, idx + query.length + 40);
+      context = (start > 0 ? '…' : '') + plain.slice(start, end) + (end < plain.length ? '…' : '');
+    }
+
+    const entry = indexEntries.find(e => e.content_id === rec.record_id) || {};
+
+    srMatches.push({
+      rec,
+      title: meta.title || entry.title || rec.displayName || rec.record_id,
+      count: matches.length,
+      context,
+      query,
+    });
+  }
+
+  renderSRResults(query, caseSensitive);
+}
+
+function renderSRResults(query, caseSensitive) {
+  const totalMatches = srMatches.reduce((sum, m) => sum + m.count, 0);
+  const countEl = document.getElementById('srCount');
+  countEl.style.display = 'flex';
+  countEl.innerHTML = `<span><strong>${totalMatches}</strong> match${totalMatches !== 1 ? 'es' : ''} across <strong>${srMatches.length}</strong> page${srMatches.length !== 1 ? 's' : ''}</span>`;
+
+  document.getElementById('srReplaceBtn').disabled = srMatches.length === 0;
+
+  const resultsEl = document.getElementById('srResults');
+  if (!srMatches.length) {
+    resultsEl.innerHTML = '<div class="loading">No matches found.</div>';
+    return;
+  }
+
+  const flags = caseSensitive ? 'g' : 'gi';
+  const highlightRe = new RegExp(`(${escapeRegex(query)})`, flags);
+
+  resultsEl.innerHTML = srMatches.map(m => {
+    const highlighted = esc(m.context).replace(highlightRe, '<mark>$1</mark>');
+    return `
+      <div class="sr-result-item" onclick="loadPage('${m.rec.record_id.replace(/'/g, "\\'")}')">
+        <div class="sr-result-title">${esc(m.title)} <span style="color:var(--text-tertiary);font-weight:400;font-size:11px;">(${m.count})</span></div>
+        <div class="sr-result-context">${highlighted}</div>
+      </div>`;
+  }).join('');
+}
+
+async function doReplaceAll() {
+  const find = document.getElementById('srFind').value;
+  const replace = document.getElementById('srReplace').value;
+  const caseSensitive = document.getElementById('srCaseSensitive').checked;
+  const contentOnly = document.getElementById('srContentOnly').checked;
+
+  if (!find || !srMatches.length) return;
+  const slugWarning = !contentOnly ? '\n\nThis will also replace in slugs, content IDs, and index entries — URLs may change.' : '';
+  if (!confirm(`Replace "${find}" with "${replace}" across ${srMatches.length} page(s)?${slugWarning}`)) return;
+
+  const btn = document.getElementById('srReplaceBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ph ph-spinner"></i> Replacing…';
+
+  const flags = caseSensitive ? 'g' : 'gi';
+  const regex = new RegExp(escapeRegex(find), flags);
+  let successCount = 0;
+  let errorCount = 0;
+
+  for (const match of srMatches) {
+    try {
+      // Fetch fresh record
+      const fresh = await fetchRecord(match.rec.id);
+      const vals = parseValues(fresh.values);
+
+      if (contentOnly) {
+        // Replace inside current_revision.content
+        const rev = deepParse(vals, 'current_revision');
+        if (rev && rev.content) {
+          rev.content = rev.content.replace(regex, replace);
+          vals.current_revision = rev;
+        }
+        // Flat content fields
+        for (const key of ['body', 'content', 'html', 'markdown', 'text']) {
+          if (typeof vals[key] === 'string') {
+            vals[key] = vals[key].replace(regex, replace);
+          }
+        }
+        // Meta: title, slug, content_id, keywords
+        const meta = deepParse(vals, 'meta');
+        if (meta) {
+          if (typeof meta.title === 'string') meta.title = meta.title.replace(regex, replace);
+          if (typeof meta.slug === 'string') meta.slug = meta.slug.replace(regex, replace);
+          if (typeof meta.content_id === 'string') meta.content_id = meta.content_id.replace(regex, replace);
+          if (Array.isArray(meta.keywords)) meta.keywords = meta.keywords.map(k => k.replace(regex, replace));
+          vals.meta = meta;
+        }
+        // Top-level title/slug
+        if (typeof vals.title === 'string') vals.title = vals.title.replace(regex, replace);
+        if (typeof vals.slug === 'string') vals.slug = vals.slug.replace(regex, replace);
+        if (typeof vals.content_id === 'string') vals.content_id = vals.content_id.replace(regex, replace);
+      } else {
+        // Replace across entire values JSON
+        const str = JSON.stringify(vals);
+        const replaced = str.replace(regex, replace);
+        Object.assign(vals, JSON.parse(replaced));
+      }
+
+      // Also update displayName and record_id on the record itself
+      const displayPayload = {};
+      if (typeof fresh.displayName === 'string' && regex.test(fresh.displayName)) {
+        displayPayload.displayName = fresh.displayName.replace(regex, replace);
+      }
+      if (!contentOnly && typeof fresh.record_id === 'string' && regex.test(fresh.record_id)) {
+        displayPayload.record_id = fresh.record_id.replace(regex, replace);
+      }
+
+      const payload = {
+        values: typeof fresh.values === 'string' ? JSON.stringify(vals) : vals,
+        ...displayPayload,
+      };
+      await patchRecord(match.rec.id, payload);
+
+      // Update local cache
+      const idx = allRecords.findIndex(r => r.id === match.rec.id);
+      if (idx !== -1) {
+        allRecords[idx].values = typeof fresh.values === 'string' ? JSON.stringify(vals) : vals;
+        if (displayPayload.displayName) allRecords[idx].displayName = displayPayload.displayName;
+        if (displayPayload.record_id) allRecords[idx].record_id = displayPayload.record_id;
+      }
+
+      successCount++;
+    } catch (err) {
+      console.error(`Failed to replace in ${match.rec.record_id}:`, err);
+      errorCount++;
+    }
+  }
+
+  // Also update site:index entries (titles, slugs, content_ids, keywords)
+  try {
+    const indexRec = allRecords.find(r => r.record_id === 'site:index');
+    if (indexRec) {
+      const fresh = await fetchRecord(indexRec.id);
+      const indexVals = parseValues(fresh.values);
+      let changed = false;
+      if (Array.isArray(indexVals.entries)) {
+        for (const entry of indexVals.entries) {
+          for (const field of ['title', 'slug', 'content_id']) {
+            if (typeof entry[field] === 'string' && regex.test(entry[field])) {
+              entry[field] = entry[field].replace(regex, replace);
+              changed = true;
+            }
+          }
+          if (Array.isArray(entry.keywords)) {
+            const before = JSON.stringify(entry.keywords);
+            entry.keywords = entry.keywords.map(k => k.replace(regex, replace));
+            if (JSON.stringify(entry.keywords) !== before) changed = true;
+          }
+          if (Array.isArray(entry.tags)) {
+            const before = JSON.stringify(entry.tags);
+            entry.tags = entry.tags.map(t => typeof t === 'string' ? t.replace(regex, replace) : t);
+            if (JSON.stringify(entry.tags) !== before) changed = true;
+          }
+        }
+      }
+      if (changed) {
+        const payload = {
+          values: typeof fresh.values === 'string' ? JSON.stringify(indexVals) : indexVals,
+        };
+        await patchRecord(indexRec.id, payload);
+        // Update local cache
+        const idx = allRecords.findIndex(r => r.id === indexRec.id);
+        if (idx !== -1) allRecords[idx].values = typeof fresh.values === 'string' ? JSON.stringify(indexVals) : indexVals;
+        // Rebuild sidebar entries
+        buildIndex(allRecords);
+      }
+    }
+  } catch (err) {
+    console.error('Failed to update site:index:', err);
+  }
+
+  // Always rebuild sidebar from updated data
+  buildIndex(allRecords);
+
+  btn.innerHTML = '<i class="ph ph-swap"></i> Replace all';
+  btn.disabled = false;
+
+  const countEl = document.getElementById('srCount');
+  if (errorCount) {
+    countEl.innerHTML = `<span class="sr-replaced">${successCount} updated</span><span style="color:var(--protogon);">${errorCount} failed</span>`;
+  } else {
+    countEl.innerHTML = `<span class="sr-replaced"><i class="ph ph-check"></i> ${successCount} page(s) updated</span>`;
+  }
+
+  showToast(`${successCount} page(s) updated`);
+  srMatches = [];
+  document.getElementById('srResults').innerHTML = '<div class="loading">Done. Search again to verify.</div>';
+  document.getElementById('srReplaceBtn').disabled = true;
+}
+
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function stripHtml(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
+}
+
+/* ═══════════════════════
+   GET STARTED GRID
+   ═══════════════════════ */
+
+const OPERATORS = [
+  { sigil: '∅', defaultId: 'wiki:emergent-ontology-eo' },
+  { sigil: '⊡', defaultId: 'wiki:ground-figure-pattern' },
+  { sigil: '△', defaultId: 'wiki:the-nine-operators' },
+  { sigil: '|',  defaultId: 'wiki:the-triads' },
+  { sigil: '⋈', defaultId: 'wiki:the-eo-phase-space-cube' },
+  { sigil: '∨', defaultId: 'wiki:the-triadic-minimum' },
+  { sigil: '⊢', defaultId: 'wiki:bivalent-compression-and-dimensional-poverty' },
+  { sigil: '⊨', defaultId: 'wiki:eo-lexical-analysis-cross-linguistic-clause-classification-study' },
+  { sigil: '↬', defaultId: 'wiki:the-experience-engine' },
+];
+
+const GS_KEY = 'eo-wiki-getstarted';
+
+function getGSMapping() {
+  try {
+    const raw = localStorage.getItem(GS_KEY);
+    return raw ? JSON.parse(raw) : {};
+  } catch { return {}; }
+}
+
+function saveGSMapping(map) {
+  try { localStorage.setItem(GS_KEY, JSON.stringify(map)); } catch {}
+}
+
+function renderGetStarted() {
+  const grid = document.getElementById('gsGrid');
+  if (!grid) return;
+
+  const mapping = getGSMapping();
+
+  grid.innerHTML = OPERATORS.map((op, i) => {
+    const contentId = mapping[i] || op.defaultId;
+    const entry = indexEntries.find(e => e.content_id === contentId);
+
+    // Only show published to public, or all if logged in
+    const visible = entry && (isLoggedIn || entry.status === 'published');
+    const title = visible ? entry.title : (entry ? entry.title : 'Not assigned');
+    const safeId = contentId.replace(/'/g, "\\'");
+
+    return `
+      <div class="gs-card" ${visible ? `onclick="loadPage('${safeId}')"` : ''} data-slot="${i}">
+        <button class="gs-picker ${isLoggedIn ? 'admin-visible' : ''}" onclick="openGSPicker(${i}, event)" title="Change article">
+          <i class="ph ph-pencil-simple"></i>
+        </button>
+        <div class="gs-sigil">${op.sigil}</div>
+        ${visible
+          ? `<div class="gs-card-title">${esc(title)}</div>`
+          : `<div class="gs-card-empty">${entry ? 'Draft' : 'Not assigned'}</div>`
+        }
+        <div class="gs-dropdown" id="gsDrop${i}"></div>
+      </div>`;
+  }).join('');
+}
+
+function openGSPicker(slot, event) {
+  event.stopPropagation();
+
+  // Close any open dropdowns
+  document.querySelectorAll('.gs-dropdown.open').forEach(d => d.classList.remove('open'));
+
+  const drop = document.getElementById('gsDrop' + slot);
+  const mapping = getGSMapping();
+  const currentId = mapping[slot] || OPERATORS[slot].defaultId;
+
+  // Build list of all wiki/document entries
+  const candidates = indexEntries.filter(e =>
+    e.content_type === 'wiki' || e.content_type === 'document'
+  );
+
+  drop.innerHTML = candidates.map(e => `
+    <div class="gs-dropdown-item ${e.content_id === currentId ? 'active' : ''}"
+         onclick="pickGS(${slot}, '${e.content_id.replace(/'/g, "\\'")}', event)">
+      ${esc(e.title)}
+    </div>
+  `).join('');
+
+  drop.classList.add('open');
+
+  // Close on outside click
+  const close = (ev) => {
+    if (!drop.contains(ev.target)) {
+      drop.classList.remove('open');
+      document.removeEventListener('click', close);
+    }
+  };
+  setTimeout(() => document.addEventListener('click', close), 0);
+}
+
+function pickGS(slot, contentId, event) {
+  event.stopPropagation();
+  const mapping = getGSMapping();
+  mapping[slot] = contentId;
+  saveGSMapping(mapping);
+  document.querySelectorAll('.gs-dropdown.open').forEach(d => d.classList.remove('open'));
+  renderGetStarted();
+  showToast('Updated');
+}
+
+/* ═══════════════════════
+   SUBTITLE CYCLING
+   ═══════════════════════ */
+
+const SUBTITLES = [
+  { sigil: '∅', text: "What's missing from every theory of change." },
+  { sigil: '⊡', text: 'Notice: everything that changes does it in one of twenty-seven ways.' },
+  { sigil: '△', text: 'Nine types of change action. Twenty-seven forms.' },
+  { sigil: '|', text: 'Nine operators. Three axes. One grammar.' },
+  { sigil: '⋈', text: 'Why independent traditions keep finding the same structure.' },
+  { sigil: '∨', text: 'A closed grammar for how anything becomes something else.' },
+  { sigil: '⊢', text: 'The transcendental limits of how anything becomes something else.' },
+  { sigil: '⊨', text: 'Testable. Cross-linguistic. Falsifiable.' },
+  { sigil: '↬', text: 'A framework that governs its own construction.' },
+];
+
+let cycleIndex = 0;
+let cycleTimer = null;
+
+function startCycling() {
+  stopCycling();
+  const el = document.getElementById('welcomeCycle');
+  if (!el) return;
+  // Show first immediately
+  cycleIndex = Math.floor(Math.random() * SUBTITLES.length);
+  showSubtitle(el);
+  cycleTimer = setInterval(() => {
+    el.classList.add('fading');
+    setTimeout(() => {
+      cycleIndex = (cycleIndex + 1) % SUBTITLES.length;
+      showSubtitle(el);
+      el.classList.remove('fading');
+    }, 500);
+  }, 9000);
+}
+
+function stopCycling() {
+  if (cycleTimer) { clearInterval(cycleTimer); cycleTimer = null; }
+}
+
+function showSubtitle(el) {
+  const s = SUBTITLES[cycleIndex];
+  el.innerHTML = `<span class="sigil">${s.sigil}</span> ${esc(s.text)}`;
+}
+
+/* ═══════════════════════
+   INIT
+   ═══════════════════════ */
+
+document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderList();
+  });
+});
+
+setupScrollSpy();
+startCycling();
+
+(async () => {
+  try {
+    const records = await fetchAllPages();
+    buildIndex(records);
+    renderGetStarted();
+  } catch (err) {
+    document.getElementById('navList').innerHTML = `<div class="error">Failed to load: ${esc(err.message)}</div>`;
+  }
+})();
+</script>
+
 </body>
 </html>
