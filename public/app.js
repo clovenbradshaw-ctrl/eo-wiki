@@ -39,10 +39,19 @@ async function fetchArticles() {
   grid.innerHTML = '<div class="loading"><div class="spinner"></div><p>Loading articles...</p></div>';
 
   try {
-    const res = await fetch(API_GET);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    articles = normalizeData(data);
+    // Fetch all pages from the paginated API
+    let allItems = [];
+    let page = 1;
+    while (true) {
+      const url = page === 1 ? API_GET : `${API_GET}?page=${page}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const items = Array.isArray(data) ? data : (data.items || data.articles || data.data || []);
+      allItems = allItems.concat(items);
+      if (data.nextPage) { page = data.nextPage; } else { break; }
+    }
+    articles = normalizeData(allItems);
   } catch (e) {
     console.warn('API fetch failed, using demo data:', e);
     articles = getDemoArticles();
@@ -53,20 +62,32 @@ async function fetchArticles() {
   handleHash();
 }
 
-function normalizeData(data) {
-  // Handle various API response shapes
-  const list = Array.isArray(data) ? data : (data.items || data.articles || data.data || []);
-  return list.map((item, i) => ({
-    id:       item.id || item._id || i + 1,
-    title:    item.title || item.meta?.title || item.name || 'Untitled',
-    slug:     item.slug || item.meta?.slug || slugify(item.title || item.meta?.title || `article-${i}`),
-    level:    item.level || item.meta?.level || '101',
-    tags:     parseTags(item.tags || item.meta?.tags),
-    keywords: parseTags(item.keywords || item.meta?.keywords),
-    body:     item.body || item.content || item.meta?.body || item.revisions?.[0]?.body || '',
-    status:   item.status || item.meta?.status || 'published',
-    created:  item.created_at || item.created || new Date().toISOString(),
-  }));
+function parseItemValues(item) {
+  // Xano API wraps article fields inside a "values" JSON string
+  if (typeof item.values === 'string') {
+    try { return { ...item, ...JSON.parse(item.values) }; } catch (e) { /* ignore parse errors */ }
+  }
+  if (item.values && typeof item.values === 'object') {
+    return { ...item, ...item.values };
+  }
+  return item;
+}
+
+function normalizeData(list) {
+  return list.map((rawItem, i) => {
+    const item = parseItemValues(rawItem);
+    return {
+      id:       item.id || item._id || item.content_id || i + 1,
+      title:    item.title || item.displayName || item.name || 'Untitled',
+      slug:     item.slug || slugify(item.title || item.displayName || `article-${i}`),
+      level:    item.level || '101',
+      tags:     parseTags(item.tags),
+      keywords: parseTags(item.keywords),
+      body:     item.body || item.content || '',
+      status:   item.status || 'published',
+      created:  item.created_at || item.created || new Date().toISOString(),
+    };
+  });
 }
 
 function parseTags(val) {
