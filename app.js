@@ -182,7 +182,7 @@ function cardHTML(a) {
   const cluster = clusterOf(a);
   const excerpt = stripMd(a.body).slice(0, 120);
   return `
-    <div class="card ${clusterCSS(cluster)}" onclick="showArticle(${a.id})">
+    <div class="card ${clusterCSS(cluster)}" onclick="showArticle('${a.id}')">
       <div class="card-title">${esc(a.title)}</div>
       <div class="card-meta">
         <span class="tag lv">${a.level}</span>
@@ -206,7 +206,7 @@ function renderSearchResults(arts) {
   if (!q) { container.innerHTML = ''; return; }
 
   container.innerHTML = arts.slice(0, 15).map(a => `
-    <div class="sr-item" onclick="closeSearch();showArticle(${a.id})">
+    <div class="sr-item" onclick="closeSearch();showArticle('${a.id}')">
       <div class="sr-title">${esc(a.title)}</div>
       <div class="sr-excerpt">${esc(stripMd(a.body).slice(0, 80))}</div>
     </div>
@@ -226,13 +226,17 @@ function closeSearch() {
 
 // ── Article View ───────────────────────────────────────
 function showArticle(id) {
-  const a = articles.find(x => x.id == id);
+  const a = articles.find(x => String(x.id) === String(id) || x.slug === String(id));
   if (!a) return;
 
   window.location.hash = a.slug;
 
-  document.getElementById('list-view').classList.add('hidden');
-  document.getElementById('article-view').classList.remove('hidden');
+  const listView = document.getElementById('list-view');
+  const articleView = document.getElementById('article-view');
+  if (!listView || !articleView) return;
+
+  listView.classList.add('hidden');
+  articleView.classList.remove('hidden');
 
   const cluster = clusterOf(a);
 
@@ -253,7 +257,7 @@ function showArticle(id) {
     relEl.innerHTML = `
       <h3>Related Articles</h3>
       <div class="related-list">
-        ${rel.map(r => `<span class="related-chip" onclick="showArticle(${r.id})">${esc(r.title)}</span>`).join('')}
+        ${rel.map(r => `<span class="related-chip" onclick="showArticle('${r.id}')">${esc(r.title)}</span>`).join('')}
       </div>`;
   } else {
     relEl.innerHTML = '';
@@ -281,8 +285,10 @@ function findRelated(a) {
 // ── Navigation ─────────────────────────────────────────
 function goBack() {
   window.location.hash = '';
-  document.getElementById('list-view').classList.remove('hidden');
-  document.getElementById('article-view').classList.add('hidden');
+  const listView = document.getElementById('list-view');
+  const articleView = document.getElementById('article-view');
+  if (listView) listView.classList.remove('hidden');
+  if (articleView) articleView.classList.add('hidden');
   window.scrollTo(0, 0);
 }
 
@@ -318,7 +324,7 @@ function renderMarkdown(md) {
     // Wiki links: [[Article Name]]
     .replace(/\[\[([^\]]+)\]\]/g, (_, name) => {
       const target = articles.find(a => a.title.toLowerCase() === name.toLowerCase());
-      if (target) return `<a href="#${target.slug}" onclick="event.preventDefault();showArticle(${target.id})">${esc(name)}</a>`;
+      if (target) return `<a href="#${target.slug}" onclick="event.preventDefault();showArticle('${target.id}')">${esc(name)}</a>`;
       return `<span style="color:var(--danger)">${esc(name)}</span>`;
     })
     // Paragraphs
