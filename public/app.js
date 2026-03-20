@@ -1,14 +1,13 @@
 /* ── Emergent Ontology Wiki ── */
 
-const API_GET  = 'https://xvkq-pq7i-idtl.n7d.xano.io/api:GGzWIVAW/get_eowikicurrent';
-const API_POST = 'https://xvkq-pq7i-idtl.n7d.xano.io/api:GGzWIVAW/eowikicurrent';
+const API_GET  = '/api/content';
+const API_POST = '/api/content';
 
 // ── State ──────────────────────────────────────────────
 let articles = [];
 let activeLevel = null;
 let activeCluster = null;
 let currentView = 'grouped';
-let editingId = null;
 
 // ── Clusters ───────────────────────────────────────────
 const CLUSTERS = {
@@ -212,9 +211,7 @@ function showArticle(id) {
   window.location.hash = a.slug;
 
   document.getElementById('list-view').classList.add('hidden');
-  document.getElementById('editor-view').classList.add('hidden');
   document.getElementById('article-view').classList.remove('hidden');
-  document.getElementById('fab').classList.add('hidden');
 
   const cluster = clusterOf(a);
 
@@ -260,76 +257,11 @@ function findRelated(a) {
     .slice(0, 6);
 }
 
-// ── Editor ─────────────────────────────────────────────
-function openEditor(id) {
-  const a = id ? articles.find(x => x.id == id) : null;
-  editingId = a ? a.id : null;
-
-  document.getElementById('list-view').classList.add('hidden');
-  document.getElementById('article-view').classList.add('hidden');
-  document.getElementById('editor-view').classList.remove('hidden');
-  document.getElementById('fab').classList.add('hidden');
-
-  document.getElementById('editor-title').textContent = a ? `Edit: ${a.title}` : 'New Article';
-  document.getElementById('ed-title').value = a?.title || '';
-  document.getElementById('ed-slug').value = a?.slug || '';
-  document.getElementById('ed-level').value = a?.level || '101';
-  document.getElementById('ed-tags').value = a?.tags?.join(', ') || '';
-  document.getElementById('ed-keywords').value = a?.keywords?.join(', ') || '';
-  document.getElementById('ed-body').value = a?.body || '';
-
-  window.scrollTo(0, 0);
-}
-
-async function saveArticle(e) {
-  e.preventDefault();
-
-  const title = document.getElementById('ed-title').value.trim();
-  const slug = document.getElementById('ed-slug').value.trim() || slugify(title);
-  const level = document.getElementById('ed-level').value;
-  const tags = document.getElementById('ed-tags').value.split(',').map(s => s.trim()).filter(Boolean);
-  const keywords = document.getElementById('ed-keywords').value.split(',').map(s => s.trim()).filter(Boolean);
-  const body = document.getElementById('ed-body').value;
-
-  const article = {
-    id: editingId || Date.now(),
-    title, slug, level, tags, keywords, body,
-    status: 'published',
-    created_at: new Date().toISOString(),
-  };
-
-  // Try to POST to API
-  try {
-    const res = await fetch(API_POST, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(article),
-    });
-    if (!res.ok) console.warn('POST failed:', res.status);
-  } catch (e) {
-    console.warn('POST failed, saving locally:', e);
-  }
-
-  // Update local state
-  if (editingId) {
-    const idx = articles.findIndex(a => a.id == editingId);
-    if (idx >= 0) articles[idx] = article;
-  } else {
-    articles.push(article);
-  }
-
-  goBack();
-  buildFilters();
-  renderList();
-}
-
 // ── Navigation ─────────────────────────────────────────
 function goBack() {
   window.location.hash = '';
   document.getElementById('list-view').classList.remove('hidden');
   document.getElementById('article-view').classList.add('hidden');
-  document.getElementById('editor-view').classList.add('hidden');
-  document.getElementById('fab').classList.remove('hidden');
   window.scrollTo(0, 0);
 }
 
