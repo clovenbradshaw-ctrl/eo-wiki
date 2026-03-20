@@ -118,6 +118,7 @@
   .nav-back i { font-size: 16px; }
   .nav.toc-mode .nav-back { display: flex; }
   .nav.toc-mode .nav-filters { display: none; }
+  .nav.toc-mode .nav-search { display: none; }
   .nav.toc-mode .nav-title { font-size: 14px; }
 
   .nav-filters {
@@ -284,6 +285,38 @@
     max-width: 720px;
     margin: 0 auto;
     padding: 52px 48px 120px;
+  }
+
+  /* Two-column layout when wide */
+  .article-layout {
+    display: block;
+  }
+  .article-aside {
+    display: none;
+  }
+  @media (min-width: 1200px) {
+    .content-area:has(.article-layout) {
+      max-width: 1000px;
+    }
+    .article-layout {
+      display: grid;
+      grid-template-columns: 1fr 230px;
+      gap: 36px;
+      align-items: start;
+    }
+    .article-aside {
+      display: block;
+      position: sticky;
+      top: 32px;
+    }
+    .article-aside .related-section {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: none;
+    }
+    .article-aside .related-grid {
+      grid-template-columns: 1fr;
+    }
   }
 
   .welcome { padding-top: 16vh; }
@@ -529,6 +562,20 @@
     color: var(--text-tertiary);
   }
   .article-body p { margin-bottom: 1em; }
+  .article-body span[style*="background"],
+  .article-body span[style*="Background"],
+  .article-body font[style*="background"] {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+  .article-body * {
+    background-color: inherit;
+  }
+  .article-body code, .article-body pre, .article-body th,
+  .article-body blockquote, .article-body .table-wrap,
+  .article-body .eo-op, .article-body .search-match {
+    background-color: revert;
+  }
   .article-body a {
     color: var(--link);
     text-decoration: none;
@@ -1010,6 +1057,124 @@
     display: block;
   }
 
+  /* ─── EO NOTATION RENDERER ─── */
+  .eo-op {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.88em;
+    font-weight: 500;
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: var(--bg-code-inline);
+    color: var(--holon);
+    white-space: nowrap;
+    cursor: default;
+  }
+  .eo-op .eo-sigil {
+    margin-right: 2px;
+    font-weight: 400;
+  }
+  /* Operator-specific tints */
+  .eo-op-NUL { color: #8a6d3b; }
+  .eo-op-SEN { color: var(--emanon); }
+  .eo-op-INS { color: #2d8a4e; }
+  .eo-op-SEG { color: #7c5295; }
+  .eo-op-CON { color: #3a7ca5; }
+  .eo-op-SYN { color: #b85c38; }
+  .eo-op-DEF { color: #5a6e7f; }
+  .eo-op-EVA { color: #2a7a62; }
+  .eo-op-REC { color: var(--holon); }
+
+  .eo-arrow {
+    color: var(--text-tertiary);
+    font-size: 0.9em;
+    padding: 0 1px;
+  }
+
+  /* ─── SEARCH ─── */
+  .nav-search {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-search-input {
+    width: 100%;
+    padding: 7px 10px 7px 30px;
+    font-family: inherit;
+    font-size: 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--text);
+    outline: none;
+    position: relative;
+  }
+  .nav-search-input:focus {
+    border-color: var(--emanon);
+    box-shadow: 0 0 0 2px rgba(58, 124, 165, 0.1);
+  }
+  .nav-search-input::placeholder { color: var(--text-tertiary); }
+  .nav-search-wrap {
+    position: relative;
+  }
+  .nav-search-wrap i {
+    position: absolute;
+    left: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: var(--text-tertiary);
+    pointer-events: none;
+  }
+  .search-match {
+    background: #fde68a;
+    border-radius: 2px;
+    padding: 0 1px;
+  }
+
+  /* ─── RELATED ARTICLES ─── */
+  .related-section {
+    margin-top: 48px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .related-heading {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    margin-bottom: 12px;
+  }
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+  }
+  .related-card {
+    padding: 12px 14px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  .related-card:hover {
+    border-color: var(--emanon);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(58,124,165,0.06);
+  }
+  .related-card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .related-card-reason {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    line-height: 1.35;
+  }
+
   /* ─── CHANGELOG PANEL ─── */
   .cl-panel {
     display: none;
@@ -1230,6 +1395,12 @@
   <div class="nav-back" onclick="backToIndex()">
     <i class="ph ph-arrow-left"></i>
     <span>All pages</span>
+  </div>
+  <div class="nav-search" id="navSearch">
+    <div class="nav-search-wrap">
+      <i class="ph ph-magnifying-glass"></i>
+      <input class="nav-search-input" id="searchInput" type="text" placeholder="Search articles…" oninput="onSearch(this.value)">
+    </div>
   </div>
   <div class="nav-filters logged-out" id="navFilters">
     <div class="nav-filter-row nav-status-row">
@@ -1774,6 +1945,15 @@ function renderToc() {
 
 function injectIds(el) {
   el.querySelectorAll('h1, h2, h3, h4').forEach((h, i) => { h.id = 'h-' + i; });
+
+  // Strip inline background styles from pasted content
+  el.querySelectorAll('[style]').forEach(node => {
+    const s = node.style;
+    if (s.backgroundColor || s.background) {
+      s.backgroundColor = '';
+      s.background = '';
+    }
+  });
   // Wrap tables in scrollable containers
   el.querySelectorAll('table').forEach(table => {
     if (table.parentElement.classList.contains('table-wrap')) return;
@@ -1912,10 +2092,18 @@ async function loadPage(contentId) {
       </div>
       ${isLoggedIn ? `<div class="article-actions"><button class="btn" onclick="toggleEdit()"><i class="ph ph-pencil-simple"></i> Edit</button><button class="btn" onclick="openChangelogFor('${esc(contentId)}')"><i class="ph ph-clock-counter-clockwise"></i> History</button></div>` : ''}
     </div>
-    <div class="article-body" id="articleBody">${bodyHtml}</div>
+    <div class="article-layout">
+      <div class="article-main">
+        <div class="article-body" id="articleBody">${bodyHtml}</div>
+      </div>
+      <div class="article-aside" id="articleAside"></div>
+    </div>
   `;
 
-  injectIds(document.getElementById('articleBody'));
+  const bodyEl = document.getElementById('articleBody');
+  injectIds(bodyEl);
+  renderEONotation(bodyEl);
+  renderRelated(contentId);
   switchToToc(title);
   document.getElementById('mainPanel').scrollTop = 0;
 }
@@ -2044,6 +2232,20 @@ function initQuill(htmlContent) {
         ['link'],
         ['clean'],
       ],
+      clipboard: {
+        matchers: [
+          [Node.ELEMENT_NODE, function(node, delta) {
+            delta.ops = delta.ops.map(op => {
+              if (op.attributes) {
+                delete op.attributes.background;
+                delete op.attributes['background-color'];
+              }
+              return op;
+            });
+            return delta;
+          }]
+        ]
+      }
     },
     placeholder: 'Write content…',
   });
@@ -2152,6 +2354,9 @@ async function saveEdit() {
   } else {
     newHtml = document.getElementById('editHtml').value;
   }
+
+  // Strip pasted background styles before saving
+  newHtml = cleanPastedHtml(newHtml);
 
   // Get metadata
   const newTitle = document.getElementById('editTitle').value.trim();
@@ -2738,6 +2943,21 @@ function stripHtml(html) {
   return tmp.textContent || tmp.innerText || '';
 }
 
+function cleanPastedHtml(html) {
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  tmp.querySelectorAll('[style]').forEach(el => {
+    el.style.backgroundColor = '';
+    el.style.background = '';
+    el.style.color = '';
+    el.style.fontFamily = '';
+    el.style.fontSize = '';
+    // Remove empty style attributes
+    if (!el.getAttribute('style')?.trim()) el.removeAttribute('style');
+  });
+  return tmp.innerHTML;
+}
+
 /* ═══════════════════════
    GET STARTED GRID
    ═══════════════════════ */
@@ -2887,6 +3107,357 @@ function showSubtitle(el) {
 }
 
 /* ═══════════════════════
+   FULL-TEXT SEARCH
+   ═══════════════════════ */
+
+let searchIndex = []; // { content_id, title, text, tags, keywords }
+
+function buildSearchIndex() {
+  searchIndex = [];
+  for (const entry of indexEntries) {
+    const rec = allRecords.find(r => r.record_id === entry.content_id);
+    if (!rec) continue;
+    const vals = parseValues(rec.values);
+    const html = extractContent(vals) || '';
+    const text = stripHtml(html).toLowerCase();
+    searchIndex.push({
+      content_id: entry.content_id,
+      title: entry.title,
+      status: entry.status,
+      tags: (entry.tags || []).join(' ').toLowerCase(),
+      keywords: (entry.keywords || []).join(' ').toLowerCase(),
+      text,
+    });
+  }
+}
+
+function onSearch(query) {
+  query = query.trim();
+  if (!query) {
+    renderList();
+    return;
+  }
+
+  if (!searchIndex.length) buildSearchIndex();
+
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  const list = document.getElementById('navList');
+
+  const results = [];
+  for (const item of searchIndex) {
+    // Skip non-published if logged out
+    if (!isLoggedIn && item.status !== 'published') continue;
+
+    let score = 0;
+    let snippets = [];
+    for (const term of terms) {
+      if (item.title.toLowerCase().includes(term)) score += 10;
+      if (item.tags.includes(term)) score += 5;
+      if (item.keywords.includes(term)) score += 5;
+      const textIdx = item.text.indexOf(term);
+      if (textIdx !== -1) {
+        score += 2;
+        // Build snippet
+        const start = Math.max(0, textIdx - 50);
+        const end = Math.min(item.text.length, textIdx + term.length + 50);
+        let snippet = (start > 0 ? '…' : '') + item.text.slice(start, end) + (end < item.text.length ? '…' : '');
+        snippets.push(snippet);
+      }
+    }
+    if (score > 0) {
+      results.push({ ...item, score, snippet: snippets[0] || '' });
+    }
+  }
+
+  results.sort((a, b) => b.score - a.score);
+
+  if (!results.length) {
+    list.innerHTML = '<div class="loading">No results for "' + esc(query) + '"</div>';
+    return;
+  }
+
+  list.innerHTML = results.map(r => {
+    const safeId = r.content_id.replace(/'/g, "\\'");
+    const highlighted = r.snippet ? highlightTerms(r.snippet, terms) : '';
+    return `
+      <div class="nav-item" data-id="${r.content_id}" onclick="loadPage('${safeId}'); document.getElementById('searchInput').value='';">
+        <div class="nav-item-title">${highlightTerms(esc(r.title), terms)}</div>
+        ${highlighted ? `<div class="nav-item-meta" style="font-size:11px;line-height:1.35;margin-top:3px;max-height:32px;overflow:hidden;">${highlighted}</div>` : ''}
+      </div>`;
+  }).join('');
+}
+
+function highlightTerms(text, terms) {
+  let result = text;
+  for (const term of terms) {
+    const re = new RegExp(`(${escapeRegex(term)})`, 'gi');
+    result = result.replace(re, '<span class="search-match">$1</span>');
+  }
+  return result;
+}
+
+/* ═══════════════════════
+   EO NOTATION RENDERER
+   ═══════════════════════ */
+
+const EO_OPS = {
+  'NUL': { sigil: '∅', label: 'Absence & Nullity' },
+  'SEN': { sigil: '⊡', label: 'Sensation & Registration' },
+  'INS': { sigil: '△', label: 'Instantiation' },
+  'SEG': { sigil: '|', label: 'Segmentation' },
+  'CON': { sigil: '⋈', label: 'Connection & Joinability' },
+  'SYN': { sigil: '∨', label: 'Synthesis' },
+  'DEF': { sigil: '⊢', label: 'Definition' },
+  'EVA': { sigil: '⊨', label: 'Evaluation' },
+  'REC': { sigil: '↬', label: 'Recursion' },
+  'ALT': { sigil: '~', label: 'Alternation' },
+  'DES': { sigil: '⊡', label: 'Designation' },
+};
+
+function renderEONotation(el) {
+  // Walk text nodes and replace operator references
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, {
+    acceptNode: (node) => {
+      // Skip code, pre, script, textarea, eo-widget
+      const p = node.parentElement;
+      if (!p) return NodeFilter.FILTER_REJECT;
+      const tag = p.tagName;
+      if (['CODE', 'PRE', 'SCRIPT', 'TEXTAREA', 'INPUT'].includes(tag)) return NodeFilter.FILTER_REJECT;
+      if (p.classList.contains('eo-op')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+  // Pattern: operator names like NUL, SEN, INS etc. followed by optional (args)
+  // Also match sigil sequences like ∅ → ⊡ → △
+  const opNames = Object.keys(EO_OPS).join('|');
+  const opPattern = new RegExp(
+    `\\b(${opNames})\\(([^)]{0,80})\\)` + // OP(args)
+    `|\\b(${opNames})\\b` +                // bare OP name
+    `|([∅⊡△|⋈∨⊢⊨↬~])\\s*→\\s*([∅⊡△|⋈∨⊢⊨↬~])` + // sigil → sigil chains
+    `|(?:^|[\\s(])([∅⊡△⋈∨⊢⊨↬])(?=[\\s),.:;]|$)`, // standalone sigils
+    'g'
+  );
+
+  for (const textNode of textNodes) {
+    const text = textNode.textContent;
+    if (!opPattern.test(text)) continue;
+    opPattern.lastIndex = 0;
+
+    const frag = document.createDocumentFragment();
+    let lastIdx = 0;
+    let match;
+
+    while ((match = opPattern.exec(text)) !== null) {
+      // Add text before match
+      if (match.index > lastIdx) {
+        frag.appendChild(document.createTextNode(text.slice(lastIdx, match.index)));
+      }
+
+      if (match[1]) {
+        // OP(args) form
+        const op = match[1];
+        const args = match[2];
+        const info = EO_OPS[op];
+        const span = document.createElement('span');
+        span.className = `eo-op eo-op-${op}`;
+        span.title = info ? info.label : op;
+        span.innerHTML = `<span class="eo-sigil">${info ? info.sigil : ''}</span>${op}(${esc(args)})`;
+        frag.appendChild(span);
+      } else if (match[3]) {
+        // Bare OP name
+        const op = match[3];
+        const info = EO_OPS[op];
+        const span = document.createElement('span');
+        span.className = `eo-op eo-op-${op}`;
+        span.title = info ? info.label : op;
+        span.innerHTML = `<span class="eo-sigil">${info ? info.sigil : ''}</span>${op}`;
+        frag.appendChild(span);
+      } else if (match[4] && match[5]) {
+        // Sigil → sigil
+        const s1 = match[4], s2 = match[5];
+        const op1 = sigToOp(s1), op2 = sigToOp(s2);
+        const span1 = document.createElement('span');
+        span1.className = `eo-op eo-op-${op1}`;
+        span1.title = EO_OPS[op1]?.label || '';
+        span1.textContent = s1;
+        const arrow = document.createElement('span');
+        arrow.className = 'eo-arrow';
+        arrow.textContent = ' → ';
+        const span2 = document.createElement('span');
+        span2.className = `eo-op eo-op-${op2}`;
+        span2.title = EO_OPS[op2]?.label || '';
+        span2.textContent = s2;
+        frag.appendChild(span1);
+        frag.appendChild(arrow);
+        frag.appendChild(span2);
+      } else if (match[6]) {
+        // Standalone sigil
+        const sig = match[6];
+        const op = sigToOp(sig);
+        const span = document.createElement('span');
+        span.className = `eo-op eo-op-${op}`;
+        span.title = EO_OPS[op]?.label || '';
+        span.textContent = sig;
+        frag.appendChild(span);
+      }
+
+      lastIdx = match.index + match[0].length;
+    }
+
+    if (lastIdx < text.length) {
+      frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+    }
+
+    if (lastIdx > 0) {
+      textNode.parentNode.replaceChild(frag, textNode);
+    }
+  }
+}
+
+function sigToOp(sigil) {
+  for (const [op, info] of Object.entries(EO_OPS)) {
+    if (info.sigil === sigil) return op;
+  }
+  return 'NUL';
+}
+
+/* ═══════════════════════
+   RELATED ARTICLES
+   ═══════════════════════ */
+
+function renderRelated(contentId) {
+  const entry = indexEntries.find(e => e.content_id === contentId);
+  if (!entry) return;
+
+  // Get this article's data
+  const rec = allRecords.find(r => r.record_id === contentId);
+  const vals = rec ? parseValues(rec.values) : {};
+  const thisHtml = extractContent(vals) || '';
+  const thisText = stripHtml(thisHtml).toLowerCase();
+  const thisTags = new Set(entry.tags || []);
+  const thisKeywords = new Set((entry.keywords || []).map(k => k.toLowerCase()));
+
+  // Extract notable words from content (simple TF approach)
+  const thisWords = extractSignificantWords(thisText);
+
+  // Score each other article
+  const candidates = [];
+  for (const other of indexEntries) {
+    if (other.content_id === contentId) continue;
+    if (!isLoggedIn && other.status !== 'published') continue;
+
+    let score = 0;
+    let reasons = [];
+
+    // Shared tags (strong signal)
+    const sharedTags = (other.tags || []).filter(t => thisTags.has(t));
+    if (sharedTags.length) {
+      score += sharedTags.length * 8;
+      reasons.push('Tag: ' + sharedTags.join(', '));
+    }
+
+    // Shared keywords
+    const sharedKW = (other.keywords || []).filter(k => thisKeywords.has(k.toLowerCase()));
+    if (sharedKW.length) {
+      score += sharedKW.length * 5;
+      reasons.push(sharedKW.join(', '));
+    }
+
+    // Cross-references: does this article mention the other's title?
+    const otherTitleLower = other.title.toLowerCase();
+    if (otherTitleLower.length > 3 && thisText.includes(otherTitleLower)) {
+      score += 6;
+      reasons.push('Referenced in text');
+    }
+
+    // Content word overlap
+    const otherRec = allRecords.find(r => r.record_id === other.content_id);
+    if (otherRec) {
+      const otherVals = parseValues(otherRec.values);
+      const otherText = stripHtml(extractContent(otherVals) || '').toLowerCase();
+      const otherWords = extractSignificantWords(otherText);
+      let overlap = 0;
+      for (const w of thisWords) {
+        if (otherWords.has(w)) overlap++;
+      }
+      if (overlap > 3) {
+        score += Math.min(overlap, 15);
+        if (!reasons.length) reasons.push(overlap + ' shared concepts');
+      }
+    }
+
+    // Does the other article mention THIS article's title?
+    const thisTitleLower = entry.title.toLowerCase();
+    if (thisTitleLower.length > 3) {
+      const otherRec2 = allRecords.find(r => r.record_id === other.content_id);
+      if (otherRec2) {
+        const otherText2 = stripHtml(extractContent(parseValues(otherRec2.values)) || '').toLowerCase();
+        if (otherText2.includes(thisTitleLower)) {
+          score += 4;
+          if (!reasons.some(r => r.includes('Referenced'))) reasons.push('References this page');
+        }
+      }
+    }
+
+    if (score > 0) {
+      candidates.push({ entry: other, score, reason: reasons[0] || '' });
+    }
+  }
+
+  candidates.sort((a, b) => b.score - a.score);
+  const top = candidates.slice(0, 6);
+
+  if (!top.length) return;
+
+  const section = document.createElement('div');
+  section.className = 'related-section';
+  section.innerHTML = `
+    <div class="related-heading">Related articles</div>
+    <div class="related-grid">
+      ${top.map(c => {
+        const safeId = c.entry.content_id.replace(/'/g, "\\'");
+        return `<div class="related-card" onclick="loadPage('${safeId}')">
+          <div class="related-card-title">${esc(c.entry.title)}</div>
+          <div class="related-card-reason">${esc(c.reason)}</div>
+        </div>`;
+      }).join('')}
+    </div>`;
+
+  // Place in aside sidebar if visible, otherwise below article body
+  const aside = document.getElementById('articleAside');
+  if (aside && window.innerWidth >= 1200) {
+    aside.appendChild(section);
+  } else {
+    const bodyEl = document.getElementById('articleBody');
+    if (bodyEl) bodyEl.parentNode.insertBefore(section, bodyEl.nextSibling);
+  }
+}
+
+function extractSignificantWords(text) {
+  // Common stop words to exclude
+  const stop = new Set(['the','a','an','is','are','was','were','be','been','being','have','has','had',
+    'do','does','did','will','would','could','should','may','might','shall','can','need',
+    'and','or','but','not','no','nor','so','yet','both','either','neither','each','every',
+    'all','any','few','more','most','other','some','such','than','too','very','just',
+    'also','then','now','here','there','when','where','why','how','what','which','who',
+    'this','that','these','those','it','its','of','in','to','for','with','on','at','by',
+    'from','as','into','through','during','before','after','above','below','between',
+    'out','off','over','under','again','further','once','about','up','down','only']);
+
+  const words = text.split(/[^a-z]+/).filter(w => w.length > 3 && !stop.has(w));
+  // Count frequency
+  const freq = {};
+  for (const w of words) freq[w] = (freq[w] || 0) + 1;
+  // Return top significant words
+  const sorted = Object.entries(freq).sort((a, b) => b[1] - a[1]);
+  return new Set(sorted.slice(0, 40).map(e => e[0]));
+}
+
+/* ═══════════════════════
    INIT
    ═══════════════════════ */
 
@@ -2906,6 +3477,7 @@ startCycling();
   try {
     const records = await fetchAllPages();
     buildIndex(records);
+    buildSearchIndex();
     renderGetStarted();
   } catch (err) {
     document.getElementById('navList').innerHTML = `<div class="error">Failed to load: ${esc(err.message)}</div>`;
