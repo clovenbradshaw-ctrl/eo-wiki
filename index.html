@@ -2022,9 +2022,9 @@
           <i class="ph ph-moon"></i>
         </button>
         <div class="text-size-group">
-          <button class="settings-btn" id="textSmBtn" onclick="setTextSize('small')" title="Smaller text" style="font-size:11px;font-weight:600;">A</button>
-          <button class="settings-btn" id="textMdBtn" onclick="setTextSize('medium')" title="Default text" style="font-size:14px;font-weight:600;">A</button>
-          <button class="settings-btn" id="textLgBtn" onclick="setTextSize('large')" title="Larger text" style="font-size:17px;font-weight:600;">A</button>
+          <button class="settings-btn" id="textSmBtn" onclick="setTextSize('small')" title="Default text" style="font-size:11px;font-weight:600;">A</button>
+          <button class="settings-btn" id="textMdBtn" onclick="setTextSize('medium')" title="Medium text" style="font-size:14px;font-weight:600;">A</button>
+          <button class="settings-btn" id="textLgBtn" onclick="setTextSize('large')" title="Large text" style="font-size:17px;font-weight:600;">A</button>
         </div>
       </div>
       <button class="nav-login-btn" id="loginBtn" onclick="showLogin()">
@@ -4866,7 +4866,7 @@ function extractSignificantWords(text) {
    DARK MODE & TEXT SIZE
    ═══════════════════════ */
 
-const TEXT_SIZES = { small: 0.875, medium: 1, large: 1.15 };
+const TEXT_SIZES = { small: 1, medium: 1.15, large: 1.3 };
 
 function toggleDarkMode() {
   const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
@@ -4894,7 +4894,7 @@ function setTextSize(size) {
     document.getElementById('darkModeBtn').classList.add('active');
     document.querySelector('#darkModeBtn i').className = 'ph ph-sun';
   }
-  const size = localStorage.getItem('eo-text-size') || 'medium';
+  const size = localStorage.getItem('eo-text-size') || 'small';
   setTextSize(size);
 })();
 
