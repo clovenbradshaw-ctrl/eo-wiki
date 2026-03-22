@@ -4015,7 +4015,7 @@ const OPERATORS = [
   { sigil: '△', defaultId: 'wiki:the-triadic-minimum' },
   { sigil: '⊢', defaultId: 'wiki:bivalent-compression-and-dimensional-poverty' },
   { sigil: '⊨', defaultId: 'wiki:eo-lexical-analysis-cross-linguistic-clause-classification-study' },
-  { sigil: '↬', defaultId: 'wiki:the-experience-engine' },
+  { sigil: '⊛', defaultId: 'wiki:the-experience-engine' },
 ];
 
 const GS_KEY = 'eo-wiki-getstarted';
@@ -4118,7 +4118,7 @@ const SUBTITLES = [
   { sigil: '△', text: 'A closed grammar for how anything becomes something else.' },
   { sigil: '⊢', text: 'The transcendental limits of how anything becomes something else.' },
   { sigil: '⊨', text: 'Testable. Cross-linguistic. Falsifiable.' },
-  { sigil: '↬', text: 'A framework that governs its own construction.' },
+  { sigil: '⊛', text: 'A framework that governs its own construction.' },
 ];
 
 let cycleIndex = 0;
@@ -4276,7 +4276,7 @@ const EO_OPS = {
   'SYN': { sigil: '△', label: 'Synthesis' },
   'DEF': { sigil: '⊢', label: 'Definition' },
   'EVA': { sigil: '⊨', label: 'Evaluation' },
-  'REC': { sigil: '↬', label: 'Recursion' },
+  'REC': { sigil: '⊛', label: 'Recursion' },
 };
 
 function renderEONotation(el) {
@@ -4302,8 +4302,8 @@ function renderEONotation(el) {
   const opPattern = new RegExp(
     `\\b(${opNames})\\(([^)]{0,80})\\)` + // OP(args)
     `|\\b(${opNames})\\b` +                // bare OP name
-    `|([∅○●|+△⊢⊨↬])\\s*→\\s*([∅○●|+△⊢⊨↬])` + // sigil → sigil chains
-    `|(?:^|[\\s(])([∅○●+△⊢⊨↬])(?=[\\s),.:;]|$)`, // standalone sigils
+    `|([∅○●|+△⊢⊨⊛])\\s*→\\s*([∅○●|+△⊢⊨⊛])` + // sigil → sigil chains
+    `|(?:^|[\\s(])([∅○●+△⊢⊨⊛])(?=[\\s),.:;]|$)`, // standalone sigils
     'g'
   );
 
