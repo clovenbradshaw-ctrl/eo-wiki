@@ -4009,11 +4009,11 @@ async function doCreateArticle() {
 
 const OPERATORS = [
   { sigil: '∅', defaultId: 'wiki:emergent-ontology-eo' },
-  { sigil: '⊡', defaultId: 'wiki:ground-figure-pattern' },
-  { sigil: '△', defaultId: 'wiki:the-nine-operators' },
+  { sigil: '○', defaultId: 'wiki:ground-figure-pattern' },
+  { sigil: '●', defaultId: 'wiki:the-nine-operators' },
   { sigil: '|',  defaultId: 'wiki:the-triads' },
-  { sigil: '⋈', defaultId: 'wiki:the-eo-phase-space-cube' },
-  { sigil: '∨', defaultId: 'wiki:the-triadic-minimum' },
+  { sigil: '+', defaultId: 'wiki:the-eo-phase-space-cube' },
+  { sigil: '△', defaultId: 'wiki:the-triadic-minimum' },
   { sigil: '⊢', defaultId: 'wiki:bivalent-compression-and-dimensional-poverty' },
   { sigil: '⊨', defaultId: 'wiki:eo-lexical-analysis-cross-linguistic-clause-classification-study' },
   { sigil: '↬', defaultId: 'wiki:the-experience-engine' },
@@ -4112,11 +4112,11 @@ function pickGS(slot, contentId, event) {
 
 const SUBTITLES = [
   { sigil: '∅', text: "What's missing from every theory of change." },
-  { sigil: '⊡', text: 'Notice: everything that changes does it in one of twenty-seven ways.' },
-  { sigil: '△', text: 'Nine types of change action. Twenty-seven forms.' },
+  { sigil: '○', text: 'Notice: everything that changes does it in one of twenty-seven ways.' },
+  { sigil: '●', text: 'Nine types of change action. Twenty-seven forms.' },
   { sigil: '|', text: 'Nine operators. Three axes. One grammar.' },
-  { sigil: '⋈', text: 'Why independent traditions keep finding the same structure.' },
-  { sigil: '∨', text: 'A closed grammar for how anything becomes something else.' },
+  { sigil: '+', text: 'Why independent traditions keep finding the same structure.' },
+  { sigil: '△', text: 'A closed grammar for how anything becomes something else.' },
   { sigil: '⊢', text: 'The transcendental limits of how anything becomes something else.' },
   { sigil: '⊨', text: 'Testable. Cross-linguistic. Falsifiable.' },
   { sigil: '↬', text: 'A framework that governs its own construction.' },
@@ -4270,11 +4270,11 @@ function highlightTerms(text, terms) {
 
 const EO_OPS = {
   'NUL': { sigil: '∅', label: 'Absence & Nullity' },
-  'SEN': { sigil: '⊡', label: 'Sensation & Registration' },
-  'INS': { sigil: '△', label: 'Instantiation' },
+  'SEN': { sigil: '○', label: 'Sensation & Registration' },
+  'INS': { sigil: '●', label: 'Instantiation' },
   'SEG': { sigil: '|', label: 'Segmentation' },
-  'CON': { sigil: '⋈', label: 'Connection & Joinability' },
-  'SYN': { sigil: '∨', label: 'Synthesis' },
+  'CON': { sigil: '+', label: 'Connection & Joinability' },
+  'SYN': { sigil: '△', label: 'Synthesis' },
   'DEF': { sigil: '⊢', label: 'Definition' },
   'EVA': { sigil: '⊨', label: 'Evaluation' },
   'REC': { sigil: '↬', label: 'Recursion' },
@@ -4301,13 +4301,13 @@ function renderEONotation(el) {
   while (walker.nextNode()) textNodes.push(walker.currentNode);
 
   // Pattern: operator names like NUL, SEN, INS etc. followed by optional (args)
-  // Also match sigil sequences like ∅ → ⊡ → △
+  // Also match sigil sequences like ∅ → ○ → ●
   const opNames = Object.keys(EO_OPS).join('|');
   const opPattern = new RegExp(
     `\\b(${opNames})\\(([^)]{0,80})\\)` + // OP(args)
     `|\\b(${opNames})\\b` +                // bare OP name
-    `|([∅⊡△|⋈∨⊢⊨↬⊙~])\\s*→\\s*([∅⊡△|⋈∨⊢⊨↬⊙~])` + // sigil → sigil chains
-    `|(?:^|[\\s(])([∅⊡△⋈∨⊢⊨↬⊙])(?=[\\s),.:;]|$)`, // standalone sigils
+    `|([∅○●|+△⊢⊨↬⊙~])\\s*→\\s*([∅○●|+△⊢⊨↬⊙~])` + // sigil → sigil chains
+    `|(?:^|[\\s(])([∅○●+△⊢⊨↬⊙])(?=[\\s),.:;]|$)`, // standalone sigils
     'g'
   );
 
