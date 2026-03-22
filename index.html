@@ -4278,7 +4278,7 @@ const EO_OPS = {
   'DEF': { sigil: '⊢', label: 'Definition' },
   'EVA': { sigil: '⊨', label: 'Evaluation' },
   'REC': { sigil: '↬', label: 'Recursion' },
-  'SIG': { sigil: '⊙', label: 'Signal' },
+  'SIG': { sigil: '○', label: 'Signal' },
   'ALT': { sigil: '~', label: 'Alternation' },
   'DES': { sigil: '⊡', label: 'Designation' },
 };
@@ -4306,8 +4306,8 @@ function renderEONotation(el) {
   const opPattern = new RegExp(
     `\\b(${opNames})\\(([^)]{0,80})\\)` + // OP(args)
     `|\\b(${opNames})\\b` +                // bare OP name
-    `|([∅○●|+△⊢⊨↬⊙~])\\s*→\\s*([∅○●|+△⊢⊨↬⊙~])` + // sigil → sigil chains
-    `|(?:^|[\\s(])([∅○●+△⊢⊨↬⊙])(?=[\\s),.:;]|$)`, // standalone sigils
+    `|([∅○●|+△⊢⊨↬○~])\\s*→\\s*([∅○●|+△⊢⊨↬○~])` + // sigil → sigil chains
+    `|(?:^|[\\s(])([∅○●+△⊢⊨↬○])(?=[\\s),.:;]|$)`, // standalone sigils
     'g'
   );
 
