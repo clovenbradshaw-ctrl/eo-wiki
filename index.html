@@ -3252,9 +3252,18 @@ async function downloadAllAsMarkdown() {
       const tags = meta.tags || [];
       const html = extractContent(vals);
 
+      const slug = fullRec.record_id || '';
+      const keywords = meta.keywords || [];
+      const updatedAt = meta.updated_at || fullRec.created_at || '';
+
       let md = `# ${title}\n\n`;
+      md += `**Record ID:** ${slug}  \n`;
+      md += `**DB ID:** ${fullRec.id}  \n`;
       if (tags.length) md += `**Tags:** ${tags.join(', ')}  \n`;
-      md += `**Status:** ${status}\n\n---\n\n`;
+      if (keywords.length) md += `**Keywords:** ${keywords.join(', ')}  \n`;
+      md += `**Status:** ${status}  \n`;
+      if (updatedAt) md += `**Updated:** ${updatedAt}  \n`;
+      md += `\n---\n\n`;
       if (html) {
         md += htmlToMarkdown(html);
       } else {
