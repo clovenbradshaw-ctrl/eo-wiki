@@ -304,8 +304,8 @@
     }
     .article-layout {
       display: grid;
-      grid-template-columns: 1fr 170px;
-      gap: 20px;
+      grid-template-columns: 1fr 240px;
+      gap: 28px;
       align-items: start;
     }
     .article-aside {
@@ -344,8 +344,8 @@
   }
   @media (min-width: 1400px) {
     .article-layout {
-      grid-template-columns: 1fr 210px;
-      gap: 32px;
+      grid-template-columns: 1fr 280px;
+      gap: 36px;
     }
     .article-aside .related-card-title {
       font-size: 13px;
@@ -2023,6 +2023,14 @@ let isEditing = false;
 let tocHeadings = [];
 let isLoggedIn = false;
 let adminPassword = '';
+const ADMIN_HASH = 'e89ade35085fc8736d6b4755af45e842c6eec0c5978d318156aff6351f0fa950';
+
+async function sha256(message) {
+  const msgBuffer = new TextEncoder().encode(message);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
 
 /* ═══════════════════════
    FETCH — paginated index
@@ -2199,9 +2207,15 @@ function showLogin() {
 
 function hideLogin() { document.getElementById('loginOverlay').classList.remove('show'); }
 
-function doLogin() {
+async function doLogin() {
   const pw = document.getElementById('loginPassword').value;
   if (!pw) return;
+  const hash = await sha256(pw);
+  if (hash !== ADMIN_HASH) {
+    document.getElementById('loginError').textContent = 'Incorrect password';
+    document.getElementById('loginError').style.display = '';
+    return;
+  }
   // Store password — we'll send it with PATCH calls and use it as auth
   adminPassword = pw;
   isLoggedIn = true;
