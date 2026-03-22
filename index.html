@@ -66,7 +66,7 @@
     overflow: hidden;
   }
   .nav-header {
-    padding: 20px 18px 14px;
+    padding: 14px 14px 10px;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: baseline;
@@ -120,23 +120,24 @@
   .nav.toc-mode .nav-filters { display: none; }
   .nav.toc-mode .nav-search { display: none; }
   .nav.toc-mode .nav-title { font-size: 14px; }
+  .nav.searching .nav-filters { display: none; }
 
   .nav-filters {
-    padding: 10px 14px 0;
+    padding: 8px 14px 0;
     border-bottom: 1px solid var(--border);
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 4px;
   }
   .nav-filter-row {
     display: flex;
     gap: 4px;
     flex-wrap: wrap;
     align-items: center;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
   }
   .nav-filter-row:not(:last-child) {
-    padding-bottom: 8px;
+    padding-bottom: 6px;
     border-bottom: 1px solid var(--border-light);
   }
   .nav-filters.logged-out .nav-status-row { display: none; }
@@ -1440,7 +1441,7 @@
 
   /* ─── SEARCH ─── */
   .nav-search {
-    padding: 10px 14px;
+    padding: 8px 14px;
     border-bottom: 1px solid var(--border);
   }
   .nav-search-input {
@@ -1472,10 +1473,59 @@
     color: var(--text-tertiary);
     pointer-events: none;
   }
+  .nav-search-clear {
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-tertiary);
+    font-size: 14px;
+    padding: 2px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    transition: color var(--transition), background var(--transition);
+  }
+  .nav-search-clear:hover { color: var(--text-secondary); background: var(--bg-nav); }
+  .nav.searching .nav-search-clear { display: flex; }
+  .nav.searching .nav-search-input { padding-right: 28px; }
+
   .search-match {
     background: #fde68a;
     border-radius: 2px;
     padding: 0 1px;
+  }
+
+  .nav-search-snippet {
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--text-tertiary);
+    margin-top: 3px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  .nav-search-tags {
+    display: flex;
+    gap: 4px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+  .nav-search-tag {
+    font-size: 9px;
+    font-weight: 500;
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: #e4eef6;
+    color: var(--emanon);
   }
 
   /* ─── RELATED ARTICLES ─── */
@@ -1749,6 +1799,7 @@
     <div class="nav-search-wrap">
       <i class="ph ph-magnifying-glass"></i>
       <input class="nav-search-input" id="searchInput" type="text" placeholder="Search articles…" oninput="onSearch(this.value)">
+      <button class="nav-search-clear" onclick="clearSearch()" title="Clear search"><i class="ph ph-x"></i></button>
     </div>
   </div>
   <div class="nav-filters logged-out" id="navFilters">
@@ -3996,11 +4047,15 @@ function buildSearchIndex() {
 }
 
 function onSearch(query) {
+  const nav = document.getElementById('nav');
   query = query.trim();
   if (!query) {
+    nav.classList.remove('searching');
     renderList();
     return;
   }
+
+  nav.classList.add('searching');
 
   if (!searchIndex.length) buildSearchIndex();
 
@@ -4014,9 +4069,19 @@ function onSearch(query) {
 
     let score = 0;
     let snippets = [];
+    let matchedTags = [];
     for (const term of terms) {
       if (item.title.toLowerCase().includes(term)) score += 10;
-      if (item.tags.includes(term)) score += 5;
+      if (item.tags.includes(term)) {
+        score += 5;
+        // Find the matching tag for display
+        const entry = indexEntries.find(e => e.content_id === item.content_id);
+        if (entry && entry.tags) {
+          entry.tags.forEach(t => {
+            if (t.toLowerCase().includes(term) && !matchedTags.includes(t)) matchedTags.push(t);
+          });
+        }
+      }
       if (item.keywords.includes(term)) score += 5;
       const textIdx = item.text.indexOf(term);
       if (textIdx !== -1) {
@@ -4029,7 +4094,7 @@ function onSearch(query) {
       }
     }
     if (score > 0) {
-      results.push({ ...item, score, snippet: snippets[0] || '' });
+      results.push({ ...item, score, snippet: snippets[0] || '', matchedTags });
     }
   }
 
@@ -4040,15 +4105,24 @@ function onSearch(query) {
     return;
   }
 
-  list.innerHTML = results.map(r => {
+  list.innerHTML = '<div class="nav-group-label"><i class="ph ph-magnifying-glass"></i> ' + results.length + ' result' + (results.length !== 1 ? 's' : '') + '</div>' +
+    results.map(r => {
     const safeId = r.content_id.replace(/'/g, "\\'");
-    const highlighted = r.snippet ? highlightTerms(r.snippet, terms) : '';
+    const highlighted = r.snippet ? highlightTerms(esc(r.snippet), terms) : '';
+    const tagsHtml = r.matchedTags.length ? `<div class="nav-search-tags">${r.matchedTags.map(t => `<span class="nav-search-tag">${esc(t)}</span>`).join('')}</div>` : '';
     return `
-      <div class="nav-item" data-id="${r.content_id}" onclick="loadPage('${safeId}'); document.getElementById('searchInput').value='';">
+      <div class="nav-item" data-id="${r.content_id}" onclick="loadPage('${safeId}'); clearSearch();">
         <div class="nav-item-title">${highlightTerms(esc(r.title), terms)}</div>
-        ${highlighted ? `<div class="nav-item-meta" style="font-size:11px;line-height:1.35;margin-top:3px;max-height:32px;overflow:hidden;">${highlighted}</div>` : ''}
+        ${highlighted ? `<div class="nav-search-snippet">${highlighted}</div>` : ''}
+        ${tagsHtml}
       </div>`;
   }).join('');
+}
+
+function clearSearch() {
+  document.getElementById('searchInput').value = '';
+  document.getElementById('nav').classList.remove('searching');
+  renderList();
 }
 
 function highlightTerms(text, terms) {
