@@ -1121,6 +1121,17 @@
     margin-bottom: 14px;
   }
   .modal input:focus { border-color: var(--emanon); box-shadow: 0 0 0 2px rgba(58, 124, 165, 0.12); }
+  .remember-me {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .remember-me input { margin: 0; cursor: pointer; }
   .modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
   .modal-error {
     font-size: 12px;
@@ -2081,6 +2092,7 @@
     <p>Access draft and archived content.</p>
     <div class="modal-error" id="loginError">Incorrect password.</div>
     <input type="password" id="loginPassword" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+    <label class="remember-me"><input type="checkbox" id="rememberMe"> Keep me logged in</label>
     <div class="modal-actions">
       <button class="btn" onclick="hideLogin()">Cancel</button>
       <button class="btn btn-save" onclick="doLogin()"><i class="ph ph-sign-in"></i> Log in</button>
@@ -2416,6 +2428,7 @@ function showLogin() {
   if (isLoggedIn) {
     isLoggedIn = false;
     adminPassword = '';
+    localStorage.removeItem('eo_session');
     document.getElementById('navFilters').classList.add('logged-out');
     document.getElementById('loginLabel').textContent = 'log in';
     document.querySelector('#loginBtn i').className = 'ph ph-sign-in';
@@ -2456,6 +2469,9 @@ async function doLogin() {
   // Store password — we'll send it with PATCH calls and use it as auth
   adminPassword = pw;
   isLoggedIn = true;
+  if (document.getElementById('rememberMe').checked) {
+    localStorage.setItem('eo_session', btoa(pw));
+  }
   hideLogin();
   document.getElementById('navFilters').classList.remove('logged-out');
   document.getElementById('loginLabel').textContent = 'log out';
@@ -4916,6 +4932,29 @@ startCycling();
 startMeaningCycle();
 
 (async () => {
+  // Restore saved session
+  const saved = localStorage.getItem('eo_session');
+  if (saved) {
+    try {
+      const pw = atob(saved);
+      const hash = await sha256(pw);
+      if (hash === ADMIN_HASH) {
+        adminPassword = pw;
+        isLoggedIn = true;
+        document.getElementById('navFilters').classList.remove('logged-out');
+        document.getElementById('loginLabel').textContent = 'log out';
+        document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
+        document.getElementById('srBtn').style.display = '';
+        document.getElementById('newBtn').style.display = '';
+        document.getElementById('adminDivider').style.display = '';
+        document.getElementById('clBtnHeader').style.display = '';
+        document.getElementById('beBtnHeader').style.display = '';
+      } else {
+        localStorage.removeItem('eo_session');
+      }
+    } catch { localStorage.removeItem('eo_session'); }
+  }
+
   try {
     const records = await fetchAllPages();
     buildIndex(records);
