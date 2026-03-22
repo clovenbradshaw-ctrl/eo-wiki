@@ -123,24 +123,25 @@
   .nav.searching .nav-filters { display: none; }
 
   .nav-filters {
-    padding: 8px 14px 0;
+    padding: 6px 14px;
     border-bottom: 1px solid var(--border);
     display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-  .nav-filter-row {
-    display: flex;
+    align-items: center;
     gap: 4px;
     flex-wrap: wrap;
-    align-items: center;
-    padding-bottom: 8px;
   }
-  .nav-filter-row:not(:last-child) {
-    padding-bottom: 6px;
-    border-bottom: 1px solid var(--border-light);
+  .nav-filter-row {
+    display: contents;
+  }
+  .nav-filter-divider {
+    width: 1px;
+    height: 16px;
+    background: var(--border);
+    margin: 0 4px;
+    flex-shrink: 0;
   }
   .nav-filters.logged-out .nav-status-row { display: none; }
+  .nav-filters.logged-out .nav-filter-divider.status-divider { display: none; }
 
   .filter-btn {
     font-family: inherit;
@@ -169,15 +170,6 @@
   .nav-list::-webkit-scrollbar { width: 3px; }
   .nav-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
-  .nav-item {
-    padding: 8px 18px;
-    padding-right: 36px;
-    cursor: pointer;
-    transition: background var(--transition);
-    border-left: 2px solid transparent;
-    line-height: 1.35;
-    position: relative;
-  }
   .nav-item:hover { background: var(--bg-nav); }
   .nav-item.active {
     background: var(--bg-nav);
@@ -194,7 +186,8 @@
     gap: 6px;
     font-size: 11px;
     color: var(--text-tertiary);
-    margin-top: 2px;
+    margin-top: 4px;
+    flex-wrap: wrap;
   }
   .status-dot {
     width: 5px; height: 5px;
@@ -208,19 +201,146 @@
 
   /* Nav groups */
   .nav-group-label {
-    padding: 14px 18px 5px;
+    padding: 16px 18px 4px;
     font-size: 10px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--text-tertiary);
     display: flex;
-    align-items: center;
+    align-items: baseline;
     gap: 6px;
   }
   .nav-group-label i { font-size: 12px; }
   .nav-group-label:first-child { padding-top: 10px; }
   .nav-group-label.fav-label { color: var(--protogon); }
+
+  /* Section headers with subtitles */
+  .nav-section-header {
+    padding: 16px 18px 6px;
+  }
+  .nav-section-header:first-child { padding-top: 10px; }
+  .nav-section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text);
+    line-height: 1.3;
+  }
+  .nav-section-title.fav-title { color: var(--protogon); }
+  .nav-section-title i { font-size: 12px; }
+  .nav-section-count {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .nav-section-subtitle {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-tertiary);
+    letter-spacing: 0;
+    text-transform: none;
+    line-height: 1.35;
+    margin-top: 1px;
+  }
+
+  /* Article cards with excerpts */
+  .nav-item {
+    padding: 10px 18px;
+    padding-right: 36px;
+    cursor: pointer;
+    transition: background var(--transition);
+    border-left: 3px solid transparent;
+    line-height: 1.35;
+    position: relative;
+  }
+  .nav-item.draft-item {
+    border-left-color: var(--draft);
+  }
+  .nav-item-excerpt {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    line-height: 1.4;
+    margin-top: 3px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  /* Status chips */
+  .status-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+  .status-chip-published {
+    background: #e8f5e9;
+    color: #2d8a4e;
+  }
+  .status-chip-draft {
+    background: #fef3e2;
+    color: #b87333;
+  }
+  .status-chip-archived {
+    background: #eef0f5;
+    color: var(--archived);
+  }
+
+  /* Inline tags in nav items */
+  .nav-item-tags {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .nav-item-tag {
+    font-size: 9px;
+    font-weight: 500;
+    padding: 1px 5px;
+    border-radius: 3px;
+    background: #e4eef6;
+    color: var(--emanon);
+  }
+
+  /* Show more button */
+  .nav-show-more {
+    padding: 6px 18px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--emanon);
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    user-select: none;
+  }
+  .nav-show-more:hover {
+    background: var(--bg-nav);
+    color: var(--text);
+  }
+  .nav-show-more i { font-size: 12px; }
+
+  /* Compact header utility buttons */
+  .nav-header-utils {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+  }
 
   /* Favorite star */
   .nav-fav {
@@ -1789,12 +1909,20 @@
 <aside class="nav" id="nav">
   <div class="nav-header">
     <span class="nav-title" id="navTitle">EO<span class="eo-meaning" id="navMeaning">Experiential Ontology</span></span>
-    <button class="nav-login-btn" id="downloadAllBtn" onclick="downloadAllAsMarkdown()" title="Download all articles as Markdown">
-      <i class="ph ph-download-simple"></i>
-    </button>
-    <button class="nav-login-btn" id="loginBtn" onclick="showLogin()">
-      <i class="ph ph-sign-in"></i> <span id="loginLabel">log in</span>
-    </button>
+    <div class="nav-header-utils">
+      <button class="nav-login-btn" id="clBtnHeader" style="display:none;" onclick="openChangelog(); event.stopPropagation();" title="Change Log">
+        <i class="ph ph-clock-counter-clockwise"></i>
+      </button>
+      <button class="nav-login-btn" id="beBtnHeader" style="display:none;" onclick="openBulkEdit(); event.stopPropagation();" title="Bulk Edit">
+        <i class="ph ph-code-block"></i>
+      </button>
+      <button class="nav-login-btn" id="downloadAllBtn" onclick="downloadAllAsMarkdown()" title="Download all articles as Markdown">
+        <i class="ph ph-download-simple"></i>
+      </button>
+      <button class="nav-login-btn" id="loginBtn" onclick="showLogin()">
+        <i class="ph ph-sign-in"></i> <span id="loginLabel">log in</span>
+      </button>
+    </div>
   </div>
   <div class="nav-back" onclick="backToIndex()">
     <i class="ph ph-arrow-left"></i>
@@ -1813,12 +1941,12 @@
       <button class="filter-btn" data-filter="published">Published</button>
       <button class="filter-btn" data-filter="draft">Draft</button>
       <button class="filter-btn" data-filter="archived">Archived</button>
-      <button class="filter-btn" id="srBtn" style="display:none;margin-left:auto;border-color:var(--emanon);color:var(--emanon);" onclick="openSR(); event.stopPropagation();"><i class="ph ph-magnifying-glass" style="font-size:12px;vertical-align:-1px;"></i> S&amp;R</button>
-      <button class="filter-btn" id="clBtn" style="display:none;border-color:var(--holon);color:var(--holon);" onclick="openChangelog(); event.stopPropagation();"><i class="ph ph-clock-counter-clockwise" style="font-size:12px;vertical-align:-1px;"></i> Log</button>
-      <button class="filter-btn" id="beBtn" style="display:none;border-color:var(--protogon);color:var(--protogon);" onclick="openBulkEdit(); event.stopPropagation();"><i class="ph ph-code-block" style="font-size:12px;vertical-align:-1px;"></i> Bulk</button>
-      <button class="filter-btn" id="newBtn" style="display:none;border-color:#15803d;color:#15803d;" onclick="openNewArticle(); event.stopPropagation();"><i class="ph ph-plus" style="font-size:12px;vertical-align:-1px;"></i> New</button>
     </div>
+    <span class="nav-filter-divider status-divider"></span>
     <div class="nav-filter-row nav-tag-row" id="navTagRow"></div>
+    <span class="nav-filter-divider" id="adminDivider" style="display:none;"></span>
+    <button class="filter-btn" id="srBtn" style="display:none;border-color:var(--emanon);color:var(--emanon);" onclick="openSR(); event.stopPropagation();" title="Search & Replace"><i class="ph ph-magnifying-glass" style="font-size:12px;vertical-align:-1px;"></i></button>
+    <button class="filter-btn" id="newBtn" style="display:none;border-color:#15803d;color:#15803d;" onclick="openNewArticle(); event.stopPropagation();" title="New Article"><i class="ph ph-plus" style="font-size:12px;vertical-align:-1px;"></i></button>
   </div>
   <div class="nav-list" id="navList">
     <div class="loading"><div class="spinner"></div><br>Loading…</div>
@@ -2184,9 +2312,10 @@ function showLogin() {
     document.getElementById('loginLabel').textContent = 'log in';
     document.querySelector('#loginBtn i').className = 'ph ph-sign-in';
     document.getElementById('srBtn').style.display = 'none';
-    document.getElementById('clBtn').style.display = 'none';
-    document.getElementById('beBtn').style.display = 'none';
     document.getElementById('newBtn').style.display = 'none';
+    document.getElementById('adminDivider').style.display = 'none';
+    document.getElementById('clBtnHeader').style.display = 'none';
+    document.getElementById('beBtnHeader').style.display = 'none';
     closeSR();
     closeChangelog();
     closeBulkEdit();
@@ -2224,9 +2353,10 @@ async function doLogin() {
   document.getElementById('loginLabel').textContent = 'log out';
   document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
   document.getElementById('srBtn').style.display = '';
-  document.getElementById('clBtn').style.display = '';
-  document.getElementById('beBtn').style.display = '';
   document.getElementById('newBtn').style.display = '';
+  document.getElementById('adminDivider').style.display = '';
+  document.getElementById('clBtnHeader').style.display = '';
+  document.getElementById('beBtnHeader').style.display = '';
   renderTagButtons();
   renderList();
   renderGetStarted();
@@ -2312,6 +2442,33 @@ function setTag(tag) {
   renderList();
 }
 
+// Section subtitles for known tags
+const TAG_SUBTITLES = {
+  '101': 'Foundations',
+  'core': 'Core framework',
+  'operator': 'Notation & structure',
+  'operators': 'Notation & structure',
+  'framework': 'Conceptual architecture',
+  'language': 'Linguistic analysis',
+  'meta': 'Meta-theory',
+  'application': 'Applied EO',
+};
+
+// How many items to show per section before collapsing
+const SECTION_PREVIEW_COUNT = 5;
+
+// Track expanded sections
+const expandedSections = new Set();
+
+function toggleSection(sectionKey) {
+  if (expandedSections.has(sectionKey)) {
+    expandedSections.delete(sectionKey);
+  } else {
+    expandedSections.add(sectionKey);
+  }
+  renderList();
+}
+
 function renderList() {
   const list = document.getElementById('navList');
   let filtered = indexEntries;
@@ -2356,21 +2513,38 @@ function renderList() {
 
   // Favorites section
   if (favorited.length) {
-    html += '<div class="nav-group-label fav-label"><i class="ph ph-star-fill"></i> Favorites</div>';
+    html += renderSectionHeader('__favorites', 'Favorites', favorited.length, null, true);
     html += favorited.map(e => renderNavItem(e, true)).join('');
   }
 
   // Tag groups
   for (const tag of sortedTags) {
     const entries = groups.get(tag);
-    html += `<div class="nav-group-label">${esc(tag)}</div>`;
-    html += entries.map(e => renderNavItem(e, favs.has(e.content_id))).join('');
+    const subtitle = TAG_SUBTITLES[tag.toLowerCase()] || null;
+    const isOperatorTag = tag.toLowerCase() === 'operator' || tag.toLowerCase() === 'operators';
+    html += renderSectionHeader(tag, tag, entries.length, subtitle, false, isOperatorTag);
+
+    const isExpanded = expandedSections.has(tag);
+    const visible = isExpanded ? entries : entries.slice(0, SECTION_PREVIEW_COUNT);
+    const remaining = entries.length - SECTION_PREVIEW_COUNT;
+
+    html += visible.map(e => renderNavItem(e, favs.has(e.content_id))).join('');
+
+    if (!isExpanded && remaining > 0) {
+      html += `<div class="nav-show-more" onclick="toggleSection('${esc(tag)}')">
+        <i class="ph ph-caret-down"></i> Show ${remaining} more in ${esc(tag)}
+      </div>`;
+    } else if (isExpanded && entries.length > SECTION_PREVIEW_COUNT) {
+      html += `<div class="nav-show-more" onclick="toggleSection('${esc(tag)}')">
+        <i class="ph ph-caret-up"></i> Show less
+      </div>`;
+    }
   }
 
   // Untagged
   if (untagged.length) {
     if (sortedTags.length || favorited.length) {
-      html += '<div class="nav-group-label">Uncategorized</div>';
+      html += renderSectionHeader('__untagged', 'Uncategorized', untagged.length, null);
     }
     html += untagged.map(e => renderNavItem(e, favs.has(e.content_id))).join('');
   }
@@ -2378,23 +2552,66 @@ function renderList() {
   list.innerHTML = html;
 }
 
+function renderSectionHeader(key, label, count, subtitle, isFav, isOperator) {
+  return `
+    <div class="nav-section-header">
+      <div class="nav-section-title ${isFav ? 'fav-title' : ''}">
+        ${isFav ? '<i class="ph ph-star-fill"></i> ' : ''}${isOperator ? '<i class="ph ph-diamond" style="font-size:10px;"></i> ' : ''}${esc(label)}
+        <span class="nav-section-count">${count}</span>
+      </div>
+      ${subtitle ? `<div class="nav-section-subtitle">${esc(subtitle)}</div>` : ''}
+    </div>`;
+}
+
+function getExcerpt(contentId) {
+  const rec = allRecords.find(r => r.record_id === contentId);
+  if (!rec) return '';
+  const vals = parseValues(rec.values);
+  const html = extractContent(vals) || '';
+  const text = stripHtml(html).trim();
+  if (!text) return '';
+  // Return first ~120 chars, breaking at word boundary
+  if (text.length <= 120) return text;
+  const cut = text.lastIndexOf(' ', 120);
+  return text.slice(0, cut > 60 ? cut : 120) + '…';
+}
+
 function renderNavItem(entry, isFav) {
   const safeId = entry.content_id.replace(/'/g, "\\'");
-  // For published: show relative time. For draft/archived: show status label.
-  let metaText;
-  if (entry.status === 'published' && entry.updated_at) {
-    metaText = formatTime(entry.updated_at);
+  const isDraft = entry.status === 'draft';
+  const isArchived = entry.status === 'archived';
+  const excerpt = getExcerpt(entry.content_id);
+
+  // Status chip
+  let chipHtml = '';
+  if (isDraft) {
+    chipHtml = '<span class="status-chip status-chip-draft">Draft</span>';
+  } else if (isArchived) {
+    chipHtml = '<span class="status-chip status-chip-archived">Archived</span>';
   } else if (entry.status === 'published') {
-    metaText = '';
-  } else {
-    metaText = entry.status;
+    chipHtml = '<span class="status-chip status-chip-published">Published</span>';
   }
+
+  // Time info
+  let timeText = '';
+  if (entry.updated_at) {
+    timeText = formatTime(entry.updated_at);
+  }
+
+  // Show additional tags (beyond the grouping tag)
+  const extraTags = (entry.tags || []).slice(1);
+  const tagsHtml = extraTags.length
+    ? `<div class="nav-item-tags">${extraTags.map(t => `<span class="nav-item-tag">${esc(t)}</span>`).join('')}</div>`
+    : '';
+
   return `
-    <div class="nav-item" data-id="${entry.content_id}" onclick="loadPage('${safeId}')">
+    <div class="nav-item ${isDraft ? 'draft-item' : ''}" data-id="${entry.content_id}" onclick="loadPage('${safeId}')">
       <div class="nav-item-title">${esc(entry.title)}</div>
+      ${excerpt ? `<div class="nav-item-excerpt">${esc(excerpt)}</div>` : ''}
       <div class="nav-item-meta">
-        <span class="status-dot status-${entry.status}"></span>
-        ${metaText}
+        ${chipHtml}
+        ${timeText}
+        ${tagsHtml}
       </div>
       <button class="nav-fav ${isFav ? 'active' : ''}" onclick="toggleFav('${safeId}', event)" title="${isFav ? 'Remove from favorites' : 'Add to favorites'}">
         <i class="ph ${isFav ? 'ph-star-fill' : 'ph-star'}"></i>
