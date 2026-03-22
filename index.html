@@ -1099,6 +1099,302 @@
   .sr-btn-replace-all:hover { opacity: 0.85; }
   .sr-btn-replace-all:disabled { opacity: 0.4; cursor: not-allowed; }
 
+  /* ─── BULK EDIT PANEL ─── */
+  .be-panel {
+    display: none;
+    position: fixed;
+    top: 0; right: 0;
+    width: 560px;
+    height: 100vh;
+    background: #fff;
+    border-left: 1px solid var(--border);
+    box-shadow: -8px 0 32px rgba(0,0,0,0.08);
+    z-index: 150;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .be-panel.open { display: flex; }
+  .be-header {
+    padding: 18px 20px 14px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .be-header h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .be-header h3 i { font-size: 18px; color: var(--text-tertiary); }
+  .be-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .be-body::-webkit-scrollbar { width: 3px; }
+  .be-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+  .be-desc {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+  }
+  .be-desc code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    background: var(--bg-code-inline);
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+  .be-textarea {
+    width: 100%;
+    min-height: 180px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    resize: vertical;
+    line-height: 1.6;
+  }
+  .be-textarea:focus {
+    border-color: var(--emanon);
+    box-shadow: 0 0 0 2px rgba(58, 124, 165, 0.12);
+  }
+  .be-actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .be-actions .be-size {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-left: auto;
+  }
+  .be-status {
+    font-size: 12px;
+    color: var(--text-secondary);
+    padding: 8px 12px;
+    background: var(--bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--border-light);
+  }
+  .be-error {
+    font-size: 12px;
+    color: #b91c1c;
+    padding: 8px 12px;
+    background: #fef2f2;
+    border-radius: var(--radius);
+    border: 1px solid #fecaca;
+  }
+  .be-preview {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .be-preview h4 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .be-group {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .be-group-header {
+    padding: 8px 12px;
+    background: var(--bg);
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .be-group-header .be-badge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: var(--emanon);
+    color: #fff;
+    text-transform: uppercase;
+  }
+  .be-group-header .be-stats {
+    color: var(--text-tertiary);
+    font-size: 11px;
+    margin-left: auto;
+  }
+  .be-edit-item {
+    padding: 6px 12px;
+    font-size: 11px;
+    font-family: 'IBM Plex Mono', monospace;
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .be-edit-item:last-child { border-bottom: none; }
+  .be-edit-count {
+    font-weight: 600;
+    color: var(--emanon);
+    flex-shrink: 0;
+    min-width: 24px;
+  }
+  .be-edit-find {
+    color: #b91c1c;
+    word-break: break-all;
+  }
+  .be-edit-arrow {
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+  .be-edit-replace {
+    color: #15803d;
+    word-break: break-all;
+  }
+  .be-edit-nomatch { opacity: 0.4; }
+  .be-diff-details { margin: 0; }
+  .be-diff-details summary {
+    padding: 6px 12px;
+    font-size: 11px;
+    cursor: pointer;
+    color: var(--text-tertiary);
+  }
+  .be-diff {
+    max-height: 300px;
+    overflow-y: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    padding: 0 12px 8px;
+  }
+  .be-diff-line { white-space: pre-wrap; word-break: break-all; }
+  .be-diff-del { background: #fef2f2; color: #b91c1c; }
+  .be-diff-add { background: #f0fdf4; color: #15803d; }
+  .be-diff-same { color: var(--text-tertiary); }
+  .be-diff-marker {
+    display: inline-block;
+    width: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .be-results {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .be-result {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .be-result-ok { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; }
+  .be-result-err { background: #fef2f2; color: #b91c1c; border: 1px solid #fecaca; }
+  .be-progress {
+    height: 4px;
+    background: var(--border-light);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .be-progress-bar {
+    height: 100%;
+    background: var(--emanon);
+    transition: width 0.2s ease;
+  }
+  .be-summary {
+    display: flex;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .btn-execute {
+    background: var(--protogon);
+    color: #fff;
+    border-color: var(--protogon);
+  }
+  .btn-execute:hover { opacity: 0.85; }
+  .btn-execute:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ─── NEW ARTICLE MODAL ─── */
+  .new-article-modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(26, 32, 48, 0.45);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .new-article-modal.open { display: flex; }
+  .new-article-form {
+    background: #fff;
+    border-radius: 8px;
+    width: 440px;
+    max-width: 90vw;
+    padding: 28px 24px 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+  .new-article-form h3 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .new-article-form h3 i { font-size: 18px; color: var(--emanon); }
+  .new-article-field {
+    margin-bottom: 12px;
+  }
+  .new-article-field label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+  }
+  .new-article-field input,
+  .new-article-field select {
+    width: 100%;
+    padding: 8px 10px;
+    font-family: inherit;
+    font-size: 13px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+  }
+  .new-article-field input:focus,
+  .new-article-field select:focus {
+    border-color: var(--emanon);
+    box-shadow: 0 0 0 2px rgba(58, 124, 165, 0.12);
+  }
+  .new-article-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 18px;
+  }
+
   /* ─── EO-WIDGET IFRAMES ─── */
   .eo-widget-frame {
     width: 100%;
@@ -1432,6 +1728,7 @@
     .nav { width: 100%; min-width: 100%; height: auto; max-height: 40vh; border-right: none; border-bottom: 1px solid var(--border); }
     .main { flex: 1; }
     .sr-panel { width: 100%; }
+    .be-panel { width: 100%; }
   }
 </style>
 </head>
@@ -1462,6 +1759,8 @@
       <button class="filter-btn" data-filter="archived">Archived</button>
       <button class="filter-btn" id="srBtn" style="display:none;margin-left:auto;border-color:var(--emanon);color:var(--emanon);" onclick="openSR(); event.stopPropagation();"><i class="ph ph-magnifying-glass" style="font-size:12px;vertical-align:-1px;"></i> S&amp;R</button>
       <button class="filter-btn" id="clBtn" style="display:none;border-color:var(--holon);color:var(--holon);" onclick="openChangelog(); event.stopPropagation();"><i class="ph ph-clock-counter-clockwise" style="font-size:12px;vertical-align:-1px;"></i> Log</button>
+      <button class="filter-btn" id="beBtn" style="display:none;border-color:var(--protogon);color:var(--protogon);" onclick="openBulkEdit(); event.stopPropagation();"><i class="ph ph-code-block" style="font-size:12px;vertical-align:-1px;"></i> Bulk</button>
+      <button class="filter-btn" id="newBtn" style="display:none;border-color:#15803d;color:#15803d;" onclick="openNewArticle(); event.stopPropagation();"><i class="ph ph-plus" style="font-size:12px;vertical-align:-1px;"></i> New</button>
     </div>
     <div class="nav-filter-row nav-tag-row" id="navTagRow"></div>
   </div>
@@ -1522,6 +1821,70 @@
   </div>
   <div class="sr-count" id="srCount" style="display:none;"></div>
   <div class="sr-results" id="srResults"></div>
+</div>
+
+<div class="be-panel" id="bePanel">
+  <div class="be-header">
+    <h3><i class="ph ph-code-block"></i> Bulk Edit</h3>
+    <button class="sr-close" onclick="closeBulkEdit()"><i class="ph ph-x"></i></button>
+  </div>
+  <div class="be-body">
+    <div class="be-desc">
+      Paste a JSON array of edit operations to find &amp; replace text across multiple articles at once.<br><br>
+      Format: <code>[{ "type": "edit", "record_id": "wiki:slug", "find": "old text", "replace": "new text" }]</code>
+    </div>
+    <textarea class="be-textarea" id="beInput" placeholder='[
+  { "type": "edit", "record_id": "wiki:my-article", "find": "old text", "replace": "new text" },
+  { "type": "edit", "record_id": "wiki:another", "find": "foo", "replace": "bar" }
+]' spellcheck="false"></textarea>
+    <div class="be-actions">
+      <button class="btn" onclick="doBulkValidate()" id="beValidateBtn"><i class="ph ph-check-circle"></i> Validate &amp; Preview</button>
+      <button class="btn" onclick="clearBulkEdit()" style="font-size:11px;">Clear</button>
+      <span class="be-size" id="beSize"></span>
+    </div>
+    <div id="beError"></div>
+    <div id="beStatus"></div>
+    <div id="bePreview"></div>
+    <div id="beProgress"></div>
+    <div id="beResults"></div>
+  </div>
+</div>
+
+<div class="new-article-modal" id="newArticleModal">
+  <div class="new-article-form">
+    <h3><i class="ph ph-plus-circle"></i> New Article</h3>
+    <div class="new-article-field">
+      <label>Title</label>
+      <input type="text" id="newArticleTitle" placeholder="My New Article">
+    </div>
+    <div class="new-article-field">
+      <label>Slug (auto-generated from title)</label>
+      <input type="text" id="newArticleSlug" placeholder="my-new-article">
+    </div>
+    <div class="new-article-field">
+      <label>Content Type</label>
+      <select id="newArticleType">
+        <option value="wiki">Wiki</option>
+        <option value="document">Document</option>
+      </select>
+    </div>
+    <div class="new-article-field">
+      <label>Status</label>
+      <select id="newArticleStatus">
+        <option value="draft">Draft</option>
+        <option value="published">Published</option>
+      </select>
+    </div>
+    <div class="new-article-field">
+      <label>Tags (comma-separated)</label>
+      <input type="text" id="newArticleTags" placeholder="core, framework">
+    </div>
+    <div id="newArticleError" class="be-error" style="display:none;"></div>
+    <div class="new-article-actions">
+      <button class="btn" onclick="closeNewArticle()">Cancel</button>
+      <button class="btn btn-save" id="newArticleBtn" onclick="doCreateArticle()"><i class="ph ph-plus"></i> Create</button>
+    </div>
+  </div>
 </div>
 
 <div class="cl-panel" id="clPanel">
@@ -1758,8 +2121,11 @@ function showLogin() {
     document.querySelector('#loginBtn i').className = 'ph ph-sign-in';
     document.getElementById('srBtn').style.display = 'none';
     document.getElementById('clBtn').style.display = 'none';
+    document.getElementById('beBtn').style.display = 'none';
+    document.getElementById('newBtn').style.display = 'none';
     closeSR();
     closeChangelog();
+    closeBulkEdit();
     currentFilter = 'all';
     currentTag = null;
     document.querySelectorAll('.nav-status-row .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
@@ -1789,6 +2155,8 @@ function doLogin() {
   document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
   document.getElementById('srBtn').style.display = '';
   document.getElementById('clBtn').style.display = '';
+  document.getElementById('beBtn').style.display = '';
+  document.getElementById('newBtn').style.display = '';
   renderTagButtons();
   renderList();
   renderGetStarted();
@@ -3034,6 +3402,424 @@ function cleanPastedHtml(html) {
     if (!el.getAttribute('style')?.trim()) el.removeAttribute('style');
   });
   return tmp.innerHTML;
+}
+
+/* ═══════════════════════
+   BULK EDIT
+   ═══════════════════════ */
+
+let beEditGroups = []; // resolved edit groups for execution
+
+function openBulkEdit() {
+  document.getElementById('bePanel').classList.add('open');
+  setTimeout(() => document.getElementById('beInput').focus(), 80);
+}
+
+function closeBulkEdit() {
+  document.getElementById('bePanel').classList.remove('open');
+  beEditGroups = [];
+}
+
+function clearBulkEdit() {
+  document.getElementById('beInput').value = '';
+  document.getElementById('beError').innerHTML = '';
+  document.getElementById('beStatus').innerHTML = '';
+  document.getElementById('bePreview').innerHTML = '';
+  document.getElementById('beProgress').innerHTML = '';
+  document.getElementById('beResults').innerHTML = '';
+  document.getElementById('beSize').textContent = '';
+  beEditGroups = [];
+}
+
+// Update size indicator on input
+document.addEventListener('DOMContentLoaded', () => {
+  const beInput = document.getElementById('beInput');
+  if (beInput) {
+    beInput.addEventListener('input', () => {
+      const size = new TextEncoder().encode(beInput.value).length;
+      document.getElementById('beSize').textContent = size > 0 ? (size / 1024).toFixed(1) + ' KB' : '';
+    });
+  }
+});
+
+function beDiff(oldText, newText) {
+  const oldLines = oldText.split('\n');
+  const newLines = newText.split('\n');
+  if (oldLines.length + newLines.length > 2000) {
+    return [
+      { type: 'del', text: `[${oldLines.length} lines — too large for inline diff]` },
+      { type: 'add', text: `[${newLines.length} lines]` },
+    ];
+  }
+  const m = oldLines.length, n = newLines.length;
+  const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+  for (let i = 1; i <= m; i++)
+    for (let j = 1; j <= n; j++)
+      dp[i][j] = oldLines[i-1] === newLines[j-1] ? dp[i-1][j-1] + 1 : Math.max(dp[i-1][j], dp[i][j-1]);
+  const diff = [];
+  let i = m, j = n;
+  while (i > 0 || j > 0) {
+    if (i > 0 && j > 0 && oldLines[i-1] === newLines[j-1]) { diff.unshift({ type: 'same', text: oldLines[i-1] }); i--; j--; }
+    else if (j > 0 && (i === 0 || dp[i][j-1] >= dp[i-1][j])) { diff.unshift({ type: 'add', text: newLines[j-1] }); j--; }
+    else { diff.unshift({ type: 'del', text: oldLines[i-1] }); i--; }
+  }
+  // Collapse long runs of unchanged lines
+  const CONTEXT = 3;
+  const hasChange = diff.map(d => d.type !== 'same');
+  const result = [];
+  for (let idx = 0; idx < diff.length; idx++) {
+    if (diff[idx].type !== 'same') { result.push(diff[idx]); continue; }
+    let near = false;
+    for (let k = Math.max(0, idx - CONTEXT); k <= Math.min(diff.length - 1, idx + CONTEXT); k++) {
+      if (hasChange[k]) { near = true; break; }
+    }
+    if (near) result.push(diff[idx]);
+    else if (result.length === 0 || result[result.length - 1].text !== '\u22EF') result.push({ type: 'same', text: '\u22EF' });
+  }
+  return result;
+}
+
+async function doBulkValidate() {
+  const input = document.getElementById('beInput').value;
+  const errorEl = document.getElementById('beError');
+  const statusEl = document.getElementById('beStatus');
+  const previewEl = document.getElementById('bePreview');
+  const resultsEl = document.getElementById('beResults');
+  const progressEl = document.getElementById('beProgress');
+
+  errorEl.innerHTML = '';
+  statusEl.innerHTML = '';
+  previewEl.innerHTML = '';
+  resultsEl.innerHTML = '';
+  progressEl.innerHTML = '';
+  beEditGroups = [];
+
+  if (!input.trim()) { errorEl.innerHTML = '<div class="be-error">Paste a JSON payload first.</div>'; return; }
+
+  let ops;
+  try {
+    const data = JSON.parse(input);
+    ops = Array.isArray(data) ? data : [data];
+  } catch (e) {
+    errorEl.innerHTML = `<div class="be-error">Invalid JSON: ${esc(e.message)}</div>`;
+    return;
+  }
+
+  // Validate ops
+  for (let i = 0; i < ops.length; i++) {
+    const op = ops[i];
+    if (!op || op.type !== 'edit') { errorEl.innerHTML = `<div class="be-error">Op ${i}: type must be "edit"</div>`; return; }
+    if (!op.record_id) { errorEl.innerHTML = `<div class="be-error">Op ${i}: missing record_id</div>`; return; }
+    if (typeof op.find !== 'string') { errorEl.innerHTML = `<div class="be-error">Op ${i}: missing find</div>`; return; }
+    if (typeof op.replace !== 'string') { errorEl.innerHTML = `<div class="be-error">Op ${i}: missing replace</div>`; return; }
+  }
+
+  // Group by record_id
+  const byRecord = new Map();
+  for (const op of ops) {
+    if (!byRecord.has(op.record_id)) byRecord.set(op.record_id, []);
+    byRecord.get(op.record_id).push(op);
+  }
+
+  statusEl.innerHTML = '<div class="be-status"><i class="ph ph-spinner" style="animation:spin 1s linear infinite;"></i> Resolving records…</div>';
+
+  const groups = [];
+  const skipped = [];
+
+  for (const [recordId, recordEdits] of byRecord) {
+    const rec = allRecords.find(r => r.record_id === recordId);
+    if (!rec) { skipped.push(recordId); continue; }
+
+    let fresh;
+    try { fresh = await fetchRecord(rec.id); } catch { skipped.push(recordId); continue; }
+
+    const vals = parseValues(fresh.values);
+    const originalContent = extractContent(vals) || '';
+    if (!originalContent) continue;
+
+    let content = originalContent;
+    const matchCounts = [];
+    for (const edit of recordEdits) {
+      const regex = new RegExp(escapeRegex(edit.find), 'g');
+      const matches = content.match(regex);
+      matchCounts.push(matches ? matches.length : 0);
+      if (matches) content = content.replace(regex, edit.replace);
+    }
+
+    const totalMatches = matchCounts.reduce((a, b) => a + b, 0);
+    if (totalMatches === 0) continue;
+
+    groups.push({
+      record_id: recordId,
+      rec: fresh,
+      vals,
+      originalContent,
+      newContent: content,
+      edits: recordEdits,
+      matchCounts,
+    });
+  }
+
+  beEditGroups = groups;
+
+  // Build status
+  let statusHtml = '';
+  if (skipped.length) {
+    statusHtml += `<div class="be-error" style="margin-bottom:8px;"><strong>Skipped ${skipped.length} record(s) (not found):</strong> ${skipped.map(s => esc(s)).join(', ')}</div>`;
+  }
+
+  const totalEdits = groups.reduce((s, g) => s + g.matchCounts.reduce((a, b) => a + b, 0), 0);
+  statusHtml += `<div class="be-status">${groups.length} record(s) with changes (${totalEdits} total replacements)</div>`;
+  statusEl.innerHTML = statusHtml;
+
+  if (groups.length === 0) { previewEl.innerHTML = ''; return; }
+
+  // Build preview
+  let html = '<div class="be-preview">';
+  html += `<div class="be-actions">
+    <button class="btn btn-execute" onclick="doBulkExecute()" id="beExecuteBtn"><i class="ph ph-play"></i> Execute all</button>
+  </div>`;
+
+  for (const group of groups) {
+    const groupMatches = group.matchCounts.reduce((a, b) => a + b, 0);
+    const title = extractMeta(group.vals).title || group.record_id;
+
+    html += `<div class="be-group">`;
+    html += `<div class="be-group-header">
+      <span class="be-badge">edit</span>
+      <span>${esc(title)}</span>
+      <span class="be-stats">${groupMatches} replacement${groupMatches !== 1 ? 's' : ''}</span>
+    </div>`;
+
+    for (let i = 0; i < group.edits.length; i++) {
+      const edit = group.edits[i];
+      const count = group.matchCounts[i];
+      const cls = count === 0 ? ' be-edit-nomatch' : '';
+      const findDisp = edit.find.length > 80 ? edit.find.slice(0, 80) + '…' : edit.find;
+      const replDisp = edit.replace.length > 80 ? edit.replace.slice(0, 80) + '…' : edit.replace;
+      html += `<div class="be-edit-item${cls}">
+        <span class="be-edit-count">${count}x</span>
+        <span class="be-edit-find">${esc(findDisp)}</span>
+        <span class="be-edit-arrow">&rarr;</span>
+        <span class="be-edit-replace">${esc(replDisp)}</span>
+      </div>`;
+    }
+
+    if (group.originalContent !== group.newContent) {
+      const diffResult = beDiff(group.originalContent, group.newContent);
+      html += `<details class="be-diff-details"><summary>Show diff</summary><div class="be-diff">`;
+      for (const seg of diffResult) {
+        const marker = seg.type === 'del' ? '-' : seg.type === 'add' ? '+' : ' ';
+        html += `<div class="be-diff-line be-diff-${seg.type}"><span class="be-diff-marker">${marker}</span>${esc(seg.text)}</div>`;
+      }
+      html += '</div></details>';
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+  previewEl.innerHTML = html;
+}
+
+async function doBulkExecute() {
+  if (!beEditGroups.length) return;
+
+  const executeBtn = document.getElementById('beExecuteBtn');
+  executeBtn.disabled = true;
+  executeBtn.innerHTML = '<i class="ph ph-spinner" style="animation:spin 1s linear infinite;"></i> Executing…';
+
+  const progressEl = document.getElementById('beProgress');
+  const resultsEl = document.getElementById('beResults');
+
+  progressEl.innerHTML = '<div class="be-progress"><div class="be-progress-bar" id="beProgressBar" style="width:0%"></div></div>';
+
+  const results = [];
+  for (let gi = 0; gi < beEditGroups.length; gi++) {
+    const group = beEditGroups[gi];
+    const bar = document.getElementById('beProgressBar');
+    if (bar) bar.style.width = `${((gi + 1) / beEditGroups.length) * 100}%`;
+
+    try {
+      const vals = group.vals;
+      const rev = deepParse(vals, 'current_revision') || {};
+      rev.content = group.newContent;
+      rev.format = 'html';
+      vals.current_revision = rev;
+      const meta = extractMeta(vals) || {};
+      meta.updated_at = new Date().toISOString();
+      vals.meta = meta;
+
+      const payload = { values: typeof group.rec.values === 'string' ? JSON.stringify(vals) : vals };
+      await patchRecord(group.rec.id, payload);
+
+      // Log the change
+      const matchTotal = group.matchCounts.reduce((a, b) => a + b, 0);
+      logChange(group.record_id, 'current_revision.content', group.originalContent, group.newContent, 'ALT');
+
+      // Update local cache
+      const idx = allRecords.findIndex(r => r.id === group.rec.id);
+      if (idx !== -1) allRecords[idx].values = typeof group.rec.values === 'string' ? JSON.stringify(vals) : vals;
+
+      results.push({ label: group.record_id, success: true, count: matchTotal });
+    } catch (err) {
+      results.push({ label: group.record_id, success: false, error: err.message });
+    }
+  }
+
+  // Show results
+  const successCount = results.filter(r => r.success).length;
+  const failCount = results.filter(r => !r.success).length;
+
+  let html = '<div class="be-results"><h4>Results</h4>';
+  for (const r of results) {
+    if (r.success) {
+      html += `<div class="be-result be-result-ok"><strong>OK</strong> ${esc(r.label)} (${r.count} replacements)</div>`;
+    } else {
+      html += `<div class="be-result be-result-err"><strong>ERR</strong> ${esc(r.label)} — ${esc(r.error)}</div>`;
+    }
+  }
+  html += `<div class="be-summary"><span style="color:#15803d;">${successCount} succeeded</span>`;
+  if (failCount) html += `<span style="color:#b91c1c;">${failCount} failed</span>`;
+  html += '</div></div>';
+  resultsEl.innerHTML = html;
+
+  executeBtn.innerHTML = '<i class="ph ph-check"></i> Done';
+
+  buildIndex(allRecords);
+  showToast(`Bulk edit: ${successCount} record(s) updated`);
+  beEditGroups = [];
+}
+
+/* ═══════════════════════
+   NEW ARTICLE
+   ═══════════════════════ */
+
+function openNewArticle() {
+  document.getElementById('newArticleModal').classList.add('open');
+  document.getElementById('newArticleTitle').value = '';
+  document.getElementById('newArticleSlug').value = '';
+  document.getElementById('newArticleTags').value = '';
+  document.getElementById('newArticleStatus').value = 'draft';
+  document.getElementById('newArticleType').value = 'wiki';
+  document.getElementById('newArticleError').style.display = 'none';
+  setTimeout(() => document.getElementById('newArticleTitle').focus(), 80);
+}
+
+function closeNewArticle() {
+  document.getElementById('newArticleModal').classList.remove('open');
+}
+
+// Auto-generate slug from title
+document.addEventListener('DOMContentLoaded', () => {
+  const titleInput = document.getElementById('newArticleTitle');
+  const slugInput = document.getElementById('newArticleSlug');
+  if (titleInput && slugInput) {
+    titleInput.addEventListener('input', () => {
+      slugInput.value = titleInput.value.toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .replace(/^-|-$/g, '');
+    });
+  }
+});
+
+// Close modal on overlay click
+document.addEventListener('click', (e) => {
+  if (e.target.id === 'newArticleModal') closeNewArticle();
+});
+
+async function doCreateArticle() {
+  const title = document.getElementById('newArticleTitle').value.trim();
+  const slug = document.getElementById('newArticleSlug').value.trim();
+  const contentType = document.getElementById('newArticleType').value;
+  const status = document.getElementById('newArticleStatus').value;
+  const tags = document.getElementById('newArticleTags').value.split(',').map(t => t.trim()).filter(Boolean);
+  const errorEl = document.getElementById('newArticleError');
+  const btn = document.getElementById('newArticleBtn');
+
+  errorEl.style.display = 'none';
+
+  if (!title) { errorEl.textContent = 'Title is required.'; errorEl.style.display = ''; return; }
+  if (!slug) { errorEl.textContent = 'Slug is required.'; errorEl.style.display = ''; return; }
+
+  const recordId = `${contentType}:${slug}`;
+
+  // Check for duplicate
+  if (allRecords.some(r => r.record_id === recordId)) {
+    errorEl.textContent = `Record "${recordId}" already exists.`;
+    errorEl.style.display = '';
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ph ph-spinner" style="animation:spin 1s linear infinite;"></i> Creating…';
+
+  const now = new Date().toISOString();
+  const values = {
+    meta: {
+      title,
+      status,
+      tags,
+      keywords: [],
+      updated_at: now,
+    },
+    current_revision: {
+      content: '<p>Start writing here…</p>',
+      format: 'html',
+    },
+  };
+
+  try {
+    // 1. Create the record
+    const newRec = await postRecord({
+      record_id: recordId,
+      displayName: title,
+      values: JSON.stringify(values),
+    });
+
+    // 2. Add to site:index
+    const indexRec = allRecords.find(r => r.record_id === 'site:index');
+    if (indexRec) {
+      const fresh = await fetchRecord(indexRec.id);
+      const indexVals = parseValues(fresh.values);
+      if (!Array.isArray(indexVals.entries)) indexVals.entries = [];
+      indexVals.entries.push({
+        content_id: recordId,
+        content_type: contentType,
+        title,
+        slug,
+        status,
+        tags,
+        keywords: [],
+        updated_at: now,
+      });
+      const payload = { values: typeof fresh.values === 'string' ? JSON.stringify(indexVals) : indexVals };
+      await patchRecord(indexRec.id, payload);
+      // Update local cache
+      const idx = allRecords.findIndex(r => r.id === indexRec.id);
+      if (idx !== -1) allRecords[idx].values = typeof fresh.values === 'string' ? JSON.stringify(indexVals) : indexVals;
+    }
+
+    // 3. Log the creation
+    logChange(recordId, 'record', null, title, 'INS');
+
+    // 4. Add to local cache and rebuild
+    allRecords.push(newRec);
+    buildIndex(allRecords);
+    buildSearchIndex();
+
+    closeNewArticle();
+    showToast(`Created "${title}"`);
+
+    // 5. Navigate to the new article
+    loadPage(recordId);
+  } catch (err) {
+    errorEl.textContent = err.message;
+    errorEl.style.display = '';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="ph ph-plus"></i> Create';
+  }
 }
 
 /* ═══════════════════════
