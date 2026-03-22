@@ -1425,7 +1425,7 @@
   }
   /* Operator-specific tints */
   .eo-op-NUL { color: #8a6d3b; }
-  .eo-op-SEN { color: var(--emanon); }
+  .eo-op-SIG { color: #6b5b95; }
   .eo-op-INS { color: #2d8a4e; }
   .eo-op-SEG { color: #7c5295; }
   .eo-op-CON { color: #3a7ca5; }
@@ -1433,7 +1433,6 @@
   .eo-op-DEF { color: #5a6e7f; }
   .eo-op-EVA { color: #2a7a62; }
   .eo-op-REC { color: var(--holon); }
-  .eo-op-SIG { color: #6b5b95; }
 
   .eo-arrow {
     color: var(--text-tertiary);
@@ -4270,7 +4269,7 @@ function highlightTerms(text, terms) {
 
 const EO_OPS = {
   'NUL': { sigil: '∅', label: 'Absence & Nullity' },
-  'SEN': { sigil: '○', label: 'Sensation & Registration' },
+  'SIG': { sigil: '○', label: 'Signal' },
   'INS': { sigil: '●', label: 'Instantiation' },
   'SEG': { sigil: '|', label: 'Segmentation' },
   'CON': { sigil: '+', label: 'Connection & Joinability' },
@@ -4278,9 +4277,6 @@ const EO_OPS = {
   'DEF': { sigil: '⊢', label: 'Definition' },
   'EVA': { sigil: '⊨', label: 'Evaluation' },
   'REC': { sigil: '↬', label: 'Recursion' },
-  'SIG': { sigil: '⊙', label: 'Signal' },
-  'ALT': { sigil: '~', label: 'Alternation' },
-  'DES': { sigil: '⊡', label: 'Designation' },
 };
 
 function renderEONotation(el) {
@@ -4300,14 +4296,14 @@ function renderEONotation(el) {
   const textNodes = [];
   while (walker.nextNode()) textNodes.push(walker.currentNode);
 
-  // Pattern: operator names like NUL, SEN, INS etc. followed by optional (args)
+  // Pattern: operator names like NUL, SIG, INS etc. followed by optional (args)
   // Also match sigil sequences like ∅ → ○ → ●
   const opNames = Object.keys(EO_OPS).join('|');
   const opPattern = new RegExp(
     `\\b(${opNames})\\(([^)]{0,80})\\)` + // OP(args)
     `|\\b(${opNames})\\b` +                // bare OP name
-    `|([∅○●|+△⊢⊨↬⊙~])\\s*→\\s*([∅○●|+△⊢⊨↬⊙~])` + // sigil → sigil chains
-    `|(?:^|[\\s(])([∅○●+△⊢⊨↬⊙])(?=[\\s),.:;]|$)`, // standalone sigils
+    `|([∅○●|+△⊢⊨↬])\\s*→\\s*([∅○●|+△⊢⊨↬])` + // sigil → sigil chains
+    `|(?:^|[\\s(])([∅○●+△⊢⊨↬])(?=[\\s),.:;]|$)`, // standalone sigils
     'g'
   );
 
