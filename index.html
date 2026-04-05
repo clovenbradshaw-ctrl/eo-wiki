@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
 <style>
   :root {
@@ -2411,6 +2412,26 @@ function extractContent(vals) {
   return vals.body || vals.content || vals.html || vals.markdown || vals.text || null;
 }
 
+// Heuristic: if a content blob looks like markdown (has heading/bold/list
+// markers and isn't dominated by block-level HTML) pass it through marked so
+// `###`, `**bold**`, lists, etc. render properly. Mixed content (Markdown
+// with inline HTML) is handled natively by marked.
+function renderMarkdown(content) {
+  if (!content || typeof content !== 'string') return content;
+  if (typeof marked === 'undefined') return content;
+  const hasMdHeading = /(^|\n)#{1,6}\s/.test(content);
+  const hasMdBold = /\*\*[^*\n]+\*\*/.test(content);
+  const hasMdList = /(^|\n)\s*[-*+]\s+\S/.test(content);
+  const hasMdFence = /```/.test(content);
+  if (!(hasMdHeading || hasMdBold || hasMdList || hasMdFence)) return content;
+  try {
+    return marked.parse(content, { breaks: true, gfm: true });
+  } catch (e) {
+    console.warn('marked failed:', e);
+    return content;
+  }
+}
+
 function extractMeta(vals) {
   return deepParse(vals, 'meta') || {
     title: vals.title,
@@ -2928,7 +2949,7 @@ async function loadPage(contentId) {
   const tags = meta.tags || entry.tags || [];
   const keywords = meta.keywords || [];
 
-  const htmlContent = extractContent(vals);
+  const htmlContent = renderMarkdown(extractContent(vals));
 
   let bodyHtml;
   if (htmlContent) {
