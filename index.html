@@ -2363,6 +2363,32 @@ async function sha256(message) {
 }
 
 /* ═══════════════════════
+   HASH ROUTING
+   ═══════════════════════ */
+
+let suppressHashChange = false;
+
+function setHash(id) {
+  const target = id ? '#' + id : ' ';   // ' ' clears the hash without scrolling
+  if (location.hash === target) return;
+  suppressHashChange = true;
+  history.replaceState(null, '', target);
+  setTimeout(() => { suppressHashChange = false; }, 0);
+}
+
+function routeFromHash() {
+  const raw = location.hash.replace(/^#/, '');
+  if (!raw) { backToIndex(); return; }
+  try { loadPage(decodeURIComponent(raw)); }
+  catch (e) { console.warn('bad hash route', e); backToIndex(); }
+}
+
+window.addEventListener('hashchange', () => {
+  if (suppressHashChange) return;
+  routeFromHash();
+});
+
+/* ═══════════════════════
    FETCH — paginated index
    ═══════════════════════ */
 
@@ -2992,6 +3018,7 @@ function switchToToc(title) {
 }
 
 function backToIndex() {
+  setHash(null);
   document.getElementById('nav').classList.remove('toc-mode');
   document.getElementById('navTitle').innerHTML = 'EO<span class="eo-meaning" id="navMeaning">' + EO_MEANINGS[meaningIndex] + '</span>';
   startMeaningCycle();
@@ -3110,6 +3137,7 @@ async function loadPage(contentId) {
   renderRelated(contentId);
   switchToToc(title);
   document.getElementById('mainPanel').scrollTop = 0;
+  setHash(contentId);
 }
 
 /* ═══════════════════════
@@ -5107,6 +5135,8 @@ startMeaningCycle();
     buildIndex(records);
     buildSearchIndex();
     renderGetStarted();
+    // Honor initial #hash deep-link (e.g. ?/#wiki:emanon) after data is ready.
+    if (location.hash && location.hash.length > 1) routeFromHash();
   } catch (err) {
     document.getElementById('navList').innerHTML = `<div class="error">Failed to load: ${esc(err.message)}</div>`;
   }
