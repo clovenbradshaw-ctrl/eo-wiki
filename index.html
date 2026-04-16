@@ -2085,12 +2085,60 @@
     .article-title { font-size: 26px; }
     .article-body { font-size: 16px; }
   }
+
+  /* Mobile nav collapse toggle (hidden on desktop) */
+  .nav-collapse-toggle { display: none; }
+  .nav-collapse-toggle .collapse-icon { display: none; }
+  .nav.collapsed .nav-collapse-toggle .expand-icon { display: none; }
+  .nav.collapsed .nav-collapse-toggle .collapse-icon { display: inline-block; }
+
   @media (max-width: 600px) {
     body { flex-direction: column; }
-    .nav { width: 100%; min-width: 100%; height: auto; max-height: 40vh; border-right: none; border-bottom: 1px solid var(--border); }
-    .main { flex: 1; }
+    .nav {
+      width: 100%;
+      min-width: 100%;
+      height: auto;
+      max-height: 50vh;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      transition: max-height 0.2s ease;
+    }
+    .nav.collapsed { max-height: 44px; overflow: hidden; }
+    .nav.collapsed .nav-back,
+    .nav.collapsed .nav-search,
+    .nav.collapsed .nav-filters,
+    .nav.collapsed .nav-list,
+    .nav.collapsed .nav-object-header { display: none !important; }
+    .nav-header { padding: 10px 12px; }
+    .nav-collapse-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-tertiary);
+      padding: 4px 6px;
+      font-size: 16px;
+    }
+    .nav-collapse-toggle:hover { color: var(--text-secondary); }
+    /* Horizontal-scrolling filter strip (no multi-row wrap) */
+    .nav-filters {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 6px 12px;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+    .nav-filters::-webkit-scrollbar { display: none; }
+    .nav-filters .filter-btn { flex-shrink: 0; white-space: nowrap; }
+    .nav-filters .nav-filter-divider { flex-shrink: 0; }
+    .main { flex: 1; min-height: 0; }
     .sr-panel { width: 100%; }
     .be-panel { width: 100%; }
+    .content-area { padding: 20px 16px 60px; }
   }
 </style>
 </head>
@@ -2121,6 +2169,10 @@
       </div>
       <button class="nav-login-btn" id="loginBtn" onclick="showLogin()">
         <i class="ph ph-sign-in"></i> <span id="loginLabel">log in</span>
+      </button>
+      <button class="nav-login-btn nav-collapse-toggle" id="navCollapseBtn" onclick="toggleNavCollapse(); event.stopPropagation();" title="Show/hide menu" aria-label="Toggle menu">
+        <i class="ph ph-caret-up expand-icon"></i>
+        <i class="ph ph-caret-down collapse-icon"></i>
       </button>
     </div>
   </div>
@@ -3009,17 +3061,29 @@ function scrollToH(id) {
   if (!el) return;
   el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   document.querySelectorAll('.toc-item').forEach(t => t.classList.toggle('active', t.dataset.target === id));
+  if (window.matchMedia('(max-width: 600px)').matches) {
+    document.getElementById('nav').classList.add('collapsed');
+  }
 }
 
 function switchToToc(title) {
-  document.getElementById('nav').classList.add('toc-mode');
+  const nav = document.getElementById('nav');
+  nav.classList.add('toc-mode');
   document.getElementById('navTitle').textContent = title;
   renderToc();
+  if (window.matchMedia('(max-width: 600px)').matches) {
+    nav.classList.add('collapsed');
+  }
+}
+
+function toggleNavCollapse() {
+  document.getElementById('nav').classList.toggle('collapsed');
 }
 
 function backToIndex() {
   setHash(null);
   document.getElementById('nav').classList.remove('toc-mode');
+  document.getElementById('nav').classList.remove('collapsed');
   document.getElementById('navTitle').innerHTML = 'EO<span class="eo-meaning" id="navMeaning">' + EO_MEANINGS[meaningIndex] + '</span>';
   startMeaningCycle();
   currentRec = null;
