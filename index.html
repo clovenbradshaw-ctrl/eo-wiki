@@ -1189,7 +1189,8 @@
     color: var(--text-secondary);
     margin-bottom: 18px;
   }
-  .modal input[type="password"] {
+  .modal input[type="password"],
+  .modal input[type="text"] {
     width: 100%;
     padding: 9px 12px;
     font-family: 'IBM Plex Mono', monospace;
@@ -1200,6 +1201,21 @@
     color: var(--text);
     outline: none;
     margin-bottom: 14px;
+    box-sizing: border-box;
+  }
+  .modal .login-field-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+  .modal .login-mxid {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--emanon);
+    font-size: 12px;
   }
   .modal input:focus { border-color: var(--emanon); box-shadow: 0 0 0 2px rgba(58, 124, 165, 0.12); }
   .remember-me {
@@ -2011,6 +2027,37 @@
   .cl-btn-revert:hover { background: var(--holon); color: #fff; }
   .cl-empty { padding: 40px 20px; text-align: center; color: var(--text-tertiary); font-size: 13px; }
 
+  /* ─── SUGGESTIONS ─── */
+  .sg-badge {
+    display: inline-block;
+    background: var(--protogon);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 600;
+    min-width: 14px;
+    height: 14px;
+    line-height: 14px;
+    padding: 0 4px;
+    margin-left: 4px;
+    vertical-align: 1px;
+  }
+  .sg-entry { padding: 12px 20px; border-bottom: 1px solid var(--border-light); }
+  .sg-entry-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; font-size: 12px; }
+  .sg-mxid { font-family: 'IBM Plex Mono', monospace; color: var(--text-secondary); font-size: 11px; }
+  .sg-status { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 600; text-transform: uppercase; }
+  .sg-status-pending { background: rgba(184, 134, 11, 0.12); color: #b8860b; }
+  .sg-status-approved { background: rgba(21, 128, 61, 0.12); color: #15803d; }
+  .sg-status-rejected { background: rgba(185, 28, 28, 0.12); color: #b91c1c; }
+  .sg-summary { font-size: 13px; color: var(--text); margin-bottom: 6px; }
+  .sg-target { font-size: 11px; color: var(--text-tertiary); margin-bottom: 8px; }
+  .sg-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .sg-actions .btn { font-size: 11px; padding: 4px 8px; }
+  .sg-diff { display: none; margin-top: 10px; border: 1px solid var(--border); border-radius: var(--radius); padding: 10px; max-height: 320px; overflow: auto; background: var(--bg); }
+  .sg-diff.open { display: block; }
+  .sg-diff h4 { font-size: 11px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; margin: 6px 0 4px; }
+  .sg-diff pre { white-space: pre-wrap; word-break: break-word; font-family: 'IBM Plex Mono', monospace; font-size: 11px; line-height: 1.5; margin: 0; }
+
   /* ─── WIDGET EDITOR MODAL ─── */
   .widget-modal-overlay {
     display: none;
@@ -2148,6 +2195,10 @@
   <div class="nav-header">
     <span class="nav-title" id="navTitle">EO<span class="eo-meaning" id="navMeaning">Experiential Ontology</span></span>
     <div class="nav-header-utils">
+      <button class="nav-login-btn" id="sgBtnHeader" style="display:none;" onclick="openSuggestions(); event.stopPropagation();" title="Suggestions">
+        <i class="ph ph-paper-plane-tilt"></i>
+        <span class="sg-badge" id="sgBadge" style="display:none;">0</span>
+      </button>
       <button class="nav-login-btn" id="clBtnHeader" style="display:none;" onclick="openChangelog(); event.stopPropagation();" title="Change Log">
         <i class="ph ph-clock-counter-clockwise"></i>
       </button>
@@ -2220,15 +2271,32 @@
 </main>
 
 <div class="modal-overlay" id="loginOverlay">
-  <div class="modal">
-    <h3>Log in</h3>
-    <p>Access draft and archived content.</p>
-    <div class="modal-error" id="loginError">Incorrect password.</div>
-    <input type="password" id="loginPassword" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
-    <label class="remember-me"><input type="checkbox" id="rememberMe"> Keep me logged in</label>
-    <div class="modal-actions">
-      <button class="btn" onclick="hideLogin()">Cancel</button>
-      <button class="btn btn-save" onclick="doLogin()"><i class="ph ph-sign-in"></i> Log in</button>
+  <div class="modal" id="loginModal">
+    <div id="loginStepMatrix">
+      <h3>Sign in with Matrix</h3>
+      <p>Any Matrix account can sign in to suggest edits. Admins enter the admin key after signing in.</p>
+      <div class="modal-error" id="loginError"></div>
+      <label class="login-field-label">Homeserver</label>
+      <input type="text" id="loginHomeserver" placeholder="https://matrix.org" value="https://matrix.org">
+      <label class="login-field-label">Username or MXID</label>
+      <input type="text" id="loginUser" placeholder="@you:matrix.org" onkeydown="if(event.key==='Enter')doMatrixLogin()">
+      <label class="login-field-label">Password</label>
+      <input type="password" id="loginPassword" placeholder="Password" onkeydown="if(event.key==='Enter')doMatrixLogin()">
+      <label class="remember-me"><input type="checkbox" id="rememberMe" checked> Keep me logged in</label>
+      <div class="modal-actions">
+        <button class="btn" onclick="hideLogin()">Cancel</button>
+        <button class="btn btn-save" id="loginSubmitBtn" onclick="doMatrixLogin()"><i class="ph ph-sign-in"></i> Sign in</button>
+      </div>
+    </div>
+    <div id="loginStepAdmin" style="display:none;">
+      <h3>Admin key</h3>
+      <p>Signed in as <span id="loginMxidDisplay" class="login-mxid"></span>. Enter the admin key to enable direct edits.</p>
+      <div class="modal-error" id="adminKeyError"></div>
+      <input type="password" id="loginAdminKey" placeholder="Admin key" onkeydown="if(event.key==='Enter')doAdminKey()">
+      <div class="modal-actions">
+        <button class="btn" onclick="finishLoginAsEditor()">Skip (sign in as editor)</button>
+        <button class="btn btn-save" onclick="doAdminKey()"><i class="ph ph-key"></i> Unlock admin</button>
+      </div>
     </div>
   </div>
 </div>
@@ -2340,6 +2408,20 @@
   </div>
 </div>
 
+<div class="cl-panel" id="sgPanel">
+  <div class="cl-header">
+    <h3><i class="ph ph-paper-plane-tilt"></i> Suggestions</h3>
+    <button class="cl-close" onclick="closeSuggestions()"><i class="ph ph-x"></i></button>
+  </div>
+  <div class="cl-filter">
+    <span id="sgStatus" style="font-size:11px;color:var(--text-tertiary);flex:1;">No suggestions loaded.</span>
+    <button class="btn" onclick="refreshSuggestions()" style="padding:4px 8px;font-size:11px;" title="Refresh"><i class="ph ph-arrow-clockwise"></i></button>
+  </div>
+  <div class="cl-list" id="sgList">
+    <div class="cl-empty">Open this panel to load suggestions.</div>
+  </div>
+</div>
+
 <div class="widget-modal-overlay" id="widgetModalOverlay">
   <div class="widget-modal">
     <div class="widget-modal-header">
@@ -2406,6 +2488,23 @@ let tocHeadings = [];
 let isLoggedIn = false;
 let adminPassword = '';
 const ADMIN_HASH = 'e89ade35085fc8736d6b4755af45e842c6eec0c5978d318156aff6351f0fa950';
+
+/* ═══════════════════════
+   MATRIX CONFIG / STATE
+   ═══════════════════════ */
+const ADMIN_MXIDS = ['@adaptivespiral194456:hyphae.social'];
+const DEFAULT_HOMESERVER = 'https://matrix.org';
+const ADMIN_HOMESERVER_HINT = 'https://hyphae.social';
+const SUGGESTION_KEY = 'org.experientialontology.suggestion';
+const SUGGESTION_ROOM_PREFIX = 'EO Wiki — ';
+const MATRIX_SESSION_KEY = 'eo_matrix_session';
+const SUGGESTION_ROOM_CACHE_KEY = 'eo_suggestion_room';
+const SUGGESTION_POLL_MS = 15000;
+
+let matrixSession = null;
+let suggestionRoomId = null;
+let pendingSuggestions = [];
+let suggestionsPollerId = null;
 
 async function sha256(message) {
   const msgBuffer = new TextEncoder().encode(message);
@@ -2550,6 +2649,151 @@ function logChange(recordId, field, before, after, op = 'ALT') {
 }
 
 /* ═══════════════════════
+   MATRIX CLIENT (raw REST)
+   ═══════════════════════ */
+
+async function mxFetch(path, opts = {}) {
+  if (!matrixSession) throw new Error('No Matrix session');
+  const url = matrixSession.homeserver.replace(/\/$/, '') + path;
+  const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
+  if (opts.auth !== false) headers['Authorization'] = 'Bearer ' + matrixSession.accessToken;
+  const fetchOpts = { ...opts, headers };
+  delete fetchOpts.auth;
+  const res = await fetch(url, fetchOpts);
+  if (!res.ok) {
+    const txt = await res.text().catch(() => '');
+    let parsed; try { parsed = JSON.parse(txt); } catch {}
+    const err = new Error(parsed?.error || parsed?.errcode || `Matrix ${res.status}`);
+    err.status = res.status;
+    err.errcode = parsed?.errcode;
+    throw err;
+  }
+  if (res.status === 204) return null;
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
+}
+
+async function mxResolveHomeserver(typed) {
+  let host = (typed || '').trim();
+  if (!host) return DEFAULT_HOMESERVER;
+  if (!/^https?:/i.test(host)) host = 'https://' + host;
+  host = host.replace(/\/$/, '');
+  try {
+    const res = await fetch(host + '/.well-known/matrix/client');
+    if (res.ok) {
+      const j = await res.json();
+      const base = j['m.homeserver'] && j['m.homeserver'].base_url;
+      if (base) return base.replace(/\/$/, '');
+    }
+  } catch {}
+  return host;
+}
+
+async function mxLogin(homeserver, user, password) {
+  const url = homeserver.replace(/\/$/, '') + '/_matrix/client/v3/login';
+  const trimmed = user.trim();
+  const localpart = trimmed.startsWith('@') ? trimmed.slice(1).split(':')[0] : trimmed;
+  const body = {
+    type: 'm.login.password',
+    identifier: { type: 'm.id.user', user: localpart },
+    password,
+    initial_device_display_name: 'EO Wiki',
+  };
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const txt = await res.text().catch(() => '');
+    let parsed; try { parsed = JSON.parse(txt); } catch {}
+    throw new Error(parsed?.error || `Login failed (${res.status})`);
+  }
+  const data = await res.json();
+  return {
+    homeserver,
+    accessToken: data.access_token,
+    mxid: data.user_id,
+    deviceId: data.device_id,
+  };
+}
+
+async function mxWhoami() {
+  return mxFetch('/_matrix/client/v3/account/whoami');
+}
+
+async function mxLogout() {
+  try { await mxFetch('/_matrix/client/v3/logout', { method: 'POST', body: '{}' }); } catch {}
+}
+
+async function mxJoinedRooms() {
+  const j = await mxFetch('/_matrix/client/v3/joined_rooms');
+  return (j && j.joined_rooms) || [];
+}
+
+async function mxRoomName(roomId) {
+  try {
+    const j = await mxFetch(`/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/state/m.room.name`);
+    return (j && j.name) || '';
+  } catch (e) {
+    if (e.status === 404) return '';
+    throw e;
+  }
+}
+
+async function mxRoomIsEncrypted(roomId) {
+  try {
+    await mxFetch(`/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/state/m.room.encryption`);
+    return true;
+  } catch { return false; }
+}
+
+async function mxCreateSuggestionRoom(adminMxid, roomName) {
+  return mxFetch('/_matrix/client/v3/createRoom', {
+    method: 'POST',
+    body: JSON.stringify({
+      preset: 'trusted_private_chat',
+      is_direct: true,
+      invite: [adminMxid],
+      name: roomName,
+      // Intentionally no m.room.encryption initial state — wiki UI cannot read E2EE.
+      initial_state: [],
+    }),
+  });
+}
+
+async function mxSendMessage(roomId, content) {
+  const txnId = 'eo-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+  const path = `/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/send/m.room.message/${txnId}`;
+  return mxFetch(path, { method: 'PUT', body: JSON.stringify(content) });
+}
+
+async function mxSendReaction(roomId, eventId, key) {
+  const txnId = 'eo-r-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
+  const path = `/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/send/m.reaction/${txnId}`;
+  return mxFetch(path, {
+    method: 'PUT',
+    body: JSON.stringify({
+      'm.relates_to': { rel_type: 'm.annotation', event_id: eventId, key },
+    }),
+  });
+}
+
+async function mxFetchMessages(roomId, limit = 100) {
+  const path = `/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/messages?dir=b&limit=${limit}`;
+  return mxFetch(path);
+}
+
+function persistMatrixSession() {
+  if (matrixSession) localStorage.setItem(MATRIX_SESSION_KEY, JSON.stringify(matrixSession));
+  else localStorage.removeItem(MATRIX_SESSION_KEY);
+}
+
+function isAdminMxid(mxid) {
+  return !!mxid && ADMIN_MXIDS.includes(mxid);
+}
+
+/* ═══════════════════════
    PARSE
    ═══════════════════════ */
 
@@ -2601,59 +2845,153 @@ function extractMeta(vals) {
 }
 
 /* ═══════════════════════
-   LOGIN
+   LOGIN (Matrix + admin key)
    ═══════════════════════ */
 
 function showLogin() {
-  if (isLoggedIn) {
-    isLoggedIn = false;
-    adminPassword = '';
-    localStorage.removeItem('eo_session');
-    document.getElementById('navFilters').classList.add('logged-out');
-    document.getElementById('loginLabel').textContent = 'log in';
-    document.querySelector('#loginBtn i').className = 'ph ph-sign-in';
-    document.getElementById('srBtn').style.display = 'none';
-    document.getElementById('newBtn').style.display = 'none';
-    document.getElementById('adminDivider').style.display = 'none';
-    document.getElementById('clBtnHeader').style.display = 'none';
-    document.getElementById('beBtnHeader').style.display = 'none';
-    closeSR();
-    closeChangelog();
-    closeBulkEdit();
-    currentFilter = 'all';
-    currentTag = null;
-    document.querySelectorAll('.nav-status-row .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
-    renderTagButtons();
-    renderList();
-    renderGetStarted();
-    showToast('Logged out');
+  if (matrixSession || isLoggedIn) {
+    doLogout();
     return;
   }
+  resetLoginModal();
   document.getElementById('loginOverlay').classList.add('show');
-  document.getElementById('loginPassword').value = '';
-  document.getElementById('loginError').style.display = 'none';
-  setTimeout(() => document.getElementById('loginPassword').focus(), 80);
+  setTimeout(() => document.getElementById('loginUser').focus(), 80);
 }
 
 function hideLogin() { document.getElementById('loginOverlay').classList.remove('show'); }
 
-async function doLogin() {
-  const pw = document.getElementById('loginPassword').value;
-  if (!pw) return;
-  const hash = await sha256(pw);
-  if (hash !== ADMIN_HASH) {
-    document.getElementById('loginError').textContent = 'Incorrect password';
-    document.getElementById('loginError').style.display = '';
+function resetLoginModal() {
+  document.getElementById('loginStepMatrix').style.display = '';
+  document.getElementById('loginStepAdmin').style.display = 'none';
+  document.getElementById('loginPassword').value = '';
+  document.getElementById('loginAdminKey').value = '';
+  document.getElementById('loginError').style.display = 'none';
+  document.getElementById('adminKeyError').style.display = 'none';
+  const submitBtn = document.getElementById('loginSubmitBtn');
+  submitBtn.disabled = false;
+  submitBtn.innerHTML = '<i class="ph ph-sign-in"></i> Sign in';
+}
+
+async function doMatrixLogin() {
+  const errEl = document.getElementById('loginError');
+  errEl.style.display = 'none';
+  const submitBtn = document.getElementById('loginSubmitBtn');
+  const homeserverInput = document.getElementById('loginHomeserver').value;
+  const user = document.getElementById('loginUser').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  if (!user || !password) {
+    errEl.textContent = 'Username and password required.';
+    errEl.style.display = '';
     return;
   }
-  // Store password — we'll send it with PATCH calls and use it as auth
-  adminPassword = pw;
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="ph ph-spinner"></i> Signing in…';
+  try {
+    const homeserver = await mxResolveHomeserver(homeserverInput || DEFAULT_HOMESERVER);
+    const session = await mxLogin(homeserver, user, password);
+    matrixSession = session;
+    if (document.getElementById('rememberMe').checked) persistMatrixSession();
+    if (isAdminMxid(session.mxid)) {
+      document.getElementById('loginMxidDisplay').textContent = session.mxid;
+      document.getElementById('loginStepMatrix').style.display = 'none';
+      document.getElementById('loginStepAdmin').style.display = '';
+      setTimeout(() => document.getElementById('loginAdminKey').focus(), 60);
+    } else {
+      finishLoginAsEditor();
+    }
+  } catch (e) {
+    errEl.textContent = e.message || 'Sign in failed.';
+    errEl.style.display = '';
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="ph ph-sign-in"></i> Sign in';
+  }
+}
+
+async function doAdminKey() {
+  const errEl = document.getElementById('adminKeyError');
+  errEl.style.display = 'none';
+  const key = document.getElementById('loginAdminKey').value;
+  if (!key) return;
+  const hash = await sha256(key);
+  if (hash !== ADMIN_HASH) {
+    errEl.textContent = 'Incorrect admin key.';
+    errEl.style.display = '';
+    return;
+  }
+  adminPassword = key;
   isLoggedIn = true;
   if (document.getElementById('rememberMe').checked) {
-    localStorage.setItem('eo_session', btoa(pw));
+    localStorage.setItem('eo_session', btoa(key));
   }
   hideLogin();
+  applyAdminUI();
+  startSuggestionsPoller();
+  showToast('Admin unlocked');
+}
+
+function finishLoginAsEditor() {
+  hideLogin();
+  applyEditorUI();
+  showToast('Signed in as ' + matrixSession.mxid);
+  // Re-render the current article so the Suggest button appears.
+  if (currentRec) loadPage(currentRec.record_id);
+}
+
+async function doLogout() {
+  if (matrixSession) await mxLogout();
+  matrixSession = null;
+  suggestionRoomId = null;
+  pendingSuggestions = [];
+  isLoggedIn = false;
+  adminPassword = '';
+  localStorage.removeItem('eo_session');
+  localStorage.removeItem(MATRIX_SESSION_KEY);
+  localStorage.removeItem(SUGGESTION_ROOM_CACHE_KEY);
+  stopSuggestionsPoller();
+  applyLoggedOutUI();
+  if (currentRec) loadPage(currentRec.record_id);
+  showToast('Logged out');
+}
+
+function applyLoggedOutUI() {
+  document.getElementById('navFilters').classList.add('logged-out');
+  const loginBtn = document.getElementById('loginBtn');
+  loginBtn.title = '';
+  document.getElementById('loginLabel').textContent = 'log in';
+  document.querySelector('#loginBtn i').className = 'ph ph-sign-in';
+  document.getElementById('srBtn').style.display = 'none';
+  document.getElementById('newBtn').style.display = 'none';
+  document.getElementById('adminDivider').style.display = 'none';
+  document.getElementById('clBtnHeader').style.display = 'none';
+  document.getElementById('beBtnHeader').style.display = 'none';
+  const sgBtn = document.getElementById('sgBtnHeader');
+  if (sgBtn) sgBtn.style.display = 'none';
+  closeSR();
+  closeChangelog();
+  closeBulkEdit();
+  closeSuggestions();
+  currentFilter = 'all';
+  currentTag = null;
+  document.querySelectorAll('.nav-status-row .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
+  renderTagButtons();
+  renderList();
+  renderGetStarted();
+}
+
+function applyEditorUI() {
+  // Editor: signed into Matrix but not admin. UI looks like logged-out except
+  // the article view shows a "Suggest edit" button (handled in renderArticle).
+  applyLoggedOutUI();
+  const loginBtn = document.getElementById('loginBtn');
+  loginBtn.title = matrixSession ? matrixSession.mxid : '';
+  document.getElementById('loginLabel').textContent = 'log out';
+  document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
+}
+
+function applyAdminUI() {
   document.getElementById('navFilters').classList.remove('logged-out');
+  const loginBtn = document.getElementById('loginBtn');
+  loginBtn.title = matrixSession ? matrixSession.mxid + ' (admin)' : '';
   document.getElementById('loginLabel').textContent = 'log out';
   document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
   document.getElementById('srBtn').style.display = '';
@@ -2661,10 +2999,11 @@ async function doLogin() {
   document.getElementById('adminDivider').style.display = '';
   document.getElementById('clBtnHeader').style.display = '';
   document.getElementById('beBtnHeader').style.display = '';
+  const sgBtn = document.getElementById('sgBtnHeader');
+  if (sgBtn) sgBtn.style.display = '';
   renderTagButtons();
   renderList();
   renderGetStarted();
-  showToast('Logged in');
 }
 
 /* ═══════════════════════
@@ -3185,7 +3524,11 @@ async function loadPage(contentId) {
         ${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}
         ${keywords.length ? '· ' + keywords.map(k => esc(k)).join(', ') : ''}
       </div>
-      ${isLoggedIn ? `<div class="article-actions"><button class="btn" onclick="toggleEdit()"><i class="ph ph-pencil-simple"></i> Edit</button><button class="btn" onclick="openChangelogFor('${esc(contentId)}')"><i class="ph ph-clock-counter-clockwise"></i> History</button></div>` : ''}
+      ${isLoggedIn
+        ? `<div class="article-actions"><button class="btn" onclick="toggleEdit()"><i class="ph ph-pencil-simple"></i> Edit</button><button class="btn" onclick="openChangelogFor('${esc(contentId)}')"><i class="ph ph-clock-counter-clockwise"></i> History</button></div>`
+        : (matrixSession
+          ? `<div class="article-actions"><button class="btn" onclick="toggleEdit()" title="Send a suggested edit to the admin"><i class="ph ph-pencil-line"></i> Suggest edit</button></div>`
+          : '')}
     </div>
     <div class="article-layout">
       <div class="article-main">
@@ -3212,7 +3555,8 @@ let quillInstance = null;
 let editTab = 'wysiwyg'; // 'wysiwyg' | 'html' | 'json'
 
 function toggleEdit() {
-  if (!currentRec || !isLoggedIn) return;
+  if (!currentRec) return;
+  if (!isLoggedIn && !matrixSession) return;
   if (!isEditing) {
     isEditing = true;
     renderEditor();
@@ -3302,8 +3646,11 @@ function renderEditor() {
     </div>
   `;
 
+  const saveLabel = isLoggedIn
+    ? '<i class="ph ph-floppy-disk"></i> Save'
+    : '<i class="ph ph-paper-plane-tilt"></i> Send suggestion';
   document.querySelector('.article-actions').innerHTML = `
-    <button class="btn btn-save" id="saveBtn" onclick="saveEdit()"><i class="ph ph-floppy-disk"></i> Save</button>
+    <button class="btn btn-save" id="saveBtn" onclick="saveEdit()">${saveLabel}</button>
     <button class="btn" onclick="cancelEdit()"><i class="ph ph-x"></i> Cancel</button>
     <button class="btn" onclick="openWidgetModal()" style="margin-left:auto;"><i class="ph ph-code-block"></i> Widget</button>
   `;
@@ -3412,6 +3759,11 @@ function toggleOpSlot(slot) {
 async function saveEdit() {
   const saveBtn = document.getElementById('saveBtn');
 
+  // Non-admin Matrix users: route through the suggestion flow instead of Xano.
+  if (!isLoggedIn && matrixSession) {
+    return submitSuggestionFromEditor(saveBtn);
+  }
+
   // If on JSON tab, use raw JSON
   if (editTab === 'json') {
     let newValues;
@@ -3514,6 +3866,343 @@ async function saveEdit() {
     showToast(err.message, 'error');
     saveBtn.disabled = false;
     saveBtn.innerHTML = '<i class="ph ph-floppy-disk"></i> Save';
+  }
+}
+
+/* ═══════════════════════
+   SUGGESTIONS — submit (editor side)
+   ═══════════════════════ */
+
+function buildSuggestionFromEditor() {
+  // Same shape that admin saveEdit() would compute, but returned instead of PATCHed.
+  const oldVals = parseValues(currentRec.values);
+
+  if (editTab === 'json') {
+    let newValues;
+    try { newValues = JSON.parse(document.getElementById('editJson').value); }
+    catch (e) { throw new Error('Invalid JSON: ' + e.message); }
+    return {
+      record_id: currentRec.record_id,
+      target_numeric_id: currentRec.id,
+      summary: 'JSON edit',
+      before: oldVals,
+      after: newValues,
+    };
+  }
+
+  let newHtml;
+  if (editTab === 'wysiwyg' && quillInstance) {
+    newHtml = quillInstance.root.innerHTML;
+  } else {
+    newHtml = document.getElementById('editHtml').value;
+  }
+  newHtml = cleanPastedHtml(newHtml);
+
+  const newTitle = document.getElementById('editTitle').value.trim();
+  const newStatus = document.getElementById('editStatus').value;
+  const newTags = document.getElementById('editTags').value.split(',').map(t => t.trim()).filter(Boolean);
+  const newKeywords = document.getElementById('editKeywords').value.split(',').map(t => t.trim()).filter(Boolean);
+
+  const vals = parseValues(currentRec.values);
+  const meta = extractMeta(vals) || {};
+  meta.title = newTitle;
+  meta.status = newStatus;
+  meta.tags = newTags;
+  meta.keywords = newKeywords;
+  vals.meta = meta;
+  const rev = deepParse(vals, 'current_revision') || {};
+  rev.content = newHtml;
+  rev.format = 'html';
+  vals.current_revision = rev;
+
+  const oldMeta = extractMeta(oldVals);
+  return {
+    record_id: currentRec.record_id,
+    target_numeric_id: currentRec.id,
+    summary: oldMeta.title !== newTitle
+      ? `Retitle: "${oldMeta.title || ''}" → "${newTitle}"`
+      : `Edit: ${newTitle || currentRec.record_id}`,
+    before: oldVals,
+    after: vals,
+  };
+}
+
+async function ensureSuggestionRoom() {
+  if (suggestionRoomId) return suggestionRoomId;
+  const cached = localStorage.getItem(SUGGESTION_ROOM_CACHE_KEY);
+  if (cached) {
+    // Validate cached room: still joined, still unencrypted.
+    const joined = await mxJoinedRooms();
+    if (joined.includes(cached) && !(await mxRoomIsEncrypted(cached))) {
+      suggestionRoomId = cached;
+      return suggestionRoomId;
+    }
+    localStorage.removeItem(SUGGESTION_ROOM_CACHE_KEY);
+  }
+  const adminMxid = ADMIN_MXIDS[0];
+  const roomName = SUGGESTION_ROOM_PREFIX + matrixSession.mxid;
+  const created = await mxCreateSuggestionRoom(adminMxid, roomName);
+  suggestionRoomId = created.room_id;
+  localStorage.setItem(SUGGESTION_ROOM_CACHE_KEY, suggestionRoomId);
+  return suggestionRoomId;
+}
+
+async function submitSuggestionFromEditor(saveBtn) {
+  let suggestion;
+  try { suggestion = buildSuggestionFromEditor(); }
+  catch (e) { showToast(e.message, 'error'); return; }
+
+  saveBtn.disabled = true;
+  saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Sending…';
+  try {
+    const roomId = await ensureSuggestionRoom();
+    const content = {
+      msgtype: 'm.text',
+      body: `Suggested edit for ${suggestion.record_id}: ${suggestion.summary}`,
+      [SUGGESTION_KEY]: {
+        v: 1,
+        record_id: suggestion.record_id,
+        target_numeric_id: suggestion.target_numeric_id,
+        summary: suggestion.summary,
+        before: suggestion.before,
+        after: suggestion.after,
+        suggester_mxid: matrixSession.mxid,
+        submitted_at: new Date().toISOString(),
+      },
+    };
+    await mxSendMessage(roomId, content);
+    showToast('Suggestion sent — admin will review.');
+    isEditing = false;
+    quillInstance = null;
+    loadPage(currentRec.record_id);
+  } catch (e) {
+    console.error('Suggestion send failed', e);
+    showToast(e.message || 'Failed to send suggestion', 'error');
+    saveBtn.disabled = false;
+    saveBtn.innerHTML = '<i class="ph ph-paper-plane-tilt"></i> Send suggestion';
+  }
+}
+
+/* ═══════════════════════
+   SUGGESTIONS — admin review
+   ═══════════════════════ */
+
+function openSuggestions() {
+  if (!isLoggedIn) return;
+  document.getElementById('sgPanel').classList.add('open');
+  refreshSuggestions();
+}
+
+function closeSuggestions() {
+  document.getElementById('sgPanel').classList.remove('open');
+}
+
+function startSuggestionsPoller() {
+  stopSuggestionsPoller();
+  if (!isLoggedIn || !matrixSession) return;
+  // Initial fetch + recurring refresh.
+  refreshSuggestions().catch(() => {});
+  suggestionsPollerId = setInterval(() => {
+    refreshSuggestions().catch(() => {});
+  }, SUGGESTION_POLL_MS);
+}
+
+function stopSuggestionsPoller() {
+  if (suggestionsPollerId) {
+    clearInterval(suggestionsPollerId);
+    suggestionsPollerId = null;
+  }
+}
+
+async function refreshSuggestions() {
+  if (!isLoggedIn || !matrixSession) return;
+  const statusEl = document.getElementById('sgStatus');
+  if (statusEl) statusEl.textContent = 'Loading…';
+  try {
+    pendingSuggestions = await fetchAllSuggestions();
+    renderSuggestionsList();
+    updateSuggestionsBadge();
+    if (statusEl) {
+      const pending = pendingSuggestions.filter(s => s.status === 'pending').length;
+      statusEl.textContent = `${pendingSuggestions.length} suggestion${pendingSuggestions.length === 1 ? '' : 's'} · ${pending} pending`;
+    }
+  } catch (e) {
+    console.error('refreshSuggestions failed', e);
+    if (statusEl) statusEl.textContent = 'Failed: ' + (e.message || 'error');
+  }
+}
+
+async function fetchAllSuggestions() {
+  const rooms = await mxJoinedRooms();
+  const out = [];
+  for (const roomId of rooms) {
+    let name = '';
+    try { name = await mxRoomName(roomId); } catch {}
+    if (!name.startsWith(SUGGESTION_ROOM_PREFIX)) continue;
+    if (await mxRoomIsEncrypted(roomId)) continue; // can't read
+    let messages;
+    try { messages = await mxFetchMessages(roomId, 100); }
+    catch (e) { console.warn('messages fetch failed', roomId, e); continue; }
+    const events = (messages && messages.chunk) || [];
+    // Build reaction index keyed by target event id.
+    const reactionsByTarget = {};
+    for (const ev of events) {
+      if (ev.type !== 'm.reaction') continue;
+      const rel = ev.content && ev.content['m.relates_to'];
+      if (!rel || rel.rel_type !== 'm.annotation') continue;
+      if (ev.sender !== matrixSession.mxid) continue; // only admin's reactions count
+      (reactionsByTarget[rel.event_id] = reactionsByTarget[rel.event_id] || []).push(rel.key);
+    }
+    for (const ev of events) {
+      if (ev.type !== 'm.room.message') continue;
+      const payload = ev.content && ev.content[SUGGESTION_KEY];
+      if (!payload) continue;
+      const keys = reactionsByTarget[ev.event_id] || [];
+      let status = 'pending';
+      if (keys.includes('eo:approved')) status = 'approved';
+      else if (keys.includes('eo:rejected')) status = 'rejected';
+      out.push({
+        eventId: ev.event_id,
+        roomId,
+        roomName: name,
+        suggester: ev.sender,
+        ts: ev.origin_server_ts,
+        payload,
+        status,
+      });
+    }
+  }
+  out.sort((a, b) => b.ts - a.ts);
+  return out;
+}
+
+function renderSuggestionsList() {
+  const listEl = document.getElementById('sgList');
+  if (!listEl) return;
+  if (!pendingSuggestions.length) {
+    listEl.innerHTML = '<div class="cl-empty">No suggestions yet. Editors will appear here when they send one.</div>';
+    return;
+  }
+  // Pending first.
+  const ordered = [
+    ...pendingSuggestions.filter(s => s.status === 'pending'),
+    ...pendingSuggestions.filter(s => s.status !== 'pending'),
+  ];
+  listEl.innerHTML = ordered.map((s, i) => {
+    const date = new Date(s.ts).toLocaleString();
+    const target = s.payload.record_id || '';
+    const summary = s.payload.summary || '(no summary)';
+    const statusCls = 'sg-status-' + s.status;
+    const isPending = s.status === 'pending';
+    return `
+      <div class="sg-entry" data-event="${esc(s.eventId)}">
+        <div class="sg-entry-head">
+          <span class="sg-mxid">${esc(s.suggester)}</span>
+          <span class="sg-status ${statusCls}">${s.status}</span>
+        </div>
+        <div class="sg-summary">${esc(summary)}</div>
+        <div class="sg-target">${esc(target)} · ${esc(date)}</div>
+        <div class="sg-actions">
+          <button class="btn" onclick="toggleSuggestionDiff(${i})"><i class="ph ph-eye"></i> View diff</button>
+          ${isPending ? `<button class="btn btn-save" onclick="approveSuggestion(${i})"><i class="ph ph-check"></i> Approve</button>` : ''}
+          ${isPending ? `<button class="btn" onclick="rejectSuggestion(${i})"><i class="ph ph-x"></i> Reject</button>` : ''}
+          ${target ? `<button class="btn" onclick="loadPage('${esc(target)}'); closeSuggestions();" style="margin-left:auto;"><i class="ph ph-arrow-up-right"></i> Open</button>` : ''}
+        </div>
+        <div class="sg-diff" id="sgDiff-${i}"></div>
+      </div>
+    `;
+  }).join('');
+  // Stash ordered list for index-based action handlers.
+  pendingSuggestionsOrdered = ordered;
+}
+
+let pendingSuggestionsOrdered = [];
+
+function updateSuggestionsBadge() {
+  const badge = document.getElementById('sgBadge');
+  if (!badge) return;
+  const pending = pendingSuggestions.filter(s => s.status === 'pending').length;
+  if (pending > 0) {
+    badge.textContent = pending;
+    badge.style.display = '';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function toggleSuggestionDiff(idx) {
+  const s = pendingSuggestionsOrdered[idx];
+  if (!s) return;
+  const el = document.getElementById('sgDiff-' + idx);
+  if (!el) return;
+  if (el.classList.contains('open')) {
+    el.classList.remove('open');
+    return;
+  }
+  const before = JSON.stringify(s.payload.before || {}, null, 2);
+  const after = JSON.stringify(s.payload.after || {}, null, 2);
+  el.innerHTML = `
+    <h4>Before</h4><pre>${esc(before)}</pre>
+    <h4>After</h4><pre>${esc(after)}</pre>
+  `;
+  el.classList.add('open');
+}
+
+async function approveSuggestion(idx) {
+  const s = pendingSuggestionsOrdered[idx];
+  if (!s) return;
+  if (!isLoggedIn) { showToast('Not admin', 'error'); return; }
+  const numericId = s.payload.target_numeric_id;
+  if (!numericId) { showToast('Suggestion missing target id', 'error'); return; }
+  const after = s.payload.after;
+  if (!after) { showToast('Suggestion missing payload', 'error'); return; }
+  if (!confirm(`Approve and apply this suggestion to ${s.payload.record_id}?`)) return;
+  try {
+    // Match the existing saveEdit() shape: values may be string or object on the record.
+    const target = allRecords.find(r => r.id === numericId);
+    const isStringField = target && typeof target.values === 'string';
+    const payload = { values: isStringField ? JSON.stringify(after) : after };
+    const updated = await patchRecord(numericId, payload);
+    // Best-effort changelog entry attributed to the suggester.
+    logChange(s.payload.record_id, 'values', s.payload.before, after, 'ALT');
+    if (target) {
+      Object.assign(target, updated);
+      if (currentRec && currentRec.id === target.id) currentRec = target;
+    }
+    buildIndex(allRecords);
+    if (currentRec && currentRec.record_id === s.payload.record_id) loadPage(currentRec.record_id);
+    // Mark approved in Matrix only after Xano write succeeds.
+    await mxSendReaction(s.roomId, s.eventId, 'eo:approved');
+    await mxSendMessage(s.roomId, {
+      msgtype: 'm.notice',
+      body: `Approved and applied to ${s.payload.record_id}.`,
+    });
+    showToast('Suggestion applied');
+    refreshSuggestions();
+  } catch (e) {
+    console.error('approve failed', e);
+    showToast(e.message || 'Approve failed', 'error');
+  }
+}
+
+async function rejectSuggestion(idx) {
+  const s = pendingSuggestionsOrdered[idx];
+  if (!s) return;
+  if (!isLoggedIn) return;
+  const reason = prompt('Optional reason for rejection (sent to suggester):', '') || '';
+  try {
+    await mxSendReaction(s.roomId, s.eventId, 'eo:rejected');
+    if (reason) {
+      await mxSendMessage(s.roomId, {
+        msgtype: 'm.notice',
+        body: `Suggestion declined: ${reason}`,
+      });
+    }
+    showToast('Suggestion rejected');
+    refreshSuggestions();
+  } catch (e) {
+    console.error('reject failed', e);
+    showToast(e.message || 'Reject failed', 'error');
   }
 }
 
@@ -5171,27 +5860,45 @@ startCycling();
 startMeaningCycle();
 
 (async () => {
-  // Restore saved session
-  const saved = localStorage.getItem('eo_session');
-  if (saved) {
+  // Restore Matrix session first (validates with /whoami).
+  const savedMatrix = localStorage.getItem(MATRIX_SESSION_KEY);
+  if (savedMatrix) {
     try {
-      const pw = atob(saved);
+      matrixSession = JSON.parse(savedMatrix);
+      const who = await mxWhoami();
+      if (!who || who.user_id !== matrixSession.mxid) throw new Error('mxid mismatch');
+    } catch (e) {
+      console.warn('Matrix session invalid, clearing', e);
+      matrixSession = null;
+      localStorage.removeItem(MATRIX_SESSION_KEY);
+      localStorage.removeItem(SUGGESTION_ROOM_CACHE_KEY);
+    }
+  }
+
+  // Restore admin-key session (only meaningful if the saved Matrix MXID is admin).
+  const savedAdmin = localStorage.getItem('eo_session');
+  if (savedAdmin && matrixSession && isAdminMxid(matrixSession.mxid)) {
+    try {
+      const pw = atob(savedAdmin);
       const hash = await sha256(pw);
       if (hash === ADMIN_HASH) {
         adminPassword = pw;
         isLoggedIn = true;
-        document.getElementById('navFilters').classList.remove('logged-out');
-        document.getElementById('loginLabel').textContent = 'log out';
-        document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
-        document.getElementById('srBtn').style.display = '';
-        document.getElementById('newBtn').style.display = '';
-        document.getElementById('adminDivider').style.display = '';
-        document.getElementById('clBtnHeader').style.display = '';
-        document.getElementById('beBtnHeader').style.display = '';
       } else {
         localStorage.removeItem('eo_session');
       }
     } catch { localStorage.removeItem('eo_session'); }
+  } else if (savedAdmin && !matrixSession) {
+    // Stale admin session with no Matrix layer: drop it; admin must sign in via Matrix.
+    localStorage.removeItem('eo_session');
+  }
+
+  // Apply UI for the resolved auth state.
+  if (isLoggedIn) {
+    applyAdminUI();
+    startSuggestionsPoller();
+  } else if (matrixSession) {
+    applyEditorUI();
   }
 
   try {
