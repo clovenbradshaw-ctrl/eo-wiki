@@ -1902,17 +1902,28 @@
   }
 
   /* ─── FORK BANNER ─── */
+  /* Sits outside .content-area so loadPage()'s innerHTML rewrite doesn't
+     destroy it. Mirrors content-area's centered, max-width layout so it
+     aligns with the article column. */
   .fork-banner {
     display: none;
     align-items: center;
     gap: 12px;
     padding: 8px 14px;
-    margin: 0 0 16px 0;
+    margin: 16px auto 0;
+    max-width: 720px;
     background: var(--bg-nav);
     border: 1px solid var(--border);
     border-radius: var(--radius);
     font-size: 13px;
     flex-wrap: wrap;
+    box-sizing: border-box;
+  }
+  @media (min-width: 1200px) {
+    .fork-banner { max-width: 1100px; margin-left: 36px; margin-right: 24px; }
+  }
+  @media (max-width: 768px) {
+    .fork-banner { margin-left: 16px; margin-right: 16px; }
   }
   .fork-banner.visible { display: flex; }
   .fork-banner.fork-active {
@@ -2424,33 +2435,33 @@
 </aside>
 
 <main class="main" id="mainPanel">
-  <div class="content-area" id="contentArea">
-    <div class="fork-banner" id="forkBanner">
-      <i class="ph ph-tree-evergreen" id="forkBannerIcon" style="font-size:16px;"></i>
-      <span class="fork-label">Viewing:</span>
-      <span class="fork-name-pill" id="forkNamePill" onclick="openForkPicker()">
-        <span id="forkNameText">Canonical</span>
-        <i class="ph ph-caret-down" style="font-size:11px;"></i>
-      </span>
-      <div class="fork-actions" id="forkActions">
-        <button class="btn" id="forkStartBtn" onclick="openCreateForkModal()" style="font-size:12px;padding:5px 10px;">
-          <i class="ph ph-git-branch"></i> Start a fork
+  <div class="fork-banner" id="forkBanner">
+    <i class="ph ph-tree-evergreen" id="forkBannerIcon" style="font-size:16px;"></i>
+    <span class="fork-label">Viewing:</span>
+    <span class="fork-name-pill" id="forkNamePill" onclick="openForkPicker()">
+      <span id="forkNameText">Canonical</span>
+      <i class="ph ph-caret-down" style="font-size:11px;"></i>
+    </span>
+    <div class="fork-actions" id="forkActions">
+      <button class="btn" id="forkStartBtn" onclick="openCreateForkModal()" style="font-size:12px;padding:5px 10px;">
+        <i class="ph ph-git-branch"></i> Start a fork
+      </button>
+      <button class="btn" id="forkInviteBtn" onclick="openInviteForkModal()" style="display:none;font-size:12px;padding:5px 10px;">
+        <i class="ph ph-user-plus"></i> Invite
+      </button>
+      <div class="fork-dl-wrap" id="forkDlWrap" style="display:none;">
+        <button class="btn" id="forkDlBtn" onclick="toggleForkDownloadMenu()" style="font-size:12px;padding:5px 10px;">
+          <i class="ph ph-download-simple"></i> Download <i class="ph ph-caret-down" style="font-size:10px;"></i>
         </button>
-        <button class="btn" id="forkInviteBtn" onclick="openInviteForkModal()" style="display:none;font-size:12px;padding:5px 10px;">
-          <i class="ph ph-user-plus"></i> Invite
-        </button>
-        <div class="fork-dl-wrap" id="forkDlWrap" style="display:none;">
-          <button class="btn" id="forkDlBtn" onclick="toggleForkDownloadMenu()" style="font-size:12px;padding:5px 10px;">
-            <i class="ph ph-download-simple"></i> Download <i class="ph ph-caret-down" style="font-size:10px;"></i>
-          </button>
-          <div class="fork-dl-menu" id="forkDlMenu">
-            <button onclick="downloadForkAs('json')"><i class="ph ph-brackets-curly"></i> JSON</button>
-            <button onclick="downloadForkAs('html')"><i class="ph ph-file-html"></i> HTML</button>
-            <button onclick="downloadForkAs('md')"><i class="ph ph-file-text"></i> Markdown</button>
-          </div>
+        <div class="fork-dl-menu" id="forkDlMenu">
+          <button onclick="downloadForkAs('json')"><i class="ph ph-brackets-curly"></i> JSON</button>
+          <button onclick="downloadForkAs('html')"><i class="ph ph-file-html"></i> HTML</button>
+          <button onclick="downloadForkAs('md')"><i class="ph ph-file-text"></i> Markdown</button>
         </div>
       </div>
     </div>
+  </div>
+  <div class="content-area" id="contentArea">
     <div class="welcome">
       <h2>EO</h2>
       <span class="eo-meaning" id="welcomeMeaning">Experiential Ontology</span>
@@ -6536,7 +6547,10 @@ async function discoverForks() {
   if (!matrixSession) return;
   let joined = [];
   try { joined = await mxJoinedRooms(); } catch (e) { console.warn('joined_rooms failed', e); return; }
-  // Probe each joined room for the fork state event. 404 = not a fork.
+  // Probe each joined room for the fork state event.
+  // - 404 / M_NOT_FOUND → not a fork (expected, common case)
+  // - M_FORBIDDEN → can't read state in this room, treat as not-a-fork
+  // - any other error → log so real homeserver issues surface
   const probes = joined.map(async rid => {
     try {
       const path = `/_matrix/client/v3/rooms/${encodeURIComponent(rid)}/state/${encodeURIComponent(FORK_STATE_EVENT)}`;
@@ -6549,17 +6563,23 @@ async function discoverForks() {
         isMember: true,
       };
     } catch (e) {
-      if (e.status === 404) return null; // not a fork — expected for non-fork rooms
+      if (e.status === 404 || e.errcode === 'M_NOT_FOUND' || e.errcode === 'M_FORBIDDEN') return null;
+      console.warn('fork probe failed for room', rid, e);
       return null;
     }
   });
   const results = await Promise.all(probes);
   availableForks = results.filter(Boolean);
-  // Restore last-selected fork if it's still in the list.
+  // Restore last-selected fork if it's still in the list. Use the setter so
+  // the banner + the open article both re-render — otherwise an article
+  // rendered before discovery completes would show the canonical Edit button
+  // even though the banner reads "Sara's Reading List".
   const saved = localStorage.getItem(CURRENT_FORK_LSK);
-  if (saved && availableForks.some(f => f.roomId === saved)) currentForkId = saved;
-  else currentForkId = null;
-  renderForkBanner();
+  if (saved && availableForks.some(f => f.roomId === saved)) {
+    setCurrentForkId(saved);
+  } else {
+    setCurrentForkId(null);
+  }
 }
 
 async function createForkRoom({ name, description, transparency, visibility }) {
@@ -6733,7 +6753,9 @@ function closeForkPicker() { document.getElementById('forkPickerOverlay').classL
 function pickFork(roomId) {
   setCurrentForkId(roomId);
   closeForkPicker();
-  showToast(roomId ? `Switched to ${getCurrentFork().meta.name}` : 'Switched to canonical');
+  if (!roomId) { showToast('Switched to canonical'); return; }
+  const fork = getCurrentFork();
+  showToast(`Switched to ${fork ? fork.meta.name : 'fork'}`);
 }
 
 /* ─── CREATE ─── */
@@ -6850,29 +6872,40 @@ async function downloadForkAs(format) {
   if (menu) menu.classList.remove('open');
   const fork = getCurrentFork();
   if (!fork) { showToast('Switch to a fork first.', 'error'); return; }
-  // Folded fork rendering (canonical + fork diffs merged) is the next slice
-  // of work. Until then this exports the raw fork metadata + diff events so
-  // users can move their fork between instances.
-  showToast('Folded ' + format.toUpperCase() + ' export coming soon — saving the raw fork log for now.');
+
+  // HTML and Markdown require the folded view of the fork (canonical state
+  // at the fork's anchor + fork diffs applied). The folder lands with the
+  // fork-render PR. JSON is the raw fork log — useful today for moving a
+  // fork between instances.
+  if (format !== 'json') {
+    showToast(format.toUpperCase() + ' export needs the folded fork renderer (coming soon). Use JSON for now.');
+    return;
+  }
+
   try {
     const path = `/_matrix/client/v3/rooms/${encodeURIComponent(fork.roomId)}/messages?dir=b&limit=500`;
     const msgs = await mxFetch(path);
-    const events = (msgs && msgs.chunk) || [];
+    const allEvents = (msgs && msgs.chunk) || [];
+    // Only export the EO diff events — m.room.message etc. is room chatter, not fork data.
+    const diffEvents = allEvents.filter(e => e.type === HYDRATION_DIFF_EVENT);
     const blob = new Blob([JSON.stringify({
       fork: fork.meta,
       room_id: fork.roomId,
       exported_at: new Date().toISOString(),
-      raw_events: events,
-      note: 'Raw EO diff log. Folded export (HTML/MD with effective fork state) is in progress.',
+      diff_event_type: HYDRATION_DIFF_EVENT,
+      events: diffEvents,
+      note: 'Raw EO diff log for this fork. Folded HTML/MD export is in progress.',
     }, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    const slug = (fork.meta.name || 'fork').toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    a.download = `eo-fork-${slug}-raw.json`;
+    const slug = (fork.meta.name || 'fork').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'fork';
+    a.download = `eo-fork-${slug}.json`;
     a.click();
     URL.revokeObjectURL(url);
+    showToast('Exported ' + a.download);
   } catch (e) {
+    console.error('fork export failed', e);
     showToast('Export failed: ' + e.message, 'error');
   }
 }
