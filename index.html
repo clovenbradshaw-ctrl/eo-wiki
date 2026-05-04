@@ -1901,6 +1901,169 @@
     line-height: 1.35;
   }
 
+  /* ─── FORK BANNER ─── */
+  .fork-banner {
+    display: none;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 14px;
+    margin: 0 0 16px 0;
+    background: var(--bg-nav);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+  .fork-banner.visible { display: flex; }
+  .fork-banner.fork-active {
+    background: rgba(107, 77, 138, 0.08);
+    border-color: var(--holon);
+  }
+  .fork-banner .fork-label {
+    color: var(--text-tertiary);
+    margin-right: 2px;
+  }
+  .fork-banner .fork-name-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background: var(--bg-nav-active);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text);
+    transition: background var(--transition);
+  }
+  .fork-banner.fork-active .fork-name-pill {
+    background: var(--holon);
+    color: #fff;
+    border-color: var(--holon);
+  }
+  .fork-banner .fork-name-pill:hover { filter: brightness(0.96); }
+  .fork-banner .fork-actions {
+    display: flex;
+    gap: 6px;
+    margin-left: auto;
+    flex-wrap: wrap;
+  }
+  .fork-banner .fork-actions .btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+  .fork-banner .fork-dl-wrap { position: relative; }
+  .fork-banner .fork-dl-menu {
+    display: none;
+    position: absolute;
+    right: 0; top: calc(100% + 4px);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    min-width: 140px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    z-index: 30;
+  }
+  .fork-banner .fork-dl-menu.open { display: block; }
+  .fork-banner .fork-dl-menu button {
+    display: block; width: 100%;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 12px;
+    color: var(--text);
+  }
+  .fork-banner .fork-dl-menu button:hover { background: var(--bg-nav-hover); }
+
+  /* ─── FORK MODALS ─── */
+  .fork-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.42);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .fork-modal-overlay.show { display: flex; }
+  .fork-modal {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    width: 92%; max-width: 460px;
+    max-height: 86vh;
+    overflow-y: auto;
+    padding: 20px;
+    color: var(--text);
+  }
+  .fork-modal h3 { margin: 0 0 12px 0; font-size: 17px; }
+  .fork-modal label { display: block; font-size: 12px; color: var(--text-tertiary); margin: 12px 0 4px; }
+  .fork-modal input[type="text"],
+  .fork-modal textarea,
+  .fork-modal select {
+    width: 100%; padding: 8px 10px;
+    background: var(--bg-nav);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    color: var(--text); font-size: 13px; font-family: inherit;
+    box-sizing: border-box;
+  }
+  .fork-modal textarea { min-height: 60px; resize: vertical; }
+  .fork-modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+  .fork-modal-error {
+    display: none;
+    margin: 8px 0 0;
+    padding: 6px 10px;
+    background: rgba(184, 115, 51, 0.12);
+    border-left: 2px solid var(--protogon);
+    color: var(--protogon);
+    font-size: 12px;
+    border-radius: var(--radius);
+  }
+
+  /* ─── FORK PICKER ─── */
+  .fork-picker-list { margin-top: 8px; max-height: 50vh; overflow-y: auto; }
+  .fork-picker-section {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-tertiary);
+    margin: 14px 0 6px;
+  }
+  .fork-picker-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    cursor: pointer;
+    margin-bottom: 6px;
+    background: var(--bg-nav);
+    transition: background var(--transition);
+  }
+  .fork-picker-row:hover { background: var(--bg-nav-hover); }
+  .fork-picker-row.active {
+    border-color: var(--holon);
+    background: rgba(107, 77, 138, 0.08);
+  }
+  .fork-picker-row .fp-name { font-weight: 600; flex: 1; }
+  .fork-picker-row .fp-meta { font-size: 11px; color: var(--text-tertiary); }
+  .fork-picker-empty { font-size: 12px; color: var(--text-tertiary); padding: 8px 4px; }
+
+  /* ─── INVITE ROLE PICKER ─── */
+  .role-grid { display: grid; gap: 8px; margin-top: 4px; }
+  .role-row {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 12px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    cursor: pointer;
+    background: var(--bg-nav);
+  }
+  .role-row.selected { border-color: var(--holon); background: rgba(107, 77, 138, 0.08); }
+  .role-row strong { display: block; font-size: 13px; }
+  .role-row span { font-size: 11px; color: var(--text-tertiary); }
+
   /* ─── CHANGELOG PANEL ─── */
   .cl-panel {
     display: none;
@@ -2262,6 +2425,32 @@
 
 <main class="main" id="mainPanel">
   <div class="content-area" id="contentArea">
+    <div class="fork-banner" id="forkBanner">
+      <i class="ph ph-tree-evergreen" id="forkBannerIcon" style="font-size:16px;"></i>
+      <span class="fork-label">Viewing:</span>
+      <span class="fork-name-pill" id="forkNamePill" onclick="openForkPicker()">
+        <span id="forkNameText">Canonical</span>
+        <i class="ph ph-caret-down" style="font-size:11px;"></i>
+      </span>
+      <div class="fork-actions" id="forkActions">
+        <button class="btn" id="forkStartBtn" onclick="openCreateForkModal()" style="font-size:12px;padding:5px 10px;">
+          <i class="ph ph-git-branch"></i> Start a fork
+        </button>
+        <button class="btn" id="forkInviteBtn" onclick="openInviteForkModal()" style="display:none;font-size:12px;padding:5px 10px;">
+          <i class="ph ph-user-plus"></i> Invite
+        </button>
+        <div class="fork-dl-wrap" id="forkDlWrap" style="display:none;">
+          <button class="btn" id="forkDlBtn" onclick="toggleForkDownloadMenu()" style="font-size:12px;padding:5px 10px;">
+            <i class="ph ph-download-simple"></i> Download <i class="ph ph-caret-down" style="font-size:10px;"></i>
+          </button>
+          <div class="fork-dl-menu" id="forkDlMenu">
+            <button onclick="downloadForkAs('json')"><i class="ph ph-brackets-curly"></i> JSON</button>
+            <button onclick="downloadForkAs('html')"><i class="ph ph-file-html"></i> HTML</button>
+            <button onclick="downloadForkAs('md')"><i class="ph ph-file-text"></i> Markdown</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="welcome">
       <h2>EO</h2>
       <span class="eo-meaning" id="welcomeMeaning">Experiential Ontology</span>
@@ -2419,6 +2608,80 @@
   </div>
   <div class="cl-list" id="hydBody" style="padding:14px;font-size:13px;line-height:1.5;">
     <div class="cl-empty">Loading…</div>
+  </div>
+</div>
+
+<!-- ─── FORK MODALS ─────────────────────────────────────────────────────── -->
+<div class="fork-modal-overlay" id="forkPickerOverlay" onclick="if(event.target===this)closeForkPicker()">
+  <div class="fork-modal">
+    <h3><i class="ph ph-tree-evergreen"></i> Switch view</h3>
+    <p style="font-size:12px;color:var(--text-tertiary);margin:0;">
+      Pick a fork to view, or stay on canonical. Forks layer EO-notation diffs over canonical at render time.
+    </p>
+    <div class="fork-picker-list" id="forkPickerList"></div>
+    <div class="fork-modal-actions">
+      <button class="btn" onclick="closeForkPicker()">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="fork-modal-overlay" id="createForkOverlay" onclick="if(event.target===this)closeCreateForkModal()">
+  <div class="fork-modal">
+    <h3><i class="ph ph-git-branch"></i> Start a fork</h3>
+    <label for="cfName">Fork name <span style="color:var(--protogon);">*</span></label>
+    <input type="text" id="cfName" placeholder="e.g. Sara's Reading List" maxlength="80">
+    <label for="cfDesc">Short description</label>
+    <textarea id="cfDesc" placeholder="What this fork is for. Shown in the picker."></textarea>
+    <label for="cfVisibility">Who can read</label>
+    <select id="cfVisibility">
+      <option value="invite">Just me + people I invite</option>
+      <option value="link">Anyone with the link</option>
+      <option value="public">Public (listed)</option>
+    </select>
+    <label for="cfTransparency">Diff event detail</label>
+    <select id="cfTransparency">
+      <option value="public" selected>Full — before + after in events</option>
+      <option value="partial">Partial — operator + field only</option>
+      <option value="private">Private — no events emitted</option>
+    </select>
+    <div class="fork-modal-error" id="cfError"></div>
+    <div class="fork-modal-actions">
+      <button class="btn" onclick="closeCreateForkModal()">Cancel</button>
+      <button class="btn btn-save" id="cfSubmitBtn" onclick="submitCreateFork()"><i class="ph ph-git-branch"></i> Create fork</button>
+    </div>
+  </div>
+</div>
+
+<div class="fork-modal-overlay" id="inviteForkOverlay" onclick="if(event.target===this)closeInviteForkModal()">
+  <div class="fork-modal">
+    <h3><i class="ph ph-user-plus"></i> Invite to fork</h3>
+    <p id="inviteForkSubtitle" style="font-size:12px;color:var(--text-tertiary);margin:0 0 8px;"></p>
+    <label for="ifMxid">Matrix ID</label>
+    <input type="text" id="ifMxid" placeholder="@user:server.com" autocomplete="off">
+    <label>Role</label>
+    <div class="role-grid" id="ifRoleGrid">
+      <label class="role-row" data-role="viewer">
+        <input type="radio" name="ifRole" value="viewer">
+        <div><strong>Viewer</strong><span>Read the fork. Can't write events.</span></div>
+      </label>
+      <label class="role-row" data-role="commenter">
+        <input type="radio" name="ifRole" value="commenter">
+        <div><strong>Commenter</strong><span>Read + post comments. No edits.</span></div>
+      </label>
+      <label class="role-row selected" data-role="editor">
+        <input type="radio" name="ifRole" value="editor" checked>
+        <div><strong>Editor</strong><span>Read + commit EO diffs to the fork.</span></div>
+      </label>
+      <label class="role-row" data-role="coowner">
+        <input type="radio" name="ifRole" value="coowner">
+        <div><strong>Co-owner</strong><span>Editor + invite + manage the fork.</span></div>
+      </label>
+    </div>
+    <div class="fork-modal-error" id="ifError"></div>
+    <div class="fork-modal-actions">
+      <button class="btn" onclick="closeInviteForkModal()">Cancel</button>
+      <button class="btn btn-save" id="ifSubmitBtn" onclick="submitInviteFork()"><i class="ph ph-paper-plane-tilt"></i> Send invite</button>
+    </div>
   </div>
 </div>
 
@@ -2951,6 +3214,8 @@ function finishLoginAsEditor() {
   showToast('Signed in as ' + matrixSession.mxid);
   // Re-render the current article so the Suggest button appears.
   if (currentRec) loadPage(currentRec.record_id);
+  // Discover forks the user owns / is invited to (non-blocking).
+  discoverForks().catch(e => console.warn('fork discovery failed', e));
 }
 
 async function doLogout() {
@@ -2963,6 +3228,10 @@ async function doLogout() {
   localStorage.removeItem('eo_session');
   localStorage.removeItem(MATRIX_SESSION_KEY);
   localStorage.removeItem(SUGGESTION_ROOM_CACHE_KEY);
+  localStorage.removeItem(CURRENT_FORK_LSK);
+  availableForks = [];
+  currentForkId = null;
+  renderForkBanner();
   stopSuggestionsPoller();
   applyLoggedOutUI();
   if (currentRec) loadPage(currentRec.record_id);
@@ -3545,11 +3814,19 @@ async function loadPage(contentId) {
         ${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}
         ${keywords.length ? '· ' + keywords.map(k => esc(k)).join(', ') : ''}
       </div>
-      ${isLoggedIn
-        ? `<div class="article-actions"><button class="btn" onclick="toggleEdit()"><i class="ph ph-pencil-simple"></i> Edit</button><button class="btn" onclick="openChangelogFor('${esc(contentId)}')"><i class="ph ph-clock-counter-clockwise"></i> History</button></div>`
-        : (matrixSession
-          ? `<div class="article-actions"><button class="btn" onclick="toggleEdit()" title="Send a suggested edit to the admin"><i class="ph ph-pencil-line"></i> Suggest edit</button></div>`
-          : '')}
+      ${(() => {
+        const onFork = !!currentForkId;
+        const forkTip = 'Switch to canonical to edit — fork editing is not yet wired.';
+        const forkDisabled = onFork ? ` disabled title="${forkTip}"` : '';
+        if (isLoggedIn) {
+          return `<div class="article-actions"><button class="btn" onclick="toggleEdit()"${forkDisabled}><i class="ph ph-pencil-simple"></i> Edit</button><button class="btn" onclick="openChangelogFor('${esc(contentId)}')"><i class="ph ph-clock-counter-clockwise"></i> History</button></div>`;
+        }
+        if (matrixSession) {
+          const tip = onFork ? forkTip : 'Send a suggested edit to the admin';
+          return `<div class="article-actions"><button class="btn" onclick="toggleEdit()" title="${tip}"${forkDisabled}><i class="ph ph-pencil-line"></i> Suggest edit</button></div>`;
+        }
+        return '';
+      })()}
     </div>
     <div class="article-layout">
       <div class="article-main">
@@ -6209,6 +6486,397 @@ async function bootstrapHydrationOnLoad() {
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   FORKS  ▌ named, invitable forks layered on top of canonical
+   ═══════════════════════════════════════════════════════════════════════════
+   Model:
+     • A fork is a Matrix room. The room's m.room.name = user-chosen fork
+       name. A custom state event (org.experientialontology.eo.fork) holds
+       fork metadata: { name, description, owner_mxid, anchor_hydration_uri,
+       anchor_ts, parent_fork_id, transparency, visibility, version }.
+     • Discovery: scan joined Matrix rooms; any room with that state event
+       is a fork. No central registry needed — the rooms themselves are the
+       registry, and they follow you across devices via Matrix.
+     • Roles map to Matrix power levels:
+         viewer    = 0   (read only)
+         commenter = 25  (m.room.message, m.reaction)
+         editor    = 50  (org.experientialontology.eo.diff)
+         co-owner  = 75  (invite + state changes)
+         owner     = 100 (creator)
+     • Anchor: each fork records the canonical hydration URI + ts at the
+       moment of creation. Render-time fold (PR #32) replays canonical to
+       that anchor, then layers fork diffs on top.
+     • This PR ships UI only: create / pick / invite. Editing while viewing
+       a fork is disabled with a tooltip; PR #32 routes edits to the fork
+       room and folds the rendered view.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const FORK_STATE_EVENT = 'org.experientialontology.eo.fork';
+const FORK_VERSION = 1;
+const CURRENT_FORK_LSK = 'eo_current_fork';
+const FORK_NAME_PREFIX = 'EO Wiki fork — ';
+
+const FORK_ROLES = Object.freeze({
+  viewer:    { power: 0,   label: 'Viewer' },
+  commenter: { power: 25,  label: 'Commenter' },
+  editor:    { power: 50,  label: 'Editor' },
+  coowner:   { power: 75,  label: 'Co-owner' },
+});
+
+let availableForks = [];   // [{ roomId, meta, isOwner, isMember }]
+let currentForkId = null;  // null = canonical view
+
+function getCurrentFork() {
+  if (!currentForkId) return null;
+  return availableForks.find(f => f.roomId === currentForkId) || null;
+}
+
+async function discoverForks() {
+  availableForks = [];
+  if (!matrixSession) return;
+  let joined = [];
+  try { joined = await mxJoinedRooms(); } catch (e) { console.warn('joined_rooms failed', e); return; }
+  // Probe each joined room for the fork state event. 404 = not a fork.
+  const probes = joined.map(async rid => {
+    try {
+      const path = `/_matrix/client/v3/rooms/${encodeURIComponent(rid)}/state/${encodeURIComponent(FORK_STATE_EVENT)}`;
+      const meta = await mxFetch(path);
+      if (!meta || meta.version !== FORK_VERSION) return null;
+      return {
+        roomId: rid,
+        meta,
+        isOwner: !!matrixSession && meta.owner_mxid === matrixSession.mxid,
+        isMember: true,
+      };
+    } catch (e) {
+      if (e.status === 404) return null; // not a fork — expected for non-fork rooms
+      return null;
+    }
+  });
+  const results = await Promise.all(probes);
+  availableForks = results.filter(Boolean);
+  // Restore last-selected fork if it's still in the list.
+  const saved = localStorage.getItem(CURRENT_FORK_LSK);
+  if (saved && availableForks.some(f => f.roomId === saved)) currentForkId = saved;
+  else currentForkId = null;
+  renderForkBanner();
+}
+
+async function createForkRoom({ name, description, transparency, visibility }) {
+  if (!matrixSession) throw new Error('Matrix session required');
+  const myMxid = matrixSession.mxid;
+  const anchorUri = (hydrationMeta && hydrationMeta.uri) || null;
+  const anchorTs = Date.now();
+  const meta = {
+    version: FORK_VERSION,
+    name,
+    description: description || '',
+    owner_mxid: myMxid,
+    anchor_hydration_uri: anchorUri,
+    anchor_ts: anchorTs,
+    parent_fork_id: currentForkId, // chain forks-of-forks
+    transparency: transparency || 'public',
+    visibility: visibility || 'invite',
+    created_at: new Date(anchorTs).toISOString(),
+  };
+
+  // Ensure org.experientialontology.eo.diff requires editor power level (50).
+  // Default events_default is 0 (so commenters can post m.room.message and
+  // m.reaction without elevation). Owner gets 100 by default in Matrix.
+  const initial_state = [
+    {
+      type: FORK_STATE_EVENT,
+      state_key: '',
+      content: meta,
+    },
+    {
+      type: 'm.room.power_levels',
+      content: {
+        users_default: 0,
+        events_default: 25, // commenters by default; editors elevated to 50
+        state_default: 75,  // co-owners can update fork meta
+        invite: 75,
+        kick: 75,
+        ban: 75,
+        redact: 50,
+        users: { [myMxid]: 100 },
+        events: {
+          [HYDRATION_DIFF_EVENT]: 50, // editor power required for diffs
+          [FORK_STATE_EVENT]: 75,     // co-owner+ can update fork meta
+          'm.room.message': 25,       // commenters and up
+          'm.reaction': 25,
+        },
+      },
+    },
+  ];
+
+  const body = {
+    name: FORK_NAME_PREFIX + name,
+    topic: meta.description || `Fork of EO Wiki by ${myMxid}`,
+    initial_state,
+  };
+  if (visibility === 'public') {
+    body.preset = 'public_chat';
+    body.visibility = 'public';
+  } else if (visibility === 'link') {
+    body.preset = 'public_chat';
+    body.visibility = 'private'; // unlisted but joinable via link/id
+  } else {
+    body.preset = 'private_chat';
+    body.visibility = 'private';
+  }
+  const created = await mxFetch('/_matrix/client/v3/createRoom', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  });
+  return { roomId: created.room_id, meta };
+}
+
+async function inviteToFork(roomId, mxid, roleKey) {
+  if (!matrixSession) throw new Error('Matrix session required');
+  const role = FORK_ROLES[roleKey];
+  if (!role) throw new Error('Unknown role: ' + roleKey);
+  const target = mxid.trim();
+  if (!/^@[^:\s]+:[^:\s]+$/.test(target)) throw new Error('Use the form @user:server.com');
+
+  // Step 1 — invite. If already in the room, this errors with M_FORBIDDEN; we proceed to set power level.
+  try {
+    await mxFetch(`/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/invite`, {
+      method: 'POST',
+      body: JSON.stringify({ user_id: target }),
+    });
+  } catch (e) {
+    // M_FORBIDDEN: Already in room — that's fine. Anything else propagates.
+    if (e.errcode !== 'M_FORBIDDEN') throw e;
+  }
+
+  // Step 2 — set their power level. Read existing, mutate, write back.
+  const plPath = `/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/state/m.room.power_levels`;
+  const pl = await mxFetch(plPath);
+  pl.users = pl.users || {};
+  if (role.power === 0) delete pl.users[target];
+  else pl.users[target] = role.power;
+  await mxFetch(plPath + '/', { method: 'PUT', body: JSON.stringify(pl) });
+}
+
+function setCurrentForkId(roomId) {
+  currentForkId = roomId || null;
+  if (currentForkId) localStorage.setItem(CURRENT_FORK_LSK, currentForkId);
+  else localStorage.removeItem(CURRENT_FORK_LSK);
+  renderForkBanner();
+  // Re-render the article view if one is open so the Edit button updates its disabled state.
+  if (currentRec) loadPage(currentRec.record_id);
+}
+
+function renderForkBanner() {
+  const banner = document.getElementById('forkBanner');
+  if (!banner) return;
+  // Banner only shows for logged-in Matrix users (admin or editor).
+  if (!matrixSession) {
+    banner.classList.remove('visible');
+    return;
+  }
+  banner.classList.add('visible');
+
+  const fork = getCurrentFork();
+  const nameText = document.getElementById('forkNameText');
+  const inviteBtn = document.getElementById('forkInviteBtn');
+  const dlWrap = document.getElementById('forkDlWrap');
+  const startBtn = document.getElementById('forkStartBtn');
+  const icon = document.getElementById('forkBannerIcon');
+
+  if (fork) {
+    banner.classList.add('fork-active');
+    nameText.textContent = fork.meta.name || '(unnamed fork)';
+    icon.className = 'ph ph-tree-evergreen';
+    icon.style.color = '#fff';
+    inviteBtn.style.display = fork.isOwner ? '' : 'none';
+    dlWrap.style.display = '';
+    startBtn.style.display = 'none';
+  } else {
+    banner.classList.remove('fork-active');
+    nameText.textContent = 'Canonical';
+    icon.className = 'ph ph-book';
+    icon.style.color = '';
+    inviteBtn.style.display = 'none';
+    dlWrap.style.display = 'none';
+    startBtn.style.display = '';
+  }
+}
+
+/* ─── PICKER ─── */
+function openForkPicker() {
+  const list = document.getElementById('forkPickerList');
+  if (!list) return;
+  const myForks = availableForks.filter(f => f.isOwner);
+  const otherForks = availableForks.filter(f => !f.isOwner);
+  const row = (f) => `
+    <div class="fork-picker-row ${f && f.roomId === currentForkId ? 'active' : (!f && !currentForkId ? 'active' : '')}"
+         onclick="${f ? `pickFork('${esc(f.roomId)}')` : 'pickFork(null)'}">
+      <i class="ph ${f ? 'ph-tree-evergreen' : 'ph-book'}" style="color:var(--holon);"></i>
+      <div style="flex:1;">
+        <div class="fp-name">${esc(f ? f.meta.name : 'Canonical')}</div>
+        <div class="fp-meta">${f ? esc((f.meta.description || f.meta.owner_mxid || '').slice(0, 80)) : 'The published wiki — what anonymous viewers see.'}</div>
+      </div>
+      ${f && f.isOwner ? '<span style="font-size:10px;color:var(--text-tertiary);">owner</span>' : ''}
+    </div>`;
+  list.innerHTML = `
+    <div class="fork-picker-section">Source</div>
+    ${row(null)}
+    ${myForks.length ? `<div class="fork-picker-section">My forks</div>${myForks.map(row).join('')}` : ''}
+    ${otherForks.length ? `<div class="fork-picker-section">Forks I'm in</div>${otherForks.map(row).join('')}` : ''}
+    ${(!myForks.length && !otherForks.length) ? '<div class="fork-picker-empty">No forks yet. Click "Start a fork" on the banner to create one.</div>' : ''}
+  `;
+  document.getElementById('forkPickerOverlay').classList.add('show');
+}
+function closeForkPicker() { document.getElementById('forkPickerOverlay').classList.remove('show'); }
+function pickFork(roomId) {
+  setCurrentForkId(roomId);
+  closeForkPicker();
+  showToast(roomId ? `Switched to ${getCurrentFork().meta.name}` : 'Switched to canonical');
+}
+
+/* ─── CREATE ─── */
+function openCreateForkModal() {
+  if (!matrixSession) { showToast('Sign in to start a fork', 'error'); return; }
+  document.getElementById('cfName').value = '';
+  document.getElementById('cfDesc').value = '';
+  document.getElementById('cfVisibility').value = 'invite';
+  document.getElementById('cfTransparency').value = 'public';
+  document.getElementById('cfError').style.display = 'none';
+  document.getElementById('createForkOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('cfName').focus(), 80);
+}
+function closeCreateForkModal() { document.getElementById('createForkOverlay').classList.remove('show'); }
+async function submitCreateFork() {
+  const errEl = document.getElementById('cfError');
+  errEl.style.display = 'none';
+  const name = document.getElementById('cfName').value.trim();
+  const description = document.getElementById('cfDesc').value.trim();
+  const visibility = document.getElementById('cfVisibility').value;
+  const transparency = document.getElementById('cfTransparency').value;
+  if (!name) {
+    errEl.textContent = 'Give your fork a name first.';
+    errEl.style.display = '';
+    return;
+  }
+  const submitBtn = document.getElementById('cfSubmitBtn');
+  submitBtn.disabled = true;
+  submitBtn.innerHTML = '<i class="ph ph-spinner ph-spin"></i> Creating…';
+  try {
+    const created = await createForkRoom({ name, description, transparency, visibility });
+    availableForks.push({ roomId: created.roomId, meta: created.meta, isOwner: true, isMember: true });
+    setCurrentForkId(created.roomId);
+    closeCreateForkModal();
+    showToast(`Fork "${name}" created`);
+  } catch (e) {
+    errEl.textContent = e.message || 'Failed to create fork.';
+    errEl.style.display = '';
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="ph ph-git-branch"></i> Create fork';
+  }
+}
+
+/* ─── INVITE ─── */
+function openInviteForkModal() {
+  const fork = getCurrentFork();
+  if (!fork || !fork.isOwner) { showToast('Open a fork you own to invite users.', 'error'); return; }
+  document.getElementById('inviteForkSubtitle').textContent = `Inviting to: ${fork.meta.name}`;
+  document.getElementById('ifMxid').value = '';
+  document.getElementById('ifError').style.display = 'none';
+  // reset role to editor by default
+  document.querySelectorAll('#ifRoleGrid .role-row').forEach(r => r.classList.remove('selected'));
+  const editorRow = document.querySelector('#ifRoleGrid .role-row[data-role="editor"]');
+  if (editorRow) editorRow.classList.add('selected');
+  document.querySelectorAll('input[name="ifRole"]').forEach(r => { r.checked = (r.value === 'editor'); });
+  document.getElementById('inviteForkOverlay').classList.add('show');
+  setTimeout(() => document.getElementById('ifMxid').focus(), 80);
+}
+function closeInviteForkModal() { document.getElementById('inviteForkOverlay').classList.remove('show'); }
+async function submitInviteFork() {
+  const fork = getCurrentFork();
+  if (!fork) return;
+  const errEl = document.getElementById('ifError');
+  errEl.style.display = 'none';
+  const mxid = document.getElementById('ifMxid').value.trim();
+  const roleEl = document.querySelector('input[name="ifRole"]:checked');
+  const role = roleEl ? roleEl.value : 'editor';
+  if (!mxid) {
+    errEl.textContent = 'Enter a Matrix ID.';
+    errEl.style.display = '';
+    return;
+  }
+  const btn = document.getElementById('ifSubmitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="ph ph-spinner ph-spin"></i> Sending…';
+  try {
+    await inviteToFork(fork.roomId, mxid, role);
+    closeInviteForkModal();
+    showToast(`Invited ${mxid} as ${FORK_ROLES[role].label}`);
+  } catch (e) {
+    errEl.textContent = e.message || 'Invite failed.';
+    errEl.style.display = '';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="ph ph-paper-plane-tilt"></i> Send invite';
+  }
+}
+
+// Visual state for radio rows
+document.addEventListener('change', (e) => {
+  if (e.target && e.target.name === 'ifRole') {
+    document.querySelectorAll('#ifRoleGrid .role-row').forEach(r => r.classList.remove('selected'));
+    const row = document.querySelector(`#ifRoleGrid .role-row[data-role="${e.target.value}"]`);
+    if (row) row.classList.add('selected');
+  }
+});
+
+/* ─── DOWNLOAD ─── */
+function toggleForkDownloadMenu() {
+  const menu = document.getElementById('forkDlMenu');
+  if (menu) menu.classList.toggle('open');
+}
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('forkDlMenu');
+  const btn = document.getElementById('forkDlBtn');
+  if (!menu || !menu.classList.contains('open')) return;
+  if (e.target === btn || btn.contains(e.target)) return;
+  if (!menu.contains(e.target)) menu.classList.remove('open');
+});
+
+async function downloadForkAs(format) {
+  const menu = document.getElementById('forkDlMenu');
+  if (menu) menu.classList.remove('open');
+  const fork = getCurrentFork();
+  if (!fork) { showToast('Switch to a fork first.', 'error'); return; }
+  // Folded fork rendering (canonical + fork diffs merged) is the next slice
+  // of work. Until then this exports the raw fork metadata + diff events so
+  // users can move their fork between instances.
+  showToast('Folded ' + format.toUpperCase() + ' export coming soon — saving the raw fork log for now.');
+  try {
+    const path = `/_matrix/client/v3/rooms/${encodeURIComponent(fork.roomId)}/messages?dir=b&limit=500`;
+    const msgs = await mxFetch(path);
+    const events = (msgs && msgs.chunk) || [];
+    const blob = new Blob([JSON.stringify({
+      fork: fork.meta,
+      room_id: fork.roomId,
+      exported_at: new Date().toISOString(),
+      raw_events: events,
+      note: 'Raw EO diff log. Folded export (HTML/MD with effective fork state) is in progress.',
+    }, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    const slug = (fork.meta.name || 'fork').toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    a.download = `eo-fork-${slug}-raw.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    showToast('Export failed: ' + e.message, 'error');
+  }
+}
+
 /* ═══════════════════════
    INIT
    ═══════════════════════ */
@@ -6266,6 +6934,12 @@ startMeaningCycle();
     startSuggestionsPoller();
   } else if (matrixSession) {
     applyEditorUI();
+  }
+
+  // Render fork banner with whatever auth we have (visible to any Matrix user).
+  renderForkBanner();
+  if (matrixSession) {
+    discoverForks().catch(e => console.warn('fork discovery failed', e));
   }
 
   try {
