@@ -3797,6 +3797,12 @@ async function loadPage(contentId) {
     console.warn('Individual fetch failed, using cached:', e.message);
   }
 
+  // If a fork is active, layer its EO diffs on top of canonical before render.
+  if (currentForkId) {
+    try { rec = await foldForkOnRecordAsync(rec); }
+    catch (e) { console.warn('fork fold failed; falling back to canonical', e); }
+  }
+
   currentRec = rec;
   const vals = parseValues(rec.values);
   const meta = extractMeta(vals);
@@ -3826,15 +3832,17 @@ async function loadPage(contentId) {
         ${keywords.length ? '· ' + keywords.map(k => esc(k)).join(', ') : ''}
       </div>
       ${(() => {
+        // Fork view: any logged-in user can edit (writes go to fork room, not Xano).
+        // Canonical view: admin gets Edit, non-admin Matrix user gets Suggest.
         const onFork = !!currentForkId;
-        const forkTip = 'Switch to canonical to edit — fork editing is not yet wired.';
-        const forkDisabled = onFork ? ` disabled title="${forkTip}"` : '';
+        if (onFork && matrixSession) {
+          return `<div class="article-actions"><button class="btn" onclick="toggleEdit()" title="Edit your fork. Saves as EO diff events in the fork's Matrix room."><i class="ph ph-pencil-simple"></i> Edit fork</button></div>`;
+        }
         if (isLoggedIn) {
-          return `<div class="article-actions"><button class="btn" onclick="toggleEdit()"${forkDisabled}><i class="ph ph-pencil-simple"></i> Edit</button><button class="btn" onclick="openChangelogFor('${esc(contentId)}')"><i class="ph ph-clock-counter-clockwise"></i> History</button></div>`;
+          return `<div class="article-actions"><button class="btn" onclick="toggleEdit()"><i class="ph ph-pencil-simple"></i> Edit</button><button class="btn" onclick="openChangelogFor('${esc(contentId)}')"><i class="ph ph-clock-counter-clockwise"></i> History</button></div>`;
         }
         if (matrixSession) {
-          const tip = onFork ? forkTip : 'Send a suggested edit to the admin';
-          return `<div class="article-actions"><button class="btn" onclick="toggleEdit()" title="${tip}"${forkDisabled}><i class="ph ph-pencil-line"></i> Suggest edit</button></div>`;
+          return `<div class="article-actions"><button class="btn" onclick="toggleEdit()" title="Send a suggested edit to the admin"><i class="ph ph-pencil-line"></i> Suggest edit</button></div>`;
         }
         return '';
       })()}
@@ -4068,7 +4076,12 @@ function toggleOpSlot(slot) {
 async function saveEdit() {
   const saveBtn = document.getElementById('saveBtn');
 
-  // Non-admin Matrix users: route through the suggestion flow instead of Xano.
+  // Fork view: edits stay in the fork's Matrix room — Xano untouched.
+  if (currentForkId) {
+    return saveEditToFork(saveBtn);
+  }
+
+  // Non-admin Matrix users on canonical: route through the suggestion flow instead of Xano.
   if (!isLoggedIn && matrixSession) {
     return submitSuggestionFromEditor(saveBtn);
   }
@@ -6694,6 +6707,7 @@ function renderForkBanner() {
   // Banner only shows for logged-in Matrix users (admin or editor).
   if (!matrixSession) {
     banner.classList.remove('visible');
+    _updateNewButtonForFork();
     return;
   }
   banner.classList.add('visible');
@@ -6721,6 +6735,23 @@ function renderForkBanner() {
     inviteBtn.style.display = 'none';
     dlWrap.style.display = 'none';
     startBtn.style.display = '';
+  }
+  _updateNewButtonForFork();
+}
+
+// New record creation (INS) needs fork-aware list rendering — deferred. Hide
+// the +New button on a fork view so admins don't try to use it expecting a
+// canonical-style flow.
+function _updateNewButtonForFork() {
+  const newBtn = document.getElementById('newBtn');
+  if (!newBtn) return;
+  if (currentForkId) {
+    newBtn.dataset.forkHidden = '1';
+    newBtn.style.display = 'none';
+  } else if (newBtn.dataset.forkHidden) {
+    delete newBtn.dataset.forkHidden;
+    // Restore admin visibility — only show if logged-in admin
+    if (isLoggedIn) newBtn.style.display = '';
   }
 }
 
@@ -6907,6 +6938,229 @@ async function downloadForkAs(format) {
   } catch (e) {
     console.error('fork export failed', e);
     showToast('Export failed: ' + e.message, 'error');
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   FORK FOLD + EMIT  ▌ render-time fold of fork diffs over canonical
+   ═══════════════════════════════════════════════════════════════════════════
+   When viewing a fork, every read of a record passes through foldForkOnRecord()
+   which fetches the fork room's EO diff events for that record_id and applies
+   the latest value for each (subject, predicate). When saving on a fork,
+   saveEditToFork() emits the same triples as EO diff events into the fork's
+   room — Xano stays untouched.
+
+   Scoped to ALT (edit) operations for now. INS (new record) and NUL (delete)
+   require fork-aware list/index rendering and ship in a follow-up; +New and
+   Delete are hidden when on a fork.
+
+   Conflict UX (highlighting fork.before ≠ canonical.now) is the next slice.
+   For now last-write-wins silently — fork's latest value is what renders.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const FORK_FOLD_LIMIT = 1000; // initial /messages page size when reading a fork
+
+// Cache: { roomId: { events: [...], fetched_at: ts } }
+const _forkEventCache = new Map();
+
+// dot-path setter: setByPath(obj, "meta.title", "New") → mutates obj
+function _setByPath(obj, path, value) {
+  const keys = path.split('.');
+  let cur = obj;
+  for (let i = 0; i < keys.length - 1; i++) {
+    const k = keys[i];
+    if (cur[k] == null || typeof cur[k] !== 'object') cur[k] = {};
+    cur = cur[k];
+  }
+  cur[keys[keys.length - 1]] = value;
+  return obj;
+}
+
+function _getByPath(obj, path) {
+  const keys = path.split('.');
+  let cur = obj;
+  for (const k of keys) {
+    if (cur == null) return undefined;
+    cur = cur[k];
+  }
+  return cur;
+}
+
+async function _fetchForkEvents(roomId, { force = false } = {}) {
+  const cached = _forkEventCache.get(roomId);
+  if (!force && cached && (Date.now() - cached.fetched_at < 30_000)) return cached.events;
+  if (!matrixSession) return [];
+  try {
+    const path = `/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/messages?dir=b&limit=${FORK_FOLD_LIMIT}`;
+    const msgs = await mxFetch(path);
+    const all = (msgs && msgs.chunk) || [];
+    // Filter to EO diff events; oldest first so applying in order is well-defined.
+    const events = all
+      .filter(e => e.type === HYDRATION_DIFF_EVENT)
+      .sort((a, b) => (a.origin_server_ts || 0) - (b.origin_server_ts || 0));
+    _forkEventCache.set(roomId, { events, fetched_at: Date.now() });
+    return events;
+  } catch (e) {
+    console.warn('fork events fetch failed', e);
+    return cached ? cached.events : [];
+  }
+}
+
+function _invalidateForkEventCache(roomId) {
+  _forkEventCache.delete(roomId);
+}
+
+// Fold all fork events targeting subject onto a canonical record.
+// Returns a clone with values mutated according to the fork's latest writes.
+function foldForkOnRecord(canonicalRec, forkEvents) {
+  if (!canonicalRec || !forkEvents || forkEvents.length === 0) return canonicalRec;
+  const subject = canonicalRec.record_id;
+  const relevant = forkEvents.filter(ev => {
+    const c = ev.content || {};
+    return c.subject === subject && c.op === 'ALT' && c.predicate;
+  });
+  if (relevant.length === 0) return canonicalRec;
+
+  const cloned = { ...canonicalRec };
+  const vals = parseValues(canonicalRec.values);
+  // Apply latest first per (subject, predicate). They're already sorted oldest→newest,
+  // so a simple sequential apply gives last-write-wins.
+  for (const ev of relevant) {
+    const { predicate, after } = ev.content;
+    let parsedAfter = after;
+    // EO diffs serialize complex values as JSON strings; try to parse them back.
+    if (typeof after === 'string' && (after.startsWith('{') || after.startsWith('['))) {
+      try { parsedAfter = JSON.parse(after); } catch {}
+    }
+    _setByPath(vals, predicate, parsedAfter);
+  }
+  // Re-serialize to match the on-the-wire shape downstream code expects.
+  cloned.values = typeof canonicalRec.values === 'string' ? JSON.stringify(vals) : vals;
+  cloned._foldedFromFork = currentForkId;
+  return cloned;
+}
+
+// Convenience: fold using cached events for the current fork.
+async function foldForkOnRecordAsync(canonicalRec) {
+  if (!currentForkId) return canonicalRec;
+  const fork = getCurrentFork();
+  if (!fork) return canonicalRec;
+  const events = await _fetchForkEvents(fork.roomId);
+  return foldForkOnRecord(canonicalRec, events);
+}
+
+// Emit one or more EO diff events into the current fork room. Each emit is a
+// one-shot Matrix send — failures throw so the save handler can surface them.
+async function emitForkOps(ops) {
+  if (!currentForkId) throw new Error('Not on a fork');
+  if (!matrixSession) throw new Error('Matrix session required');
+  const fork = getCurrentFork();
+  if (!fork) throw new Error('Active fork not in registry');
+  const transparency = (fork.meta && fork.meta.transparency) || 'public';
+  if (transparency === 'private') {
+    // Private fork: skip emission. State changes still update the local cache so
+    // the user's view reflects their edit, but nothing leaves the browser.
+  }
+
+  const _trim = v => {
+    if (v == null) return v;
+    const s = typeof v === 'string' ? v : JSON.stringify(v);
+    return s.length > 8000 ? s.slice(0, 8000) + '…[truncated]' : s;
+  };
+
+  for (const op of ops) {
+    const ts = Date.now();
+    const event = {
+      msgtype: HYDRATION_DIFF_EVENT,
+      body: `${op.op} ${op.subject}[${op.predicate}]`,
+      op: op.op,
+      subject: op.subject,
+      predicate: op.predicate,
+      ts,
+      hydration_ref: hydrationMeta ? hydrationMeta.uri : null,
+      scope: 'fork',
+      fork_id: fork.roomId,
+    };
+    if (transparency === 'public') {
+      event.before = _trim(op.before);
+      event.after = _trim(op.after);
+    }
+    if (transparency === 'private') continue; // skip the actual send
+
+    const txn = 'eo-fork-' + ts + '-' + Math.random().toString(36).slice(2, 8);
+    const path = `/_matrix/client/v3/rooms/${encodeURIComponent(fork.roomId)}/send/${encodeURIComponent(HYDRATION_DIFF_EVENT)}/${txn}`;
+    await mxFetch(path, { method: 'PUT', body: JSON.stringify(event) });
+  }
+  // Refresh cache so the very next render picks up the new events.
+  _invalidateForkEventCache(fork.roomId);
+}
+
+// Save the editor's current state as fork diffs instead of a Xano patch.
+async function saveEditToFork(saveBtn) {
+  if (!currentRec) return;
+  const oldVals = parseValues(currentRec.values);
+  const ops = [];
+  const subject = currentRec.record_id;
+
+  if (editTab === 'json') {
+    let newValues;
+    try {
+      newValues = JSON.parse(document.getElementById('editJson').value);
+    } catch (e) {
+      showToast('Invalid JSON: ' + e.message, 'error');
+      return;
+    }
+    // Whole-values replace — emit one ALT against the synthetic predicate "values".
+    // The folder treats predicate "values" as a full-tree replacement.
+    ops.push({ op: 'ALT', subject, predicate: 'values', before: JSON.stringify(oldVals), after: JSON.stringify(newValues) });
+  } else {
+    let newHtml;
+    if (editTab === 'wysiwyg' && quillInstance) newHtml = quillInstance.root.innerHTML;
+    else newHtml = document.getElementById('editHtml').value;
+    newHtml = cleanPastedHtml(newHtml);
+
+    const newTitle = document.getElementById('editTitle').value.trim();
+    const newStatus = document.getElementById('editStatus').value;
+    const newTags = document.getElementById('editTags').value.split(',').map(t => t.trim()).filter(Boolean);
+    const newKeywords = document.getElementById('editKeywords').value.split(',').map(t => t.trim()).filter(Boolean);
+
+    const oldContent = extractContent(oldVals) || '';
+    const oldMeta = extractMeta(oldVals);
+
+    if (oldContent !== newHtml) ops.push({ op: 'ALT', subject, predicate: 'current_revision.content', before: oldContent, after: newHtml });
+    if (oldMeta.title !== newTitle) ops.push({ op: 'ALT', subject, predicate: 'meta.title', before: oldMeta.title, after: newTitle });
+    if (oldMeta.status !== newStatus) ops.push({ op: 'ALT', subject, predicate: 'meta.status', before: oldMeta.status, after: newStatus });
+    if (JSON.stringify(oldMeta.tags || []) !== JSON.stringify(newTags)) ops.push({ op: 'ALT', subject, predicate: 'meta.tags', before: JSON.stringify(oldMeta.tags || []), after: JSON.stringify(newTags) });
+    if (JSON.stringify(oldMeta.keywords || []) !== JSON.stringify(newKeywords)) ops.push({ op: 'ALT', subject, predicate: 'meta.keywords', before: JSON.stringify(oldMeta.keywords || []), after: JSON.stringify(newKeywords) });
+  }
+
+  if (ops.length === 0) {
+    showToast('Nothing to save — no changes detected.');
+    isEditing = false;
+    quillInstance = null;
+    loadPage(subject);
+    return;
+  }
+
+  if (saveBtn) {
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Saving to fork…';
+  }
+  try {
+    await emitForkOps(ops);
+    const fork = getCurrentFork();
+    const transparency = fork && fork.meta && fork.meta.transparency;
+    showToast(transparency === 'private' ? 'Saved to fork (private — no events emitted)' : 'Saved to fork');
+    isEditing = false;
+    quillInstance = null;
+    loadPage(subject);
+  } catch (e) {
+    console.error('saveEditToFork failed', e);
+    showToast('Save failed: ' + (e.message || e), 'error');
+    if (saveBtn) {
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = '<i class="ph ph-floppy-disk"></i> Save';
+    }
   }
 }
 
