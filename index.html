@@ -5864,28 +5864,32 @@ function setTextSize(size) {
 })();
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   HYDRATION  ▌ one-time canonical snapshot + EO diff stream
+   HYDRATION  ▌ one-time canonical genesis snapshot + canonical diff stream
    ═══════════════════════════════════════════════════════════════════════════
-   Model:
-     1. On the first admin load after this code ships, the current Xano state
-        is exported into a canonical JSON "hydration file" and uploaded ONCE
-        to public storage (Matrix media store now; archive.org via the
-        external uploader app — pass the downloaded file to it).
-     2. A `site:hydration` record is written into Xano so the export is
-        global-idempotent: any future browser load sees it and skips.
-     3. After hydration is published, every logChange() also emits an EO
-        diff event into a per-fork Matrix "diffs" room. The hydration file
-        plus the diff stream is the full forkable history. Anyone with the
-        hydration URI + room access can rebuild current state.
-     4. Forking falls out of the data model: a fork is just a new hydration
-        snapshot whose `fork.parent_uri` points at this one, with its own
-        diff room and transparency level. (Fork UI deferred.)
+   Model (this PR — foundation only):
+     • Xano is canonical. Anonymous viewers always see canonical.
+     • On the first admin load after this ships, the current Xano state is
+       exported into a JSON hydration file and uploaded once to Matrix
+       media (mxc://). That file IS the genesis snapshot all forks anchor to.
+     • A `site:hydration` Xano record stores the genesis URI + sha256 so the
+       export is global-idempotent across browsers.
+     • After publish, every admin logChange() also emits an EO diff event
+       into the canonical diffs Matrix room. Hydration + canonical diffs =
+       the full canonical timeline anyone can replay.
+   Follow-up PRs:
+     • Per-user fork rooms (any logged-in user can fork without admin
+       approval; fork is anchored to canonical-at-fork-start).
+     • Named forks with prominent display + Matrix-native invites with
+       per-user edit levels (viewer / editor / co-owner via power levels).
+     • Render-time fold of fork diffs over canonical, with conflict UX
+       (highlighted spans + modal: take canonical / keep fork / leave visible).
+     • Fork export (JSON / HTML / MD).
    ═══════════════════════════════════════════════════════════════════════════ */
 
 const HYDRATION_RECORD_ID  = 'site:hydration';
 const HYDRATION_DIFF_EVENT = 'org.experientialontology.eo.diff';
 const HYDRATION_SNAP_EVENT = 'org.experientialontology.eo.hydration';
-const HYDRATION_ROOM_NAME  = 'EO Wiki — diffs';
+const HYDRATION_ROOM_NAME  = 'EO Wiki — canonical diffs';
 const HYDRATION_ROOM_LSK   = 'eo_hydration_room';
 const HYDRATION_VERSION    = 1;
 
@@ -5896,7 +5900,7 @@ const HYDRATION_VERSION    = 1;
 const TRANSPARENCY = Object.freeze({ PUBLIC: 'public', PARTIAL: 'partial', PRIVATE: 'private' });
 
 // In-memory cache of the published hydration meta. Null until checked.
-// Shape when set: { uri, sha256, generated_at, fork: { id, parent_uri, transparency }, channel }
+// Shape when set: { uri, sha256, generated_at, canonical: { kind, label, transparency }, channel }
 let hydrationMeta = null;
 let hydrationRoomId = null;
 let _hydrationCheckedOnce = false;
@@ -5916,18 +5920,20 @@ function _stableStringify(value) {
 }
 
 function buildHydrationFile(records, opts = {}) {
-  const fork = {
-    id: opts.forkId || ('fork-' + Date.now().toString(36)),
-    parent_uri: opts.parentUri || null,
-    transparency: opts.transparency || TRANSPARENCY.PUBLIC,
+  // The genesis hydration always describes itself as canonical. User forks
+  // (PR #31) carry their own metadata (name, owner mxid, parent_fork_id,
+  // anchor_hydration_uri) on the fork's room — not on this file.
+  const canonical = {
+    kind: 'canonical',
     label: opts.label || 'EO Wiki canonical',
+    transparency: opts.transparency || TRANSPARENCY.PUBLIC,
   };
   return {
     version: HYDRATION_VERSION,
     kind: 'eo-wiki.hydration',
     generated_at: new Date().toISOString(),
     source: { type: 'xano', endpoint: API + '/get_eowikicurrent' },
-    fork,
+    canonical,
     schema: {
       operators: ['ALT', 'INS', 'NUL', 'REC'],
       operator_meanings: {
@@ -5979,9 +5985,8 @@ async function persistHydrationMeta(meta) {
   }
 }
 
-// Storage adapter A — browser download. Always works. Pipe the downloaded
-// file into the user's archive.org uploader app for public storage.
-function publishHydrationViaDownload(hydration) {
+// Save a backup copy locally. Not a publish — purely for the admin's archive.
+function downloadHydrationBackup(hydration) {
   const blob = new Blob([JSON.stringify(hydration, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -5989,10 +5994,10 @@ function publishHydrationViaDownload(hydration) {
   a.download = `eo-wiki-hydration-${hydration.generated_at.slice(0, 10)}.json`;
   a.click();
   URL.revokeObjectURL(url);
-  return { channel: 'download', uri: `local:${a.download}` };
 }
 
-// Storage adapter B — Matrix media store (mxc://). Same pattern brrst uses.
+// Publish to Matrix media store (mxc://). Same pattern brrst uses. This is
+// the canonical genesis URI all forks anchor against.
 async function publishHydrationViaMatrix(hydration) {
   if (!matrixSession) throw new Error('Matrix session required for media upload');
   const blob = new Blob([JSON.stringify(hydration)], { type: 'application/json' });
@@ -6012,24 +6017,6 @@ async function publishHydrationViaMatrix(hydration) {
   }
   const data = await r.json();
   return { channel: 'matrix-media', uri: data.content_uri }; // mxc://...
-}
-
-// Storage adapter C — Internet Archive (stub). The user has a separate app
-// that handles IA uploads (https://nashvillecommunitysafety.net). The current
-// path is: download the hydration file, then drop it into that uploader.
-// When/if a direct in-browser path is wired, fill this in. The IA S3-compat
-// contract is roughly:
-//   PUT https://s3.us.archive.org/<item>/<filename>
-//   Headers: { 'authorization': 'LOW <accesskey>:<secret>',
-//              'x-amz-auto-make-bucket': '1',
-//              'x-archive-meta-collection': 'opensource',
-//              'x-archive-meta-mediatype': 'data',
-//              'content-type': 'application/json' }
-function publishHydrationViaArchiveOrg(_hydration, _opts) {
-  throw new Error(
-    'archive.org direct upload not wired. Use the Download button and pass the ' +
-    'file to your uploader app at nashvillecommunitysafety.net.'
-  );
 }
 
 async function ensureHydrationRoom() {
@@ -6066,9 +6053,10 @@ async function ensureHydrationRoom() {
 
 async function emitEOdiff(op, subject, predicate, before, after) {
   if (!hydrationMeta) return; // pre-hydration: skip silently. Xano changelog still records it.
-  const transparency = (hydrationMeta.fork && hydrationMeta.fork.transparency) || TRANSPARENCY.PUBLIC;
+  const transparency = (hydrationMeta.canonical && hydrationMeta.canonical.transparency) || TRANSPARENCY.PUBLIC;
   if (transparency === TRANSPARENCY.PRIVATE) return;
-  if (!matrixSession) return; // no auth → no emission
+  if (!matrixSession) return; // no auth → no emission. PR #31 routes user edits to fork rooms.
+  if (!isLoggedIn) return; // canonical room mirrors admin's writes only; user forks come in PR #31.
 
   const ts = Date.now();
   const _trim = v => {
@@ -6081,7 +6069,7 @@ async function emitEOdiff(op, subject, predicate, before, after) {
     body: `${op} ${subject}[${predicate}]`,
     op, subject, predicate, ts,
     hydration_ref: hydrationMeta.uri,
-    fork_id: hydrationMeta.fork ? hydrationMeta.fork.id : null,
+    scope: 'canonical',
   };
   if (transparency === TRANSPARENCY.PUBLIC) {
     event.before = _trim(before);
@@ -6103,64 +6091,52 @@ function _renderHydrationPanel() {
   const body = document.getElementById('hydBody');
   if (!body) return;
   if (hydrationMeta) {
-    const f = hydrationMeta.fork || {};
+    const c = hydrationMeta.canonical || {};
     body.innerHTML = `
       <p><strong>Status:</strong> Published.</p>
       <p style="word-break:break-all;font-family:monospace;font-size:11px;">
         <strong>URI:</strong> ${esc(hydrationMeta.uri || '(none)')}<br>
         <strong>SHA-256:</strong> ${esc(hydrationMeta.sha256 || '(none)')}<br>
         <strong>Generated:</strong> ${esc(hydrationMeta.generated_at || '(none)')}<br>
-        <strong>Fork:</strong> ${esc(f.id || '(none)')} — <em>${esc(f.transparency || 'public')}</em>
+        <strong>Transparency:</strong> <em>${esc(c.transparency || 'public')}</em>
       </p>
       <hr style="opacity:.3;margin:10px 0;">
       <p style="font-size:12px;color:var(--text-tertiary);">
-        Future edits emit EO diff events into the
-        <code>${esc(HYDRATION_ROOM_NAME)}</code> Matrix room (transparency:
-        <strong>${esc(f.transparency || 'public')}</strong>).
+        Future admin edits emit EO diff events into the
+        <code>${esc(HYDRATION_ROOM_NAME)}</code> Matrix room. User forks
+        (coming next) anchor against this snapshot.
       </p>
       <p style="font-size:12px;">
-        <button class="btn" onclick="downloadHydrationFromXano()"><i class="ph ph-download-simple"></i> Re-download snapshot</button>
+        <button class="btn" onclick="downloadHydrationFromXano()"><i class="ph ph-download-simple"></i> Download backup copy</button>
       </p>`;
     return;
   }
   body.innerHTML = `
     <p><strong>Status:</strong> Not yet published.</p>
     <p style="font-size:12px;color:var(--text-tertiary);">
-      Export the current Xano state as a one-time canonical hydration file.
-      This becomes the genesis snapshot. After publishing, every edit also
-      streams as an EO diff into a Matrix room — the wiki becomes forkable
-      from that point forward.
+      Export the current Xano state as the one-time canonical genesis
+      snapshot. Uploaded to Matrix media (mxc://) — durable and shareable.
+      All future admin edits stream as EO diffs into the canonical diffs
+      room; user forks anchor against this snapshot.
     </p>
-    <p style="font-size:12px;">Transparency:
+    <p style="font-size:12px;">Transparency of the canonical diffs room:
       <select id="hydTransparency" style="font-size:12px;padding:4px;">
-        <option value="public" selected>public — full before/after in room</option>
+        <option value="public" selected>public — full before/after</option>
         <option value="partial">partial — op + subject only</option>
         <option value="private">private — no room emission</option>
       </select>
     </p>
+    <p style="font-size:12px;">
+      <label style="display:inline-flex;align-items:center;gap:6px;">
+        <input type="checkbox" id="hydAlsoBackup"> Also save a local backup copy
+      </label>
+    </p>
     <hr style="opacity:.3;margin:10px 0;">
     <p>
-      <button class="btn btn-save" id="hydPubDownloadBtn" onclick="publishHydration('download')">
-        <i class="ph ph-download-simple"></i> Build &amp; download
-      </button>
-    </p>
-    <p>
-      <button class="btn" id="hydPubMatrixBtn" onclick="publishHydration('matrix')" ${matrixSession ? '' : 'disabled'}>
-        <i class="ph ph-cloud-arrow-up"></i> Build &amp; upload to Matrix media
+      <button class="btn btn-save" id="hydPubMatrixBtn" onclick="publishHydration()" ${matrixSession ? '' : 'disabled'}>
+        <i class="ph ph-cloud-arrow-up"></i> Publish canonical hydration
       </button>
       ${matrixSession ? '' : '<span style="font-size:11px;color:var(--text-tertiary);"> (sign into Matrix to enable)</span>'}
-    </p>
-    <p style="font-size:11px;color:var(--text-tertiary);">
-      For archive.org: download the file, then upload it via your
-      uploader app at <code>nashvillecommunitysafety.net</code>. Once stored,
-      paste the resulting <code>https://archive.org/...</code> URI back here
-      to update the canonical reference.
-    </p>
-    <p style="font-size:12px;">
-      <input type="text" id="hydArchiveUri" placeholder="https://archive.org/download/..." style="width:100%;font-size:11px;padding:5px;">
-      <button class="btn" onclick="setHydrationArchiveUri()" style="margin-top:6px;">
-        <i class="ph ph-link"></i> Save archive.org URI
-      </button>
     </p>`;
 }
 
@@ -6175,70 +6151,48 @@ function closeHydrationPanel() {
   if (p) p.classList.remove('open');
 }
 
-async function publishHydration(channel) {
+async function publishHydration() {
   if (!isLoggedIn) { showToast('Admin only', 'error'); return; }
+  if (!matrixSession) { showToast('Sign into Matrix to upload', 'error'); return; }
   const transparency = (document.getElementById('hydTransparency') || {}).value || TRANSPARENCY.PUBLIC;
-  const dlBtn = document.getElementById('hydPubDownloadBtn');
-  const mxBtn = document.getElementById('hydPubMatrixBtn');
-  if (dlBtn) dlBtn.disabled = true;
-  if (mxBtn) mxBtn.disabled = true;
+  const alsoBackup = !!(document.getElementById('hydAlsoBackup') || {}).checked;
+  const btn = document.getElementById('hydPubMatrixBtn');
+  if (btn) btn.disabled = true;
   try {
     // Snapshot strips out the prior hydration record itself so the file is genesis-clean.
     const recordsForSnapshot = (allRecords || []).filter(r => r.record_id !== HYDRATION_RECORD_ID);
     const hydration = buildHydrationFile(recordsForSnapshot, { transparency });
     const sha = await _sha256Hex(_stableStringify(hydration));
-    let result;
-    if (channel === 'matrix') result = await publishHydrationViaMatrix(hydration);
-    else                      result = publishHydrationViaDownload(hydration);
+    const result = await publishHydrationViaMatrix(hydration);
+    if (alsoBackup) downloadHydrationBackup(hydration);
     const meta = {
       uri: result.uri,
       sha256: sha,
       generated_at: hydration.generated_at,
-      fork: hydration.fork,
+      canonical: hydration.canonical,
       channel: result.channel,
     };
     await persistHydrationMeta(meta);
     _updateHydrationBadge();
     _renderHydrationPanel();
-    showToast(`Hydration published via ${result.channel}`);
+    showToast('Canonical hydration published');
   } catch (e) {
     console.error('publishHydration failed', e);
     showToast('Publish failed: ' + (e.message || e), 'error');
   } finally {
-    if (dlBtn) dlBtn.disabled = false;
-    if (mxBtn) mxBtn.disabled = !matrixSession;
+    if (btn) btn.disabled = !matrixSession;
   }
 }
 
-async function setHydrationArchiveUri() {
-  const input = document.getElementById('hydArchiveUri');
-  const uri = input && input.value.trim();
-  if (!uri) { showToast('Enter an archive.org URI first', 'error'); return; }
-  if (!/^https?:\/\//i.test(uri)) { showToast('Must be an http(s) URI', 'error'); return; }
-  const meta = hydrationMeta || {
-    uri, sha256: null, generated_at: new Date().toISOString(),
-    fork: { id: 'fork-archive-' + Date.now().toString(36), parent_uri: null, transparency: TRANSPARENCY.PUBLIC },
-    channel: 'archive-org',
-  };
-  meta.uri = uri;
-  meta.channel = 'archive-org';
-  await persistHydrationMeta(meta);
-  _updateHydrationBadge();
-  _renderHydrationPanel();
-  showToast('Archive.org URI saved as canonical hydration reference.');
-}
-
 async function downloadHydrationFromXano() {
-  // Re-emits the current snapshot using the existing fork/transparency settings.
   if (!hydrationMeta) return;
   const recordsForSnapshot = (allRecords || []).filter(r => r.record_id !== HYDRATION_RECORD_ID);
+  const c = hydrationMeta.canonical || {};
   const hydration = buildHydrationFile(recordsForSnapshot, {
-    forkId: hydrationMeta.fork && hydrationMeta.fork.id,
-    parentUri: hydrationMeta.uri,
-    transparency: hydrationMeta.fork && hydrationMeta.fork.transparency,
-    label: hydrationMeta.fork && hydrationMeta.fork.label,
+    transparency: c.transparency,
+    label: c.label,
   });
-  publishHydrationViaDownload(hydration);
+  downloadHydrationBackup(hydration);
 }
 
 function _updateHydrationBadge() {
