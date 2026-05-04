@@ -2208,6 +2208,10 @@
       <button class="nav-login-btn" id="downloadAllBtn" onclick="downloadAllAsMarkdown()" title="Download all articles as Markdown">
         <i class="ph ph-download-simple"></i>
       </button>
+      <button class="nav-login-btn" id="hydBtnHeader" style="display:none;" onclick="openHydrationPanel(); event.stopPropagation();" title="Hydration export">
+        <i class="ph ph-database"></i>
+        <span class="sg-badge" id="hydBadge" style="display:none;">!</span>
+      </button>
       <div class="settings-bar">
         <button class="settings-btn" id="darkModeBtn" onclick="toggleDarkMode()" title="Toggle dark mode">
           <i class="ph ph-moon"></i>
@@ -2405,6 +2409,16 @@
   </div>
   <div class="cl-list" id="clList">
     <div class="cl-empty">Load changelog to see history.</div>
+  </div>
+</div>
+
+<div class="cl-panel" id="hydPanel">
+  <div class="cl-header">
+    <h3><i class="ph ph-database"></i> Hydration</h3>
+    <button class="cl-close" onclick="closeHydrationPanel()"><i class="ph ph-x"></i></button>
+  </div>
+  <div class="cl-list" id="hydBody" style="padding:14px;font-size:13px;line-height:1.5;">
+    <div class="cl-empty">Loading…</div>
   </div>
 </div>
 
@@ -2646,6 +2660,8 @@ function logChange(recordId, field, before, after, op = 'ALT') {
   const val = typeof after === 'string' ? after.slice(0, 5000) : JSON.stringify(after).slice(0, 5000);
   // Fire and forget — don't block saves
   postChangeLog(op, recordId, field, val, ctx);
+  // Mirror as an EO diff event in the hydration room (no-op if not yet published).
+  try { emitEOdiff(op, recordId, field, before, after); } catch (e) { console.warn('EO diff emit failed', e); }
 }
 
 /* ═══════════════════════
@@ -2966,10 +2982,13 @@ function applyLoggedOutUI() {
   document.getElementById('beBtnHeader').style.display = 'none';
   const sgBtn = document.getElementById('sgBtnHeader');
   if (sgBtn) sgBtn.style.display = 'none';
+  const hydBtn = document.getElementById('hydBtnHeader');
+  if (hydBtn) hydBtn.style.display = 'none';
   closeSR();
   closeChangelog();
   closeBulkEdit();
   closeSuggestions();
+  closeHydrationPanel();
   currentFilter = 'all';
   currentTag = null;
   document.querySelectorAll('.nav-status-row .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
@@ -3001,6 +3020,8 @@ function applyAdminUI() {
   document.getElementById('beBtnHeader').style.display = '';
   const sgBtn = document.getElementById('sgBtnHeader');
   if (sgBtn) sgBtn.style.display = '';
+  const hydBtn = document.getElementById('hydBtnHeader');
+  if (hydBtn) hydBtn.style.display = '';
   renderTagButtons();
   renderList();
   renderGetStarted();
@@ -5842,6 +5863,352 @@ function setTextSize(size) {
   setTextSize(size);
 })();
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   HYDRATION  ▌ one-time canonical genesis snapshot + canonical diff stream
+   ═══════════════════════════════════════════════════════════════════════════
+   Model (this PR — foundation only):
+     • Xano is canonical. Anonymous viewers always see canonical.
+     • On the first admin load after this ships, the current Xano state is
+       exported into a JSON hydration file and uploaded once to Matrix
+       media (mxc://). That file IS the genesis snapshot all forks anchor to.
+     • A `site:hydration` Xano record stores the genesis URI + sha256 so the
+       export is global-idempotent across browsers.
+     • After publish, every admin logChange() also emits an EO diff event
+       into the canonical diffs Matrix room. Hydration + canonical diffs =
+       the full canonical timeline anyone can replay.
+   Follow-up PRs:
+     • Per-user fork rooms (any logged-in user can fork without admin
+       approval; fork is anchored to canonical-at-fork-start).
+     • Named forks with prominent display + Matrix-native invites with
+       per-user edit levels (viewer / editor / co-owner via power levels).
+     • Render-time fold of fork diffs over canonical, with conflict UX
+       (highlighted spans + modal: take canonical / keep fork / leave visible).
+     • Fork export (JSON / HTML / MD).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+const HYDRATION_RECORD_ID  = 'site:hydration';
+const HYDRATION_DIFF_EVENT = 'org.experientialontology.eo.diff';
+const HYDRATION_SNAP_EVENT = 'org.experientialontology.eo.hydration';
+const HYDRATION_ROOM_NAME  = 'EO Wiki — canonical diffs';
+const HYDRATION_ROOM_LSK   = 'eo_hydration_room';
+const HYDRATION_VERSION    = 1;
+
+// Transparency knob — controls how much detail is mirrored to the diff room.
+//   public  → full payloads (op + subject + predicate + before + after)
+//   partial → headers only  (op + subject + predicate; before/after stripped)
+//   private → no room emission at all
+const TRANSPARENCY = Object.freeze({ PUBLIC: 'public', PARTIAL: 'partial', PRIVATE: 'private' });
+
+// In-memory cache of the published hydration meta. Null until checked.
+// Shape when set: { uri, sha256, generated_at, canonical: { kind, label, transparency }, channel }
+let hydrationMeta = null;
+let hydrationRoomId = null;
+let _hydrationCheckedOnce = false;
+
+async function _sha256Hex(str) {
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// Stable JSON: sort keys so the digest doesn't churn on key order.
+function _stableStringify(value) {
+  if (value === null || typeof value !== 'object') return JSON.stringify(value);
+  if (Array.isArray(value)) return '[' + value.map(_stableStringify).join(',') + ']';
+  const keys = Object.keys(value).sort();
+  return '{' + keys.map(k => JSON.stringify(k) + ':' + _stableStringify(value[k])).join(',') + '}';
+}
+
+function buildHydrationFile(records, opts = {}) {
+  // The genesis hydration always describes itself as canonical. User forks
+  // (PR #31) carry their own metadata (name, owner mxid, parent_fork_id,
+  // anchor_hydration_uri) on the fork's room — not on this file.
+  const canonical = {
+    kind: 'canonical',
+    label: opts.label || 'EO Wiki canonical',
+    transparency: opts.transparency || TRANSPARENCY.PUBLIC,
+  };
+  return {
+    version: HYDRATION_VERSION,
+    kind: 'eo-wiki.hydration',
+    generated_at: new Date().toISOString(),
+    source: { type: 'xano', endpoint: API + '/get_eowikicurrent' },
+    canonical,
+    schema: {
+      operators: ['ALT', 'INS', 'NUL', 'REC'],
+      operator_meanings: {
+        ALT: 'alter (edit existing field)',
+        INS: 'instantiate (create record)',
+        NUL: 'nullify (delete record)',
+        REC: 'recover (revert to prior value)',
+      },
+      diff_event_type: HYDRATION_DIFF_EVENT,
+      predicate_format: 'dot.path within record values (e.g. "meta.title", "current_revision.content")',
+    },
+    records,
+  };
+}
+
+async function loadHydrationMeta() {
+  if (_hydrationCheckedOnce && hydrationMeta) return hydrationMeta;
+  _hydrationCheckedOnce = true;
+  // First: pull from in-memory allRecords if already loaded (cheap path).
+  let rec = (allRecords || []).find(r => r.record_id === HYDRATION_RECORD_ID);
+  if (!rec) {
+    // Fall back to a direct fetch in case the record exists but isn't in the index yet.
+    try {
+      const list = await fetch(`${API}/get_eowikicurrent?record_id=${encodeURIComponent(HYDRATION_RECORD_ID)}`)
+        .then(r => r.ok ? r.json() : null).catch(() => null);
+      const items = list && (list.items || list);
+      rec = Array.isArray(items) ? items.find(r => r.record_id === HYDRATION_RECORD_ID) : null;
+    } catch {}
+  }
+  if (!rec) return null;
+  const vals = parseValues(rec.values);
+  hydrationMeta = vals && vals.hydration ? vals.hydration : (vals && vals.uri ? vals : null);
+  return hydrationMeta;
+}
+
+async function persistHydrationMeta(meta) {
+  hydrationMeta = meta;
+  if (!adminPassword) return; // can't write without admin
+  const existing = (allRecords || []).find(r => r.record_id === HYDRATION_RECORD_ID);
+  const values = JSON.stringify({ hydration: meta });
+  try {
+    if (existing) {
+      await patchRecord(existing.id, { values });
+    } else {
+      await postRecord({ record_id: HYDRATION_RECORD_ID, displayName: 'Hydration', values });
+    }
+  } catch (e) {
+    console.warn('persistHydrationMeta failed (will still work locally)', e);
+  }
+}
+
+// Save a backup copy locally. Not a publish — purely for the admin's archive.
+function downloadHydrationBackup(hydration) {
+  const blob = new Blob([JSON.stringify(hydration, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `eo-wiki-hydration-${hydration.generated_at.slice(0, 10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+// Publish to Matrix media store (mxc://). Same pattern brrst uses. This is
+// the canonical genesis URI all forks anchor against.
+async function publishHydrationViaMatrix(hydration) {
+  if (!matrixSession) throw new Error('Matrix session required for media upload');
+  const blob = new Blob([JSON.stringify(hydration)], { type: 'application/json' });
+  const url = matrixSession.homeserver.replace(/\/$/, '') +
+              '/_matrix/media/v3/upload?filename=eo-wiki-hydration.json';
+  const r = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + matrixSession.accessToken,
+    },
+    body: blob,
+  });
+  if (!r.ok) {
+    const err = await r.json().catch(() => ({}));
+    throw new Error(err.error || `Matrix upload failed (${r.status})`);
+  }
+  const data = await r.json();
+  return { channel: 'matrix-media', uri: data.content_uri }; // mxc://...
+}
+
+async function ensureHydrationRoom() {
+  if (hydrationRoomId) return hydrationRoomId;
+  if (!matrixSession) throw new Error('Matrix session required');
+  const cached = localStorage.getItem(HYDRATION_ROOM_LSK);
+  if (cached) { hydrationRoomId = cached; return hydrationRoomId; }
+  // Look for an existing room by name in joined rooms.
+  try {
+    const joined = await mxJoinedRooms();
+    for (const rid of joined) {
+      const name = await mxRoomName(rid).catch(() => '');
+      if (name === HYDRATION_ROOM_NAME) {
+        hydrationRoomId = rid;
+        localStorage.setItem(HYDRATION_ROOM_LSK, rid);
+        return rid;
+      }
+    }
+  } catch {}
+  // Create a public room so anyone with the link can audit the diffs.
+  const created = await mxFetch('/_matrix/client/v3/createRoom', {
+    method: 'POST',
+    body: JSON.stringify({
+      preset: 'public_chat',
+      visibility: 'public',
+      name: HYDRATION_ROOM_NAME,
+      topic: 'EO Wiki — canonical EO diff stream against the published hydration snapshot.',
+    }),
+  });
+  hydrationRoomId = created.room_id;
+  localStorage.setItem(HYDRATION_ROOM_LSK, hydrationRoomId);
+  return hydrationRoomId;
+}
+
+async function emitEOdiff(op, subject, predicate, before, after) {
+  if (!hydrationMeta) return; // pre-hydration: skip silently. Xano changelog still records it.
+  const transparency = (hydrationMeta.canonical && hydrationMeta.canonical.transparency) || TRANSPARENCY.PUBLIC;
+  if (transparency === TRANSPARENCY.PRIVATE) return;
+  if (!matrixSession) return; // no auth → no emission. PR #31 routes user edits to fork rooms.
+  if (!isLoggedIn) return; // canonical room mirrors admin's writes only; user forks come in PR #31.
+
+  const ts = Date.now();
+  const _trim = v => {
+    if (v == null) return v;
+    const s = typeof v === 'string' ? v : JSON.stringify(v);
+    return s.length > 8000 ? s.slice(0, 8000) + '…[truncated]' : s;
+  };
+  const event = {
+    msgtype: HYDRATION_DIFF_EVENT,
+    body: `${op} ${subject}[${predicate}]`,
+    op, subject, predicate, ts,
+    hydration_ref: hydrationMeta.uri,
+    scope: 'canonical',
+  };
+  if (transparency === TRANSPARENCY.PUBLIC) {
+    event.before = _trim(before);
+    event.after  = _trim(after);
+  }
+
+  try {
+    const rid = await ensureHydrationRoom();
+    const txn = 'eo-diff-' + ts + '-' + Math.random().toString(36).slice(2, 8);
+    const path = `/_matrix/client/v3/rooms/${encodeURIComponent(rid)}/send/${encodeURIComponent(HYDRATION_DIFF_EVENT)}/${txn}`;
+    await mxFetch(path, { method: 'PUT', body: JSON.stringify(event) });
+  } catch (e) {
+    console.warn('EO diff room emit failed', e);
+  }
+}
+
+// Render the admin hydration panel.
+function _renderHydrationPanel() {
+  const body = document.getElementById('hydBody');
+  if (!body) return;
+  if (hydrationMeta) {
+    const c = hydrationMeta.canonical || {};
+    body.innerHTML = `
+      <p><strong>Status:</strong> Published.</p>
+      <p style="word-break:break-all;font-family:monospace;font-size:11px;">
+        <strong>URI:</strong> ${esc(hydrationMeta.uri || '(none)')}<br>
+        <strong>SHA-256:</strong> ${esc(hydrationMeta.sha256 || '(none)')}<br>
+        <strong>Generated:</strong> ${esc(hydrationMeta.generated_at || '(none)')}<br>
+        <strong>Transparency:</strong> <em>${esc(c.transparency || 'public')}</em>
+      </p>
+      <hr style="opacity:.3;margin:10px 0;">
+      <p style="font-size:12px;color:var(--text-tertiary);">
+        Future admin edits emit EO diff events into the
+        <code>${esc(HYDRATION_ROOM_NAME)}</code> Matrix room. User forks
+        (coming next) anchor against this snapshot.
+      </p>
+      <p style="font-size:12px;">
+        <button class="btn" onclick="downloadHydrationFromXano()"><i class="ph ph-download-simple"></i> Download backup copy</button>
+      </p>`;
+    return;
+  }
+  body.innerHTML = `
+    <p><strong>Status:</strong> Not yet published.</p>
+    <p style="font-size:12px;color:var(--text-tertiary);">
+      Export the current Xano state as the one-time canonical genesis
+      snapshot. Uploaded to Matrix media (mxc://) — durable and shareable.
+      All future admin edits stream as EO diffs into the canonical diffs
+      room; user forks anchor against this snapshot.
+    </p>
+    <p style="font-size:12px;">Transparency of the canonical diffs room:
+      <select id="hydTransparency" style="font-size:12px;padding:4px;">
+        <option value="public" selected>public — full before/after</option>
+        <option value="partial">partial — op + subject only</option>
+        <option value="private">private — no room emission</option>
+      </select>
+    </p>
+    <p style="font-size:12px;">
+      <label style="display:inline-flex;align-items:center;gap:6px;">
+        <input type="checkbox" id="hydAlsoBackup"> Also save a local backup copy
+      </label>
+    </p>
+    <hr style="opacity:.3;margin:10px 0;">
+    <p>
+      <button class="btn btn-save" id="hydPubMatrixBtn" onclick="publishHydration()" ${matrixSession ? '' : 'disabled'}>
+        <i class="ph ph-cloud-arrow-up"></i> Publish canonical hydration
+      </button>
+      ${matrixSession ? '' : '<span style="font-size:11px;color:var(--text-tertiary);"> (sign into Matrix to enable)</span>'}
+    </p>`;
+}
+
+function openHydrationPanel() {
+  const p = document.getElementById('hydPanel');
+  if (p) p.classList.add('open');
+  _renderHydrationPanel();
+}
+
+function closeHydrationPanel() {
+  const p = document.getElementById('hydPanel');
+  if (p) p.classList.remove('open');
+}
+
+async function publishHydration() {
+  if (!isLoggedIn) { showToast('Admin only', 'error'); return; }
+  if (!matrixSession) { showToast('Sign into Matrix to upload', 'error'); return; }
+  const transparency = (document.getElementById('hydTransparency') || {}).value || TRANSPARENCY.PUBLIC;
+  const alsoBackup = !!(document.getElementById('hydAlsoBackup') || {}).checked;
+  const btn = document.getElementById('hydPubMatrixBtn');
+  if (btn) btn.disabled = true;
+  try {
+    // Snapshot strips out the prior hydration record itself so the file is genesis-clean.
+    const recordsForSnapshot = (allRecords || []).filter(r => r.record_id !== HYDRATION_RECORD_ID);
+    const hydration = buildHydrationFile(recordsForSnapshot, { transparency });
+    const sha = await _sha256Hex(_stableStringify(hydration));
+    const result = await publishHydrationViaMatrix(hydration);
+    if (alsoBackup) downloadHydrationBackup(hydration);
+    const meta = {
+      uri: result.uri,
+      sha256: sha,
+      generated_at: hydration.generated_at,
+      canonical: hydration.canonical,
+      channel: result.channel,
+    };
+    await persistHydrationMeta(meta);
+    _updateHydrationBadge();
+    _renderHydrationPanel();
+    showToast('Canonical hydration published');
+  } catch (e) {
+    console.error('publishHydration failed', e);
+    showToast('Publish failed: ' + (e.message || e), 'error');
+  } finally {
+    if (btn) btn.disabled = !matrixSession;
+  }
+}
+
+async function downloadHydrationFromXano() {
+  if (!hydrationMeta) return;
+  const recordsForSnapshot = (allRecords || []).filter(r => r.record_id !== HYDRATION_RECORD_ID);
+  const c = hydrationMeta.canonical || {};
+  const hydration = buildHydrationFile(recordsForSnapshot, {
+    transparency: c.transparency,
+    label: c.label,
+  });
+  downloadHydrationBackup(hydration);
+}
+
+function _updateHydrationBadge() {
+  const badge = document.getElementById('hydBadge');
+  if (!badge) return;
+  badge.style.display = (isLoggedIn && !hydrationMeta) ? '' : 'none';
+}
+
+async function bootstrapHydrationOnLoad() {
+  await loadHydrationMeta();
+  _updateHydrationBadge();
+  if (isLoggedIn && !hydrationMeta) {
+    showToast('No hydration snapshot yet — open the Hydration panel to publish one.');
+  }
+}
+
 /* ═══════════════════════
    INIT
    ═══════════════════════ */
@@ -5908,6 +6275,8 @@ startMeaningCycle();
     renderGetStarted();
     // Honor initial #hash deep-link (e.g. ?/#wiki:emanon) after data is ready.
     if (location.hash && location.hash.length > 1) routeFromHash();
+    // Resolve hydration state (silent for non-admins; nudges admin if missing).
+    bootstrapHydrationOnLoad().catch(e => console.warn('hydration bootstrap', e));
   } catch (err) {
     document.getElementById('navList').innerHTML = `<div class="error">Failed to load: ${esc(err.message)}</div>`;
   }
