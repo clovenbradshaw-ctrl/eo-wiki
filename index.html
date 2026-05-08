@@ -2165,10 +2165,14 @@
     background: var(--bg-code-inline);
     color: var(--holon);
   }
-  .cl-op.op-ALT { color: var(--emanon); }
   .cl-op.op-INS { color: #2d8a4e; }
-  .cl-op.op-NUL { color: var(--protogon); }
+  .cl-op.op-SEG { color: #7c5295; }
+  .cl-op.op-CON { color: #3a7ca5; }
+  .cl-op.op-SYN { color: #b85c38; }
+  .cl-op.op-DEF { color: var(--emanon); }
+  .cl-op.op-EVA { color: #2a7a62; }
   .cl-op.op-REC { color: var(--holon); }
+  .cl-op.op-NUL { color: var(--protogon); }
   .cl-subject {
     font-size: 12px;
     font-weight: 500;
@@ -2951,7 +2955,7 @@ async function fetchChangeLog(subject) {
  * @param {*} after - new value
  * @param {string} op - EO operator: ALT (edit), INS (create), NUL (delete), REC (revert)
  */
-function logChange(recordId, field, before, after, op = 'ALT') {
+function logChange(recordId, field, before, after, op = 'DEF') {
   const ctx = JSON.stringify({
     before: typeof before === 'string' ? before : JSON.stringify(before),
     after: typeof after === 'string' ? after : JSON.stringify(after),
@@ -3408,37 +3412,44 @@ let _canonicalIndexEntries = [];
 // Build entries + records for any INS events in the fork. Each new article
 // shows up in both the nav (`indexEntries`) and the article cache
 // (`allRecords`) with a synthetic numeric id so loadPage's lookups still work.
+// INS at record-level: target is the bare record_id, operand carries the full
+// materialization {record_id, displayName, values}. Withdrawal pole (operand
+// === EO_VOID) means the record is de-instantiated and should be hidden.
 function _foldForkInsRecords(forkEvents) {
   if (!forkEvents || !forkEvents.length) return { records: [], entries: [] };
-  const bySubject = new Map();
+  const byRecord = new Map(); // record_id → {ev, operand} (last wins)
   for (const ev of forkEvents) {
     const c = ev.content || {};
     if (c.op !== 'INS') continue;
-    let after = c.after;
-    if (typeof after === 'string') {
-      try { after = JSON.parse(after); } catch { continue; }
+    if (!c.target) continue;
+    const { record_id, path } = _eoSplitTarget(c.target);
+    if (path) continue; // INS at a sub-field — out of scope here
+    let operand = c.operand;
+    if (typeof operand === 'string' && operand !== EO_VOID && (operand.startsWith('{') || operand.startsWith('['))) {
+      try { operand = JSON.parse(operand); } catch { continue; }
     }
-    if (!after || !after.record_id) continue;
-    bySubject.set(c.subject, { ev, after });
+    byRecord.set(record_id, { ev, operand });
   }
   const records = [];
   const entries = [];
-  for (const [, { ev, after }] of bySubject) {
-    const meta = (after.values && after.values.meta) || {};
+  for (const [record_id, { ev, operand }] of byRecord) {
+    if (operand === EO_VOID) continue; // de-instantiated; don't surface
+    if (!operand || typeof operand !== 'object') continue;
+    const meta = (operand.values && operand.values.meta) || {};
     const synthId = '__fork_' + (ev.event_id || ev.origin_server_ts);
     records.push({
       id: synthId,
-      record_id: after.record_id,
-      displayName: after.displayName || meta.title || after.record_id,
-      values: after.values,
+      record_id,
+      displayName: operand.displayName || meta.title || record_id,
+      values: operand.values,
       _forkOnly: true,
       _forkRoom: currentForkId,
     });
-    const [contentType] = String(after.record_id).split(':');
+    const [contentType] = String(record_id).split(':');
     entries.push({
-      content_id: after.record_id,
+      content_id: record_id,
       content_type: contentType || 'wiki',
-      title: meta.title || after.displayName || after.record_id,
+      title: meta.title || operand.displayName || record_id,
       status: meta.status || 'draft',
       tags: meta.tags || [],
       keywords: meta.keywords || [],
@@ -4240,7 +4251,7 @@ async function saveEdit() {
       const payload = { values: typeof currentRec.values === 'string' ? JSON.stringify(newValues) : newValues };
       const oldVals = parseValues(currentRec.values);
       const updated = await patchRecord(currentRec.id, payload);
-      logChange(currentRec.record_id, 'values', oldVals, newValues, 'ALT');
+      logChange(currentRec.record_id, '', oldVals, newValues, 'REC');
       const idx = allRecords.findIndex(r => r.id === currentRec.id);
       if (idx !== -1) { allRecords[idx] = { ...allRecords[idx], ...updated }; currentRec = allRecords[idx]; }
       showToast('Saved');
@@ -4300,12 +4311,12 @@ async function saveEdit() {
 
     // Log content change
     if (oldContent !== newHtml) {
-      logChange(currentRec.record_id, 'current_revision.content', oldContent, newHtml, 'ALT');
+      logChange(currentRec.record_id, 'current_revision.content', oldContent, newHtml, 'DEF');
     }
     // Log meta changes
-    if (oldMeta.title !== newTitle) logChange(currentRec.record_id, 'meta.title', oldMeta.title, newTitle, 'ALT');
-    if (oldMeta.status !== newStatus) logChange(currentRec.record_id, 'meta.status', oldMeta.status, newStatus, 'ALT');
-    if (JSON.stringify(oldMeta.tags) !== JSON.stringify(newTags)) logChange(currentRec.record_id, 'meta.tags', oldMeta.tags, newTags, 'ALT');
+    if (oldMeta.title !== newTitle) logChange(currentRec.record_id, 'meta.title', oldMeta.title, newTitle, 'DEF');
+    if (oldMeta.status !== newStatus) logChange(currentRec.record_id, 'meta.status', oldMeta.status, newStatus, 'DEF');
+    if (JSON.stringify(oldMeta.tags) !== JSON.stringify(newTags)) logChange(currentRec.record_id, 'meta.tags', oldMeta.tags, newTags, 'DEF');
 
     const idx = allRecords.findIndex(r => r.id === currentRec.id);
     if (idx !== -1) { allRecords[idx] = { ...allRecords[idx], ...updated }; currentRec = allRecords[idx]; }
@@ -4625,7 +4636,7 @@ async function approveSuggestion(idx) {
     const payload = { values: isStringField ? JSON.stringify(after) : after };
     const updated = await patchRecord(numericId, payload);
     // Best-effort changelog entry attributed to the suggester.
-    logChange(s.payload.record_id, 'values', s.payload.before, after, 'ALT');
+    logChange(s.payload.record_id, '', s.payload.before, after, 'REC');
     if (target) {
       Object.assign(target, updated);
       if (currentRec && currentRec.id === target.id) currentRec = target;
@@ -4730,7 +4741,7 @@ async function loadChangelog() {
     return `
       <div class="cl-entry" data-id="${e.id}">
         <div class="cl-entry-head">
-          <span class="cl-op op-${esc(e.op || 'ALT')}">${esc(e.op || 'ALT')}</span>
+          <span class="cl-op op-${esc(e.op || 'DEF')}">${esc(e.op || 'DEF')}</span>
           <span class="cl-subject" title="${esc(e.subject)}">${esc(subjectTitle)}</span>
           <span class="cl-time">${esc(timeStr)}</span>
         </div>
@@ -4787,7 +4798,7 @@ async function previewChange(changeId, event) {
     <div style="padding:16px 20px;">
       <button class="btn" onclick="loadChangelog()" style="margin-bottom:12px;"><i class="ph ph-arrow-left"></i> Back</button>
       <div class="edit-label">Operator</div>
-      <div style="margin-bottom:12px;"><span class="cl-op op-${esc(entry.op || 'ALT')}">${esc(entry.op || 'ALT')}</span> ${esc(entry.subject)} → <code style="font-size:11px;">${esc(entry.predicate)}</code></div>
+      <div style="margin-bottom:12px;"><span class="cl-op op-${esc(entry.op || 'DEF')}">${esc(entry.op || 'DEF')}</span> ${esc(entry.subject)} → <code style="font-size:11px;">${esc(entry.predicate)}</code></div>
       <div class="edit-label">Before</div>
       <pre style="background:var(--bg-code);color:var(--code-text);padding:12px;border-radius:4px;font-size:11px;max-height:200px;overflow:auto;margin-bottom:12px;white-space:pre-wrap;">${esc(truncBefore)}</pre>
       <div class="edit-label">After</div>
@@ -5578,7 +5589,7 @@ async function doBulkExecute() {
 
       // Log the change
       const matchTotal = group.matchCounts.reduce((a, b) => a + b, 0);
-      logChange(group.record_id, 'current_revision.content', group.originalContent, group.newContent, 'ALT');
+      logChange(group.record_id, 'current_revision.content', group.originalContent, group.newContent, 'DEF');
 
       // Update local cache
       const idx = allRecords.findIndex(r => r.id === group.rec.id);
@@ -5801,21 +5812,30 @@ async function pushForkToMerge() {
   if (!events.length) { showToast('No fork events to push'); return; }
 
   // Plan the push: bucket by record_id, classify as create-vs-edit against canonical.
+  // INS at record-level → target is the bare record_id, operand is the full
+  // materialization. We only push record-level creates today; field-level
+  // DEF/REC overlays haven't been carried up yet.
   const canonicalIds = new Set(_canonicalAllRecords.map(r => r.record_id));
-  const insBySubject = new Map();
+  const insByRecord = new Map();
   for (const ev of events) {
     const c = ev.content || {};
-    if (c.op !== 'INS') continue;
-    let after = c.after;
-    if (typeof after === 'string') { try { after = JSON.parse(after); } catch { continue; } }
-    if (!after || !after.record_id) continue;
-    insBySubject.set(c.subject, after);
+    if (c.op !== 'INS' || !c.target) continue;
+    const { record_id, path } = _eoSplitTarget(c.target);
+    if (path) continue;
+    let operand = c.operand;
+    if (typeof operand === 'string' && operand !== EO_VOID && (operand.startsWith('{') || operand.startsWith('['))) {
+      try { operand = JSON.parse(operand); } catch { continue; }
+    }
+    insByRecord.set(record_id, operand);
   }
 
   const newCreates = [];
   const conflicting = [];
-  for (const [subject, after] of insBySubject) {
-    if (canonicalIds.has(after.record_id)) conflicting.push(subject);
+  for (const [record_id, operand] of insByRecord) {
+    if (operand === EO_VOID) continue; // de-instantiated, nothing to push
+    if (!operand || typeof operand !== 'object') continue;
+    const after = { ...operand, record_id: operand.record_id || record_id };
+    if (canonicalIds.has(after.record_id)) conflicting.push(record_id);
     else newCreates.push(after);
   }
 
@@ -5917,23 +5937,17 @@ async function createArticleInFork({ record_id, content_type, slug, title, statu
       availableForks.push({ roomId: created.roomId, meta: created.meta, isOwner: true, isMember: true });
       setCurrentForkId(created.roomId);
     }
-    // setCurrentForkId schedules an async overlay; wait a tick so emitForkOps
+    // setCurrentForkId schedules an async overlay; wait a tick so eoEmit
     // has the right room targeted before sending.
     await Promise.resolve();
   }
 
-  // Emit a single INS op carrying the full record materialization.
-  await emitForkOps([{
-    op: 'INS',
-    subject: record_id,
-    predicate: '_record_',
-    before: null,
-    after: {
-      record_id,
-      displayName: title,
-      values,
-    },
-  }]);
+  // INS at record level: the operand carries the full materialization.
+  await eoEmit.ins(record_id, {
+    record_id,
+    displayName: title,
+    values,
+  });
 
   // Refresh fork events into the in-memory list so the new article appears
   // in the nav and can be opened immediately.
@@ -6569,15 +6583,21 @@ function buildHydrationFile(records, opts = {}) {
     source: { type: 'xano', endpoint: API + '/get_eowikicurrent' },
     canonical,
     schema: {
-      operators: ['ALT', 'INS', 'NUL', 'REC'],
+      operators: ['INS', 'SEG', 'CON', 'SYN', 'DEF', 'EVA', 'REC'],
+      horizon_read: 'NUL',
       operator_meanings: {
-        ALT: 'alter (edit existing field)',
-        INS: 'instantiate (create record)',
-        NUL: 'nullify (delete record)',
-        REC: 'recover (revert to prior value)',
+        INS: 'instantiate / de-instantiate (operand ∅ = withdraw)',
+        SEG: 'draw / dissolve boundary',
+        CON: 'connect / sever',
+        SYN: 'merge / decompose',
+        DEF: 'define / clear value (operand ∅ = clear)',
+        EVA: 'evaluate / set rule',
+        REC: 'reframe / discard frame',
+        NUL: 'horizon read (no emission)',
       },
       diff_event_type: HYDRATION_DIFF_EVENT,
-      predicate_format: 'dot.path within record values (e.g. "meta.title", "current_revision.content")',
+      target_format: 'collection:id[.field.subfield] (e.g. "wiki:emanon", "wiki:emanon.meta.title")',
+      void_pole: '∅',
     },
     records,
   };
@@ -7351,26 +7371,46 @@ function _invalidateForkEventCache(roomId) {
 function foldForkOnRecord(canonicalRec, forkEvents) {
   if (!canonicalRec || !forkEvents || forkEvents.length === 0) return canonicalRec;
   const subject = canonicalRec.record_id;
+
+  // Pick events targeting this record. Targets parse as record_id[.field.path].
+  // INS at record-level is handled elsewhere (synthesizes new records); here
+  // we only fold field-level changes onto an existing canonical record.
   const relevant = forkEvents.filter(ev => {
     const c = ev.content || {};
-    return c.subject === subject && c.op === 'ALT' && c.predicate;
+    if (!c.target) return false;
+    const { record_id } = _eoSplitTarget(c.target);
+    return record_id === subject && (c.op === 'DEF' || c.op === 'REC');
   });
   if (relevant.length === 0) return canonicalRec;
 
   const cloned = { ...canonicalRec };
-  const vals = parseValues(canonicalRec.values);
-  // Apply latest first per (subject, predicate). They're already sorted oldest→newest,
-  // so a simple sequential apply gives last-write-wins.
-  for (const ev of relevant) {
-    const { predicate, after } = ev.content;
-    let parsedAfter = after;
-    // EO diffs serialize complex values as JSON strings; try to parse them back.
-    if (typeof after === 'string' && (after.startsWith('{') || after.startsWith('['))) {
-      try { parsedAfter = JSON.parse(after); } catch {}
+  let vals = parseValues(canonicalRec.values);
+  const _parse = v => {
+    if (typeof v === 'string' && (v.startsWith('{') || v.startsWith('['))) {
+      try { return JSON.parse(v); } catch { return v; }
     }
-    _setByPath(vals, predicate, parsedAfter);
+    return v;
+  };
+
+  // Apply oldest→newest (last-write-wins). REC at record level resets the
+  // frame; DEF at a field path overlays.
+  for (const ev of relevant) {
+    const c = ev.content;
+    const { path } = _eoSplitTarget(c.target);
+    const operand = _parse(c.operand);
+    if (c.op === 'REC' && !path) {
+      // Frame replacement.
+      vals = (operand && typeof operand === 'object') ? operand : vals;
+    } else if (c.op === 'DEF' && path) {
+      if (operand === EO_VOID) {
+        // -1 pole: clear the value. Set to undefined; downstream renders treat
+        // missing fields as cleared.
+        _setByPath(vals, path, undefined);
+      } else {
+        _setByPath(vals, path, operand);
+      }
+    }
   }
-  // Re-serialize to match the on-the-wire shape downstream code expects.
   cloned.values = typeof canonicalRec.values === 'string' ? JSON.stringify(vals) : vals;
   cloned._foldedFromFork = currentForkId;
   return cloned;
@@ -7385,58 +7425,117 @@ async function foldForkOnRecordAsync(canonicalRec) {
   return foldForkOnRecord(canonicalRec, events);
 }
 
-// Emit one or more EO diff events into the current fork room. Each emit is a
-// one-shot Matrix send — failures throw so the save handler can surface them.
-async function emitForkOps(ops) {
+/* ─── EO MODULE: 7-operator emit surface + Horizon read ───
+   The whole module API is seven emitting operators plus one non-emitting
+   Horizon read. Domain specificity lives in the target path and operand,
+   not in method names. See the EO notation spec.
+
+     eoEmit.ins(target, operand)   Instantiate / de-instantiate
+     eoEmit.seg(target, operand)   Draw / dissolve boundary
+     eoEmit.con(target, operand)   Connect / sever
+     eoEmit.syn(target, operand)   Merge / decompose
+     eoEmit.def(target, operand)   Define / clear value
+     eoEmit.eva(target, operand)   Evaluate / set rule
+     eoEmit.rec(target, operand)   Reframe / discard frame
+     eoHorizon.read(target)        NUL — current value at target, no emission
+
+   Target shape: 'collection:id' or 'collection:id.field.subfield'.
+   Operand:      value, related target, EO_VOID for the −1 pole, or a rule.
+   Withdrawal pole (-1): pass EO_VOID as the operand.
+*/
+const EO_EMIT_OPS = ['INS', 'SEG', 'CON', 'SYN', 'DEF', 'EVA', 'REC'];
+const EO_HELIX = ['NUL', 'SIG', 'INS', 'SEG', 'CON', 'SYN', 'DEF', 'EVA', 'REC'];
+const EO_VOID = '∅';
+
+function _eoSplitTarget(target) {
+  // 'wiki:slug.meta.title' → { record_id: 'wiki:slug', path: 'meta.title' }
+  const s = String(target);
+  const dot = s.indexOf('.');
+  if (dot < 0) return { record_id: s, path: '' };
+  return { record_id: s.slice(0, dot), path: s.slice(dot + 1) };
+}
+
+async function _eoSendForkEvent(op, target, operand, before) {
+  if (!EO_EMIT_OPS.includes(op)) throw new Error('Unknown EO operator: ' + op);
   if (!currentForkId) throw new Error('Not on a fork');
   if (!matrixSession) throw new Error('Matrix session required');
   const fork = getCurrentFork();
   if (!fork) throw new Error('Active fork not in registry');
   const transparency = (fork.meta && fork.meta.transparency) || 'public';
-  if (transparency === 'private') {
-    // Private fork: skip emission. State changes still update the local cache so
-    // the user's view reflects their edit, but nothing leaves the browser.
-  }
 
   const _trim = v => {
     if (v == null) return v;
+    if (v === EO_VOID) return v;
     const s = typeof v === 'string' ? v : JSON.stringify(v);
     return s.length > 8000 ? s.slice(0, 8000) + '…[truncated]' : s;
   };
 
-  for (const op of ops) {
-    const ts = Date.now();
-    const event = {
-      msgtype: HYDRATION_DIFF_EVENT,
-      body: `${op.op} ${op.subject}[${op.predicate}]`,
-      op: op.op,
-      subject: op.subject,
-      predicate: op.predicate,
-      ts,
-      hydration_ref: hydrationMeta ? hydrationMeta.uri : null,
-      scope: 'fork',
-      fork_id: fork.roomId,
-    };
-    if (transparency === 'public') {
-      event.before = _trim(op.before);
-      event.after = _trim(op.after);
-    }
-    if (transparency === 'private') continue; // skip the actual send
-
-    const txn = 'eo-fork-' + ts + '-' + Math.random().toString(36).slice(2, 8);
-    const path = `/_matrix/client/v3/rooms/${encodeURIComponent(fork.roomId)}/send/${encodeURIComponent(HYDRATION_DIFF_EVENT)}/${txn}`;
-    await mxFetch(path, { method: 'PUT', body: JSON.stringify(event) });
+  const ts = Date.now();
+  const event = {
+    msgtype: HYDRATION_DIFF_EVENT,
+    body: `${op} ${target}`,
+    op,
+    target,
+    ts,
+    hydration_ref: hydrationMeta ? hydrationMeta.uri : null,
+    scope: 'fork',
+    fork_id: fork.roomId,
+  };
+  if (transparency === 'public') {
+    event.operand = _trim(operand);
+    if (before !== undefined) event.before = _trim(before);
   }
-  // Refresh cache so the very next render picks up the new events.
+
+  if (transparency === 'private') {
+    _invalidateForkEventCache(fork.roomId);
+    return;
+  }
+
+  const txn = 'eo-fork-' + ts + '-' + Math.random().toString(36).slice(2, 8);
+  const path = `/_matrix/client/v3/rooms/${encodeURIComponent(fork.roomId)}/send/${encodeURIComponent(HYDRATION_DIFF_EVENT)}/${txn}`;
+  await mxFetch(path, { method: 'PUT', body: JSON.stringify(event) });
   _invalidateForkEventCache(fork.roomId);
 }
 
-// Save the editor's current state as fork diffs instead of a Xano patch.
+const eoEmit = {
+  ins: (target, operand, before)  => _eoSendForkEvent('INS', target, operand, before),
+  seg: (target, operand, before)  => _eoSendForkEvent('SEG', target, operand, before),
+  con: (target, operand, before)  => _eoSendForkEvent('CON', target, operand, before),
+  syn: (target, operand, before)  => _eoSendForkEvent('SYN', target, operand, before),
+  def: (target, operand, before)  => _eoSendForkEvent('DEF', target, operand, before),
+  eva: (target, operand, before)  => _eoSendForkEvent('EVA', target, operand, before),
+  rec: (target, operand, before)  => _eoSendForkEvent('REC', target, operand, before),
+  // Sequential apply — events serialize so the room receives them in order.
+  batch: async (events) => {
+    for (const e of events) await _eoSendForkEvent(e.op, e.target, e.operand, e.before);
+  },
+};
+
+// Horizon read: walk canonical + active-fork overlay to materialize the
+// current value at `target`. NUL never emits; this is the read primitive.
+const eoHorizon = {
+  read: async (target) => {
+    const { record_id, path } = _eoSplitTarget(target);
+    let rec = allRecords.find(r => r.record_id === record_id);
+    if (!rec) return undefined;
+    if (currentForkId && !rec._forkOnly) {
+      try { rec = await foldForkOnRecordAsync(rec); } catch {}
+    }
+    if (!path) return rec;
+    return _getByPath(parseValues(rec.values), path);
+  },
+};
+
+
+// Save the editor's current state as EO emissions into the active fork room.
+// Per-field changes decompose to DEF events; a raw-JSON tab edit replaces the
+// whole frame (REC). No app-specific verbs — every save is some combination of
+// the seven operators against (record_id.field) targets.
 async function saveEditToFork(saveBtn) {
   if (!currentRec) return;
   const oldVals = parseValues(currentRec.values);
-  const ops = [];
   const subject = currentRec.record_id;
+  const events = [];
 
   if (editTab === 'json') {
     let newValues;
@@ -7446,9 +7545,8 @@ async function saveEditToFork(saveBtn) {
       showToast('Invalid JSON: ' + e.message, 'error');
       return;
     }
-    // Whole-values replace — emit one ALT against the synthetic predicate "values".
-    // The folder treats predicate "values" as a full-tree replacement.
-    ops.push({ op: 'ALT', subject, predicate: 'values', before: JSON.stringify(oldVals), after: JSON.stringify(newValues) });
+    // Raw-JSON edit = frame replacement. REC carries the whole new frame.
+    events.push({ op: 'REC', target: subject, operand: newValues, before: oldVals });
   } else {
     let newHtml;
     if (editTab === 'wysiwyg' && quillInstance) newHtml = quillInstance.root.innerHTML;
@@ -7463,14 +7561,17 @@ async function saveEditToFork(saveBtn) {
     const oldContent = extractContent(oldVals) || '';
     const oldMeta = extractMeta(oldVals);
 
-    if (oldContent !== newHtml) ops.push({ op: 'ALT', subject, predicate: 'current_revision.content', before: oldContent, after: newHtml });
-    if (oldMeta.title !== newTitle) ops.push({ op: 'ALT', subject, predicate: 'meta.title', before: oldMeta.title, after: newTitle });
-    if (oldMeta.status !== newStatus) ops.push({ op: 'ALT', subject, predicate: 'meta.status', before: oldMeta.status, after: newStatus });
-    if (JSON.stringify(oldMeta.tags || []) !== JSON.stringify(newTags)) ops.push({ op: 'ALT', subject, predicate: 'meta.tags', before: JSON.stringify(oldMeta.tags || []), after: JSON.stringify(newTags) });
-    if (JSON.stringify(oldMeta.keywords || []) !== JSON.stringify(newKeywords)) ops.push({ op: 'ALT', subject, predicate: 'meta.keywords', before: JSON.stringify(oldMeta.keywords || []), after: JSON.stringify(newKeywords) });
+    const def = (path, oldVal, newVal) => {
+      events.push({ op: 'DEF', target: subject + '.' + path, operand: newVal, before: oldVal });
+    };
+    if (oldContent !== newHtml) def('current_revision.content', oldContent, newHtml);
+    if (oldMeta.title !== newTitle) def('meta.title', oldMeta.title, newTitle);
+    if (oldMeta.status !== newStatus) def('meta.status', oldMeta.status, newStatus);
+    if (JSON.stringify(oldMeta.tags || []) !== JSON.stringify(newTags)) def('meta.tags', oldMeta.tags || [], newTags);
+    if (JSON.stringify(oldMeta.keywords || []) !== JSON.stringify(newKeywords)) def('meta.keywords', oldMeta.keywords || [], newKeywords);
   }
 
-  if (ops.length === 0) {
+  if (events.length === 0) {
     showToast('Nothing to save — no changes detected.');
     isEditing = false;
     quillInstance = null;
@@ -7483,7 +7584,7 @@ async function saveEditToFork(saveBtn) {
     saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Saving to fork…';
   }
   try {
-    await emitForkOps(ops);
+    await eoEmit.batch(events);
     const fork = getCurrentFork();
     const transparency = fork && fork.meta && fork.meta.transparency;
     showToast(transparency === 'private' ? 'Saved to fork (private — no events emitted)' : 'Saved to fork');
