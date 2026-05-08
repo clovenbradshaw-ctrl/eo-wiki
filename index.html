@@ -1923,7 +1923,20 @@
     .fork-banner { max-width: 1100px; margin-left: 36px; margin-right: 24px; }
   }
   @media (max-width: 768px) {
-    .fork-banner { margin-left: 16px; margin-right: 16px; }
+    .fork-banner {
+      margin: 8px 12px 0;
+      padding: 5px 10px;
+      gap: 8px;
+      font-size: 12px;
+    }
+    .fork-banner .fork-label { display: none; }
+    .fork-banner .fork-name-pill { padding: 3px 9px; font-size: 12px; }
+    .fork-banner .fork-actions { gap: 4px; }
+    .fork-banner .fork-actions .btn {
+      padding: 4px 7px;
+      font-size: 11px;
+    }
+    .fork-banner .btn-text { display: none; }
   }
   .fork-banner.visible { display: flex; }
   .fork-banner.fork-active {
@@ -2152,10 +2165,14 @@
     background: var(--bg-code-inline);
     color: var(--holon);
   }
-  .cl-op.op-ALT { color: var(--emanon); }
   .cl-op.op-INS { color: #2d8a4e; }
-  .cl-op.op-NUL { color: var(--protogon); }
+  .cl-op.op-SEG { color: #7c5295; }
+  .cl-op.op-CON { color: #3a7ca5; }
+  .cl-op.op-SYN { color: #b85c38; }
+  .cl-op.op-DEF { color: var(--emanon); }
+  .cl-op.op-EVA { color: #2a7a62; }
   .cl-op.op-REC { color: var(--holon); }
+  .cl-op.op-NUL { color: var(--protogon); }
   .cl-subject {
     font-size: 12px;
     font-weight: 500;
@@ -2360,6 +2377,13 @@
     .sr-panel { width: 100%; }
     .be-panel { width: 100%; }
     .content-area { padding: 20px 16px 60px; }
+    /* Tighter section/tag rows so the article list doesn't dominate the
+       viewport on mobile. The descriptive subtitle under each section is
+       redundant once the user is on a phone — hide it. */
+    .nav-object { padding: 7px 14px; gap: 8px; }
+    .nav-object-name { font-size: 13px; }
+    .nav-object-subtitle { display: none; }
+    .nav-section-header { padding: 10px 14px 4px; }
   }
 </style>
 </head>
@@ -2443,15 +2467,18 @@
       <i class="ph ph-caret-down" style="font-size:11px;"></i>
     </span>
     <div class="fork-actions" id="forkActions">
-      <button class="btn" id="forkStartBtn" onclick="openCreateForkModal()" style="font-size:12px;padding:5px 10px;">
-        <i class="ph ph-git-branch"></i> Start a fork
+      <button class="btn" id="forkStartBtn" onclick="openCreateForkModal()" style="font-size:12px;padding:5px 10px;" aria-label="Start a fork" title="Start a fork">
+        <i class="ph ph-git-branch"></i> <span class="btn-text">Start a fork</span>
       </button>
-      <button class="btn" id="forkInviteBtn" onclick="openInviteForkModal()" style="display:none;font-size:12px;padding:5px 10px;">
-        <i class="ph ph-user-plus"></i> Invite
+      <button class="btn" id="forkInviteBtn" onclick="openInviteForkModal()" style="display:none;font-size:12px;padding:5px 10px;" aria-label="Invite" title="Invite">
+        <i class="ph ph-user-plus"></i> <span class="btn-text">Invite</span>
+      </button>
+      <button class="btn btn-save" id="forkMergeBtn" onclick="pushForkToMerge()" style="display:none;font-size:12px;padding:5px 10px;" aria-label="Push to merge" title="Push fork content to canonical (admin only)">
+        <i class="ph ph-git-merge"></i> <span class="btn-text">Push to merge</span>
       </button>
       <div class="fork-dl-wrap" id="forkDlWrap" style="display:none;">
-        <button class="btn" id="forkDlBtn" onclick="toggleForkDownloadMenu()" style="font-size:12px;padding:5px 10px;">
-          <i class="ph ph-download-simple"></i> Download <i class="ph ph-caret-down" style="font-size:10px;"></i>
+        <button class="btn" id="forkDlBtn" onclick="toggleForkDownloadMenu()" style="font-size:12px;padding:5px 10px;" aria-label="Download" title="Download">
+          <i class="ph ph-download-simple"></i> <span class="btn-text">Download</span> <i class="ph ph-caret-down" style="font-size:10px;"></i>
         </button>
         <div class="fork-dl-menu" id="forkDlMenu">
           <button onclick="downloadForkAs('json')"><i class="ph ph-brackets-curly"></i> JSON</button>
@@ -2493,12 +2520,12 @@
       </div>
     </div>
     <div id="loginStepAdmin" style="display:none;">
-      <h3>Admin key</h3>
-      <p>Signed in as <span id="loginMxidDisplay" class="login-mxid"></span>. Enter the admin key to enable direct edits.</p>
+      <h3>Admin key (optional)</h3>
+      <p>Signed in as <span id="loginMxidDisplay" class="login-mxid"></span>. Enter the admin key to write to the canonical wiki, or skip — your edits and new articles will live in your own fork.</p>
       <div class="modal-error" id="adminKeyError"></div>
       <input type="password" id="loginAdminKey" placeholder="Admin key" onkeydown="if(event.key==='Enter')doAdminKey()">
       <div class="modal-actions">
-        <button class="btn" onclick="finishLoginAsEditor()">Skip (sign in as editor)</button>
+        <button class="btn" onclick="finishLoginAsEditor()">Skip (continue in fork)</button>
         <button class="btn btn-save" onclick="doAdminKey()"><i class="ph ph-key"></i> Unlock admin</button>
       </div>
     </div>
@@ -2561,7 +2588,10 @@
 
 <div class="new-article-modal" id="newArticleModal">
   <div class="new-article-form">
-    <h3><i class="ph ph-plus-circle"></i> New Article</h3>
+    <h3 id="newArticleHeading"><i class="ph ph-plus-circle"></i> New Article</h3>
+    <div id="newArticleHelp" style="display:none;font-size:12px;color:var(--text-secondary);margin:-4px 0 8px;">
+      Editors can propose a new article; an admin will review it before it goes live.
+    </div>
     <div class="new-article-field">
       <label>Title</label>
       <input type="text" id="newArticleTitle" placeholder="My New Article">
@@ -2925,7 +2955,7 @@ async function fetchChangeLog(subject) {
  * @param {*} after - new value
  * @param {string} op - EO operator: ALT (edit), INS (create), NUL (delete), REC (revert)
  */
-function logChange(recordId, field, before, after, op = 'ALT') {
+function logChange(recordId, field, before, after, op = 'DEF') {
   const ctx = JSON.stringify({
     before: typeof before === 'string' ? before : JSON.stringify(before),
     after: typeof after === 'string' ? after : JSON.stringify(after),
@@ -3181,14 +3211,13 @@ async function doMatrixLogin() {
     const session = await mxLogin(homeserver, user, password);
     matrixSession = session;
     if (document.getElementById('rememberMe').checked) persistMatrixSession();
-    if (isAdminMxid(session.mxid)) {
-      document.getElementById('loginMxidDisplay').textContent = session.mxid;
-      document.getElementById('loginStepMatrix').style.display = 'none';
-      document.getElementById('loginStepAdmin').style.display = '';
-      setTimeout(() => document.getElementById('loginAdminKey').focus(), 60);
-    } else {
-      finishLoginAsEditor();
-    }
+    // Any Matrix user can attempt the admin key. If they have it, they get
+    // canonical write access; if they skip, they continue as an editor and
+    // any new articles they create land in their own fork.
+    document.getElementById('loginMxidDisplay').textContent = session.mxid;
+    document.getElementById('loginStepMatrix').style.display = 'none';
+    document.getElementById('loginStepAdmin').style.display = '';
+    setTimeout(() => document.getElementById('loginAdminKey').focus(), 60);
   } catch (e) {
     errEl.textContent = e.message || 'Sign in failed.';
     errEl.style.display = '';
@@ -3279,12 +3308,21 @@ function applyLoggedOutUI() {
 
 function applyEditorUI() {
   // Editor: signed into Matrix but not admin. UI looks like logged-out except
-  // the article view shows a "Suggest edit" button (handled in renderArticle).
+  // the article view shows a "Suggest edit" button (handled in renderArticle)
+  // and the nav exposes a "Propose new article" button that routes through
+  // the Matrix suggestion pipeline.
   applyLoggedOutUI();
   const loginBtn = document.getElementById('loginBtn');
   loginBtn.title = matrixSession ? matrixSession.mxid : '';
   document.getElementById('loginLabel').textContent = 'log out';
   document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
+  const newBtn = document.getElementById('newBtn');
+  if (newBtn && !currentForkId) {
+    newBtn.style.display = '';
+    newBtn.title = 'Propose new article';
+  }
+  const adminDivider = document.getElementById('adminDivider');
+  if (adminDivider) adminDivider.style.display = '';
 }
 
 function applyAdminUI() {
@@ -3294,7 +3332,9 @@ function applyAdminUI() {
   document.getElementById('loginLabel').textContent = 'log out';
   document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
   document.getElementById('srBtn').style.display = '';
-  document.getElementById('newBtn').style.display = '';
+  const adminNewBtn = document.getElementById('newBtn');
+  adminNewBtn.style.display = '';
+  adminNewBtn.title = 'New Article';
   document.getElementById('adminDivider').style.display = '';
   document.getElementById('clBtnHeader').style.display = '';
   document.getElementById('beBtnHeader').style.display = '';
@@ -3350,6 +3390,106 @@ function buildIndex(records) {
     }
   }
 
+  // Snapshot canonical state so fork overlays can be re-derived non-destructively.
+  _canonicalAllRecords = allRecords.slice();
+  _canonicalIndexEntries = indexEntries.slice();
+
+  // If a fork is active, reapply its overlay on top of the fresh canonical.
+  if (currentForkId) {
+    applyForkOverlayAsync().catch(e => console.warn('fork overlay failed', e));
+    return;
+  }
+
+  renderTagButtons();
+  renderList();
+}
+
+// Canonical snapshots — the fork overlay layers fork-only records on top of
+// these without mutating them, so flipping back to canonical is a pure restore.
+let _canonicalAllRecords = [];
+let _canonicalIndexEntries = [];
+
+// Build entries + records for any INS events in the fork. Each new article
+// shows up in both the nav (`indexEntries`) and the article cache
+// (`allRecords`) with a synthetic numeric id so loadPage's lookups still work.
+// INS at record-level: target is the bare record_id, operand carries the full
+// materialization {record_id, displayName, values}. Withdrawal pole (operand
+// === EO_VOID) means the record is de-instantiated and should be hidden.
+function _foldForkInsRecords(forkEvents) {
+  if (!forkEvents || !forkEvents.length) return { records: [], entries: [] };
+  const byRecord = new Map(); // record_id → {ev, operand} (last wins)
+  for (const ev of forkEvents) {
+    const c = ev.content || {};
+    if (c.op !== 'INS') continue;
+    if (!c.target) continue;
+    const { record_id, path } = _eoSplitTarget(c.target);
+    if (path) continue; // INS at a sub-field — out of scope here
+    let operand = c.operand;
+    if (typeof operand === 'string' && operand !== EO_VOID && (operand.startsWith('{') || operand.startsWith('['))) {
+      try { operand = JSON.parse(operand); } catch { continue; }
+    }
+    byRecord.set(record_id, { ev, operand });
+  }
+  const records = [];
+  const entries = [];
+  for (const [record_id, { ev, operand }] of byRecord) {
+    if (operand === EO_VOID) continue; // de-instantiated; don't surface
+    if (!operand || typeof operand !== 'object') continue;
+    const meta = (operand.values && operand.values.meta) || {};
+    const synthId = '__fork_' + (ev.event_id || ev.origin_server_ts);
+    records.push({
+      id: synthId,
+      record_id,
+      displayName: operand.displayName || meta.title || record_id,
+      values: operand.values,
+      _forkOnly: true,
+      _forkRoom: currentForkId,
+    });
+    const [contentType] = String(record_id).split(':');
+    entries.push({
+      content_id: record_id,
+      content_type: contentType || 'wiki',
+      title: meta.title || operand.displayName || record_id,
+      status: meta.status || 'draft',
+      tags: meta.tags || [],
+      keywords: meta.keywords || [],
+      updated_at: meta.updated_at || (ev.origin_server_ts && new Date(ev.origin_server_ts).toISOString()),
+      _forkOnly: true,
+    });
+  }
+  return { records, entries };
+}
+
+async function applyForkOverlayAsync() {
+  // Reset to canonical, then layer fork-only records on top. Purely additive
+  // for INS today; ALT folds happen at loadPage() time per-record.
+  allRecords = _canonicalAllRecords.slice();
+  indexEntries = _canonicalIndexEntries.slice();
+
+  if (!currentForkId) {
+    renderTagButtons();
+    renderList();
+    return;
+  }
+
+  const fork = getCurrentFork();
+  if (!fork) {
+    renderTagButtons();
+    renderList();
+    return;
+  }
+  try {
+    const events = await _fetchForkEvents(fork.roomId);
+    const { records, entries } = _foldForkInsRecords(events);
+    // Drop any entries whose record_id collides with canonical (canonical wins
+    // for create-name conflicts; the editor sees "already exists" before send).
+    const existingIds = new Set(allRecords.map(r => r.record_id));
+    for (const r of records) if (!existingIds.has(r.record_id)) allRecords.push(r);
+    const existingEntryIds = new Set(indexEntries.map(e => e.content_id));
+    for (const e of entries) if (!existingEntryIds.has(e.content_id)) indexEntries.push(e);
+  } catch (e) {
+    console.warn('fork INS overlay failed', e);
+  }
   renderTagButtons();
   renderList();
 }
@@ -3722,8 +3862,15 @@ function toggleNavCollapse() {
 
 function backToIndex() {
   setHash(null);
-  document.getElementById('nav').classList.remove('toc-mode');
-  document.getElementById('nav').classList.remove('collapsed');
+  const nav = document.getElementById('nav');
+  nav.classList.remove('toc-mode');
+  // On mobile, keep the nav collapsed when returning to the index so the
+  // welcome content is visible without a forest of tag rows pushing it down.
+  if (!window.matchMedia('(max-width: 600px)').matches) {
+    nav.classList.remove('collapsed');
+  } else {
+    nav.classList.add('collapsed');
+  }
   document.getElementById('navTitle').innerHTML = 'EO<span class="eo-meaning" id="navMeaning">' + EO_MEANINGS[meaningIndex] + '</span>';
   startMeaningCycle();
   currentRec = null;
@@ -3785,16 +3932,19 @@ async function loadPage(contentId) {
     return;
   }
 
-  // Fetch fresh from individual endpoint for full content
-  try {
-    const fresh = await fetchRecord(rec.id);
-    // Update local cache
-    const idx = allRecords.findIndex(r => r.id === rec.id);
-    if (idx !== -1) allRecords[idx] = fresh;
-    rec = fresh;
-  } catch (e) {
-    // Fall back to cached version
-    console.warn('Individual fetch failed, using cached:', e.message);
+  // Fetch fresh from individual endpoint for full content. Fork-only records
+  // exist purely as Matrix events, not in Xano, so skip the fetch for them.
+  if (!rec._forkOnly) {
+    try {
+      const fresh = await fetchRecord(rec.id);
+      // Update local cache
+      const idx = allRecords.findIndex(r => r.id === rec.id);
+      if (idx !== -1) allRecords[idx] = fresh;
+      rec = fresh;
+    } catch (e) {
+      // Fall back to cached version
+      console.warn('Individual fetch failed, using cached:', e.message);
+    }
   }
 
   // If a fork is active, layer its EO diffs on top of canonical before render.
@@ -4101,7 +4251,7 @@ async function saveEdit() {
       const payload = { values: typeof currentRec.values === 'string' ? JSON.stringify(newValues) : newValues };
       const oldVals = parseValues(currentRec.values);
       const updated = await patchRecord(currentRec.id, payload);
-      logChange(currentRec.record_id, 'values', oldVals, newValues, 'ALT');
+      logChange(currentRec.record_id, '', oldVals, newValues, 'REC');
       const idx = allRecords.findIndex(r => r.id === currentRec.id);
       if (idx !== -1) { allRecords[idx] = { ...allRecords[idx], ...updated }; currentRec = allRecords[idx]; }
       showToast('Saved');
@@ -4161,12 +4311,12 @@ async function saveEdit() {
 
     // Log content change
     if (oldContent !== newHtml) {
-      logChange(currentRec.record_id, 'current_revision.content', oldContent, newHtml, 'ALT');
+      logChange(currentRec.record_id, 'current_revision.content', oldContent, newHtml, 'DEF');
     }
     // Log meta changes
-    if (oldMeta.title !== newTitle) logChange(currentRec.record_id, 'meta.title', oldMeta.title, newTitle, 'ALT');
-    if (oldMeta.status !== newStatus) logChange(currentRec.record_id, 'meta.status', oldMeta.status, newStatus, 'ALT');
-    if (JSON.stringify(oldMeta.tags) !== JSON.stringify(newTags)) logChange(currentRec.record_id, 'meta.tags', oldMeta.tags, newTags, 'ALT');
+    if (oldMeta.title !== newTitle) logChange(currentRec.record_id, 'meta.title', oldMeta.title, newTitle, 'DEF');
+    if (oldMeta.status !== newStatus) logChange(currentRec.record_id, 'meta.status', oldMeta.status, newStatus, 'DEF');
+    if (JSON.stringify(oldMeta.tags) !== JSON.stringify(newTags)) logChange(currentRec.record_id, 'meta.tags', oldMeta.tags, newTags, 'DEF');
 
     const idx = allRecords.findIndex(r => r.id === currentRec.id);
     if (idx !== -1) { allRecords[idx] = { ...allRecords[idx], ...updated }; currentRec = allRecords[idx]; }
@@ -4486,7 +4636,7 @@ async function approveSuggestion(idx) {
     const payload = { values: isStringField ? JSON.stringify(after) : after };
     const updated = await patchRecord(numericId, payload);
     // Best-effort changelog entry attributed to the suggester.
-    logChange(s.payload.record_id, 'values', s.payload.before, after, 'ALT');
+    logChange(s.payload.record_id, '', s.payload.before, after, 'REC');
     if (target) {
       Object.assign(target, updated);
       if (currentRec && currentRec.id === target.id) currentRec = target;
@@ -4591,7 +4741,7 @@ async function loadChangelog() {
     return `
       <div class="cl-entry" data-id="${e.id}">
         <div class="cl-entry-head">
-          <span class="cl-op op-${esc(e.op || 'ALT')}">${esc(e.op || 'ALT')}</span>
+          <span class="cl-op op-${esc(e.op || 'DEF')}">${esc(e.op || 'DEF')}</span>
           <span class="cl-subject" title="${esc(e.subject)}">${esc(subjectTitle)}</span>
           <span class="cl-time">${esc(timeStr)}</span>
         </div>
@@ -4648,7 +4798,7 @@ async function previewChange(changeId, event) {
     <div style="padding:16px 20px;">
       <button class="btn" onclick="loadChangelog()" style="margin-bottom:12px;"><i class="ph ph-arrow-left"></i> Back</button>
       <div class="edit-label">Operator</div>
-      <div style="margin-bottom:12px;"><span class="cl-op op-${esc(entry.op || 'ALT')}">${esc(entry.op || 'ALT')}</span> ${esc(entry.subject)} → <code style="font-size:11px;">${esc(entry.predicate)}</code></div>
+      <div style="margin-bottom:12px;"><span class="cl-op op-${esc(entry.op || 'DEF')}">${esc(entry.op || 'DEF')}</span> ${esc(entry.subject)} → <code style="font-size:11px;">${esc(entry.predicate)}</code></div>
       <div class="edit-label">Before</div>
       <pre style="background:var(--bg-code);color:var(--code-text);padding:12px;border-radius:4px;font-size:11px;max-height:200px;overflow:auto;margin-bottom:12px;white-space:pre-wrap;">${esc(truncBefore)}</pre>
       <div class="edit-label">After</div>
@@ -5439,7 +5589,7 @@ async function doBulkExecute() {
 
       // Log the change
       const matchTotal = group.matchCounts.reduce((a, b) => a + b, 0);
-      logChange(group.record_id, 'current_revision.content', group.originalContent, group.newContent, 'ALT');
+      logChange(group.record_id, 'current_revision.content', group.originalContent, group.newContent, 'DEF');
 
       // Update local cache
       const idx = allRecords.findIndex(r => r.id === group.rec.id);
@@ -5487,6 +5637,22 @@ function openNewArticle() {
   document.getElementById('newArticleStatus').value = 'draft';
   document.getElementById('newArticleType').value = 'wiki';
   document.getElementById('newArticleError').style.display = 'none';
+  const forkMode = !isLoggedIn && !!matrixSession;
+  const heading = document.getElementById('newArticleHeading');
+  const help = document.getElementById('newArticleHelp');
+  const submitBtn = document.getElementById('newArticleBtn');
+  if (forkMode) {
+    heading.innerHTML = '<i class="ph ph-tree-evergreen"></i> New Article (in your fork)';
+    help.textContent = currentForkId
+      ? 'This article will live in the fork you\'re viewing. An admin can later push it to the canonical wiki.'
+      : 'You don\'t have an admin key, so this article will live in your own fork. We\'ll create one for you if you don\'t have one yet.';
+    help.style.display = '';
+    submitBtn.innerHTML = '<i class="ph ph-tree-evergreen"></i> Create in fork';
+  } else {
+    heading.innerHTML = '<i class="ph ph-plus-circle"></i> New Article';
+    help.style.display = 'none';
+    submitBtn.innerHTML = '<i class="ph ph-plus"></i> Create';
+  }
   setTimeout(() => document.getElementById('newArticleTitle').focus(), 80);
 }
 
@@ -5537,6 +5703,8 @@ async function doCreateArticle() {
     return;
   }
 
+  const forkMode = !isLoggedIn && !!matrixSession;
+
   btn.disabled = true;
   btn.innerHTML = '<i class="ph ph-spinner" style="animation:spin 1s linear infinite;"></i> Creating…';
 
@@ -5554,6 +5722,30 @@ async function doCreateArticle() {
       format: 'html',
     },
   };
+
+  if (forkMode) {
+    try {
+      const newRecordId = await createArticleInFork({
+        record_id: recordId,
+        content_type: contentType,
+        slug,
+        title,
+        status,
+        tags,
+        values,
+      });
+      closeNewArticle();
+      showToast(`Created "${title}" in your fork`);
+      loadPage(newRecordId);
+    } catch (err) {
+      errorEl.textContent = err.message || 'Failed to create article in fork.';
+      errorEl.style.display = '';
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="ph ph-tree-evergreen"></i> Create in fork';
+    }
+    return;
+  }
 
   try {
     // 1. Create the record
@@ -5606,6 +5798,161 @@ async function doCreateArticle() {
     btn.disabled = false;
     btn.innerHTML = '<i class="ph ph-plus"></i> Create';
   }
+}
+
+// Push everything an admin sees in their active fork up to canonical (Xano).
+// Today this only handles INS records — ALT folds happen on read and we
+// re-derive the values at push time so the canonical record reflects them.
+async function pushForkToMerge() {
+  if (!isLoggedIn) { showToast('Admin key required to push to merge', 'error'); return; }
+  if (!currentForkId) { showToast('Switch to a fork first', 'error'); return; }
+  const fork = getCurrentFork();
+  if (!fork) { showToast('Active fork not in registry', 'error'); return; }
+  const events = await _fetchForkEvents(fork.roomId, { force: true });
+  if (!events.length) { showToast('No fork events to push'); return; }
+
+  // Plan the push: bucket by record_id, classify as create-vs-edit against canonical.
+  // INS at record-level → target is the bare record_id, operand is the full
+  // materialization. We only push record-level creates today; field-level
+  // DEF/REC overlays haven't been carried up yet.
+  const canonicalIds = new Set(_canonicalAllRecords.map(r => r.record_id));
+  const insByRecord = new Map();
+  for (const ev of events) {
+    const c = ev.content || {};
+    if (c.op !== 'INS' || !c.target) continue;
+    const { record_id, path } = _eoSplitTarget(c.target);
+    if (path) continue;
+    let operand = c.operand;
+    if (typeof operand === 'string' && operand !== EO_VOID && (operand.startsWith('{') || operand.startsWith('['))) {
+      try { operand = JSON.parse(operand); } catch { continue; }
+    }
+    insByRecord.set(record_id, operand);
+  }
+
+  const newCreates = [];
+  const conflicting = [];
+  for (const [record_id, operand] of insByRecord) {
+    if (operand === EO_VOID) continue; // de-instantiated, nothing to push
+    if (!operand || typeof operand !== 'object') continue;
+    const after = { ...operand, record_id: operand.record_id || record_id };
+    if (canonicalIds.has(after.record_id)) conflicting.push(record_id);
+    else newCreates.push(after);
+  }
+
+  if (!newCreates.length) {
+    if (conflicting.length) {
+      showToast(`Nothing new to push — ${conflicting.length} record(s) already exist canonically.`, 'error');
+    } else {
+      showToast('Fork has no new articles to push.');
+    }
+    return;
+  }
+
+  const summary = newCreates.map(a => '  • ' + a.record_id).join('\n');
+  if (!confirm(`Push ${newCreates.length} new article(s) from "${fork.meta.name}" to canonical?\n\n${summary}`)) return;
+
+  const btn = document.getElementById('forkMergeBtn');
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<i class="ph ph-spinner" style="animation:spin 1s linear infinite;"></i> <span class="btn-text">Pushing…</span>';
+  }
+  try {
+    let pushed = 0;
+    for (const after of newCreates) {
+      const newRec = await postRecord({
+        record_id: after.record_id,
+        displayName: after.displayName || after.record_id,
+        values: typeof after.values === 'string' ? after.values : JSON.stringify(after.values || {}),
+      });
+      _canonicalAllRecords.push(newRec);
+
+      // Add to site:index so the article appears in the canonical nav.
+      const indexRec = _canonicalAllRecords.find(r => r.record_id === 'site:index');
+      if (indexRec) {
+        try {
+          const fresh = await fetchRecord(indexRec.id);
+          const indexVals = parseValues(fresh.values);
+          if (!Array.isArray(indexVals.entries)) indexVals.entries = [];
+          const meta = (after.values && after.values.meta) || {};
+          const [contentType, slug] = String(after.record_id).split(':');
+          indexVals.entries.push({
+            content_id: after.record_id,
+            content_type: contentType || 'wiki',
+            title: meta.title || after.displayName || after.record_id,
+            slug: slug || '',
+            status: meta.status || 'draft',
+            tags: meta.tags || [],
+            keywords: meta.keywords || [],
+            updated_at: meta.updated_at || new Date().toISOString(),
+          });
+          const payload = { values: typeof fresh.values === 'string' ? JSON.stringify(indexVals) : indexVals };
+          await patchRecord(indexRec.id, payload);
+          const idx = _canonicalAllRecords.findIndex(r => r.id === indexRec.id);
+          if (idx !== -1) _canonicalAllRecords[idx].values = payload.values;
+        } catch (e) {
+          console.warn('site:index update failed for', after.record_id, e);
+        }
+      }
+      logChange(after.record_id, 'record', null, after.displayName || after.record_id, 'INS');
+      pushed++;
+    }
+    // Refresh from canonical so the user sees the merged state, then re-overlay
+    // the fork (which will now drop the merged INS-overlays since canonical
+    // owns those record_ids).
+    buildIndex(_canonicalAllRecords);
+    buildSearchIndex();
+    let msg = `Pushed ${pushed} article(s) to canonical`;
+    if (conflicting.length) msg += `; ${conflicting.length} conflicted and were skipped`;
+    showToast(msg);
+  } catch (e) {
+    console.error('pushForkToMerge failed', e);
+    showToast(e.message || 'Push failed', 'error');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="ph ph-git-merge"></i> <span class="btn-text">Push to merge</span>';
+    }
+  }
+}
+
+// Create a brand-new article inside the editor's fork. If they aren't on a
+// fork yet, auto-create a personal one so the article has somewhere to live.
+// Returns the record_id so the caller can navigate to the new article.
+async function createArticleInFork({ record_id, content_type, slug, title, status, tags, values }) {
+  if (!matrixSession) throw new Error('Sign in to create an article in a fork.');
+
+  // Ensure there's an active fork. If the user has none, mint a personal one.
+  if (!currentForkId) {
+    const myForks = availableForks.filter(f => f.isOwner);
+    if (myForks.length) {
+      setCurrentForkId(myForks[0].roomId);
+    } else {
+      const personalName = (matrixSession.mxid.split(':')[0] || 'My') + "'s fork";
+      const created = await createForkRoom({
+        name: personalName,
+        description: 'Personal fork',
+        transparency: 'public',
+        visibility: 'invite',
+      });
+      availableForks.push({ roomId: created.roomId, meta: created.meta, isOwner: true, isMember: true });
+      setCurrentForkId(created.roomId);
+    }
+    // setCurrentForkId schedules an async overlay; wait a tick so eoEmit
+    // has the right room targeted before sending.
+    await Promise.resolve();
+  }
+
+  // INS at record level: the operand carries the full materialization.
+  await eoEmit.ins(record_id, {
+    record_id,
+    displayName: title,
+    values,
+  });
+
+  // Refresh fork events into the in-memory list so the new article appears
+  // in the nav and can be opened immediately.
+  await applyForkOverlayAsync();
+  return record_id;
 }
 
 /* ═══════════════════════
@@ -6236,15 +6583,21 @@ function buildHydrationFile(records, opts = {}) {
     source: { type: 'xano', endpoint: API + '/get_eowikicurrent' },
     canonical,
     schema: {
-      operators: ['ALT', 'INS', 'NUL', 'REC'],
+      operators: ['INS', 'SEG', 'CON', 'SYN', 'DEF', 'EVA', 'REC'],
+      horizon_read: 'NUL',
       operator_meanings: {
-        ALT: 'alter (edit existing field)',
-        INS: 'instantiate (create record)',
-        NUL: 'nullify (delete record)',
-        REC: 'recover (revert to prior value)',
+        INS: 'instantiate / de-instantiate (operand ∅ = withdraw)',
+        SEG: 'draw / dissolve boundary',
+        CON: 'connect / sever',
+        SYN: 'merge / decompose',
+        DEF: 'define / clear value (operand ∅ = clear)',
+        EVA: 'evaluate / set rule',
+        REC: 'reframe / discard frame',
+        NUL: 'horizon read (no emission)',
       },
       diff_event_type: HYDRATION_DIFF_EVENT,
-      predicate_format: 'dot.path within record values (e.g. "meta.title", "current_revision.content")',
+      target_format: 'collection:id[.field.subfield] (e.g. "wiki:emanon", "wiki:emanon.meta.title")',
+      void_pole: '∅',
     },
     records,
   };
@@ -6697,6 +7050,10 @@ function setCurrentForkId(roomId) {
   if (currentForkId) localStorage.setItem(CURRENT_FORK_LSK, currentForkId);
   else localStorage.removeItem(CURRENT_FORK_LSK);
   renderForkBanner();
+  // Re-derive the index list with fork-only records overlaid (or restored to
+  // canonical when leaving a fork). Errors are non-fatal — fall back to
+  // canonical so the user still sees something.
+  applyForkOverlayAsync().catch(e => console.warn('fork overlay failed', e));
   // Re-render the article view if one is open so the Edit button updates its disabled state.
   if (currentRec) loadPage(currentRec.record_id);
 }
@@ -6719,6 +7076,7 @@ function renderForkBanner() {
   const startBtn = document.getElementById('forkStartBtn');
   const icon = document.getElementById('forkBannerIcon');
 
+  const mergeBtn = document.getElementById('forkMergeBtn');
   if (fork) {
     banner.classList.add('fork-active');
     nameText.textContent = fork.meta.name || '(unnamed fork)';
@@ -6727,6 +7085,7 @@ function renderForkBanner() {
     inviteBtn.style.display = fork.isOwner ? '' : 'none';
     dlWrap.style.display = '';
     startBtn.style.display = 'none';
+    if (mergeBtn) mergeBtn.style.display = isLoggedIn ? '' : 'none';
   } else {
     banner.classList.remove('fork-active');
     nameText.textContent = 'Canonical';
@@ -6735,23 +7094,20 @@ function renderForkBanner() {
     inviteBtn.style.display = 'none';
     dlWrap.style.display = 'none';
     startBtn.style.display = '';
+    if (mergeBtn) mergeBtn.style.display = 'none';
   }
   _updateNewButtonForFork();
 }
 
-// New record creation (INS) needs fork-aware list rendering — deferred. Hide
-// the +New button on a fork view so admins don't try to use it expecting a
-// canonical-style flow.
+// Visibility rules for the +New button: shown to any logged-in Matrix user
+// (admin writes canonical, editor writes to their fork as INS events).
 function _updateNewButtonForFork() {
   const newBtn = document.getElementById('newBtn');
   if (!newBtn) return;
-  if (currentForkId) {
-    newBtn.dataset.forkHidden = '1';
+  if (isLoggedIn || matrixSession) {
+    newBtn.style.display = '';
+  } else {
     newBtn.style.display = 'none';
-  } else if (newBtn.dataset.forkHidden) {
-    delete newBtn.dataset.forkHidden;
-    // Restore admin visibility — only show if logged-in admin
-    if (isLoggedIn) newBtn.style.display = '';
   }
 }
 
@@ -7015,26 +7371,46 @@ function _invalidateForkEventCache(roomId) {
 function foldForkOnRecord(canonicalRec, forkEvents) {
   if (!canonicalRec || !forkEvents || forkEvents.length === 0) return canonicalRec;
   const subject = canonicalRec.record_id;
+
+  // Pick events targeting this record. Targets parse as record_id[.field.path].
+  // INS at record-level is handled elsewhere (synthesizes new records); here
+  // we only fold field-level changes onto an existing canonical record.
   const relevant = forkEvents.filter(ev => {
     const c = ev.content || {};
-    return c.subject === subject && c.op === 'ALT' && c.predicate;
+    if (!c.target) return false;
+    const { record_id } = _eoSplitTarget(c.target);
+    return record_id === subject && (c.op === 'DEF' || c.op === 'REC');
   });
   if (relevant.length === 0) return canonicalRec;
 
   const cloned = { ...canonicalRec };
-  const vals = parseValues(canonicalRec.values);
-  // Apply latest first per (subject, predicate). They're already sorted oldest→newest,
-  // so a simple sequential apply gives last-write-wins.
-  for (const ev of relevant) {
-    const { predicate, after } = ev.content;
-    let parsedAfter = after;
-    // EO diffs serialize complex values as JSON strings; try to parse them back.
-    if (typeof after === 'string' && (after.startsWith('{') || after.startsWith('['))) {
-      try { parsedAfter = JSON.parse(after); } catch {}
+  let vals = parseValues(canonicalRec.values);
+  const _parse = v => {
+    if (typeof v === 'string' && (v.startsWith('{') || v.startsWith('['))) {
+      try { return JSON.parse(v); } catch { return v; }
     }
-    _setByPath(vals, predicate, parsedAfter);
+    return v;
+  };
+
+  // Apply oldest→newest (last-write-wins). REC at record level resets the
+  // frame; DEF at a field path overlays.
+  for (const ev of relevant) {
+    const c = ev.content;
+    const { path } = _eoSplitTarget(c.target);
+    const operand = _parse(c.operand);
+    if (c.op === 'REC' && !path) {
+      // Frame replacement.
+      vals = (operand && typeof operand === 'object') ? operand : vals;
+    } else if (c.op === 'DEF' && path) {
+      if (operand === EO_VOID) {
+        // -1 pole: clear the value. Set to undefined; downstream renders treat
+        // missing fields as cleared.
+        _setByPath(vals, path, undefined);
+      } else {
+        _setByPath(vals, path, operand);
+      }
+    }
   }
-  // Re-serialize to match the on-the-wire shape downstream code expects.
   cloned.values = typeof canonicalRec.values === 'string' ? JSON.stringify(vals) : vals;
   cloned._foldedFromFork = currentForkId;
   return cloned;
@@ -7049,58 +7425,117 @@ async function foldForkOnRecordAsync(canonicalRec) {
   return foldForkOnRecord(canonicalRec, events);
 }
 
-// Emit one or more EO diff events into the current fork room. Each emit is a
-// one-shot Matrix send — failures throw so the save handler can surface them.
-async function emitForkOps(ops) {
+/* ─── EO MODULE: 7-operator emit surface + Horizon read ───
+   The whole module API is seven emitting operators plus one non-emitting
+   Horizon read. Domain specificity lives in the target path and operand,
+   not in method names. See the EO notation spec.
+
+     eoEmit.ins(target, operand)   Instantiate / de-instantiate
+     eoEmit.seg(target, operand)   Draw / dissolve boundary
+     eoEmit.con(target, operand)   Connect / sever
+     eoEmit.syn(target, operand)   Merge / decompose
+     eoEmit.def(target, operand)   Define / clear value
+     eoEmit.eva(target, operand)   Evaluate / set rule
+     eoEmit.rec(target, operand)   Reframe / discard frame
+     eoHorizon.read(target)        NUL — current value at target, no emission
+
+   Target shape: 'collection:id' or 'collection:id.field.subfield'.
+   Operand:      value, related target, EO_VOID for the −1 pole, or a rule.
+   Withdrawal pole (-1): pass EO_VOID as the operand.
+*/
+const EO_EMIT_OPS = ['INS', 'SEG', 'CON', 'SYN', 'DEF', 'EVA', 'REC'];
+const EO_HELIX = ['NUL', 'SIG', 'INS', 'SEG', 'CON', 'SYN', 'DEF', 'EVA', 'REC'];
+const EO_VOID = '∅';
+
+function _eoSplitTarget(target) {
+  // 'wiki:slug.meta.title' → { record_id: 'wiki:slug', path: 'meta.title' }
+  const s = String(target);
+  const dot = s.indexOf('.');
+  if (dot < 0) return { record_id: s, path: '' };
+  return { record_id: s.slice(0, dot), path: s.slice(dot + 1) };
+}
+
+async function _eoSendForkEvent(op, target, operand, before) {
+  if (!EO_EMIT_OPS.includes(op)) throw new Error('Unknown EO operator: ' + op);
   if (!currentForkId) throw new Error('Not on a fork');
   if (!matrixSession) throw new Error('Matrix session required');
   const fork = getCurrentFork();
   if (!fork) throw new Error('Active fork not in registry');
   const transparency = (fork.meta && fork.meta.transparency) || 'public';
-  if (transparency === 'private') {
-    // Private fork: skip emission. State changes still update the local cache so
-    // the user's view reflects their edit, but nothing leaves the browser.
-  }
 
   const _trim = v => {
     if (v == null) return v;
+    if (v === EO_VOID) return v;
     const s = typeof v === 'string' ? v : JSON.stringify(v);
     return s.length > 8000 ? s.slice(0, 8000) + '…[truncated]' : s;
   };
 
-  for (const op of ops) {
-    const ts = Date.now();
-    const event = {
-      msgtype: HYDRATION_DIFF_EVENT,
-      body: `${op.op} ${op.subject}[${op.predicate}]`,
-      op: op.op,
-      subject: op.subject,
-      predicate: op.predicate,
-      ts,
-      hydration_ref: hydrationMeta ? hydrationMeta.uri : null,
-      scope: 'fork',
-      fork_id: fork.roomId,
-    };
-    if (transparency === 'public') {
-      event.before = _trim(op.before);
-      event.after = _trim(op.after);
-    }
-    if (transparency === 'private') continue; // skip the actual send
-
-    const txn = 'eo-fork-' + ts + '-' + Math.random().toString(36).slice(2, 8);
-    const path = `/_matrix/client/v3/rooms/${encodeURIComponent(fork.roomId)}/send/${encodeURIComponent(HYDRATION_DIFF_EVENT)}/${txn}`;
-    await mxFetch(path, { method: 'PUT', body: JSON.stringify(event) });
+  const ts = Date.now();
+  const event = {
+    msgtype: HYDRATION_DIFF_EVENT,
+    body: `${op} ${target}`,
+    op,
+    target,
+    ts,
+    hydration_ref: hydrationMeta ? hydrationMeta.uri : null,
+    scope: 'fork',
+    fork_id: fork.roomId,
+  };
+  if (transparency === 'public') {
+    event.operand = _trim(operand);
+    if (before !== undefined) event.before = _trim(before);
   }
-  // Refresh cache so the very next render picks up the new events.
+
+  if (transparency === 'private') {
+    _invalidateForkEventCache(fork.roomId);
+    return;
+  }
+
+  const txn = 'eo-fork-' + ts + '-' + Math.random().toString(36).slice(2, 8);
+  const path = `/_matrix/client/v3/rooms/${encodeURIComponent(fork.roomId)}/send/${encodeURIComponent(HYDRATION_DIFF_EVENT)}/${txn}`;
+  await mxFetch(path, { method: 'PUT', body: JSON.stringify(event) });
   _invalidateForkEventCache(fork.roomId);
 }
 
-// Save the editor's current state as fork diffs instead of a Xano patch.
+const eoEmit = {
+  ins: (target, operand, before)  => _eoSendForkEvent('INS', target, operand, before),
+  seg: (target, operand, before)  => _eoSendForkEvent('SEG', target, operand, before),
+  con: (target, operand, before)  => _eoSendForkEvent('CON', target, operand, before),
+  syn: (target, operand, before)  => _eoSendForkEvent('SYN', target, operand, before),
+  def: (target, operand, before)  => _eoSendForkEvent('DEF', target, operand, before),
+  eva: (target, operand, before)  => _eoSendForkEvent('EVA', target, operand, before),
+  rec: (target, operand, before)  => _eoSendForkEvent('REC', target, operand, before),
+  // Sequential apply — events serialize so the room receives them in order.
+  batch: async (events) => {
+    for (const e of events) await _eoSendForkEvent(e.op, e.target, e.operand, e.before);
+  },
+};
+
+// Horizon read: walk canonical + active-fork overlay to materialize the
+// current value at `target`. NUL never emits; this is the read primitive.
+const eoHorizon = {
+  read: async (target) => {
+    const { record_id, path } = _eoSplitTarget(target);
+    let rec = allRecords.find(r => r.record_id === record_id);
+    if (!rec) return undefined;
+    if (currentForkId && !rec._forkOnly) {
+      try { rec = await foldForkOnRecordAsync(rec); } catch {}
+    }
+    if (!path) return rec;
+    return _getByPath(parseValues(rec.values), path);
+  },
+};
+
+
+// Save the editor's current state as EO emissions into the active fork room.
+// Per-field changes decompose to DEF events; a raw-JSON tab edit replaces the
+// whole frame (REC). No app-specific verbs — every save is some combination of
+// the seven operators against (record_id.field) targets.
 async function saveEditToFork(saveBtn) {
   if (!currentRec) return;
   const oldVals = parseValues(currentRec.values);
-  const ops = [];
   const subject = currentRec.record_id;
+  const events = [];
 
   if (editTab === 'json') {
     let newValues;
@@ -7110,9 +7545,8 @@ async function saveEditToFork(saveBtn) {
       showToast('Invalid JSON: ' + e.message, 'error');
       return;
     }
-    // Whole-values replace — emit one ALT against the synthetic predicate "values".
-    // The folder treats predicate "values" as a full-tree replacement.
-    ops.push({ op: 'ALT', subject, predicate: 'values', before: JSON.stringify(oldVals), after: JSON.stringify(newValues) });
+    // Raw-JSON edit = frame replacement. REC carries the whole new frame.
+    events.push({ op: 'REC', target: subject, operand: newValues, before: oldVals });
   } else {
     let newHtml;
     if (editTab === 'wysiwyg' && quillInstance) newHtml = quillInstance.root.innerHTML;
@@ -7127,14 +7561,17 @@ async function saveEditToFork(saveBtn) {
     const oldContent = extractContent(oldVals) || '';
     const oldMeta = extractMeta(oldVals);
 
-    if (oldContent !== newHtml) ops.push({ op: 'ALT', subject, predicate: 'current_revision.content', before: oldContent, after: newHtml });
-    if (oldMeta.title !== newTitle) ops.push({ op: 'ALT', subject, predicate: 'meta.title', before: oldMeta.title, after: newTitle });
-    if (oldMeta.status !== newStatus) ops.push({ op: 'ALT', subject, predicate: 'meta.status', before: oldMeta.status, after: newStatus });
-    if (JSON.stringify(oldMeta.tags || []) !== JSON.stringify(newTags)) ops.push({ op: 'ALT', subject, predicate: 'meta.tags', before: JSON.stringify(oldMeta.tags || []), after: JSON.stringify(newTags) });
-    if (JSON.stringify(oldMeta.keywords || []) !== JSON.stringify(newKeywords)) ops.push({ op: 'ALT', subject, predicate: 'meta.keywords', before: JSON.stringify(oldMeta.keywords || []), after: JSON.stringify(newKeywords) });
+    const def = (path, oldVal, newVal) => {
+      events.push({ op: 'DEF', target: subject + '.' + path, operand: newVal, before: oldVal });
+    };
+    if (oldContent !== newHtml) def('current_revision.content', oldContent, newHtml);
+    if (oldMeta.title !== newTitle) def('meta.title', oldMeta.title, newTitle);
+    if (oldMeta.status !== newStatus) def('meta.status', oldMeta.status, newStatus);
+    if (JSON.stringify(oldMeta.tags || []) !== JSON.stringify(newTags)) def('meta.tags', oldMeta.tags || [], newTags);
+    if (JSON.stringify(oldMeta.keywords || []) !== JSON.stringify(newKeywords)) def('meta.keywords', oldMeta.keywords || [], newKeywords);
   }
 
-  if (ops.length === 0) {
+  if (events.length === 0) {
     showToast('Nothing to save — no changes detected.');
     isEditing = false;
     quillInstance = null;
@@ -7147,7 +7584,7 @@ async function saveEditToFork(saveBtn) {
     saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Saving to fork…';
   }
   try {
-    await emitForkOps(ops);
+    await eoEmit.batch(events);
     const fork = getCurrentFork();
     const transparency = fork && fork.meta && fork.meta.transparency;
     showToast(transparency === 'private' ? 'Saved to fork (private — no events emitted)' : 'Saved to fork');
@@ -7197,9 +7634,10 @@ startMeaningCycle();
     }
   }
 
-  // Restore admin-key session (only meaningful if the saved Matrix MXID is admin).
+  // Restore admin-key session. Any Matrix user with the right key is admin —
+  // verification is the SHA-256 check below.
   const savedAdmin = localStorage.getItem('eo_session');
-  if (savedAdmin && matrixSession && isAdminMxid(matrixSession.mxid)) {
+  if (savedAdmin && matrixSession) {
     try {
       const pw = atob(savedAdmin);
       const hash = await sha256(pw);
@@ -7236,6 +7674,11 @@ startMeaningCycle();
     renderGetStarted();
     // Honor initial #hash deep-link (e.g. ?/#wiki:emanon) after data is ready.
     if (location.hash && location.hash.length > 1) routeFromHash();
+    // On mobile, collapse the nav if we landed on the welcome page so the
+    // section/tag list doesn't push the welcome content out of view.
+    else if (window.matchMedia('(max-width: 600px)').matches) {
+      document.getElementById('nav').classList.add('collapsed');
+    }
     // Resolve hydration state (silent for non-admins; nudges admin if missing).
     bootstrapHydrationOnLoad().catch(e => console.warn('hydration bootstrap', e));
   } catch (err) {
