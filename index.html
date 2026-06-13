@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EO — Wiki</title>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
 <style>
@@ -2393,22 +2391,11 @@
   <div class="nav-header">
     <span class="nav-title" id="navTitle">EO<span class="eo-meaning" id="navMeaning">Experiential Ontology</span></span>
     <div class="nav-header-utils">
-      <button class="nav-login-btn" id="sgBtnHeader" style="display:none;" onclick="openSuggestions(); event.stopPropagation();" title="Suggestions">
-        <i class="ph ph-paper-plane-tilt"></i>
-        <span class="sg-badge" id="sgBadge" style="display:none;">0</span>
-      </button>
-      <button class="nav-login-btn" id="clBtnHeader" style="display:none;" onclick="openChangelog(); event.stopPropagation();" title="Change Log">
-        <i class="ph ph-clock-counter-clockwise"></i>
-      </button>
       <button class="nav-login-btn" id="beBtnHeader" style="display:none;" onclick="openBulkEdit(); event.stopPropagation();" title="Bulk Edit">
         <i class="ph ph-code-block"></i>
       </button>
       <button class="nav-login-btn" id="downloadAllBtn" onclick="downloadAllAsMarkdown()" title="Download all articles as Markdown">
         <i class="ph ph-download-simple"></i>
-      </button>
-      <button class="nav-login-btn" id="hydBtnHeader" style="display:none;" onclick="openHydrationPanel(); event.stopPropagation();" title="Hydration export">
-        <i class="ph ph-database"></i>
-        <span class="sg-badge" id="hydBadge" style="display:none;">!</span>
       </button>
       <div class="settings-bar">
         <button class="settings-btn" id="darkModeBtn" onclick="toggleDarkMode()" title="Toggle dark mode">
@@ -2459,35 +2446,6 @@
 </aside>
 
 <main class="main" id="mainPanel">
-  <div class="fork-banner" id="forkBanner">
-    <i class="ph ph-tree-evergreen" id="forkBannerIcon" style="font-size:16px;"></i>
-    <span class="fork-label">Viewing:</span>
-    <span class="fork-name-pill" id="forkNamePill" onclick="openForkPicker()">
-      <span id="forkNameText">Canonical</span>
-      <i class="ph ph-caret-down" style="font-size:11px;"></i>
-    </span>
-    <div class="fork-actions" id="forkActions">
-      <button class="btn" id="forkStartBtn" onclick="openCreateForkModal()" style="font-size:12px;padding:5px 10px;" aria-label="Start a fork" title="Start a fork">
-        <i class="ph ph-git-branch"></i> <span class="btn-text">Start a fork</span>
-      </button>
-      <button class="btn" id="forkInviteBtn" onclick="openInviteForkModal()" style="display:none;font-size:12px;padding:5px 10px;" aria-label="Invite" title="Invite">
-        <i class="ph ph-user-plus"></i> <span class="btn-text">Invite</span>
-      </button>
-      <button class="btn btn-save" id="forkMergeBtn" onclick="pushForkToMerge()" style="display:none;font-size:12px;padding:5px 10px;" aria-label="Push to merge" title="Push fork content to canonical (admin only)">
-        <i class="ph ph-git-merge"></i> <span class="btn-text">Push to merge</span>
-      </button>
-      <div class="fork-dl-wrap" id="forkDlWrap" style="display:none;">
-        <button class="btn" id="forkDlBtn" onclick="toggleForkDownloadMenu()" style="font-size:12px;padding:5px 10px;" aria-label="Download" title="Download">
-          <i class="ph ph-download-simple"></i> <span class="btn-text">Download</span> <i class="ph ph-caret-down" style="font-size:10px;"></i>
-        </button>
-        <div class="fork-dl-menu" id="forkDlMenu">
-          <button onclick="downloadForkAs('json')"><i class="ph ph-brackets-curly"></i> JSON</button>
-          <button onclick="downloadForkAs('html')"><i class="ph ph-file-html"></i> HTML</button>
-          <button onclick="downloadForkAs('md')"><i class="ph ph-file-text"></i> Markdown</button>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="content-area" id="contentArea">
     <div class="welcome">
       <h2>EO</h2>
@@ -2503,30 +2461,15 @@
 
 <div class="modal-overlay" id="loginOverlay">
   <div class="modal" id="loginModal">
-    <div id="loginStepMatrix">
-      <h3>Sign in with Matrix</h3>
-      <p>Any Matrix account can sign in to suggest edits. Admins enter the admin key after signing in.</p>
-      <div class="modal-error" id="loginError"></div>
-      <label class="login-field-label">Homeserver</label>
-      <input type="text" id="loginHomeserver" placeholder="https://matrix.org" value="https://matrix.org">
-      <label class="login-field-label">Username or MXID</label>
-      <input type="text" id="loginUser" placeholder="@you:matrix.org" onkeydown="if(event.key==='Enter')doMatrixLogin()">
-      <label class="login-field-label">Password</label>
-      <input type="password" id="loginPassword" placeholder="Password" onkeydown="if(event.key==='Enter')doMatrixLogin()">
-      <label class="remember-me"><input type="checkbox" id="rememberMe" checked> Keep me logged in</label>
+    <div id="loginStepAdmin">
+      <h3>Sign in</h3>
+      <p>Enter the editor password to create and edit articles.</p>
+      <div class="modal-error" id="adminKeyError"></div>
+      <input type="password" id="loginAdminKey" placeholder="Password" onkeydown="if(event.key==='Enter')doAdminKey()">
+      <label class="remember-me"><input type="checkbox" id="rememberMe" checked> Keep me signed in</label>
       <div class="modal-actions">
         <button class="btn" onclick="hideLogin()">Cancel</button>
-        <button class="btn btn-save" id="loginSubmitBtn" onclick="doMatrixLogin()"><i class="ph ph-sign-in"></i> Sign in</button>
-      </div>
-    </div>
-    <div id="loginStepAdmin" style="display:none;">
-      <h3>Admin key (optional)</h3>
-      <p>Signed in as <span id="loginMxidDisplay" class="login-mxid"></span>. Enter the admin key to write to the canonical wiki, or skip — your edits and new articles will live in your own fork.</p>
-      <div class="modal-error" id="adminKeyError"></div>
-      <input type="password" id="loginAdminKey" placeholder="Admin key" onkeydown="if(event.key==='Enter')doAdminKey()">
-      <div class="modal-actions">
-        <button class="btn" onclick="finishLoginAsEditor()">Skip (continue in fork)</button>
-        <button class="btn btn-save" onclick="doAdminKey()"><i class="ph ph-key"></i> Unlock admin</button>
+        <button class="btn btn-save" onclick="doAdminKey()"><i class="ph ph-sign-in"></i> Sign in</button>
       </div>
     </div>
   </div>
@@ -2626,119 +2569,6 @@
   </div>
 </div>
 
-<div class="cl-panel" id="clPanel">
-  <div class="cl-header">
-    <h3><i class="ph ph-clock-counter-clockwise"></i> Change Log</h3>
-    <button class="cl-close" onclick="closeChangelog()"><i class="ph ph-x"></i></button>
-  </div>
-  <div class="cl-filter">
-    <select id="clFilter" onchange="loadChangelog()">
-      <option value="">All pages</option>
-    </select>
-    <button class="btn" onclick="loadChangelog()" style="padding:4px 8px;font-size:11px;"><i class="ph ph-arrow-clockwise"></i></button>
-  </div>
-  <div class="cl-list" id="clList">
-    <div class="cl-empty">Load changelog to see history.</div>
-  </div>
-</div>
-
-<div class="cl-panel" id="hydPanel">
-  <div class="cl-header">
-    <h3><i class="ph ph-database"></i> Hydration</h3>
-    <button class="cl-close" onclick="closeHydrationPanel()"><i class="ph ph-x"></i></button>
-  </div>
-  <div class="cl-list" id="hydBody" style="padding:14px;font-size:13px;line-height:1.5;">
-    <div class="cl-empty">Loading…</div>
-  </div>
-</div>
-
-<!-- ─── FORK MODALS ─────────────────────────────────────────────────────── -->
-<div class="fork-modal-overlay" id="forkPickerOverlay" onclick="if(event.target===this)closeForkPicker()">
-  <div class="fork-modal">
-    <h3><i class="ph ph-tree-evergreen"></i> Switch view</h3>
-    <p style="font-size:12px;color:var(--text-tertiary);margin:0;">
-      Pick a fork to view, or stay on canonical. Forks layer EO-notation diffs over canonical at render time.
-    </p>
-    <div class="fork-picker-list" id="forkPickerList"></div>
-    <div class="fork-modal-actions">
-      <button class="btn" onclick="closeForkPicker()">Close</button>
-    </div>
-  </div>
-</div>
-
-<div class="fork-modal-overlay" id="createForkOverlay" onclick="if(event.target===this)closeCreateForkModal()">
-  <div class="fork-modal">
-    <h3><i class="ph ph-git-branch"></i> Start a fork</h3>
-    <label for="cfName">Fork name <span style="color:var(--protogon);">*</span></label>
-    <input type="text" id="cfName" placeholder="e.g. Sara's Reading List" maxlength="80">
-    <label for="cfDesc">Short description</label>
-    <textarea id="cfDesc" placeholder="What this fork is for. Shown in the picker."></textarea>
-    <label for="cfVisibility">Who can read</label>
-    <select id="cfVisibility">
-      <option value="invite">Just me + people I invite</option>
-      <option value="link">Anyone with the link</option>
-      <option value="public">Public (listed)</option>
-    </select>
-    <label for="cfTransparency">Diff event detail</label>
-    <select id="cfTransparency">
-      <option value="public" selected>Full — before + after in events</option>
-      <option value="partial">Partial — operator + field only</option>
-      <option value="private">Private — no events emitted</option>
-    </select>
-    <div class="fork-modal-error" id="cfError"></div>
-    <div class="fork-modal-actions">
-      <button class="btn" onclick="closeCreateForkModal()">Cancel</button>
-      <button class="btn btn-save" id="cfSubmitBtn" onclick="submitCreateFork()"><i class="ph ph-git-branch"></i> Create fork</button>
-    </div>
-  </div>
-</div>
-
-<div class="fork-modal-overlay" id="inviteForkOverlay" onclick="if(event.target===this)closeInviteForkModal()">
-  <div class="fork-modal">
-    <h3><i class="ph ph-user-plus"></i> Invite to fork</h3>
-    <p id="inviteForkSubtitle" style="font-size:12px;color:var(--text-tertiary);margin:0 0 8px;"></p>
-    <label for="ifMxid">Matrix ID</label>
-    <input type="text" id="ifMxid" placeholder="@user:server.com" autocomplete="off">
-    <label>Role</label>
-    <div class="role-grid" id="ifRoleGrid">
-      <label class="role-row" data-role="viewer">
-        <input type="radio" name="ifRole" value="viewer">
-        <div><strong>Viewer</strong><span>Read the fork. Can't write events.</span></div>
-      </label>
-      <label class="role-row" data-role="commenter">
-        <input type="radio" name="ifRole" value="commenter">
-        <div><strong>Commenter</strong><span>Read + post comments. No edits.</span></div>
-      </label>
-      <label class="role-row selected" data-role="editor">
-        <input type="radio" name="ifRole" value="editor" checked>
-        <div><strong>Editor</strong><span>Read + commit EO diffs to the fork.</span></div>
-      </label>
-      <label class="role-row" data-role="coowner">
-        <input type="radio" name="ifRole" value="coowner">
-        <div><strong>Co-owner</strong><span>Editor + invite + manage the fork.</span></div>
-      </label>
-    </div>
-    <div class="fork-modal-error" id="ifError"></div>
-    <div class="fork-modal-actions">
-      <button class="btn" onclick="closeInviteForkModal()">Cancel</button>
-      <button class="btn btn-save" id="ifSubmitBtn" onclick="submitInviteFork()"><i class="ph ph-paper-plane-tilt"></i> Send invite</button>
-    </div>
-  </div>
-</div>
-
-<div class="cl-panel" id="sgPanel">
-  <div class="cl-header">
-    <h3><i class="ph ph-paper-plane-tilt"></i> Suggestions</h3>
-    <button class="cl-close" onclick="closeSuggestions()"><i class="ph ph-x"></i></button>
-  </div>
-  <div class="cl-filter">
-    <span id="sgStatus" style="font-size:11px;color:var(--text-tertiary);flex:1;">No suggestions loaded.</span>
-    <button class="btn" onclick="refreshSuggestions()" style="padding:4px 8px;font-size:11px;" title="Refresh"><i class="ph ph-arrow-clockwise"></i></button>
-  </div>
-  <div class="cl-list" id="sgList">
-    <div class="cl-empty">Open this panel to load suggestions.</div>
-  </div>
-</div>
 
 <div class="widget-modal-overlay" id="widgetModalOverlay">
   <div class="widget-modal">
@@ -2769,7 +2599,22 @@
 <div class="toast" id="toast"></div>
 
 <script>
-const API = 'https://xvkq-pq7i-idtl.n7d.xano.io/api:GGzWIVAW';
+/* ═══════════════════════
+   DATA SOURCE + PUBLISH
+   ═══════════════════════ */
+
+// Articles are static Markdown files committed to this repo and served by
+// GitHub Pages. There is no application backend — reads are plain fetches.
+const ARTICLES_DIR = 'articles';
+const MANIFEST_URL = ARTICLES_DIR + '/index.json';
+
+// Edits are published through an n8n webhook that commits the file to GitHub.
+// The webhook URL is NOT in the source: it is AES-GCM encrypted under a key
+// derived (PBKDF2) from the admin password and decrypted in memory only after
+// a correct admin login. Viewing source reveals nothing usable.
+const WEBHOOK_ENC = 'ozDZJBbXejzhi0ihxThO7VfIohnsMI1tVo/A8++2rvYWnhlpbIU2bVfwxp4on+i4yrdSJoF/xWuNJFZX5ah/AcjEXy37g0T125OyATSQJeFDtMAjo2jGdgqXu29XRTV5';
+const WEBHOOK_PBKDF2_ITERATIONS = 200000;
+let webhookUrl = '';  // set on admin login; '' means publishing is unavailable
 
 const EO_MEANINGS = ['Experiential Ontology', 'Existential Ontology', 'Emergent Ontology'];
 let meaningIndex = 0;
@@ -2807,22 +2652,6 @@ let isLoggedIn = false;
 let adminPassword = '';
 const ADMIN_HASH = 'e89ade35085fc8736d6b4755af45e842c6eec0c5978d318156aff6351f0fa950';
 
-/* ═══════════════════════
-   MATRIX CONFIG / STATE
-   ═══════════════════════ */
-const ADMIN_MXIDS = ['@adaptivespiral194456:hyphae.social'];
-const DEFAULT_HOMESERVER = 'https://matrix.org';
-const ADMIN_HOMESERVER_HINT = 'https://hyphae.social';
-const SUGGESTION_KEY = 'org.experientialontology.suggestion';
-const SUGGESTION_ROOM_PREFIX = 'EO Wiki — ';
-const MATRIX_SESSION_KEY = 'eo_matrix_session';
-const SUGGESTION_ROOM_CACHE_KEY = 'eo_suggestion_room';
-const SUGGESTION_POLL_MS = 15000;
-
-let matrixSession = null;
-let suggestionRoomId = null;
-let pendingSuggestions = [];
-let suggestionsPollerId = null;
 
 async function sha256(message) {
   const msgBuffer = new TextEncoder().encode(message);
@@ -2858,260 +2687,163 @@ window.addEventListener('hashchange', () => {
 });
 
 /* ═══════════════════════
-   FETCH — paginated index
+   DATA — read static Markdown, publish via n8n → GitHub
    ═══════════════════════ */
 
-async function fetchAllPages() {
-  let all = [];
-  let page = 1;
-  while (true) {
-    const res = await fetch(`${API}/get_eowikicurrent?page=${page}`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const items = data.items || data;
-    if (Array.isArray(items)) all = all.concat(items);
-    if (!data.nextPage) break;
-    page = data.nextPage;
-  }
-  return all;
+let manifestCache = null;
+
+// "wiki:emanon" → "articles/wiki/emanon.md"
+function articleFilePath(recordId) {
+  const i = recordId.indexOf(':');
+  const type = i >= 0 ? recordId.slice(0, i) : 'wiki';
+  let slug = i >= 0 ? recordId.slice(i + 1) : recordId;
+  slug = String(slug).toLowerCase().replace(/[^a-z0-9._-]+/g, '-').replace(/^-+|-+$/g, '') || 'untitled';
+  return `${ARTICLES_DIR}/${type}/${slug}.md`;
 }
 
-/* Fetch single record by numeric ID for full content */
-async function fetchRecord(numericId) {
-  const res = await fetch(`${API}/eowikicurrent/${numericId}`);
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res.json();
-}
-
-/* PATCH with XANO_PASSWORD */
-async function patchRecord(numericId, payload) {
-  const body = { ...payload };
-  if (adminPassword) body.XANO_PASSWORD = adminPassword;
-  const res = await fetch(`${API}/eowikicurrent/${numericId}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) throw new Error(`PATCH ${res.status}: ${await res.text().catch(() => '')}`);
-  return res.json();
-}
-
-/* POST with XANO_PASSWORD */
-async function postRecord(payload) {
-  const body = { ...payload };
-  if (adminPassword) body.XANO_PASSWORD = adminPassword;
-  const res = await fetch(`${API}/eowikicurrent`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) throw new Error(`POST ${res.status}: ${await res.text().catch(() => '')}`);
-  return res.json();
-}
-
-/* POST change log entry to /eowiki */
-async function postChangeLog(op, subject, predicate, value, context) {
-  const body = {
-    op,          // EO operator: ALT, INS, NUL, etc.
-    subject,     // record_id being changed
-    predicate,   // what changed: "meta.title", "current_revision.content", etc.
-    value,       // new value (stringified if object)
-    context,     // JSON string: { before, after, rev_id, timestamp }
+// Parse one article file (metadata header + Markdown body) into the record
+// shape the rest of the app expects. `fallback` is the manifest entry.
+function parseArticleMarkdown(text, fallback = {}) {
+  const src = String(text).replace(/\r\n/g, '\n');
+  const field = (label) => {
+    const mm = src.match(new RegExp('^\\*\\*' + label + ':\\*\\* (.*?)[ \\t]*$', 'm'));
+    return mm ? mm[1].trim() : '';
   };
-  if (adminPassword) body.XANO_PASSWORD = adminPassword;
-  try {
-    const res = await fetch(`${API}/eowiki`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
-    if (!res.ok) console.warn('Changelog POST failed:', res.status);
-    else return res.json();
-  } catch (e) {
-    console.warn('Changelog POST error:', e);
-  }
-}
-
-/* Fetch changelog entries (newest first) */
-async function fetchChangeLog(subject) {
-  // Try fetching from the eowiki GET endpoint filtered by subject
-  try {
-    const url = subject
-      ? `${API}/eowiki?subject=${encodeURIComponent(subject)}`
-      : `${API}/eowiki`;
-    const res = await fetch(url);
-    if (!res.ok) return [];
-    const data = await res.json();
-    const items = data.items || data;
-    return Array.isArray(items) ? items : [];
-  } catch { return []; }
-}
-
-/**
- * Log a structured change using EO notation.
- * @param {string} recordId - e.g. "wiki:emanon"
- * @param {string} field - what changed: "values", "meta.title", "meta.status", etc.
- * @param {*} before - old value
- * @param {*} after - new value
- * @param {string} op - EO operator: ALT (edit), INS (create), NUL (delete), REC (revert)
- */
-function logChange(recordId, field, before, after, op = 'DEF') {
-  const ctx = JSON.stringify({
-    before: typeof before === 'string' ? before : JSON.stringify(before),
-    after: typeof after === 'string' ? after : JSON.stringify(after),
-    timestamp: new Date().toISOString(),
-  });
-  const val = typeof after === 'string' ? after.slice(0, 5000) : JSON.stringify(after).slice(0, 5000);
-  // Fire and forget — don't block saves
-  postChangeLog(op, recordId, field, val, ctx);
-  // Mirror as an EO diff event in the hydration room (no-op if not yet published).
-  try { emitEOdiff(op, recordId, field, before, after); } catch (e) { console.warn('EO diff emit failed', e); }
-}
-
-/* ═══════════════════════
-   MATRIX CLIENT (raw REST)
-   ═══════════════════════ */
-
-async function mxFetch(path, opts = {}) {
-  if (!matrixSession) throw new Error('No Matrix session');
-  const url = matrixSession.homeserver.replace(/\/$/, '') + path;
-  const headers = { 'Content-Type': 'application/json', ...(opts.headers || {}) };
-  if (opts.auth !== false) headers['Authorization'] = 'Bearer ' + matrixSession.accessToken;
-  const fetchOpts = { ...opts, headers };
-  delete fetchOpts.auth;
-  const res = await fetch(url, fetchOpts);
-  if (!res.ok) {
-    const txt = await res.text().catch(() => '');
-    let parsed; try { parsed = JSON.parse(txt); } catch {}
-    const err = new Error(parsed?.error || parsed?.errcode || `Matrix ${res.status}`);
-    err.status = res.status;
-    err.errcode = parsed?.errcode;
-    throw err;
-  }
-  if (res.status === 204) return null;
-  const text = await res.text();
-  return text ? JSON.parse(text) : null;
-}
-
-async function mxResolveHomeserver(typed) {
-  let host = (typed || '').trim();
-  if (!host) return DEFAULT_HOMESERVER;
-  if (!/^https?:/i.test(host)) host = 'https://' + host;
-  host = host.replace(/\/$/, '');
-  try {
-    const res = await fetch(host + '/.well-known/matrix/client');
-    if (res.ok) {
-      const j = await res.json();
-      const base = j['m.homeserver'] && j['m.homeserver'].base_url;
-      if (base) return base.replace(/\/$/, '');
-    }
-  } catch {}
-  return host;
-}
-
-async function mxLogin(homeserver, user, password) {
-  const url = homeserver.replace(/\/$/, '') + '/_matrix/client/v3/login';
-  const trimmed = user.trim();
-  const localpart = trimmed.startsWith('@') ? trimmed.slice(1).split(':')[0] : trimmed;
-  const body = {
-    type: 'm.login.password',
-    identifier: { type: 'm.id.user', user: localpart },
-    password,
-    initial_device_display_name: 'EO Wiki',
-  };
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) {
-    const txt = await res.text().catch(() => '');
-    let parsed; try { parsed = JSON.parse(txt); } catch {}
-    throw new Error(parsed?.error || `Login failed (${res.status})`);
-  }
-  const data = await res.json();
+  const list = (s) => s ? s.split(',').map(x => x.trim()).filter(Boolean) : [];
+  const titleMatch = src.match(/^# (.+)$/m);
+  const title = (titleMatch ? titleMatch[1].trim().replace(/^"(.*)"$/, '$1') : (fallback.title || '')).trim();
+  const dbId = parseInt(field('DB ID'), 10);
+  // Body = everything after the first "\n---\n" header/body separator.
+  let body = '';
+  const sep = src.indexOf('\n---\n');
+  if (sep >= 0) body = src.slice(sep + 5).replace(/^\n+/, '');
+  body = body.replace(/\s+$/, '');
+  if (/^\*?\s*no content\.?\s*\*?$/i.test(body)) body = '';
   return {
-    homeserver,
-    accessToken: data.access_token,
-    mxid: data.user_id,
-    deviceId: data.device_id,
+    id: Number.isFinite(dbId) ? dbId : (fallback.db_id || 0),
+    record_id: field('Record ID') || fallback.record_id || '',
+    displayName: title,
+    values: {
+      meta: {
+        title,
+        status: field('Status') || fallback.status || 'draft',
+        tags: list(field('Tags')),
+        keywords: list(field('Keywords')),
+        updated_at: field('Updated') || fallback.updated_at || '',
+      },
+      current_revision: { content: body, format: 'markdown' },
+    },
+    created_at: field('Updated') || fallback.updated_at || '',
   };
 }
 
-async function mxWhoami() {
-  return mxFetch('/_matrix/client/v3/account/whoami');
+// Inverse of parseArticleMarkdown — the file text for a record.
+function serializeArticleMarkdown(rec) {
+  const vals = parseValues(rec.values);
+  const meta = extractMeta(vals) || {};
+  const content = extractContent(vals) || '';
+  const tags = meta.tags || [];
+  const keywords = meta.keywords || [];
+  let md = `# ${meta.title || rec.displayName || rec.record_id}\n\n`;
+  md += `**Record ID:** ${rec.record_id}  \n`;
+  md += `**DB ID:** ${rec.id}  \n`;
+  if (tags.length) md += `**Tags:** ${tags.join(', ')}  \n`;
+  if (keywords.length) md += `**Keywords:** ${keywords.join(', ')}  \n`;
+  md += `**Status:** ${meta.status || 'draft'}  \n`;
+  md += `**Updated:** ${meta.updated_at || rec.created_at || new Date().toISOString()}  \n`;
+  md += `\n---\n\n`;
+  md += content ? content.replace(/\s+$/, '') + '\n' : '*No content.*\n';
+  return md;
 }
 
-async function mxLogout() {
-  try { await mxFetch('/_matrix/client/v3/logout', { method: 'POST', body: '{}' }); } catch {}
+async function fetchManifest() {
+  const res = await fetch(MANIFEST_URL + '?t=' + Date.now(), { cache: 'no-store' });
+  if (!res.ok) throw new Error(`manifest HTTP ${res.status}`);
+  return res.json();
 }
 
-async function mxJoinedRooms() {
-  const j = await mxFetch('/_matrix/client/v3/joined_rooms');
-  return (j && j.joined_rooms) || [];
+// Load every article in the manifest (parallel fetches) → records. Replaces
+// the old paginated Xano fetch.
+async function fetchAllArticles() {
+  const manifest = await fetchManifest();
+  manifestCache = manifest;
+  const entries = (manifest && manifest.articles) || [];
+  return Promise.all(entries.map(async (e) => {
+    try {
+      const res = await fetch(e.path + '?v=' + encodeURIComponent(manifest.generated_at || ''));
+      if (!res.ok) throw new Error(String(res.status));
+      return parseArticleMarkdown(await res.text(), e);
+    } catch (err) {
+      console.warn('article load failed:', e.path, err.message);
+      return parseArticleMarkdown('', e); // metadata-only stub keeps it in the nav
+    }
+  }));
 }
 
-async function mxRoomName(roomId) {
-  try {
-    const j = await mxFetch(`/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/state/m.room.name`);
-    return (j && j.name) || '';
-  } catch (e) {
-    if (e.status === 404) return '';
-    throw e;
-  }
+/* ── Publish (admin only) ─────────────────────────────────────────────── */
+
+// Decrypt the n8n webhook URL from WEBHOOK_ENC using a key derived from the
+// admin password. Only ever called after the password matches ADMIN_HASH.
+async function decryptWebhook(password) {
+  const raw = atob(WEBHOOK_ENC);
+  const bytes = new Uint8Array(raw.length);
+  for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
+  const salt = bytes.slice(0, 16), iv = bytes.slice(16, 28), data = bytes.slice(28);
+  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
+  const key = await crypto.subtle.deriveKey(
+    { name: 'PBKDF2', salt, iterations: WEBHOOK_PBKDF2_ITERATIONS, hash: 'SHA-256' },
+    km, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+  const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
+  return new TextDecoder().decode(plain);
 }
 
-async function mxRoomIsEncrypted(roomId) {
-  try {
-    await mxFetch(`/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/state/m.room.encryption`);
-    return true;
-  } catch { return false; }
-}
-
-async function mxCreateSuggestionRoom(adminMxid, roomName) {
-  return mxFetch('/_matrix/client/v3/createRoom', {
+async function publishFile(filename, contentRaw, message) {
+  if (!webhookUrl) throw new Error('Admin login required to publish.');
+  // Sent as text/plain so the browser treats this as a CORS "simple request"
+  // (no preflight). The n8n webhook parses the JSON string from the body.
+  const res = await fetch(webhookUrl, {
     method: 'POST',
-    body: JSON.stringify({
-      preset: 'trusted_private_chat',
-      is_direct: true,
-      invite: [adminMxid],
-      name: roomName,
-      // Intentionally no m.room.encryption initial state — wiki UI cannot read E2EE.
-      initial_state: [],
-    }),
+    headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+    body: JSON.stringify({ filename, mode: 'overwrite', contentRaw, message: message || ('update ' + filename) }),
   });
+  if (!res.ok) throw new Error(`publish ${res.status}: ${await res.text().catch(() => '')}`);
+  return res.json().catch(() => ({}));
 }
 
-async function mxSendMessage(roomId, content) {
-  const txnId = 'eo-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
-  const path = `/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/send/m.room.message/${txnId}`;
-  return mxFetch(path, { method: 'PUT', body: JSON.stringify(content) });
+// Rebuild the manifest from the in-memory records (skips any site:* records).
+function buildManifest() {
+  const articles = allRecords
+    .filter(r => r.record_id && !r.record_id.startsWith('site:'))
+    .map(r => {
+      const meta = extractMeta(parseValues(r.values)) || {};
+      const i = r.record_id.indexOf(':');
+      return {
+        record_id: r.record_id,
+        content_type: i >= 0 ? r.record_id.slice(0, i) : 'wiki',
+        slug: i >= 0 ? r.record_id.slice(i + 1) : r.record_id,
+        title: meta.title || r.displayName || r.record_id,
+        db_id: r.id,
+        status: meta.status || 'draft',
+        tags: meta.tags || [],
+        keywords: meta.keywords || [],
+        updated_at: meta.updated_at || r.created_at || '',
+        path: articleFilePath(r.record_id),
+      };
+    })
+    .sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()));
+  return { version: 1, generated_at: new Date().toISOString(), count: articles.length, articles };
 }
 
-async function mxSendReaction(roomId, eventId, key) {
-  const txnId = 'eo-r-' + Date.now() + '-' + Math.random().toString(36).slice(2, 8);
-  const path = `/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/send/m.reaction/${txnId}`;
-  return mxFetch(path, {
-    method: 'PUT',
-    body: JSON.stringify({
-      'm.relates_to': { rel_type: 'm.annotation', event_id: eventId, key },
-    }),
-  });
+async function publishManifest(message) {
+  return publishFile(MANIFEST_URL, JSON.stringify(buildManifest(), null, 2) + '\n', message || 'update article index');
 }
 
-async function mxFetchMessages(roomId, limit = 100) {
-  const path = `/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/messages?dir=b&limit=${limit}`;
-  return mxFetch(path);
+// Publish one record's file, then refresh the manifest.
+async function publishRecord(rec, message) {
+  await publishFile(articleFilePath(rec.record_id), serializeArticleMarkdown(rec), message || ('update ' + rec.record_id));
+  await publishManifest('reindex after ' + rec.record_id);
 }
 
-function persistMatrixSession() {
-  if (matrixSession) localStorage.setItem(MATRIX_SESSION_KEY, JSON.stringify(matrixSession));
-  else localStorage.removeItem(MATRIX_SESSION_KEY);
-}
-
-function isAdminMxid(mxid) {
-  return !!mxid && ADMIN_MXIDS.includes(mxid);
-}
 
 /* ═══════════════════════
    PARSE
@@ -3165,65 +2897,21 @@ function extractMeta(vals) {
 }
 
 /* ═══════════════════════
-   LOGIN (Matrix + admin key)
+   LOGIN (admin password)
    ═══════════════════════ */
 
 function showLogin() {
-  if (matrixSession || isLoggedIn) {
-    doLogout();
-    return;
-  }
+  if (isLoggedIn) { doLogout(); return; }
   resetLoginModal();
   document.getElementById('loginOverlay').classList.add('show');
-  setTimeout(() => document.getElementById('loginUser').focus(), 80);
+  setTimeout(() => document.getElementById('loginAdminKey').focus(), 80);
 }
 
 function hideLogin() { document.getElementById('loginOverlay').classList.remove('show'); }
 
 function resetLoginModal() {
-  document.getElementById('loginStepMatrix').style.display = '';
-  document.getElementById('loginStepAdmin').style.display = 'none';
-  document.getElementById('loginPassword').value = '';
   document.getElementById('loginAdminKey').value = '';
-  document.getElementById('loginError').style.display = 'none';
   document.getElementById('adminKeyError').style.display = 'none';
-  const submitBtn = document.getElementById('loginSubmitBtn');
-  submitBtn.disabled = false;
-  submitBtn.innerHTML = '<i class="ph ph-sign-in"></i> Sign in';
-}
-
-async function doMatrixLogin() {
-  const errEl = document.getElementById('loginError');
-  errEl.style.display = 'none';
-  const submitBtn = document.getElementById('loginSubmitBtn');
-  const homeserverInput = document.getElementById('loginHomeserver').value;
-  const user = document.getElementById('loginUser').value.trim();
-  const password = document.getElementById('loginPassword').value;
-  if (!user || !password) {
-    errEl.textContent = 'Username and password required.';
-    errEl.style.display = '';
-    return;
-  }
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="ph ph-spinner"></i> Signing in…';
-  try {
-    const homeserver = await mxResolveHomeserver(homeserverInput || DEFAULT_HOMESERVER);
-    const session = await mxLogin(homeserver, user, password);
-    matrixSession = session;
-    if (document.getElementById('rememberMe').checked) persistMatrixSession();
-    // Any Matrix user can attempt the admin key. If they have it, they get
-    // canonical write access; if they skip, they continue as an editor and
-    // any new articles they create land in their own fork.
-    document.getElementById('loginMxidDisplay').textContent = session.mxid;
-    document.getElementById('loginStepMatrix').style.display = 'none';
-    document.getElementById('loginStepAdmin').style.display = '';
-    setTimeout(() => document.getElementById('loginAdminKey').focus(), 60);
-  } catch (e) {
-    errEl.textContent = e.message || 'Sign in failed.';
-    errEl.style.display = '';
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="ph ph-sign-in"></i> Sign in';
-  }
 }
 
 async function doAdminKey() {
@@ -3233,46 +2921,28 @@ async function doAdminKey() {
   if (!key) return;
   const hash = await sha256(key);
   if (hash !== ADMIN_HASH) {
-    errEl.textContent = 'Incorrect admin key.';
+    errEl.textContent = 'Incorrect password.';
     errEl.style.display = '';
     return;
   }
   adminPassword = key;
   isLoggedIn = true;
-  if (document.getElementById('rememberMe').checked) {
-    localStorage.setItem('eo_session', btoa(key));
-  }
+  // Reveal the publish webhook now that the correct password is known.
+  try { webhookUrl = await decryptWebhook(key); }
+  catch (e) { console.warn('webhook decrypt failed', e); webhookUrl = ''; }
+  const remember = document.getElementById('rememberMe');
+  if (remember && remember.checked) localStorage.setItem('eo_session', btoa(key));
   hideLogin();
   applyAdminUI();
-  startSuggestionsPoller();
-  showToast('Admin unlocked');
-}
-
-function finishLoginAsEditor() {
-  hideLogin();
-  applyEditorUI();
-  showToast('Signed in as ' + matrixSession.mxid);
-  // Re-render the current article so the Suggest button appears.
+  showToast('Signed in');
   if (currentRec) loadPage(currentRec.record_id);
-  // Discover forks the user owns / is invited to (non-blocking).
-  discoverForks().catch(e => console.warn('fork discovery failed', e));
 }
 
 async function doLogout() {
-  if (matrixSession) await mxLogout();
-  matrixSession = null;
-  suggestionRoomId = null;
-  pendingSuggestions = [];
   isLoggedIn = false;
   adminPassword = '';
+  webhookUrl = '';
   localStorage.removeItem('eo_session');
-  localStorage.removeItem(MATRIX_SESSION_KEY);
-  localStorage.removeItem(SUGGESTION_ROOM_CACHE_KEY);
-  localStorage.removeItem(CURRENT_FORK_LSK);
-  availableForks = [];
-  currentForkId = null;
-  renderForkBanner();
-  stopSuggestionsPoller();
   applyLoggedOutUI();
   if (currentRec) loadPage(currentRec.record_id);
   showToast('Logged out');
@@ -3287,17 +2957,9 @@ function applyLoggedOutUI() {
   document.getElementById('srBtn').style.display = 'none';
   document.getElementById('newBtn').style.display = 'none';
   document.getElementById('adminDivider').style.display = 'none';
-  document.getElementById('clBtnHeader').style.display = 'none';
   document.getElementById('beBtnHeader').style.display = 'none';
-  const sgBtn = document.getElementById('sgBtnHeader');
-  if (sgBtn) sgBtn.style.display = 'none';
-  const hydBtn = document.getElementById('hydBtnHeader');
-  if (hydBtn) hydBtn.style.display = 'none';
   closeSR();
-  closeChangelog();
   closeBulkEdit();
-  closeSuggestions();
-  closeHydrationPanel();
   currentFilter = 'all';
   currentTag = null;
   document.querySelectorAll('.nav-status-row .filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === 'all'));
@@ -3306,29 +2968,10 @@ function applyLoggedOutUI() {
   renderGetStarted();
 }
 
-function applyEditorUI() {
-  // Editor: signed into Matrix but not admin. UI looks like logged-out except
-  // the article view shows a "Suggest edit" button (handled in renderArticle)
-  // and the nav exposes a "Propose new article" button that routes through
-  // the Matrix suggestion pipeline.
-  applyLoggedOutUI();
-  const loginBtn = document.getElementById('loginBtn');
-  loginBtn.title = matrixSession ? matrixSession.mxid : '';
-  document.getElementById('loginLabel').textContent = 'log out';
-  document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
-  const newBtn = document.getElementById('newBtn');
-  if (newBtn && !currentForkId) {
-    newBtn.style.display = '';
-    newBtn.title = 'Propose new article';
-  }
-  const adminDivider = document.getElementById('adminDivider');
-  if (adminDivider) adminDivider.style.display = '';
-}
-
 function applyAdminUI() {
   document.getElementById('navFilters').classList.remove('logged-out');
   const loginBtn = document.getElementById('loginBtn');
-  loginBtn.title = matrixSession ? matrixSession.mxid + ' (admin)' : '';
+  loginBtn.title = 'admin';
   document.getElementById('loginLabel').textContent = 'log out';
   document.querySelector('#loginBtn i').className = 'ph ph-sign-out';
   document.getElementById('srBtn').style.display = '';
@@ -3336,12 +2979,7 @@ function applyAdminUI() {
   adminNewBtn.style.display = '';
   adminNewBtn.title = 'New Article';
   document.getElementById('adminDivider').style.display = '';
-  document.getElementById('clBtnHeader').style.display = '';
   document.getElementById('beBtnHeader').style.display = '';
-  const sgBtn = document.getElementById('sgBtnHeader');
-  if (sgBtn) sgBtn.style.display = '';
-  const hydBtn = document.getElementById('hydBtnHeader');
-  if (hydBtn) hydBtn.style.display = '';
   renderTagButtons();
   renderList();
   renderGetStarted();
@@ -3354,142 +2992,25 @@ function applyAdminUI() {
 function buildIndex(records) {
   allRecords = records;
 
-  const indexRec = records.find(r => r.record_id === 'site:index');
-  if (indexRec) {
-    const vals = parseValues(indexRec.values);
-    indexEntries = (vals.entries || []).filter(e =>
-      e.content_type === 'wiki' || e.content_type === 'document'
-    );
-  }
-
-  if (!indexEntries.length) {
-    indexEntries = records
-      .filter(r => r.record_id && (r.record_id.startsWith('wiki:') || r.record_id.startsWith('document:')))
-      .map(r => {
-        const v = parseValues(r.values);
-        const m = extractMeta(v);
-        return {
-          content_id: r.record_id,
-          title: m.title || r.displayName || r.record_id,
-          status: m.status || 'draft',
-          tags: m.tags || [],
-          keywords: m.keywords || [],
-          content_type: 'wiki',
-        };
-      });
-  }
-
-  // Enrich entries with updated_at from full records
-  for (const entry of indexEntries) {
-    const rec = records.find(r => r.record_id === entry.content_id);
-    if (rec) {
-      const v = parseValues(rec.values);
+  // Every record is a real article (site:* records are excluded at load time),
+  // so the nav index is derived directly from them.
+  indexEntries = records
+    .filter(r => r.record_id && !r.record_id.startsWith('site:'))
+    .map(r => {
+      const v = parseValues(r.values);
       const m = extractMeta(v);
-      if (m.updated_at) entry.updated_at = m.updated_at;
-      else if (rec.created_at) entry.updated_at = new Date(rec.created_at).toISOString();
-    }
-  }
-
-  // Snapshot canonical state so fork overlays can be re-derived non-destructively.
-  _canonicalAllRecords = allRecords.slice();
-  _canonicalIndexEntries = indexEntries.slice();
-
-  // If a fork is active, reapply its overlay on top of the fresh canonical.
-  if (currentForkId) {
-    applyForkOverlayAsync().catch(e => console.warn('fork overlay failed', e));
-    return;
-  }
-
-  renderTagButtons();
-  renderList();
-}
-
-// Canonical snapshots — the fork overlay layers fork-only records on top of
-// these without mutating them, so flipping back to canonical is a pure restore.
-let _canonicalAllRecords = [];
-let _canonicalIndexEntries = [];
-
-// Build entries + records for any INS events in the fork. Each new article
-// shows up in both the nav (`indexEntries`) and the article cache
-// (`allRecords`) with a synthetic numeric id so loadPage's lookups still work.
-// INS at record-level: target is the bare record_id, operand carries the full
-// materialization {record_id, displayName, values}. Withdrawal pole (operand
-// === EO_VOID) means the record is de-instantiated and should be hidden.
-function _foldForkInsRecords(forkEvents) {
-  if (!forkEvents || !forkEvents.length) return { records: [], entries: [] };
-  const byRecord = new Map(); // record_id → {ev, operand} (last wins)
-  for (const ev of forkEvents) {
-    const c = ev.content || {};
-    if (c.op !== 'INS') continue;
-    if (!c.target) continue;
-    const { record_id, path } = _eoSplitTarget(c.target);
-    if (path) continue; // INS at a sub-field — out of scope here
-    let operand = c.operand;
-    if (typeof operand === 'string' && operand !== EO_VOID && (operand.startsWith('{') || operand.startsWith('['))) {
-      try { operand = JSON.parse(operand); } catch { continue; }
-    }
-    byRecord.set(record_id, { ev, operand });
-  }
-  const records = [];
-  const entries = [];
-  for (const [record_id, { ev, operand }] of byRecord) {
-    if (operand === EO_VOID) continue; // de-instantiated; don't surface
-    if (!operand || typeof operand !== 'object') continue;
-    const meta = (operand.values && operand.values.meta) || {};
-    const synthId = '__fork_' + (ev.event_id || ev.origin_server_ts);
-    records.push({
-      id: synthId,
-      record_id,
-      displayName: operand.displayName || meta.title || record_id,
-      values: operand.values,
-      _forkOnly: true,
-      _forkRoom: currentForkId,
+      const i = r.record_id.indexOf(':');
+      return {
+        content_id: r.record_id,
+        title: m.title || r.displayName || r.record_id,
+        status: m.status || 'draft',
+        tags: m.tags || [],
+        keywords: m.keywords || [],
+        content_type: i >= 0 ? r.record_id.slice(0, i) : 'wiki',
+        updated_at: m.updated_at || (r.created_at || ''),
+      };
     });
-    const [contentType] = String(record_id).split(':');
-    entries.push({
-      content_id: record_id,
-      content_type: contentType || 'wiki',
-      title: meta.title || operand.displayName || record_id,
-      status: meta.status || 'draft',
-      tags: meta.tags || [],
-      keywords: meta.keywords || [],
-      updated_at: meta.updated_at || (ev.origin_server_ts && new Date(ev.origin_server_ts).toISOString()),
-      _forkOnly: true,
-    });
-  }
-  return { records, entries };
-}
 
-async function applyForkOverlayAsync() {
-  // Reset to canonical, then layer fork-only records on top. Purely additive
-  // for INS today; ALT folds happen at loadPage() time per-record.
-  allRecords = _canonicalAllRecords.slice();
-  indexEntries = _canonicalIndexEntries.slice();
-
-  if (!currentForkId) {
-    renderTagButtons();
-    renderList();
-    return;
-  }
-
-  const fork = getCurrentFork();
-  if (!fork) {
-    renderTagButtons();
-    renderList();
-    return;
-  }
-  try {
-    const events = await _fetchForkEvents(fork.roomId);
-    const { records, entries } = _foldForkInsRecords(events);
-    // Drop any entries whose record_id collides with canonical (canonical wins
-    // for create-name conflicts; the editor sees "already exists" before send).
-    const existingIds = new Set(allRecords.map(r => r.record_id));
-    for (const r of records) if (!existingIds.has(r.record_id)) allRecords.push(r);
-    const existingEntryIds = new Set(indexEntries.map(e => e.content_id));
-    for (const e of entries) if (!existingEntryIds.has(e.content_id)) indexEntries.push(e);
-  } catch (e) {
-    console.warn('fork INS overlay failed', e);
-  }
   renderTagButtons();
   renderList();
 }
@@ -3925,32 +3446,11 @@ async function loadPage(contentId) {
   const area = document.getElementById('contentArea');
   area.innerHTML = '<div class="loading"><div class="spinner"></div><br>Loading…</div>';
 
-  // Find in local cache first to get numeric ID
+  // Bodies are already loaded into allRecords at startup, so just look it up.
   let rec = allRecords.find(r => r.record_id === contentId);
   if (!rec) {
     area.innerHTML = '<div class="error">Record not found.</div>';
     return;
-  }
-
-  // Fetch fresh from individual endpoint for full content. Fork-only records
-  // exist purely as Matrix events, not in Xano, so skip the fetch for them.
-  if (!rec._forkOnly) {
-    try {
-      const fresh = await fetchRecord(rec.id);
-      // Update local cache
-      const idx = allRecords.findIndex(r => r.id === rec.id);
-      if (idx !== -1) allRecords[idx] = fresh;
-      rec = fresh;
-    } catch (e) {
-      // Fall back to cached version
-      console.warn('Individual fetch failed, using cached:', e.message);
-    }
-  }
-
-  // If a fork is active, layer its EO diffs on top of canonical before render.
-  if (currentForkId) {
-    try { rec = await foldForkOnRecordAsync(rec); }
-    catch (e) { console.warn('fork fold failed; falling back to canonical', e); }
   }
 
   currentRec = rec;
@@ -3981,21 +3481,7 @@ async function loadPage(contentId) {
         ${tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}
         ${keywords.length ? '· ' + keywords.map(k => esc(k)).join(', ') : ''}
       </div>
-      ${(() => {
-        // Fork view: any logged-in user can edit (writes go to fork room, not Xano).
-        // Canonical view: admin gets Edit, non-admin Matrix user gets Suggest.
-        const onFork = !!currentForkId;
-        if (onFork && matrixSession) {
-          return `<div class="article-actions"><button class="btn" onclick="toggleEdit()" title="Edit your fork. Saves as EO diff events in the fork's Matrix room."><i class="ph ph-pencil-simple"></i> Edit fork</button></div>`;
-        }
-        if (isLoggedIn) {
-          return `<div class="article-actions"><button class="btn" onclick="toggleEdit()"><i class="ph ph-pencil-simple"></i> Edit</button><button class="btn" onclick="openChangelogFor('${esc(contentId)}')"><i class="ph ph-clock-counter-clockwise"></i> History</button></div>`;
-        }
-        if (matrixSession) {
-          return `<div class="article-actions"><button class="btn" onclick="toggleEdit()" title="Send a suggested edit to the admin"><i class="ph ph-pencil-line"></i> Suggest edit</button></div>`;
-        }
-        return '';
-      })()}
+      ${isLoggedIn ? `<div class="article-actions"><button class="btn" onclick="toggleEdit()"><i class="ph ph-pencil-simple"></i> Edit</button></div>` : ''}
     </div>
     <div class="article-layout">
       <div class="article-main">
@@ -4018,12 +3504,9 @@ async function loadPage(contentId) {
    EDIT
    ═══════════════════════ */
 
-let quillInstance = null;
-let editTab = 'wysiwyg'; // 'wysiwyg' | 'html' | 'json'
-
 function toggleEdit() {
   if (!currentRec) return;
-  if (!isLoggedIn && !matrixSession) return;
+  if (!isLoggedIn) return;
   if (!isEditing) {
     isEditing = true;
     renderEditor();
@@ -4035,7 +3518,7 @@ function toggleEdit() {
 function renderEditor() {
   const vals = parseValues(currentRec.values);
   const meta = extractMeta(vals);
-  const htmlContent = extractContent(vals) || '';
+  const body = extractContent(vals) || '';
   const contentId = currentRec.record_id;
 
   // Find which operator slot this article is in (if any)
@@ -4096,92 +3579,16 @@ function renderEditor() {
     </div>
 
     <div class="edit-section">
-      <div class="edit-tabs">
-        <button class="edit-tab ${editTab === 'wysiwyg' ? 'active' : ''}" onclick="switchEditTab('wysiwyg')"><i class="ph ph-text-aa"></i> Visual</button>
-        <button class="edit-tab ${editTab === 'html' ? 'active' : ''}" onclick="switchEditTab('html')"><i class="ph ph-code"></i> HTML</button>
-        <button class="edit-tab ${editTab === 'json' ? 'active' : ''}" onclick="switchEditTab('json')"><i class="ph ph-brackets-curly"></i> JSON</button>
-      </div>
-      <div id="editWysiwyg" style="${editTab === 'wysiwyg' ? '' : 'display:none;'}">
-        <div id="quillEditor"></div>
-      </div>
-      <div id="editHtmlWrap" style="${editTab === 'html' ? '' : 'display:none;'}">
-        <textarea class="edit-textarea" id="editHtml" style="min-height:400px;">${esc(htmlContent)}</textarea>
-      </div>
-      <div id="editJsonWrap" style="${editTab === 'json' ? '' : 'display:none;'}">
-        <textarea class="edit-textarea" id="editJson" style="min-height:400px;">${esc(JSON.stringify(vals, null, 2))}</textarea>
-      </div>
+      <div class="edit-label">Content (Markdown)</div>
+      <textarea class="edit-textarea" id="editBody" style="min-height:460px;">${esc(body)}</textarea>
     </div>
   `;
 
-  const saveLabel = isLoggedIn
-    ? '<i class="ph ph-floppy-disk"></i> Save'
-    : '<i class="ph ph-paper-plane-tilt"></i> Send suggestion';
   document.querySelector('.article-actions').innerHTML = `
-    <button class="btn btn-save" id="saveBtn" onclick="saveEdit()">${saveLabel}</button>
+    <button class="btn btn-save" id="saveBtn" onclick="saveEdit()"><i class="ph ph-floppy-disk"></i> Save</button>
     <button class="btn" onclick="cancelEdit()"><i class="ph ph-x"></i> Cancel</button>
     <button class="btn" onclick="openWidgetModal()" style="margin-left:auto;"><i class="ph ph-code-block"></i> Widget</button>
   `;
-
-  // Init Quill
-  initQuill(htmlContent);
-}
-
-function initQuill(htmlContent) {
-  if (quillInstance) { quillInstance = null; }
-  const container = document.getElementById('quillEditor');
-  if (!container) return;
-
-  quillInstance = new Quill('#quillEditor', {
-    theme: 'snow',
-    modules: {
-      toolbar: [
-        [{ header: [1, 2, 3, false] }],
-        ['bold', 'italic', 'underline', 'strike'],
-        ['blockquote', 'code-block'],
-        [{ list: 'ordered' }, { list: 'bullet' }],
-        ['link'],
-        ['clean'],
-      ],
-      clipboard: {
-        matchers: [
-          [Node.ELEMENT_NODE, function(node, delta) {
-            delta.ops = delta.ops.map(op => {
-              if (op.attributes) {
-                delete op.attributes.background;
-                delete op.attributes['background-color'];
-              }
-              return op;
-            });
-            return delta;
-          }]
-        ]
-      }
-    },
-    placeholder: 'Write content…',
-  });
-
-  // Set HTML content
-  quillInstance.root.innerHTML = htmlContent;
-}
-
-function switchEditTab(tab) {
-  // Sync content between tabs before switching
-  if (editTab === 'wysiwyg' && quillInstance) {
-    const html = quillInstance.root.innerHTML;
-    document.getElementById('editHtml').value = html;
-  } else if (editTab === 'html') {
-    const html = document.getElementById('editHtml').value;
-    if (quillInstance) quillInstance.root.innerHTML = html;
-  }
-
-  editTab = tab;
-  document.querySelectorAll('.edit-tab').forEach((t, i) => {
-    const tabs = ['wysiwyg', 'html', 'json'];
-    t.classList.toggle('active', tabs[i] === tab);
-  });
-  document.getElementById('editWysiwyg').style.display = tab === 'wysiwyg' ? '' : 'none';
-  document.getElementById('editHtmlWrap').style.display = tab === 'html' ? '' : 'none';
-  document.getElementById('editJsonWrap').style.display = tab === 'json' ? '' : 'none';
 }
 
 function toggleOpSlot(slot) {
@@ -4225,114 +3632,40 @@ function toggleOpSlot(slot) {
 
 async function saveEdit() {
   const saveBtn = document.getElementById('saveBtn');
+  if (!isLoggedIn) return;
 
-  // Fork view: edits stay in the fork's Matrix room — Xano untouched.
-  if (currentForkId) {
-    return saveEditToFork(saveBtn);
-  }
-
-  // Non-admin Matrix users on canonical: route through the suggestion flow instead of Xano.
-  if (!isLoggedIn && matrixSession) {
-    return submitSuggestionFromEditor(saveBtn);
-  }
-
-  // If on JSON tab, use raw JSON
-  if (editTab === 'json') {
-    let newValues;
-    try {
-      newValues = JSON.parse(document.getElementById('editJson').value);
-    } catch (e) {
-      showToast('Invalid JSON: ' + e.message, 'error');
-      return;
-    }
-    saveBtn.disabled = true;
-    saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Saving…';
-    try {
-      const payload = { values: typeof currentRec.values === 'string' ? JSON.stringify(newValues) : newValues };
-      const oldVals = parseValues(currentRec.values);
-      const updated = await patchRecord(currentRec.id, payload);
-      logChange(currentRec.record_id, '', oldVals, newValues, 'REC');
-      const idx = allRecords.findIndex(r => r.id === currentRec.id);
-      if (idx !== -1) { allRecords[idx] = { ...allRecords[idx], ...updated }; currentRec = allRecords[idx]; }
-      showToast('Saved');
-      isEditing = false;
-      quillInstance = null;
-      buildIndex(allRecords);
-      loadPage(currentRec.record_id);
-    } catch (err) {
-      showToast(err.message, 'error');
-      saveBtn.disabled = false;
-      saveBtn.innerHTML = '<i class="ph ph-floppy-disk"></i> Save';
-    }
-    return;
-  }
-
-  // Get content from WYSIWYG or HTML tab
-  let newHtml;
-  if (editTab === 'wysiwyg' && quillInstance) {
-    newHtml = quillInstance.root.innerHTML;
-  } else {
-    newHtml = document.getElementById('editHtml').value;
-  }
-
-  // Strip pasted background styles before saving
-  newHtml = cleanPastedHtml(newHtml);
-
-  // Get metadata
+  const newBody = document.getElementById('editBody').value;
   const newTitle = document.getElementById('editTitle').value.trim();
   const newStatus = document.getElementById('editStatus').value;
   const newTags = document.getElementById('editTags').value.split(',').map(t => t.trim()).filter(Boolean);
   const newKeywords = document.getElementById('editKeywords').value.split(',').map(t => t.trim()).filter(Boolean);
 
-  // Build updated values
+  // Build updated values (content is Markdown).
   const vals = parseValues(currentRec.values);
   const meta = extractMeta(vals) || {};
   meta.title = newTitle;
   meta.status = newStatus;
   meta.tags = newTags;
   meta.keywords = newKeywords;
+  meta.updated_at = new Date().toISOString();
   vals.meta = meta;
-
-  // Update current_revision
-  const rev = deepParse(vals, 'current_revision') || {};
-  rev.content = newHtml;
-  rev.format = 'html';
-  vals.current_revision = rev;
+  vals.current_revision = { content: newBody, format: 'markdown' };
 
   saveBtn.disabled = true;
   saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Saving…';
 
   try {
-    const oldVals = parseValues(currentRec.values);
-    const oldContent = extractContent(oldVals) || '';
-    const oldMeta = extractMeta(oldVals);
-    const payload = { values: typeof currentRec.values === 'string' ? JSON.stringify(vals) : vals };
-    const updated = await patchRecord(currentRec.id, payload);
-
-    // Log content change
-    if (oldContent !== newHtml) {
-      logChange(currentRec.record_id, 'current_revision.content', oldContent, newHtml, 'DEF');
-    }
-    // Log meta changes
-    if (oldMeta.title !== newTitle) logChange(currentRec.record_id, 'meta.title', oldMeta.title, newTitle, 'DEF');
-    if (oldMeta.status !== newStatus) logChange(currentRec.record_id, 'meta.status', oldMeta.status, newStatus, 'DEF');
-    if (JSON.stringify(oldMeta.tags) !== JSON.stringify(newTags)) logChange(currentRec.record_id, 'meta.tags', oldMeta.tags, newTags, 'DEF');
-
     const idx = allRecords.findIndex(r => r.id === currentRec.id);
-    if (idx !== -1) { allRecords[idx] = { ...allRecords[idx], ...updated }; currentRec = allRecords[idx]; }
+    const updated = { ...currentRec, displayName: newTitle, values: vals };
+    if (idx !== -1) allRecords[idx] = updated;
+    currentRec = updated;
 
-    // Update index entries with new meta
-    const entryIdx = indexEntries.findIndex(e => e.content_id === currentRec.record_id);
-    if (entryIdx !== -1) {
-      indexEntries[entryIdx].title = newTitle;
-      indexEntries[entryIdx].status = newStatus;
-      indexEntries[entryIdx].tags = newTags;
-      indexEntries[entryIdx].keywords = newKeywords;
-    }
+    await publishRecord(currentRec, 'edit ' + currentRec.record_id);
 
-    showToast('Saved');
+    buildIndex(allRecords);
+    buildSearchIndex();
+    showToast('Saved & published');
     isEditing = false;
-    quillInstance = null;
     loadPage(currentRec.record_id);
   } catch (err) {
     showToast(err.message, 'error');
@@ -4341,422 +3674,10 @@ async function saveEdit() {
   }
 }
 
-/* ═══════════════════════
-   SUGGESTIONS — submit (editor side)
-   ═══════════════════════ */
-
-function buildSuggestionFromEditor() {
-  // Same shape that admin saveEdit() would compute, but returned instead of PATCHed.
-  const oldVals = parseValues(currentRec.values);
-
-  if (editTab === 'json') {
-    let newValues;
-    try { newValues = JSON.parse(document.getElementById('editJson').value); }
-    catch (e) { throw new Error('Invalid JSON: ' + e.message); }
-    return {
-      record_id: currentRec.record_id,
-      target_numeric_id: currentRec.id,
-      summary: 'JSON edit',
-      before: oldVals,
-      after: newValues,
-    };
-  }
-
-  let newHtml;
-  if (editTab === 'wysiwyg' && quillInstance) {
-    newHtml = quillInstance.root.innerHTML;
-  } else {
-    newHtml = document.getElementById('editHtml').value;
-  }
-  newHtml = cleanPastedHtml(newHtml);
-
-  const newTitle = document.getElementById('editTitle').value.trim();
-  const newStatus = document.getElementById('editStatus').value;
-  const newTags = document.getElementById('editTags').value.split(',').map(t => t.trim()).filter(Boolean);
-  const newKeywords = document.getElementById('editKeywords').value.split(',').map(t => t.trim()).filter(Boolean);
-
-  const vals = parseValues(currentRec.values);
-  const meta = extractMeta(vals) || {};
-  meta.title = newTitle;
-  meta.status = newStatus;
-  meta.tags = newTags;
-  meta.keywords = newKeywords;
-  vals.meta = meta;
-  const rev = deepParse(vals, 'current_revision') || {};
-  rev.content = newHtml;
-  rev.format = 'html';
-  vals.current_revision = rev;
-
-  const oldMeta = extractMeta(oldVals);
-  return {
-    record_id: currentRec.record_id,
-    target_numeric_id: currentRec.id,
-    summary: oldMeta.title !== newTitle
-      ? `Retitle: "${oldMeta.title || ''}" → "${newTitle}"`
-      : `Edit: ${newTitle || currentRec.record_id}`,
-    before: oldVals,
-    after: vals,
-  };
-}
-
-async function ensureSuggestionRoom() {
-  if (suggestionRoomId) return suggestionRoomId;
-  const cached = localStorage.getItem(SUGGESTION_ROOM_CACHE_KEY);
-  if (cached) {
-    // Validate cached room: still joined, still unencrypted.
-    const joined = await mxJoinedRooms();
-    if (joined.includes(cached) && !(await mxRoomIsEncrypted(cached))) {
-      suggestionRoomId = cached;
-      return suggestionRoomId;
-    }
-    localStorage.removeItem(SUGGESTION_ROOM_CACHE_KEY);
-  }
-  const adminMxid = ADMIN_MXIDS[0];
-  const roomName = SUGGESTION_ROOM_PREFIX + matrixSession.mxid;
-  const created = await mxCreateSuggestionRoom(adminMxid, roomName);
-  suggestionRoomId = created.room_id;
-  localStorage.setItem(SUGGESTION_ROOM_CACHE_KEY, suggestionRoomId);
-  return suggestionRoomId;
-}
-
-async function submitSuggestionFromEditor(saveBtn) {
-  let suggestion;
-  try { suggestion = buildSuggestionFromEditor(); }
-  catch (e) { showToast(e.message, 'error'); return; }
-
-  saveBtn.disabled = true;
-  saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Sending…';
-  try {
-    const roomId = await ensureSuggestionRoom();
-    const content = {
-      msgtype: 'm.text',
-      body: `Suggested edit for ${suggestion.record_id}: ${suggestion.summary}`,
-      [SUGGESTION_KEY]: {
-        v: 1,
-        record_id: suggestion.record_id,
-        target_numeric_id: suggestion.target_numeric_id,
-        summary: suggestion.summary,
-        before: suggestion.before,
-        after: suggestion.after,
-        suggester_mxid: matrixSession.mxid,
-        submitted_at: new Date().toISOString(),
-      },
-    };
-    await mxSendMessage(roomId, content);
-    showToast('Suggestion sent — admin will review.');
-    isEditing = false;
-    quillInstance = null;
-    loadPage(currentRec.record_id);
-  } catch (e) {
-    console.error('Suggestion send failed', e);
-    showToast(e.message || 'Failed to send suggestion', 'error');
-    saveBtn.disabled = false;
-    saveBtn.innerHTML = '<i class="ph ph-paper-plane-tilt"></i> Send suggestion';
-  }
-}
-
-/* ═══════════════════════
-   SUGGESTIONS — admin review
-   ═══════════════════════ */
-
-function openSuggestions() {
-  if (!isLoggedIn) return;
-  document.getElementById('sgPanel').classList.add('open');
-  refreshSuggestions();
-}
-
-function closeSuggestions() {
-  document.getElementById('sgPanel').classList.remove('open');
-}
-
-function startSuggestionsPoller() {
-  stopSuggestionsPoller();
-  if (!isLoggedIn || !matrixSession) return;
-  // Initial fetch + recurring refresh.
-  refreshSuggestions().catch(() => {});
-  suggestionsPollerId = setInterval(() => {
-    refreshSuggestions().catch(() => {});
-  }, SUGGESTION_POLL_MS);
-}
-
-function stopSuggestionsPoller() {
-  if (suggestionsPollerId) {
-    clearInterval(suggestionsPollerId);
-    suggestionsPollerId = null;
-  }
-}
-
-async function refreshSuggestions() {
-  if (!isLoggedIn || !matrixSession) return;
-  const statusEl = document.getElementById('sgStatus');
-  if (statusEl) statusEl.textContent = 'Loading…';
-  try {
-    pendingSuggestions = await fetchAllSuggestions();
-    renderSuggestionsList();
-    updateSuggestionsBadge();
-    if (statusEl) {
-      const pending = pendingSuggestions.filter(s => s.status === 'pending').length;
-      statusEl.textContent = `${pendingSuggestions.length} suggestion${pendingSuggestions.length === 1 ? '' : 's'} · ${pending} pending`;
-    }
-  } catch (e) {
-    console.error('refreshSuggestions failed', e);
-    if (statusEl) statusEl.textContent = 'Failed: ' + (e.message || 'error');
-  }
-}
-
-async function fetchAllSuggestions() {
-  const rooms = await mxJoinedRooms();
-  const out = [];
-  for (const roomId of rooms) {
-    let name = '';
-    try { name = await mxRoomName(roomId); } catch {}
-    if (!name.startsWith(SUGGESTION_ROOM_PREFIX)) continue;
-    if (await mxRoomIsEncrypted(roomId)) continue; // can't read
-    let messages;
-    try { messages = await mxFetchMessages(roomId, 100); }
-    catch (e) { console.warn('messages fetch failed', roomId, e); continue; }
-    const events = (messages && messages.chunk) || [];
-    // Build reaction index keyed by target event id.
-    const reactionsByTarget = {};
-    for (const ev of events) {
-      if (ev.type !== 'm.reaction') continue;
-      const rel = ev.content && ev.content['m.relates_to'];
-      if (!rel || rel.rel_type !== 'm.annotation') continue;
-      if (ev.sender !== matrixSession.mxid) continue; // only admin's reactions count
-      (reactionsByTarget[rel.event_id] = reactionsByTarget[rel.event_id] || []).push(rel.key);
-    }
-    for (const ev of events) {
-      if (ev.type !== 'm.room.message') continue;
-      const payload = ev.content && ev.content[SUGGESTION_KEY];
-      if (!payload) continue;
-      const keys = reactionsByTarget[ev.event_id] || [];
-      let status = 'pending';
-      if (keys.includes('eo:approved')) status = 'approved';
-      else if (keys.includes('eo:rejected')) status = 'rejected';
-      out.push({
-        eventId: ev.event_id,
-        roomId,
-        roomName: name,
-        suggester: ev.sender,
-        ts: ev.origin_server_ts,
-        payload,
-        status,
-      });
-    }
-  }
-  out.sort((a, b) => b.ts - a.ts);
-  return out;
-}
-
-function renderSuggestionsList() {
-  const listEl = document.getElementById('sgList');
-  if (!listEl) return;
-  if (!pendingSuggestions.length) {
-    listEl.innerHTML = '<div class="cl-empty">No suggestions yet. Editors will appear here when they send one.</div>';
-    return;
-  }
-  // Pending first.
-  const ordered = [
-    ...pendingSuggestions.filter(s => s.status === 'pending'),
-    ...pendingSuggestions.filter(s => s.status !== 'pending'),
-  ];
-  listEl.innerHTML = ordered.map((s, i) => {
-    const date = new Date(s.ts).toLocaleString();
-    const target = s.payload.record_id || '';
-    const summary = s.payload.summary || '(no summary)';
-    const statusCls = 'sg-status-' + s.status;
-    const isPending = s.status === 'pending';
-    return `
-      <div class="sg-entry" data-event="${esc(s.eventId)}">
-        <div class="sg-entry-head">
-          <span class="sg-mxid">${esc(s.suggester)}</span>
-          <span class="sg-status ${statusCls}">${s.status}</span>
-        </div>
-        <div class="sg-summary">${esc(summary)}</div>
-        <div class="sg-target">${esc(target)} · ${esc(date)}</div>
-        <div class="sg-actions">
-          <button class="btn" onclick="toggleSuggestionDiff(${i})"><i class="ph ph-eye"></i> View diff</button>
-          ${isPending ? `<button class="btn btn-save" onclick="approveSuggestion(${i})"><i class="ph ph-check"></i> Approve</button>` : ''}
-          ${isPending ? `<button class="btn" onclick="rejectSuggestion(${i})"><i class="ph ph-x"></i> Reject</button>` : ''}
-          ${target ? `<button class="btn" onclick="loadPage('${esc(target)}'); closeSuggestions();" style="margin-left:auto;"><i class="ph ph-arrow-up-right"></i> Open</button>` : ''}
-        </div>
-        <div class="sg-diff" id="sgDiff-${i}"></div>
-      </div>
-    `;
-  }).join('');
-  // Stash ordered list for index-based action handlers.
-  pendingSuggestionsOrdered = ordered;
-}
-
-let pendingSuggestionsOrdered = [];
-
-function updateSuggestionsBadge() {
-  const badge = document.getElementById('sgBadge');
-  if (!badge) return;
-  const pending = pendingSuggestions.filter(s => s.status === 'pending').length;
-  if (pending > 0) {
-    badge.textContent = pending;
-    badge.style.display = '';
-  } else {
-    badge.style.display = 'none';
-  }
-}
-
-function toggleSuggestionDiff(idx) {
-  const s = pendingSuggestionsOrdered[idx];
-  if (!s) return;
-  const el = document.getElementById('sgDiff-' + idx);
-  if (!el) return;
-  if (el.classList.contains('open')) {
-    el.classList.remove('open');
-    return;
-  }
-  const before = JSON.stringify(s.payload.before || {}, null, 2);
-  const after = JSON.stringify(s.payload.after || {}, null, 2);
-  el.innerHTML = `
-    <h4>Before</h4><pre>${esc(before)}</pre>
-    <h4>After</h4><pre>${esc(after)}</pre>
-  `;
-  el.classList.add('open');
-}
-
-async function approveSuggestion(idx) {
-  const s = pendingSuggestionsOrdered[idx];
-  if (!s) return;
-  if (!isLoggedIn) { showToast('Not admin', 'error'); return; }
-  const numericId = s.payload.target_numeric_id;
-  if (!numericId) { showToast('Suggestion missing target id', 'error'); return; }
-  const after = s.payload.after;
-  if (!after) { showToast('Suggestion missing payload', 'error'); return; }
-  if (!confirm(`Approve and apply this suggestion to ${s.payload.record_id}?`)) return;
-  try {
-    // Match the existing saveEdit() shape: values may be string or object on the record.
-    const target = allRecords.find(r => r.id === numericId);
-    const isStringField = target && typeof target.values === 'string';
-    const payload = { values: isStringField ? JSON.stringify(after) : after };
-    const updated = await patchRecord(numericId, payload);
-    // Best-effort changelog entry attributed to the suggester.
-    logChange(s.payload.record_id, '', s.payload.before, after, 'REC');
-    if (target) {
-      Object.assign(target, updated);
-      if (currentRec && currentRec.id === target.id) currentRec = target;
-    }
-    buildIndex(allRecords);
-    if (currentRec && currentRec.record_id === s.payload.record_id) loadPage(currentRec.record_id);
-    // Mark approved in Matrix only after Xano write succeeds.
-    await mxSendReaction(s.roomId, s.eventId, 'eo:approved');
-    await mxSendMessage(s.roomId, {
-      msgtype: 'm.notice',
-      body: `Approved and applied to ${s.payload.record_id}.`,
-    });
-    showToast('Suggestion applied');
-    refreshSuggestions();
-  } catch (e) {
-    console.error('approve failed', e);
-    showToast(e.message || 'Approve failed', 'error');
-  }
-}
-
-async function rejectSuggestion(idx) {
-  const s = pendingSuggestionsOrdered[idx];
-  if (!s) return;
-  if (!isLoggedIn) return;
-  const reason = prompt('Optional reason for rejection (sent to suggester):', '') || '';
-  try {
-    await mxSendReaction(s.roomId, s.eventId, 'eo:rejected');
-    if (reason) {
-      await mxSendMessage(s.roomId, {
-        msgtype: 'm.notice',
-        body: `Suggestion declined: ${reason}`,
-      });
-    }
-    showToast('Suggestion rejected');
-    refreshSuggestions();
-  } catch (e) {
-    console.error('reject failed', e);
-    showToast(e.message || 'Reject failed', 'error');
-  }
-}
-
 function cancelEdit() {
   if (!currentRec) return;
   isEditing = false;
-  quillInstance = null;
-  editTab = 'wysiwyg';
   loadPage(currentRec.record_id);
-}
-
-/* ═══════════════════════
-   CHANGELOG PANEL
-   ═══════════════════════ */
-
-function openChangelog() {
-  document.getElementById('clPanel').classList.add('open');
-  // Populate filter dropdown with known pages
-  const sel = document.getElementById('clFilter');
-  const current = sel.value;
-  sel.innerHTML = '<option value="">All pages</option>' +
-    indexEntries.map(e => `<option value="${esc(e.content_id)}" ${current === e.content_id ? 'selected' : ''}>${esc(e.title)}</option>`).join('');
-  // If viewing an article, auto-select it
-  if (currentRec && !current) {
-    sel.value = currentRec.record_id;
-  }
-  loadChangelog();
-}
-
-function openChangelogFor(recordId) {
-  document.getElementById('clPanel').classList.add('open');
-  const sel = document.getElementById('clFilter');
-  sel.innerHTML = '<option value="">All pages</option>' +
-    indexEntries.map(e => `<option value="${esc(e.content_id)}" ${e.content_id === recordId ? 'selected' : ''}>${esc(e.title)}</option>`).join('');
-  sel.value = recordId;
-  loadChangelog();
-}
-
-function closeChangelog() {
-  document.getElementById('clPanel').classList.remove('open');
-}
-
-async function loadChangelog() {
-  const subject = document.getElementById('clFilter').value;
-  const listEl = document.getElementById('clList');
-  listEl.innerHTML = '<div class="cl-empty"><div class="spinner"></div><br>Loading…</div>';
-
-  const entries = await fetchChangeLog(subject);
-
-  if (!entries.length) {
-    listEl.innerHTML = '<div class="cl-empty">No changes logged yet.</div>';
-    return;
-  }
-
-  // Sort newest first
-  entries.sort((a, b) => (b.created_at || 0) - (a.created_at || 0));
-
-  listEl.innerHTML = entries.map(e => {
-    const ctx = safeParseJSON(e.context);
-    const ts = ctx.timestamp || (e.created_at ? new Date(e.created_at).toISOString() : '');
-    const timeStr = ts ? formatTime(ts) : '';
-    const subjectTitle = findTitle(e.subject);
-
-    return `
-      <div class="cl-entry" data-id="${e.id}">
-        <div class="cl-entry-head">
-          <span class="cl-op op-${esc(e.op || 'DEF')}">${esc(e.op || 'DEF')}</span>
-          <span class="cl-subject" title="${esc(e.subject)}">${esc(subjectTitle)}</span>
-          <span class="cl-time">${esc(timeStr)}</span>
-        </div>
-        <div class="cl-predicate">${esc(e.predicate || '')}</div>
-        <div class="cl-actions">
-          <button class="cl-btn" onclick="previewChange(${e.id}, event)"><i class="ph ph-eye"></i> View</button>
-          <button class="cl-btn cl-btn-revert" onclick="revertChange(${e.id}, event)"><i class="ph ph-arrow-counter-clockwise"></i> Revert</button>
-        </div>
-      </div>`;
-  }).join('');
-}
-
-function findTitle(recordId) {
-  const entry = indexEntries.find(e => e.content_id === recordId);
-  return entry ? entry.title : recordId || 'Unknown';
 }
 
 function formatTime(isoStr) {
@@ -4770,112 +3691,6 @@ function formatTime(isoStr) {
     if (diff < 604800000) return Math.floor(diff / 86400000) + 'd ago';
     return d.toLocaleDateString();
   } catch { return isoStr; }
-}
-
-function safeParseJSON(s) {
-  if (!s) return {};
-  if (typeof s === 'object') return s;
-  try { return JSON.parse(s); } catch { return {}; }
-}
-
-async function previewChange(changeId, event) {
-  event.stopPropagation();
-  // Fetch the full changelog entry and show before/after
-  const entries = await fetchChangeLog('');
-  const entry = entries.find(e => e.id === changeId);
-  if (!entry) { showToast('Entry not found', 'error'); return; }
-
-  const ctx = safeParseJSON(entry.context);
-  const before = ctx.before || '(empty)';
-  const after = ctx.after || '(empty)';
-
-  // Simple modal-like display in the changelog panel
-  const listEl = document.getElementById('clList');
-  const truncBefore = typeof before === 'string' ? before.slice(0, 2000) : JSON.stringify(before).slice(0, 2000);
-  const truncAfter = typeof after === 'string' ? after.slice(0, 2000) : JSON.stringify(after).slice(0, 2000);
-
-  const prevHtml = `
-    <div style="padding:16px 20px;">
-      <button class="btn" onclick="loadChangelog()" style="margin-bottom:12px;"><i class="ph ph-arrow-left"></i> Back</button>
-      <div class="edit-label">Operator</div>
-      <div style="margin-bottom:12px;"><span class="cl-op op-${esc(entry.op || 'DEF')}">${esc(entry.op || 'DEF')}</span> ${esc(entry.subject)} → <code style="font-size:11px;">${esc(entry.predicate)}</code></div>
-      <div class="edit-label">Before</div>
-      <pre style="background:var(--bg-code);color:var(--code-text);padding:12px;border-radius:4px;font-size:11px;max-height:200px;overflow:auto;margin-bottom:12px;white-space:pre-wrap;">${esc(truncBefore)}</pre>
-      <div class="edit-label">After</div>
-      <pre style="background:var(--bg-code);color:var(--code-text);padding:12px;border-radius:4px;font-size:11px;max-height:200px;overflow:auto;margin-bottom:12px;white-space:pre-wrap;">${esc(truncAfter)}</pre>
-      <button class="cl-btn cl-btn-revert" onclick="revertChange(${changeId}, event)"><i class="ph ph-arrow-counter-clockwise"></i> Revert to before</button>
-    </div>`;
-  listEl.innerHTML = prevHtml;
-}
-
-async function revertChange(changeId, event) {
-  event.stopPropagation();
-
-  // Fetch entry
-  const entries = await fetchChangeLog('');
-  const entry = entries.find(e => e.id === changeId);
-  if (!entry) { showToast('Entry not found', 'error'); return; }
-
-  const ctx = safeParseJSON(entry.context);
-  const beforeVal = ctx.before;
-  if (beforeVal === undefined || beforeVal === null) {
-    showToast('No before state to revert to', 'error');
-    return;
-  }
-
-  if (!confirm(`Revert ${entry.predicate} on ${findTitle(entry.subject)} to previous state?`)) return;
-
-  // Find the record
-  const rec = allRecords.find(r => r.record_id === entry.subject);
-  if (!rec) { showToast('Record not found in local data', 'error'); return; }
-
-  try {
-    // Fetch fresh
-    const fresh = await fetchRecord(rec.id);
-    const vals = parseValues(fresh.values);
-    const currentVal = getNestedValue(vals, entry.predicate);
-
-    // Apply the revert
-    let revertVal;
-    try { revertVal = JSON.parse(beforeVal); } catch { revertVal = beforeVal; }
-    setNestedValue(vals, entry.predicate, revertVal);
-
-    const payload = { values: typeof fresh.values === 'string' ? JSON.stringify(vals) : vals };
-    await patchRecord(rec.id, payload);
-
-    // Log the reversion itself (so it can also be reverted)
-    logChange(entry.subject, entry.predicate, currentVal, revertVal, 'REC');
-
-    // Update local cache
-    const idx = allRecords.findIndex(r => r.id === rec.id);
-    if (idx !== -1) allRecords[idx].values = typeof fresh.values === 'string' ? JSON.stringify(vals) : vals;
-
-    showToast('Reverted');
-    loadChangelog();
-
-    // Reload page if viewing this article
-    if (currentRec && currentRec.record_id === entry.subject) {
-      isEditing = false;
-      quillInstance = null;
-      loadPage(currentRec.record_id);
-    }
-  } catch (err) {
-    showToast('Revert failed: ' + err.message, 'error');
-  }
-}
-
-function getNestedValue(obj, path) {
-  return path.split('.').reduce((o, k) => (o && o[k] !== undefined) ? o[k] : undefined, obj);
-}
-
-function setNestedValue(obj, path, val) {
-  const keys = path.split('.');
-  let o = obj;
-  for (let i = 0; i < keys.length - 1; i++) {
-    if (!o[keys[i]] || typeof o[keys[i]] !== 'object') o[keys[i]] = {};
-    o = o[keys[i]];
-  }
-  o[keys[keys.length - 1]] = val;
 }
 
 /* ═══════════════════════
@@ -4898,24 +3713,15 @@ function insertWidget() {
 
   const tag = `<eo-widget height="400">\n${code}\n</eo-widget>`;
 
-  if (editTab === 'wysiwyg' && quillInstance) {
-    // Insert as HTML in Quill — Quill can't render iframes, so insert a placeholder
-    // Switch to HTML tab to insert cleanly
-    const currentHtml = quillInstance.root.innerHTML;
-    document.getElementById('editHtml').value = currentHtml + '\n\n' + tag;
-    switchEditTab('html');
-    showToast('Widget inserted in HTML tab');
-  } else if (editTab === 'html') {
-    const textarea = document.getElementById('editHtml');
-    const pos = textarea.selectionStart || textarea.value.length;
-    textarea.value = textarea.value.slice(0, pos) + '\n\n' + tag + '\n\n' + textarea.value.slice(pos);
-    showToast('Widget inserted');
-  } else {
-    showToast('Switch to Visual or HTML tab to insert widgets', 'error');
+  const textarea = document.getElementById('editBody');
+  if (!textarea) {
+    showToast('Open an article for editing first', 'error');
     closeWidgetModal();
     return;
   }
-
+  const pos = textarea.selectionStart || textarea.value.length;
+  textarea.value = textarea.value.slice(0, pos) + '\n\n' + tag + '\n\n' + textarea.value.slice(pos);
+  showToast('Widget inserted');
   closeWidgetModal();
 }
 
@@ -4923,110 +3729,22 @@ function insertWidget() {
    DOWNLOAD ALL AS MARKDOWN
    ═══════════════════════ */
 
-function htmlToMarkdown(html) {
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  const body = doc.body;
-
-  function convert(node) {
-    if (node.nodeType === Node.TEXT_NODE) return node.textContent;
-    if (node.nodeType !== Node.ELEMENT_NODE) return '';
-
-    const tag = node.tagName.toLowerCase();
-    const children = Array.from(node.childNodes).map(convert).join('');
-
-    switch (tag) {
-      case 'h1': return `\n# ${children.trim()}\n\n`;
-      case 'h2': return `\n## ${children.trim()}\n\n`;
-      case 'h3': return `\n### ${children.trim()}\n\n`;
-      case 'h4': return `\n#### ${children.trim()}\n\n`;
-      case 'h5': return `\n##### ${children.trim()}\n\n`;
-      case 'h6': return `\n###### ${children.trim()}\n\n`;
-      case 'p': return `${children.trim()}\n\n`;
-      case 'br': return '\n';
-      case 'strong': case 'b': return `**${children}**`;
-      case 'em': case 'i': return `*${children}*`;
-      case 'code': return node.parentElement?.tagName === 'PRE' ? children : `\`${children}\``;
-      case 'pre': return `\n\`\`\`\n${children.trim()}\n\`\`\`\n\n`;
-      case 'blockquote': return children.trim().split('\n').map(l => `> ${l}`).join('\n') + '\n\n';
-      case 'a': {
-        const href = node.getAttribute('href') || '';
-        return `[${children}](${href})`;
-      }
-      case 'img': {
-        const src = node.getAttribute('src') || '';
-        const alt = node.getAttribute('alt') || '';
-        return `![${alt}](${src})`;
-      }
-      case 'ul': return '\n' + Array.from(node.children).map(li => `- ${convert(li).trim()}`).join('\n') + '\n\n';
-      case 'ol': return '\n' + Array.from(node.children).map((li, i) => `${i + 1}. ${convert(li).trim()}`).join('\n') + '\n\n';
-      case 'li': return children;
-      case 'hr': return '\n---\n\n';
-      case 'table': {
-        const rows = Array.from(node.querySelectorAll('tr'));
-        if (!rows.length) return children;
-        const result = [];
-        rows.forEach((row, ri) => {
-          const cells = Array.from(row.querySelectorAll('th, td')).map(c => convert(c).trim());
-          result.push('| ' + cells.join(' | ') + ' |');
-          if (ri === 0) result.push('| ' + cells.map(() => '---').join(' | ') + ' |');
-        });
-        return '\n' + result.join('\n') + '\n\n';
-      }
-      case 'div': case 'section': case 'article': case 'span': case 'figure': case 'figcaption':
-        return children;
-      default: return children;
-    }
-  }
-
-  return convert(body).replace(/\n{3,}/g, '\n\n').trim();
-}
-
 async function downloadAllAsMarkdown() {
   const btn = document.getElementById('downloadAllBtn');
   btn.disabled = true;
   btn.innerHTML = '<i class="ph ph-spinner ph-spin"></i>';
 
   try {
-    const parts = [];
     const sorted = [...allRecords]
-      .filter(r => r.record_id !== 'site:index')
+      .filter(r => r.record_id && !r.record_id.startsWith('site:'))
       .sort((a, b) => {
         const ma = extractMeta(parseValues(a.values));
         const mb = extractMeta(parseValues(b.values));
         return (ma.title || a.displayName || '').localeCompare(mb.title || b.displayName || '');
       });
 
-    // Fetch full content for each record
-    for (const rec of sorted) {
-      let fullRec = rec;
-      try { fullRec = await fetchRecord(rec.id); } catch {}
-      const vals = parseValues(fullRec.values);
-      const meta = extractMeta(vals);
-      const title = meta.title || fullRec.displayName || fullRec.record_id;
-      const status = meta.status || 'unknown';
-      const tags = meta.tags || [];
-      const html = extractContent(vals);
-
-      const slug = fullRec.record_id || '';
-      const keywords = meta.keywords || [];
-      const updatedAt = meta.updated_at || fullRec.created_at || '';
-
-      let md = `# ${title}\n\n`;
-      md += `**Record ID:** ${slug}  \n`;
-      md += `**DB ID:** ${fullRec.id}  \n`;
-      if (tags.length) md += `**Tags:** ${tags.join(', ')}  \n`;
-      if (keywords.length) md += `**Keywords:** ${keywords.join(', ')}  \n`;
-      md += `**Status:** ${status}  \n`;
-      if (updatedAt) md += `**Updated:** ${updatedAt}  \n`;
-      md += `\n---\n\n`;
-      if (html) {
-        md += htmlToMarkdown(html);
-      } else {
-        md += '*No content.*';
-      }
-      parts.push(md);
-    }
-
+    // Content is already in memory as Markdown — reuse the file serializer.
+    const parts = sorted.map(rec => serializeArticleMarkdown(rec).replace(/\n+$/, ''));
     const fullDoc = parts.join('\n\n---\n\n---\n\n');
     const blob = new Blob([fullDoc], { type: 'text/markdown;charset=utf-8' });
     const url = URL.createObjectURL(blob);
@@ -5183,11 +3901,11 @@ async function doReplaceAll() {
   const regex = new RegExp(escapeRegex(find), flags);
   let successCount = 0;
   let errorCount = 0;
+  const changed = [];
 
   for (const match of srMatches) {
     try {
-      // Fetch fresh record
-      const fresh = await fetchRecord(match.rec.id);
+      const fresh = allRecords.find(r => r.id === match.rec.id) || match.rec;
       const vals = parseValues(fresh.values);
 
       if (contentOnly) {
@@ -5223,27 +3941,16 @@ async function doReplaceAll() {
         Object.assign(vals, JSON.parse(replaced));
       }
 
-      // Also update displayName and record_id on the record itself
-      const displayPayload = {};
-      if (typeof fresh.displayName === 'string' && regex.test(fresh.displayName)) {
-        displayPayload.displayName = fresh.displayName.replace(regex, replace);
-      }
-      if (!contentOnly && typeof fresh.record_id === 'string' && regex.test(fresh.record_id)) {
-        displayPayload.record_id = fresh.record_id.replace(regex, replace);
-      }
+      // Update displayName too. record_id is intentionally left unchanged so the
+      // article's file path stays stable (the webhook can't delete an orphan).
+      let newDisplay = fresh.displayName;
+      if (typeof fresh.displayName === 'string') newDisplay = fresh.displayName.replace(regex, replace);
 
-      const payload = {
-        values: typeof fresh.values === 'string' ? JSON.stringify(vals) : vals,
-        ...displayPayload,
-      };
-      await patchRecord(match.rec.id, payload);
-
-      // Update local cache
       const idx = allRecords.findIndex(r => r.id === match.rec.id);
       if (idx !== -1) {
-        allRecords[idx].values = typeof fresh.values === 'string' ? JSON.stringify(vals) : vals;
-        if (displayPayload.displayName) allRecords[idx].displayName = displayPayload.displayName;
-        if (displayPayload.record_id) allRecords[idx].record_id = displayPayload.record_id;
+        allRecords[idx].values = vals;
+        allRecords[idx].displayName = newDisplay;
+        changed.push(allRecords[idx]);
       }
 
       successCount++;
@@ -5253,51 +3960,21 @@ async function doReplaceAll() {
     }
   }
 
-  // Also update site:index entries (titles, slugs, content_ids, keywords)
+  // Publish each changed article, then refresh the manifest once.
   try {
-    const indexRec = allRecords.find(r => r.record_id === 'site:index');
-    if (indexRec) {
-      const fresh = await fetchRecord(indexRec.id);
-      const indexVals = parseValues(fresh.values);
-      let changed = false;
-      if (Array.isArray(indexVals.entries)) {
-        for (const entry of indexVals.entries) {
-          for (const field of ['title', 'slug', 'content_id']) {
-            if (typeof entry[field] === 'string' && regex.test(entry[field])) {
-              entry[field] = entry[field].replace(regex, replace);
-              changed = true;
-            }
-          }
-          if (Array.isArray(entry.keywords)) {
-            const before = JSON.stringify(entry.keywords);
-            entry.keywords = entry.keywords.map(k => k.replace(regex, replace));
-            if (JSON.stringify(entry.keywords) !== before) changed = true;
-          }
-          if (Array.isArray(entry.tags)) {
-            const before = JSON.stringify(entry.tags);
-            entry.tags = entry.tags.map(t => typeof t === 'string' ? t.replace(regex, replace) : t);
-            if (JSON.stringify(entry.tags) !== before) changed = true;
-          }
-        }
-      }
-      if (changed) {
-        const payload = {
-          values: typeof fresh.values === 'string' ? JSON.stringify(indexVals) : indexVals,
-        };
-        await patchRecord(indexRec.id, payload);
-        // Update local cache
-        const idx = allRecords.findIndex(r => r.id === indexRec.id);
-        if (idx !== -1) allRecords[idx].values = typeof fresh.values === 'string' ? JSON.stringify(indexVals) : indexVals;
-        // Rebuild sidebar entries
-        buildIndex(allRecords);
-      }
+    for (const rec of changed) {
+      await publishFile(articleFilePath(rec.record_id), serializeArticleMarkdown(rec), 'search/replace in ' + rec.record_id);
     }
+    if (changed.length) await publishManifest('search/replace reindex');
   } catch (err) {
-    console.error('Failed to update site:index:', err);
+    console.error('publish failed during replace:', err);
+    showToast('Publish failed: ' + err.message, 'error');
+    errorCount++;
   }
 
-  // Always rebuild sidebar from updated data
+  // Rebuild sidebar + search from updated data.
   buildIndex(allRecords);
+  buildSearchIndex();
 
   btn.innerHTML = '<i class="ph ph-swap"></i> Replace all';
   btn.disabled = false;
@@ -5325,20 +4002,6 @@ function stripHtml(html) {
   return tmp.textContent || tmp.innerText || '';
 }
 
-function cleanPastedHtml(html) {
-  const tmp = document.createElement('div');
-  tmp.innerHTML = html;
-  tmp.querySelectorAll('[style]').forEach(el => {
-    el.style.backgroundColor = '';
-    el.style.background = '';
-    el.style.color = '';
-    el.style.fontFamily = '';
-    el.style.fontSize = '';
-    // Remove empty style attributes
-    if (!el.getAttribute('style')?.trim()) el.removeAttribute('style');
-  });
-  return tmp.innerHTML;
-}
 
 /* ═══════════════════════
    BULK EDIT
@@ -5466,9 +4129,7 @@ async function doBulkValidate() {
     const rec = allRecords.find(r => r.record_id === recordId);
     if (!rec) { skipped.push(recordId); continue; }
 
-    let fresh;
-    try { fresh = await fetchRecord(rec.id); } catch { skipped.push(recordId); continue; }
-
+    const fresh = rec;
     const vals = parseValues(fresh.values);
     const originalContent = extractContent(vals) || '';
     if (!originalContent) continue;
@@ -5569,6 +4230,7 @@ async function doBulkExecute() {
   progressEl.innerHTML = '<div class="be-progress"><div class="be-progress-bar" id="beProgressBar" style="width:0%"></div></div>';
 
   const results = [];
+  const changedRecs = [];
   for (let gi = 0; gi < beEditGroups.length; gi++) {
     const group = beEditGroups[gi];
     const bar = document.getElementById('beProgressBar');
@@ -5576,29 +4238,30 @@ async function doBulkExecute() {
 
     try {
       const vals = group.vals;
-      const rev = deepParse(vals, 'current_revision') || {};
-      rev.content = group.newContent;
-      rev.format = 'html';
-      vals.current_revision = rev;
+      vals.current_revision = { content: group.newContent, format: 'markdown' };
       const meta = extractMeta(vals) || {};
       meta.updated_at = new Date().toISOString();
       vals.meta = meta;
 
-      const payload = { values: typeof group.rec.values === 'string' ? JSON.stringify(vals) : vals };
-      await patchRecord(group.rec.id, payload);
-
-      // Log the change
       const matchTotal = group.matchCounts.reduce((a, b) => a + b, 0);
-      logChange(group.record_id, 'current_revision.content', group.originalContent, group.newContent, 'DEF');
-
-      // Update local cache
       const idx = allRecords.findIndex(r => r.id === group.rec.id);
-      if (idx !== -1) allRecords[idx].values = typeof group.rec.values === 'string' ? JSON.stringify(vals) : vals;
+      if (idx !== -1) { allRecords[idx].values = vals; changedRecs.push(allRecords[idx]); }
+      else changedRecs.push({ ...group.rec, values: vals });
 
       results.push({ label: group.record_id, success: true, count: matchTotal });
     } catch (err) {
       results.push({ label: group.record_id, success: false, error: err.message });
     }
+  }
+
+  // Publish every changed file, then refresh the manifest once.
+  try {
+    for (const rec of changedRecs) {
+      await publishFile(articleFilePath(rec.record_id), serializeArticleMarkdown(rec), 'bulk edit ' + rec.record_id);
+    }
+    if (changedRecs.length) await publishManifest('bulk edit reindex');
+  } catch (err) {
+    showToast('Publish failed: ' + err.message, 'error');
   }
 
   // Show results
@@ -5621,6 +4284,7 @@ async function doBulkExecute() {
   executeBtn.innerHTML = '<i class="ph ph-check"></i> Done';
 
   buildIndex(allRecords);
+  buildSearchIndex();
   showToast(`Bulk edit: ${successCount} record(s) updated`);
   beEditGroups = [];
 }
@@ -5637,22 +4301,12 @@ function openNewArticle() {
   document.getElementById('newArticleStatus').value = 'draft';
   document.getElementById('newArticleType').value = 'wiki';
   document.getElementById('newArticleError').style.display = 'none';
-  const forkMode = !isLoggedIn && !!matrixSession;
   const heading = document.getElementById('newArticleHeading');
   const help = document.getElementById('newArticleHelp');
   const submitBtn = document.getElementById('newArticleBtn');
-  if (forkMode) {
-    heading.innerHTML = '<i class="ph ph-tree-evergreen"></i> New Article (in your fork)';
-    help.textContent = currentForkId
-      ? 'This article will live in the fork you\'re viewing. An admin can later push it to the canonical wiki.'
-      : 'You don\'t have an admin key, so this article will live in your own fork. We\'ll create one for you if you don\'t have one yet.';
-    help.style.display = '';
-    submitBtn.innerHTML = '<i class="ph ph-tree-evergreen"></i> Create in fork';
-  } else {
-    heading.innerHTML = '<i class="ph ph-plus-circle"></i> New Article';
-    help.style.display = 'none';
-    submitBtn.innerHTML = '<i class="ph ph-plus"></i> Create';
-  }
+  if (heading) heading.innerHTML = '<i class="ph ph-plus-circle"></i> New Article';
+  if (help) help.style.display = 'none';
+  if (submitBtn) submitBtn.innerHTML = '<i class="ph ph-plus"></i> Create';
   setTimeout(() => document.getElementById('newArticleTitle').focus(), 80);
 }
 
@@ -5703,95 +4357,30 @@ async function doCreateArticle() {
     return;
   }
 
-  const forkMode = !isLoggedIn && !!matrixSession;
-
   btn.disabled = true;
   btn.innerHTML = '<i class="ph ph-spinner" style="animation:spin 1s linear infinite;"></i> Creating…';
 
   const now = new Date().toISOString();
   const values = {
-    meta: {
-      title,
-      status,
-      tags,
-      keywords: [],
-      updated_at: now,
-    },
-    current_revision: {
-      content: '<p>Start writing here…</p>',
-      format: 'html',
-    },
+    meta: { title, status, tags, keywords: [], updated_at: now },
+    current_revision: { content: `# ${title}\n\nStart writing here…\n`, format: 'markdown' },
   };
 
-  if (forkMode) {
-    try {
-      const newRecordId = await createArticleInFork({
-        record_id: recordId,
-        content_type: contentType,
-        slug,
-        title,
-        status,
-        tags,
-        values,
-      });
-      closeNewArticle();
-      showToast(`Created "${title}" in your fork`);
-      loadPage(newRecordId);
-    } catch (err) {
-      errorEl.textContent = err.message || 'Failed to create article in fork.';
-      errorEl.style.display = '';
-    } finally {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="ph ph-tree-evergreen"></i> Create in fork';
-    }
-    return;
-  }
+  // Synthetic numeric id, one past the current max (kept for in-memory lookups).
+  const newId = allRecords.reduce((m, r) => Math.max(m, r.id || 0), 0) + 1;
+  const newRec = { id: newId, record_id: recordId, displayName: title, values, created_at: now };
 
   try {
-    // 1. Create the record
-    const newRec = await postRecord({
-      record_id: recordId,
-      displayName: title,
-      values: JSON.stringify(values),
-    });
-
-    // 2. Add to site:index
-    const indexRec = allRecords.find(r => r.record_id === 'site:index');
-    if (indexRec) {
-      const fresh = await fetchRecord(indexRec.id);
-      const indexVals = parseValues(fresh.values);
-      if (!Array.isArray(indexVals.entries)) indexVals.entries = [];
-      indexVals.entries.push({
-        content_id: recordId,
-        content_type: contentType,
-        title,
-        slug,
-        status,
-        tags,
-        keywords: [],
-        updated_at: now,
-      });
-      const payload = { values: typeof fresh.values === 'string' ? JSON.stringify(indexVals) : indexVals };
-      await patchRecord(indexRec.id, payload);
-      // Update local cache
-      const idx = allRecords.findIndex(r => r.id === indexRec.id);
-      if (idx !== -1) allRecords[idx].values = typeof fresh.values === 'string' ? JSON.stringify(indexVals) : indexVals;
-    }
-
-    // 3. Log the creation
-    logChange(recordId, 'record', null, title, 'INS');
-
-    // 4. Add to local cache and rebuild
     allRecords.push(newRec);
+    await publishRecord(newRec, 'create ' + recordId);
     buildIndex(allRecords);
     buildSearchIndex();
-
     closeNewArticle();
     showToast(`Created "${title}"`);
-
-    // 5. Navigate to the new article
     loadPage(recordId);
   } catch (err) {
+    // Roll back the optimistic insert if publishing failed.
+    allRecords = allRecords.filter(r => r !== newRec);
     errorEl.textContent = err.message;
     errorEl.style.display = '';
   } finally {
@@ -5800,160 +4389,6 @@ async function doCreateArticle() {
   }
 }
 
-// Push everything an admin sees in their active fork up to canonical (Xano).
-// Today this only handles INS records — ALT folds happen on read and we
-// re-derive the values at push time so the canonical record reflects them.
-async function pushForkToMerge() {
-  if (!isLoggedIn) { showToast('Admin key required to push to merge', 'error'); return; }
-  if (!currentForkId) { showToast('Switch to a fork first', 'error'); return; }
-  const fork = getCurrentFork();
-  if (!fork) { showToast('Active fork not in registry', 'error'); return; }
-  const events = await _fetchForkEvents(fork.roomId, { force: true });
-  if (!events.length) { showToast('No fork events to push'); return; }
-
-  // Plan the push: bucket by record_id, classify as create-vs-edit against canonical.
-  // INS at record-level → target is the bare record_id, operand is the full
-  // materialization. We only push record-level creates today; field-level
-  // DEF/REC overlays haven't been carried up yet.
-  const canonicalIds = new Set(_canonicalAllRecords.map(r => r.record_id));
-  const insByRecord = new Map();
-  for (const ev of events) {
-    const c = ev.content || {};
-    if (c.op !== 'INS' || !c.target) continue;
-    const { record_id, path } = _eoSplitTarget(c.target);
-    if (path) continue;
-    let operand = c.operand;
-    if (typeof operand === 'string' && operand !== EO_VOID && (operand.startsWith('{') || operand.startsWith('['))) {
-      try { operand = JSON.parse(operand); } catch { continue; }
-    }
-    insByRecord.set(record_id, operand);
-  }
-
-  const newCreates = [];
-  const conflicting = [];
-  for (const [record_id, operand] of insByRecord) {
-    if (operand === EO_VOID) continue; // de-instantiated, nothing to push
-    if (!operand || typeof operand !== 'object') continue;
-    const after = { ...operand, record_id: operand.record_id || record_id };
-    if (canonicalIds.has(after.record_id)) conflicting.push(record_id);
-    else newCreates.push(after);
-  }
-
-  if (!newCreates.length) {
-    if (conflicting.length) {
-      showToast(`Nothing new to push — ${conflicting.length} record(s) already exist canonically.`, 'error');
-    } else {
-      showToast('Fork has no new articles to push.');
-    }
-    return;
-  }
-
-  const summary = newCreates.map(a => '  • ' + a.record_id).join('\n');
-  if (!confirm(`Push ${newCreates.length} new article(s) from "${fork.meta.name}" to canonical?\n\n${summary}`)) return;
-
-  const btn = document.getElementById('forkMergeBtn');
-  if (btn) {
-    btn.disabled = true;
-    btn.innerHTML = '<i class="ph ph-spinner" style="animation:spin 1s linear infinite;"></i> <span class="btn-text">Pushing…</span>';
-  }
-  try {
-    let pushed = 0;
-    for (const after of newCreates) {
-      const newRec = await postRecord({
-        record_id: after.record_id,
-        displayName: after.displayName || after.record_id,
-        values: typeof after.values === 'string' ? after.values : JSON.stringify(after.values || {}),
-      });
-      _canonicalAllRecords.push(newRec);
-
-      // Add to site:index so the article appears in the canonical nav.
-      const indexRec = _canonicalAllRecords.find(r => r.record_id === 'site:index');
-      if (indexRec) {
-        try {
-          const fresh = await fetchRecord(indexRec.id);
-          const indexVals = parseValues(fresh.values);
-          if (!Array.isArray(indexVals.entries)) indexVals.entries = [];
-          const meta = (after.values && after.values.meta) || {};
-          const [contentType, slug] = String(after.record_id).split(':');
-          indexVals.entries.push({
-            content_id: after.record_id,
-            content_type: contentType || 'wiki',
-            title: meta.title || after.displayName || after.record_id,
-            slug: slug || '',
-            status: meta.status || 'draft',
-            tags: meta.tags || [],
-            keywords: meta.keywords || [],
-            updated_at: meta.updated_at || new Date().toISOString(),
-          });
-          const payload = { values: typeof fresh.values === 'string' ? JSON.stringify(indexVals) : indexVals };
-          await patchRecord(indexRec.id, payload);
-          const idx = _canonicalAllRecords.findIndex(r => r.id === indexRec.id);
-          if (idx !== -1) _canonicalAllRecords[idx].values = payload.values;
-        } catch (e) {
-          console.warn('site:index update failed for', after.record_id, e);
-        }
-      }
-      logChange(after.record_id, 'record', null, after.displayName || after.record_id, 'INS');
-      pushed++;
-    }
-    // Refresh from canonical so the user sees the merged state, then re-overlay
-    // the fork (which will now drop the merged INS-overlays since canonical
-    // owns those record_ids).
-    buildIndex(_canonicalAllRecords);
-    buildSearchIndex();
-    let msg = `Pushed ${pushed} article(s) to canonical`;
-    if (conflicting.length) msg += `; ${conflicting.length} conflicted and were skipped`;
-    showToast(msg);
-  } catch (e) {
-    console.error('pushForkToMerge failed', e);
-    showToast(e.message || 'Push failed', 'error');
-  } finally {
-    if (btn) {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="ph ph-git-merge"></i> <span class="btn-text">Push to merge</span>';
-    }
-  }
-}
-
-// Create a brand-new article inside the editor's fork. If they aren't on a
-// fork yet, auto-create a personal one so the article has somewhere to live.
-// Returns the record_id so the caller can navigate to the new article.
-async function createArticleInFork({ record_id, content_type, slug, title, status, tags, values }) {
-  if (!matrixSession) throw new Error('Sign in to create an article in a fork.');
-
-  // Ensure there's an active fork. If the user has none, mint a personal one.
-  if (!currentForkId) {
-    const myForks = availableForks.filter(f => f.isOwner);
-    if (myForks.length) {
-      setCurrentForkId(myForks[0].roomId);
-    } else {
-      const personalName = (matrixSession.mxid.split(':')[0] || 'My') + "'s fork";
-      const created = await createForkRoom({
-        name: personalName,
-        description: 'Personal fork',
-        transparency: 'public',
-        visibility: 'invite',
-      });
-      availableForks.push({ roomId: created.roomId, meta: created.meta, isOwner: true, isMember: true });
-      setCurrentForkId(created.roomId);
-    }
-    // setCurrentForkId schedules an async overlay; wait a tick so eoEmit
-    // has the right room targeted before sending.
-    await Promise.resolve();
-  }
-
-  // INS at record level: the operand carries the full materialization.
-  await eoEmit.ins(record_id, {
-    record_id,
-    displayName: title,
-    values,
-  });
-
-  // Refresh fork events into the in-memory list so the new article appears
-  // in the nav and can be opened immediately.
-  await applyForkOverlayAsync();
-  return record_id;
-}
 
 /* ═══════════════════════
    GET STARTED GRID
@@ -6511,1095 +4946,6 @@ function setTextSize(size) {
   setTextSize(size);
 })();
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   HYDRATION  ▌ one-time canonical genesis snapshot + canonical diff stream
-   ═══════════════════════════════════════════════════════════════════════════
-   Model (this PR — foundation only):
-     • Xano is canonical. Anonymous viewers always see canonical.
-     • On the first admin load after this ships, the current Xano state is
-       exported into a JSON hydration file and uploaded once to Matrix
-       media (mxc://). That file IS the genesis snapshot all forks anchor to.
-     • A `site:hydration` Xano record stores the genesis URI + sha256 so the
-       export is global-idempotent across browsers.
-     • After publish, every admin logChange() also emits an EO diff event
-       into the canonical diffs Matrix room. Hydration + canonical diffs =
-       the full canonical timeline anyone can replay.
-   Follow-up PRs:
-     • Per-user fork rooms (any logged-in user can fork without admin
-       approval; fork is anchored to canonical-at-fork-start).
-     • Named forks with prominent display + Matrix-native invites with
-       per-user edit levels (viewer / editor / co-owner via power levels).
-     • Render-time fold of fork diffs over canonical, with conflict UX
-       (highlighted spans + modal: take canonical / keep fork / leave visible).
-     • Fork export (JSON / HTML / MD).
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-const HYDRATION_RECORD_ID  = 'site:hydration';
-const HYDRATION_DIFF_EVENT = 'org.experientialontology.eo.diff';
-const HYDRATION_SNAP_EVENT = 'org.experientialontology.eo.hydration';
-const HYDRATION_ROOM_NAME  = 'EO Wiki — canonical diffs';
-const HYDRATION_ROOM_LSK   = 'eo_hydration_room';
-const HYDRATION_VERSION    = 1;
-
-// Transparency knob — controls how much detail is mirrored to the diff room.
-//   public  → full payloads (op + subject + predicate + before + after)
-//   partial → headers only  (op + subject + predicate; before/after stripped)
-//   private → no room emission at all
-const TRANSPARENCY = Object.freeze({ PUBLIC: 'public', PARTIAL: 'partial', PRIVATE: 'private' });
-
-// In-memory cache of the published hydration meta. Null until checked.
-// Shape when set: { uri, sha256, generated_at, canonical: { kind, label, transparency }, channel }
-let hydrationMeta = null;
-let hydrationRoomId = null;
-let _hydrationCheckedOnce = false;
-
-async function _sha256Hex(str) {
-  const buf = new TextEncoder().encode(str);
-  const hash = await crypto.subtle.digest('SHA-256', buf);
-  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-// Stable JSON: sort keys so the digest doesn't churn on key order.
-function _stableStringify(value) {
-  if (value === null || typeof value !== 'object') return JSON.stringify(value);
-  if (Array.isArray(value)) return '[' + value.map(_stableStringify).join(',') + ']';
-  const keys = Object.keys(value).sort();
-  return '{' + keys.map(k => JSON.stringify(k) + ':' + _stableStringify(value[k])).join(',') + '}';
-}
-
-function buildHydrationFile(records, opts = {}) {
-  // The genesis hydration always describes itself as canonical. User forks
-  // (PR #31) carry their own metadata (name, owner mxid, parent_fork_id,
-  // anchor_hydration_uri) on the fork's room — not on this file.
-  const canonical = {
-    kind: 'canonical',
-    label: opts.label || 'EO Wiki canonical',
-    transparency: opts.transparency || TRANSPARENCY.PUBLIC,
-  };
-  return {
-    version: HYDRATION_VERSION,
-    kind: 'eo-wiki.hydration',
-    generated_at: new Date().toISOString(),
-    source: { type: 'xano', endpoint: API + '/get_eowikicurrent' },
-    canonical,
-    schema: {
-      operators: ['INS', 'SEG', 'CON', 'SYN', 'DEF', 'EVA', 'REC'],
-      horizon_read: 'NUL',
-      operator_meanings: {
-        INS: 'instantiate / de-instantiate (operand ∅ = withdraw)',
-        SEG: 'draw / dissolve boundary',
-        CON: 'connect / sever',
-        SYN: 'merge / decompose',
-        DEF: 'define / clear value (operand ∅ = clear)',
-        EVA: 'evaluate / set rule',
-        REC: 'reframe / discard frame',
-        NUL: 'horizon read (no emission)',
-      },
-      diff_event_type: HYDRATION_DIFF_EVENT,
-      target_format: 'collection:id[.field.subfield] (e.g. "wiki:emanon", "wiki:emanon.meta.title")',
-      void_pole: '∅',
-    },
-    records,
-  };
-}
-
-async function loadHydrationMeta() {
-  if (_hydrationCheckedOnce && hydrationMeta) return hydrationMeta;
-  _hydrationCheckedOnce = true;
-  // First: pull from in-memory allRecords if already loaded (cheap path).
-  let rec = (allRecords || []).find(r => r.record_id === HYDRATION_RECORD_ID);
-  if (!rec) {
-    // Fall back to a direct fetch in case the record exists but isn't in the index yet.
-    try {
-      const list = await fetch(`${API}/get_eowikicurrent?record_id=${encodeURIComponent(HYDRATION_RECORD_ID)}`)
-        .then(r => r.ok ? r.json() : null).catch(() => null);
-      const items = list && (list.items || list);
-      rec = Array.isArray(items) ? items.find(r => r.record_id === HYDRATION_RECORD_ID) : null;
-    } catch {}
-  }
-  if (!rec) return null;
-  const vals = parseValues(rec.values);
-  hydrationMeta = vals && vals.hydration ? vals.hydration : (vals && vals.uri ? vals : null);
-  return hydrationMeta;
-}
-
-async function persistHydrationMeta(meta) {
-  hydrationMeta = meta;
-  if (!adminPassword) return; // can't write without admin
-  const existing = (allRecords || []).find(r => r.record_id === HYDRATION_RECORD_ID);
-  const values = JSON.stringify({ hydration: meta });
-  try {
-    if (existing) {
-      await patchRecord(existing.id, { values });
-    } else {
-      await postRecord({ record_id: HYDRATION_RECORD_ID, displayName: 'Hydration', values });
-    }
-  } catch (e) {
-    console.warn('persistHydrationMeta failed (will still work locally)', e);
-  }
-}
-
-// Save a backup copy locally. Not a publish — purely for the admin's archive.
-function downloadHydrationBackup(hydration) {
-  const blob = new Blob([JSON.stringify(hydration, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `eo-wiki-hydration-${hydration.generated_at.slice(0, 10)}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-}
-
-// Publish to Matrix media store (mxc://). Same pattern brrst uses. This is
-// the canonical genesis URI all forks anchor against.
-async function publishHydrationViaMatrix(hydration) {
-  if (!matrixSession) throw new Error('Matrix session required for media upload');
-  const blob = new Blob([JSON.stringify(hydration)], { type: 'application/json' });
-  const url = matrixSession.homeserver.replace(/\/$/, '') +
-              '/_matrix/media/v3/upload?filename=eo-wiki-hydration.json';
-  const r = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + matrixSession.accessToken,
-    },
-    body: blob,
-  });
-  if (!r.ok) {
-    const err = await r.json().catch(() => ({}));
-    throw new Error(err.error || `Matrix upload failed (${r.status})`);
-  }
-  const data = await r.json();
-  return { channel: 'matrix-media', uri: data.content_uri }; // mxc://...
-}
-
-async function ensureHydrationRoom() {
-  if (hydrationRoomId) return hydrationRoomId;
-  if (!matrixSession) throw new Error('Matrix session required');
-  const cached = localStorage.getItem(HYDRATION_ROOM_LSK);
-  if (cached) { hydrationRoomId = cached; return hydrationRoomId; }
-  // Look for an existing room by name in joined rooms.
-  try {
-    const joined = await mxJoinedRooms();
-    for (const rid of joined) {
-      const name = await mxRoomName(rid).catch(() => '');
-      if (name === HYDRATION_ROOM_NAME) {
-        hydrationRoomId = rid;
-        localStorage.setItem(HYDRATION_ROOM_LSK, rid);
-        return rid;
-      }
-    }
-  } catch {}
-  // Create a public room so anyone with the link can audit the diffs.
-  const created = await mxFetch('/_matrix/client/v3/createRoom', {
-    method: 'POST',
-    body: JSON.stringify({
-      preset: 'public_chat',
-      visibility: 'public',
-      name: HYDRATION_ROOM_NAME,
-      topic: 'EO Wiki — canonical EO diff stream against the published hydration snapshot.',
-    }),
-  });
-  hydrationRoomId = created.room_id;
-  localStorage.setItem(HYDRATION_ROOM_LSK, hydrationRoomId);
-  return hydrationRoomId;
-}
-
-async function emitEOdiff(op, subject, predicate, before, after) {
-  if (!hydrationMeta) return; // pre-hydration: skip silently. Xano changelog still records it.
-  const transparency = (hydrationMeta.canonical && hydrationMeta.canonical.transparency) || TRANSPARENCY.PUBLIC;
-  if (transparency === TRANSPARENCY.PRIVATE) return;
-  if (!matrixSession) return; // no auth → no emission. PR #31 routes user edits to fork rooms.
-  if (!isLoggedIn) return; // canonical room mirrors admin's writes only; user forks come in PR #31.
-
-  const ts = Date.now();
-  const _trim = v => {
-    if (v == null) return v;
-    const s = typeof v === 'string' ? v : JSON.stringify(v);
-    return s.length > 8000 ? s.slice(0, 8000) + '…[truncated]' : s;
-  };
-  const event = {
-    msgtype: HYDRATION_DIFF_EVENT,
-    body: `${op} ${subject}[${predicate}]`,
-    op, subject, predicate, ts,
-    hydration_ref: hydrationMeta.uri,
-    scope: 'canonical',
-  };
-  if (transparency === TRANSPARENCY.PUBLIC) {
-    event.before = _trim(before);
-    event.after  = _trim(after);
-  }
-
-  try {
-    const rid = await ensureHydrationRoom();
-    const txn = 'eo-diff-' + ts + '-' + Math.random().toString(36).slice(2, 8);
-    const path = `/_matrix/client/v3/rooms/${encodeURIComponent(rid)}/send/${encodeURIComponent(HYDRATION_DIFF_EVENT)}/${txn}`;
-    await mxFetch(path, { method: 'PUT', body: JSON.stringify(event) });
-  } catch (e) {
-    console.warn('EO diff room emit failed', e);
-  }
-}
-
-// Render the admin hydration panel.
-function _renderHydrationPanel() {
-  const body = document.getElementById('hydBody');
-  if (!body) return;
-  if (hydrationMeta) {
-    const c = hydrationMeta.canonical || {};
-    body.innerHTML = `
-      <p><strong>Status:</strong> Published.</p>
-      <p style="word-break:break-all;font-family:monospace;font-size:11px;">
-        <strong>URI:</strong> ${esc(hydrationMeta.uri || '(none)')}<br>
-        <strong>SHA-256:</strong> ${esc(hydrationMeta.sha256 || '(none)')}<br>
-        <strong>Generated:</strong> ${esc(hydrationMeta.generated_at || '(none)')}<br>
-        <strong>Transparency:</strong> <em>${esc(c.transparency || 'public')}</em>
-      </p>
-      <hr style="opacity:.3;margin:10px 0;">
-      <p style="font-size:12px;color:var(--text-tertiary);">
-        Future admin edits emit EO diff events into the
-        <code>${esc(HYDRATION_ROOM_NAME)}</code> Matrix room. User forks
-        (coming next) anchor against this snapshot.
-      </p>
-      <p style="font-size:12px;">
-        <button class="btn" onclick="downloadHydrationFromXano()"><i class="ph ph-download-simple"></i> Download backup copy</button>
-      </p>`;
-    return;
-  }
-  body.innerHTML = `
-    <p><strong>Status:</strong> Not yet published.</p>
-    <p style="font-size:12px;color:var(--text-tertiary);">
-      Export the current Xano state as the one-time canonical genesis
-      snapshot. Uploaded to Matrix media (mxc://) — durable and shareable.
-      All future admin edits stream as EO diffs into the canonical diffs
-      room; user forks anchor against this snapshot.
-    </p>
-    <p style="font-size:12px;">Transparency of the canonical diffs room:
-      <select id="hydTransparency" style="font-size:12px;padding:4px;">
-        <option value="public" selected>public — full before/after</option>
-        <option value="partial">partial — op + subject only</option>
-        <option value="private">private — no room emission</option>
-      </select>
-    </p>
-    <p style="font-size:12px;">
-      <label style="display:inline-flex;align-items:center;gap:6px;">
-        <input type="checkbox" id="hydAlsoBackup"> Also save a local backup copy
-      </label>
-    </p>
-    <hr style="opacity:.3;margin:10px 0;">
-    <p>
-      <button class="btn btn-save" id="hydPubMatrixBtn" onclick="publishHydration()" ${matrixSession ? '' : 'disabled'}>
-        <i class="ph ph-cloud-arrow-up"></i> Publish canonical hydration
-      </button>
-      ${matrixSession ? '' : '<span style="font-size:11px;color:var(--text-tertiary);"> (sign into Matrix to enable)</span>'}
-    </p>`;
-}
-
-function openHydrationPanel() {
-  const p = document.getElementById('hydPanel');
-  if (p) p.classList.add('open');
-  _renderHydrationPanel();
-}
-
-function closeHydrationPanel() {
-  const p = document.getElementById('hydPanel');
-  if (p) p.classList.remove('open');
-}
-
-async function publishHydration() {
-  if (!isLoggedIn) { showToast('Admin only', 'error'); return; }
-  if (!matrixSession) { showToast('Sign into Matrix to upload', 'error'); return; }
-  const transparency = (document.getElementById('hydTransparency') || {}).value || TRANSPARENCY.PUBLIC;
-  const alsoBackup = !!(document.getElementById('hydAlsoBackup') || {}).checked;
-  const btn = document.getElementById('hydPubMatrixBtn');
-  if (btn) btn.disabled = true;
-  try {
-    // Snapshot strips out the prior hydration record itself so the file is genesis-clean.
-    const recordsForSnapshot = (allRecords || []).filter(r => r.record_id !== HYDRATION_RECORD_ID);
-    const hydration = buildHydrationFile(recordsForSnapshot, { transparency });
-    const sha = await _sha256Hex(_stableStringify(hydration));
-    const result = await publishHydrationViaMatrix(hydration);
-    if (alsoBackup) downloadHydrationBackup(hydration);
-    const meta = {
-      uri: result.uri,
-      sha256: sha,
-      generated_at: hydration.generated_at,
-      canonical: hydration.canonical,
-      channel: result.channel,
-    };
-    await persistHydrationMeta(meta);
-    _updateHydrationBadge();
-    _renderHydrationPanel();
-    showToast('Canonical hydration published');
-  } catch (e) {
-    console.error('publishHydration failed', e);
-    showToast('Publish failed: ' + (e.message || e), 'error');
-  } finally {
-    if (btn) btn.disabled = !matrixSession;
-  }
-}
-
-async function downloadHydrationFromXano() {
-  if (!hydrationMeta) return;
-  const recordsForSnapshot = (allRecords || []).filter(r => r.record_id !== HYDRATION_RECORD_ID);
-  const c = hydrationMeta.canonical || {};
-  const hydration = buildHydrationFile(recordsForSnapshot, {
-    transparency: c.transparency,
-    label: c.label,
-  });
-  downloadHydrationBackup(hydration);
-}
-
-function _updateHydrationBadge() {
-  const badge = document.getElementById('hydBadge');
-  if (!badge) return;
-  badge.style.display = (isLoggedIn && !hydrationMeta) ? '' : 'none';
-}
-
-async function bootstrapHydrationOnLoad() {
-  await loadHydrationMeta();
-  _updateHydrationBadge();
-  if (isLoggedIn && !hydrationMeta) {
-    showToast('No hydration snapshot yet — open the Hydration panel to publish one.');
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   FORKS  ▌ named, invitable forks layered on top of canonical
-   ═══════════════════════════════════════════════════════════════════════════
-   Model:
-     • A fork is a Matrix room. The room's m.room.name = user-chosen fork
-       name. A custom state event (org.experientialontology.eo.fork) holds
-       fork metadata: { name, description, owner_mxid, anchor_hydration_uri,
-       anchor_ts, parent_fork_id, transparency, visibility, version }.
-     • Discovery: scan joined Matrix rooms; any room with that state event
-       is a fork. No central registry needed — the rooms themselves are the
-       registry, and they follow you across devices via Matrix.
-     • Roles map to Matrix power levels:
-         viewer    = 0   (read only)
-         commenter = 25  (m.room.message, m.reaction)
-         editor    = 50  (org.experientialontology.eo.diff)
-         co-owner  = 75  (invite + state changes)
-         owner     = 100 (creator)
-     • Anchor: each fork records the canonical hydration URI + ts at the
-       moment of creation. Render-time fold (PR #32) replays canonical to
-       that anchor, then layers fork diffs on top.
-     • This PR ships UI only: create / pick / invite. Editing while viewing
-       a fork is disabled with a tooltip; PR #32 routes edits to the fork
-       room and folds the rendered view.
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-const FORK_STATE_EVENT = 'org.experientialontology.eo.fork';
-const FORK_VERSION = 1;
-const CURRENT_FORK_LSK = 'eo_current_fork';
-const FORK_NAME_PREFIX = 'EO Wiki fork — ';
-
-const FORK_ROLES = Object.freeze({
-  viewer:    { power: 0,   label: 'Viewer' },
-  commenter: { power: 25,  label: 'Commenter' },
-  editor:    { power: 50,  label: 'Editor' },
-  coowner:   { power: 75,  label: 'Co-owner' },
-});
-
-let availableForks = [];   // [{ roomId, meta, isOwner, isMember }]
-let currentForkId = null;  // null = canonical view
-
-function getCurrentFork() {
-  if (!currentForkId) return null;
-  return availableForks.find(f => f.roomId === currentForkId) || null;
-}
-
-async function discoverForks() {
-  availableForks = [];
-  if (!matrixSession) return;
-  let joined = [];
-  try { joined = await mxJoinedRooms(); } catch (e) { console.warn('joined_rooms failed', e); return; }
-  // Probe each joined room for the fork state event.
-  // - 404 / M_NOT_FOUND → not a fork (expected, common case)
-  // - M_FORBIDDEN → can't read state in this room, treat as not-a-fork
-  // - any other error → log so real homeserver issues surface
-  const probes = joined.map(async rid => {
-    try {
-      const path = `/_matrix/client/v3/rooms/${encodeURIComponent(rid)}/state/${encodeURIComponent(FORK_STATE_EVENT)}`;
-      const meta = await mxFetch(path);
-      if (!meta || meta.version !== FORK_VERSION) return null;
-      return {
-        roomId: rid,
-        meta,
-        isOwner: !!matrixSession && meta.owner_mxid === matrixSession.mxid,
-        isMember: true,
-      };
-    } catch (e) {
-      if (e.status === 404 || e.errcode === 'M_NOT_FOUND' || e.errcode === 'M_FORBIDDEN') return null;
-      console.warn('fork probe failed for room', rid, e);
-      return null;
-    }
-  });
-  const results = await Promise.all(probes);
-  availableForks = results.filter(Boolean);
-  // Restore last-selected fork if it's still in the list. Use the setter so
-  // the banner + the open article both re-render — otherwise an article
-  // rendered before discovery completes would show the canonical Edit button
-  // even though the banner reads "Sara's Reading List".
-  const saved = localStorage.getItem(CURRENT_FORK_LSK);
-  if (saved && availableForks.some(f => f.roomId === saved)) {
-    setCurrentForkId(saved);
-  } else {
-    setCurrentForkId(null);
-  }
-}
-
-async function createForkRoom({ name, description, transparency, visibility }) {
-  if (!matrixSession) throw new Error('Matrix session required');
-  const myMxid = matrixSession.mxid;
-  const anchorUri = (hydrationMeta && hydrationMeta.uri) || null;
-  const anchorTs = Date.now();
-  const meta = {
-    version: FORK_VERSION,
-    name,
-    description: description || '',
-    owner_mxid: myMxid,
-    anchor_hydration_uri: anchorUri,
-    anchor_ts: anchorTs,
-    parent_fork_id: currentForkId, // chain forks-of-forks
-    transparency: transparency || 'public',
-    visibility: visibility || 'invite',
-    created_at: new Date(anchorTs).toISOString(),
-  };
-
-  // Ensure org.experientialontology.eo.diff requires editor power level (50).
-  // Default events_default is 0 (so commenters can post m.room.message and
-  // m.reaction without elevation). Owner gets 100 by default in Matrix.
-  const initial_state = [
-    {
-      type: FORK_STATE_EVENT,
-      state_key: '',
-      content: meta,
-    },
-    {
-      type: 'm.room.power_levels',
-      content: {
-        users_default: 0,
-        events_default: 25, // commenters by default; editors elevated to 50
-        state_default: 75,  // co-owners can update fork meta
-        invite: 75,
-        kick: 75,
-        ban: 75,
-        redact: 50,
-        users: { [myMxid]: 100 },
-        events: {
-          [HYDRATION_DIFF_EVENT]: 50, // editor power required for diffs
-          [FORK_STATE_EVENT]: 75,     // co-owner+ can update fork meta
-          'm.room.message': 25,       // commenters and up
-          'm.reaction': 25,
-        },
-      },
-    },
-  ];
-
-  const body = {
-    name: FORK_NAME_PREFIX + name,
-    topic: meta.description || `Fork of EO Wiki by ${myMxid}`,
-    initial_state,
-  };
-  if (visibility === 'public') {
-    body.preset = 'public_chat';
-    body.visibility = 'public';
-  } else if (visibility === 'link') {
-    body.preset = 'public_chat';
-    body.visibility = 'private'; // unlisted but joinable via link/id
-  } else {
-    body.preset = 'private_chat';
-    body.visibility = 'private';
-  }
-  const created = await mxFetch('/_matrix/client/v3/createRoom', {
-    method: 'POST',
-    body: JSON.stringify(body),
-  });
-  return { roomId: created.room_id, meta };
-}
-
-async function inviteToFork(roomId, mxid, roleKey) {
-  if (!matrixSession) throw new Error('Matrix session required');
-  const role = FORK_ROLES[roleKey];
-  if (!role) throw new Error('Unknown role: ' + roleKey);
-  const target = mxid.trim();
-  if (!/^@[^:\s]+:[^:\s]+$/.test(target)) throw new Error('Use the form @user:server.com');
-
-  // Step 1 — invite. If already in the room, this errors with M_FORBIDDEN; we proceed to set power level.
-  try {
-    await mxFetch(`/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/invite`, {
-      method: 'POST',
-      body: JSON.stringify({ user_id: target }),
-    });
-  } catch (e) {
-    // M_FORBIDDEN: Already in room — that's fine. Anything else propagates.
-    if (e.errcode !== 'M_FORBIDDEN') throw e;
-  }
-
-  // Step 2 — set their power level. Read existing, mutate, write back.
-  const plPath = `/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/state/m.room.power_levels`;
-  const pl = await mxFetch(plPath);
-  pl.users = pl.users || {};
-  if (role.power === 0) delete pl.users[target];
-  else pl.users[target] = role.power;
-  await mxFetch(plPath + '/', { method: 'PUT', body: JSON.stringify(pl) });
-}
-
-function setCurrentForkId(roomId) {
-  currentForkId = roomId || null;
-  if (currentForkId) localStorage.setItem(CURRENT_FORK_LSK, currentForkId);
-  else localStorage.removeItem(CURRENT_FORK_LSK);
-  renderForkBanner();
-  // Re-derive the index list with fork-only records overlaid (or restored to
-  // canonical when leaving a fork). Errors are non-fatal — fall back to
-  // canonical so the user still sees something.
-  applyForkOverlayAsync().catch(e => console.warn('fork overlay failed', e));
-  // Re-render the article view if one is open so the Edit button updates its disabled state.
-  if (currentRec) loadPage(currentRec.record_id);
-}
-
-function renderForkBanner() {
-  const banner = document.getElementById('forkBanner');
-  if (!banner) return;
-  // Banner only shows for logged-in Matrix users (admin or editor).
-  if (!matrixSession) {
-    banner.classList.remove('visible');
-    _updateNewButtonForFork();
-    return;
-  }
-  banner.classList.add('visible');
-
-  const fork = getCurrentFork();
-  const nameText = document.getElementById('forkNameText');
-  const inviteBtn = document.getElementById('forkInviteBtn');
-  const dlWrap = document.getElementById('forkDlWrap');
-  const startBtn = document.getElementById('forkStartBtn');
-  const icon = document.getElementById('forkBannerIcon');
-
-  const mergeBtn = document.getElementById('forkMergeBtn');
-  if (fork) {
-    banner.classList.add('fork-active');
-    nameText.textContent = fork.meta.name || '(unnamed fork)';
-    icon.className = 'ph ph-tree-evergreen';
-    icon.style.color = '#fff';
-    inviteBtn.style.display = fork.isOwner ? '' : 'none';
-    dlWrap.style.display = '';
-    startBtn.style.display = 'none';
-    if (mergeBtn) mergeBtn.style.display = isLoggedIn ? '' : 'none';
-  } else {
-    banner.classList.remove('fork-active');
-    nameText.textContent = 'Canonical';
-    icon.className = 'ph ph-book';
-    icon.style.color = '';
-    inviteBtn.style.display = 'none';
-    dlWrap.style.display = 'none';
-    startBtn.style.display = '';
-    if (mergeBtn) mergeBtn.style.display = 'none';
-  }
-  _updateNewButtonForFork();
-}
-
-// Visibility rules for the +New button: shown to any logged-in Matrix user
-// (admin writes canonical, editor writes to their fork as INS events).
-function _updateNewButtonForFork() {
-  const newBtn = document.getElementById('newBtn');
-  if (!newBtn) return;
-  if (isLoggedIn || matrixSession) {
-    newBtn.style.display = '';
-  } else {
-    newBtn.style.display = 'none';
-  }
-}
-
-/* ─── PICKER ─── */
-function openForkPicker() {
-  const list = document.getElementById('forkPickerList');
-  if (!list) return;
-  const myForks = availableForks.filter(f => f.isOwner);
-  const otherForks = availableForks.filter(f => !f.isOwner);
-  const row = (f) => `
-    <div class="fork-picker-row ${f && f.roomId === currentForkId ? 'active' : (!f && !currentForkId ? 'active' : '')}"
-         onclick="${f ? `pickFork('${esc(f.roomId)}')` : 'pickFork(null)'}">
-      <i class="ph ${f ? 'ph-tree-evergreen' : 'ph-book'}" style="color:var(--holon);"></i>
-      <div style="flex:1;">
-        <div class="fp-name">${esc(f ? f.meta.name : 'Canonical')}</div>
-        <div class="fp-meta">${f ? esc((f.meta.description || f.meta.owner_mxid || '').slice(0, 80)) : 'The published wiki — what anonymous viewers see.'}</div>
-      </div>
-      ${f && f.isOwner ? '<span style="font-size:10px;color:var(--text-tertiary);">owner</span>' : ''}
-    </div>`;
-  list.innerHTML = `
-    <div class="fork-picker-section">Source</div>
-    ${row(null)}
-    ${myForks.length ? `<div class="fork-picker-section">My forks</div>${myForks.map(row).join('')}` : ''}
-    ${otherForks.length ? `<div class="fork-picker-section">Forks I'm in</div>${otherForks.map(row).join('')}` : ''}
-    ${(!myForks.length && !otherForks.length) ? '<div class="fork-picker-empty">No forks yet. Click "Start a fork" on the banner to create one.</div>' : ''}
-  `;
-  document.getElementById('forkPickerOverlay').classList.add('show');
-}
-function closeForkPicker() { document.getElementById('forkPickerOverlay').classList.remove('show'); }
-function pickFork(roomId) {
-  setCurrentForkId(roomId);
-  closeForkPicker();
-  if (!roomId) { showToast('Switched to canonical'); return; }
-  const fork = getCurrentFork();
-  showToast(`Switched to ${fork ? fork.meta.name : 'fork'}`);
-}
-
-/* ─── CREATE ─── */
-function openCreateForkModal() {
-  if (!matrixSession) { showToast('Sign in to start a fork', 'error'); return; }
-  document.getElementById('cfName').value = '';
-  document.getElementById('cfDesc').value = '';
-  document.getElementById('cfVisibility').value = 'invite';
-  document.getElementById('cfTransparency').value = 'public';
-  document.getElementById('cfError').style.display = 'none';
-  document.getElementById('createForkOverlay').classList.add('show');
-  setTimeout(() => document.getElementById('cfName').focus(), 80);
-}
-function closeCreateForkModal() { document.getElementById('createForkOverlay').classList.remove('show'); }
-async function submitCreateFork() {
-  const errEl = document.getElementById('cfError');
-  errEl.style.display = 'none';
-  const name = document.getElementById('cfName').value.trim();
-  const description = document.getElementById('cfDesc').value.trim();
-  const visibility = document.getElementById('cfVisibility').value;
-  const transparency = document.getElementById('cfTransparency').value;
-  if (!name) {
-    errEl.textContent = 'Give your fork a name first.';
-    errEl.style.display = '';
-    return;
-  }
-  const submitBtn = document.getElementById('cfSubmitBtn');
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="ph ph-spinner ph-spin"></i> Creating…';
-  try {
-    const created = await createForkRoom({ name, description, transparency, visibility });
-    availableForks.push({ roomId: created.roomId, meta: created.meta, isOwner: true, isMember: true });
-    setCurrentForkId(created.roomId);
-    closeCreateForkModal();
-    showToast(`Fork "${name}" created`);
-  } catch (e) {
-    errEl.textContent = e.message || 'Failed to create fork.';
-    errEl.style.display = '';
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="ph ph-git-branch"></i> Create fork';
-  }
-}
-
-/* ─── INVITE ─── */
-function openInviteForkModal() {
-  const fork = getCurrentFork();
-  if (!fork || !fork.isOwner) { showToast('Open a fork you own to invite users.', 'error'); return; }
-  document.getElementById('inviteForkSubtitle').textContent = `Inviting to: ${fork.meta.name}`;
-  document.getElementById('ifMxid').value = '';
-  document.getElementById('ifError').style.display = 'none';
-  // reset role to editor by default
-  document.querySelectorAll('#ifRoleGrid .role-row').forEach(r => r.classList.remove('selected'));
-  const editorRow = document.querySelector('#ifRoleGrid .role-row[data-role="editor"]');
-  if (editorRow) editorRow.classList.add('selected');
-  document.querySelectorAll('input[name="ifRole"]').forEach(r => { r.checked = (r.value === 'editor'); });
-  document.getElementById('inviteForkOverlay').classList.add('show');
-  setTimeout(() => document.getElementById('ifMxid').focus(), 80);
-}
-function closeInviteForkModal() { document.getElementById('inviteForkOverlay').classList.remove('show'); }
-async function submitInviteFork() {
-  const fork = getCurrentFork();
-  if (!fork) return;
-  const errEl = document.getElementById('ifError');
-  errEl.style.display = 'none';
-  const mxid = document.getElementById('ifMxid').value.trim();
-  const roleEl = document.querySelector('input[name="ifRole"]:checked');
-  const role = roleEl ? roleEl.value : 'editor';
-  if (!mxid) {
-    errEl.textContent = 'Enter a Matrix ID.';
-    errEl.style.display = '';
-    return;
-  }
-  const btn = document.getElementById('ifSubmitBtn');
-  btn.disabled = true;
-  btn.innerHTML = '<i class="ph ph-spinner ph-spin"></i> Sending…';
-  try {
-    await inviteToFork(fork.roomId, mxid, role);
-    closeInviteForkModal();
-    showToast(`Invited ${mxid} as ${FORK_ROLES[role].label}`);
-  } catch (e) {
-    errEl.textContent = e.message || 'Invite failed.';
-    errEl.style.display = '';
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<i class="ph ph-paper-plane-tilt"></i> Send invite';
-  }
-}
-
-// Visual state for radio rows
-document.addEventListener('change', (e) => {
-  if (e.target && e.target.name === 'ifRole') {
-    document.querySelectorAll('#ifRoleGrid .role-row').forEach(r => r.classList.remove('selected'));
-    const row = document.querySelector(`#ifRoleGrid .role-row[data-role="${e.target.value}"]`);
-    if (row) row.classList.add('selected');
-  }
-});
-
-/* ─── DOWNLOAD ─── */
-function toggleForkDownloadMenu() {
-  const menu = document.getElementById('forkDlMenu');
-  if (menu) menu.classList.toggle('open');
-}
-document.addEventListener('click', (e) => {
-  const menu = document.getElementById('forkDlMenu');
-  const btn = document.getElementById('forkDlBtn');
-  if (!menu || !menu.classList.contains('open')) return;
-  if (e.target === btn || btn.contains(e.target)) return;
-  if (!menu.contains(e.target)) menu.classList.remove('open');
-});
-
-async function downloadForkAs(format) {
-  const menu = document.getElementById('forkDlMenu');
-  if (menu) menu.classList.remove('open');
-  const fork = getCurrentFork();
-  if (!fork) { showToast('Switch to a fork first.', 'error'); return; }
-
-  // HTML and Markdown require the folded view of the fork (canonical state
-  // at the fork's anchor + fork diffs applied). The folder lands with the
-  // fork-render PR. JSON is the raw fork log — useful today for moving a
-  // fork between instances.
-  if (format !== 'json') {
-    showToast(format.toUpperCase() + ' export needs the folded fork renderer (coming soon). Use JSON for now.');
-    return;
-  }
-
-  try {
-    const path = `/_matrix/client/v3/rooms/${encodeURIComponent(fork.roomId)}/messages?dir=b&limit=500`;
-    const msgs = await mxFetch(path);
-    const allEvents = (msgs && msgs.chunk) || [];
-    // Only export the EO diff events — m.room.message etc. is room chatter, not fork data.
-    const diffEvents = allEvents.filter(e => e.type === HYDRATION_DIFF_EVENT);
-    const blob = new Blob([JSON.stringify({
-      fork: fork.meta,
-      room_id: fork.roomId,
-      exported_at: new Date().toISOString(),
-      diff_event_type: HYDRATION_DIFF_EVENT,
-      events: diffEvents,
-      note: 'Raw EO diff log for this fork. Folded HTML/MD export is in progress.',
-    }, null, 2)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    const slug = (fork.meta.name || 'fork').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'fork';
-    a.download = `eo-fork-${slug}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast('Exported ' + a.download);
-  } catch (e) {
-    console.error('fork export failed', e);
-    showToast('Export failed: ' + e.message, 'error');
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   FORK FOLD + EMIT  ▌ render-time fold of fork diffs over canonical
-   ═══════════════════════════════════════════════════════════════════════════
-   When viewing a fork, every read of a record passes through foldForkOnRecord()
-   which fetches the fork room's EO diff events for that record_id and applies
-   the latest value for each (subject, predicate). When saving on a fork,
-   saveEditToFork() emits the same triples as EO diff events into the fork's
-   room — Xano stays untouched.
-
-   Scoped to ALT (edit) operations for now. INS (new record) and NUL (delete)
-   require fork-aware list/index rendering and ship in a follow-up; +New and
-   Delete are hidden when on a fork.
-
-   Conflict UX (highlighting fork.before ≠ canonical.now) is the next slice.
-   For now last-write-wins silently — fork's latest value is what renders.
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-const FORK_FOLD_LIMIT = 1000; // initial /messages page size when reading a fork
-
-// Cache: { roomId: { events: [...], fetched_at: ts } }
-const _forkEventCache = new Map();
-
-// dot-path setter: setByPath(obj, "meta.title", "New") → mutates obj
-function _setByPath(obj, path, value) {
-  const keys = path.split('.');
-  let cur = obj;
-  for (let i = 0; i < keys.length - 1; i++) {
-    const k = keys[i];
-    if (cur[k] == null || typeof cur[k] !== 'object') cur[k] = {};
-    cur = cur[k];
-  }
-  cur[keys[keys.length - 1]] = value;
-  return obj;
-}
-
-function _getByPath(obj, path) {
-  const keys = path.split('.');
-  let cur = obj;
-  for (const k of keys) {
-    if (cur == null) return undefined;
-    cur = cur[k];
-  }
-  return cur;
-}
-
-async function _fetchForkEvents(roomId, { force = false } = {}) {
-  const cached = _forkEventCache.get(roomId);
-  if (!force && cached && (Date.now() - cached.fetched_at < 30_000)) return cached.events;
-  if (!matrixSession) return [];
-  try {
-    const path = `/_matrix/client/v3/rooms/${encodeURIComponent(roomId)}/messages?dir=b&limit=${FORK_FOLD_LIMIT}`;
-    const msgs = await mxFetch(path);
-    const all = (msgs && msgs.chunk) || [];
-    // Filter to EO diff events; oldest first so applying in order is well-defined.
-    const events = all
-      .filter(e => e.type === HYDRATION_DIFF_EVENT)
-      .sort((a, b) => (a.origin_server_ts || 0) - (b.origin_server_ts || 0));
-    _forkEventCache.set(roomId, { events, fetched_at: Date.now() });
-    return events;
-  } catch (e) {
-    console.warn('fork events fetch failed', e);
-    return cached ? cached.events : [];
-  }
-}
-
-function _invalidateForkEventCache(roomId) {
-  _forkEventCache.delete(roomId);
-}
-
-// Fold all fork events targeting subject onto a canonical record.
-// Returns a clone with values mutated according to the fork's latest writes.
-function foldForkOnRecord(canonicalRec, forkEvents) {
-  if (!canonicalRec || !forkEvents || forkEvents.length === 0) return canonicalRec;
-  const subject = canonicalRec.record_id;
-
-  // Pick events targeting this record. Targets parse as record_id[.field.path].
-  // INS at record-level is handled elsewhere (synthesizes new records); here
-  // we only fold field-level changes onto an existing canonical record.
-  const relevant = forkEvents.filter(ev => {
-    const c = ev.content || {};
-    if (!c.target) return false;
-    const { record_id } = _eoSplitTarget(c.target);
-    return record_id === subject && (c.op === 'DEF' || c.op === 'REC');
-  });
-  if (relevant.length === 0) return canonicalRec;
-
-  const cloned = { ...canonicalRec };
-  let vals = parseValues(canonicalRec.values);
-  const _parse = v => {
-    if (typeof v === 'string' && (v.startsWith('{') || v.startsWith('['))) {
-      try { return JSON.parse(v); } catch { return v; }
-    }
-    return v;
-  };
-
-  // Apply oldest→newest (last-write-wins). REC at record level resets the
-  // frame; DEF at a field path overlays.
-  for (const ev of relevant) {
-    const c = ev.content;
-    const { path } = _eoSplitTarget(c.target);
-    const operand = _parse(c.operand);
-    if (c.op === 'REC' && !path) {
-      // Frame replacement.
-      vals = (operand && typeof operand === 'object') ? operand : vals;
-    } else if (c.op === 'DEF' && path) {
-      if (operand === EO_VOID) {
-        // -1 pole: clear the value. Set to undefined; downstream renders treat
-        // missing fields as cleared.
-        _setByPath(vals, path, undefined);
-      } else {
-        _setByPath(vals, path, operand);
-      }
-    }
-  }
-  cloned.values = typeof canonicalRec.values === 'string' ? JSON.stringify(vals) : vals;
-  cloned._foldedFromFork = currentForkId;
-  return cloned;
-}
-
-// Convenience: fold using cached events for the current fork.
-async function foldForkOnRecordAsync(canonicalRec) {
-  if (!currentForkId) return canonicalRec;
-  const fork = getCurrentFork();
-  if (!fork) return canonicalRec;
-  const events = await _fetchForkEvents(fork.roomId);
-  return foldForkOnRecord(canonicalRec, events);
-}
-
-/* ─── EO MODULE: 7-operator emit surface + Horizon read ───
-   The whole module API is seven emitting operators plus one non-emitting
-   Horizon read. Domain specificity lives in the target path and operand,
-   not in method names. See the EO notation spec.
-
-     eoEmit.ins(target, operand)   Instantiate / de-instantiate
-     eoEmit.seg(target, operand)   Draw / dissolve boundary
-     eoEmit.con(target, operand)   Connect / sever
-     eoEmit.syn(target, operand)   Merge / decompose
-     eoEmit.def(target, operand)   Define / clear value
-     eoEmit.eva(target, operand)   Evaluate / set rule
-     eoEmit.rec(target, operand)   Reframe / discard frame
-     eoHorizon.read(target)        NUL — current value at target, no emission
-
-   Target shape: 'collection:id' or 'collection:id.field.subfield'.
-   Operand:      value, related target, EO_VOID for the −1 pole, or a rule.
-   Withdrawal pole (-1): pass EO_VOID as the operand.
-*/
-const EO_EMIT_OPS = ['INS', 'SEG', 'CON', 'SYN', 'DEF', 'EVA', 'REC'];
-const EO_HELIX = ['NUL', 'SIG', 'INS', 'SEG', 'CON', 'SYN', 'DEF', 'EVA', 'REC'];
-const EO_VOID = '∅';
-
-function _eoSplitTarget(target) {
-  // 'wiki:slug.meta.title' → { record_id: 'wiki:slug', path: 'meta.title' }
-  const s = String(target);
-  const dot = s.indexOf('.');
-  if (dot < 0) return { record_id: s, path: '' };
-  return { record_id: s.slice(0, dot), path: s.slice(dot + 1) };
-}
-
-async function _eoSendForkEvent(op, target, operand, before) {
-  if (!EO_EMIT_OPS.includes(op)) throw new Error('Unknown EO operator: ' + op);
-  if (!currentForkId) throw new Error('Not on a fork');
-  if (!matrixSession) throw new Error('Matrix session required');
-  const fork = getCurrentFork();
-  if (!fork) throw new Error('Active fork not in registry');
-  const transparency = (fork.meta && fork.meta.transparency) || 'public';
-
-  const _trim = v => {
-    if (v == null) return v;
-    if (v === EO_VOID) return v;
-    const s = typeof v === 'string' ? v : JSON.stringify(v);
-    return s.length > 8000 ? s.slice(0, 8000) + '…[truncated]' : s;
-  };
-
-  const ts = Date.now();
-  const event = {
-    msgtype: HYDRATION_DIFF_EVENT,
-    body: `${op} ${target}`,
-    op,
-    target,
-    ts,
-    hydration_ref: hydrationMeta ? hydrationMeta.uri : null,
-    scope: 'fork',
-    fork_id: fork.roomId,
-  };
-  if (transparency === 'public') {
-    event.operand = _trim(operand);
-    if (before !== undefined) event.before = _trim(before);
-  }
-
-  if (transparency === 'private') {
-    _invalidateForkEventCache(fork.roomId);
-    return;
-  }
-
-  const txn = 'eo-fork-' + ts + '-' + Math.random().toString(36).slice(2, 8);
-  const path = `/_matrix/client/v3/rooms/${encodeURIComponent(fork.roomId)}/send/${encodeURIComponent(HYDRATION_DIFF_EVENT)}/${txn}`;
-  await mxFetch(path, { method: 'PUT', body: JSON.stringify(event) });
-  _invalidateForkEventCache(fork.roomId);
-}
-
-const eoEmit = {
-  ins: (target, operand, before)  => _eoSendForkEvent('INS', target, operand, before),
-  seg: (target, operand, before)  => _eoSendForkEvent('SEG', target, operand, before),
-  con: (target, operand, before)  => _eoSendForkEvent('CON', target, operand, before),
-  syn: (target, operand, before)  => _eoSendForkEvent('SYN', target, operand, before),
-  def: (target, operand, before)  => _eoSendForkEvent('DEF', target, operand, before),
-  eva: (target, operand, before)  => _eoSendForkEvent('EVA', target, operand, before),
-  rec: (target, operand, before)  => _eoSendForkEvent('REC', target, operand, before),
-  // Sequential apply — events serialize so the room receives them in order.
-  batch: async (events) => {
-    for (const e of events) await _eoSendForkEvent(e.op, e.target, e.operand, e.before);
-  },
-};
-
-// Horizon read: walk canonical + active-fork overlay to materialize the
-// current value at `target`. NUL never emits; this is the read primitive.
-const eoHorizon = {
-  read: async (target) => {
-    const { record_id, path } = _eoSplitTarget(target);
-    let rec = allRecords.find(r => r.record_id === record_id);
-    if (!rec) return undefined;
-    if (currentForkId && !rec._forkOnly) {
-      try { rec = await foldForkOnRecordAsync(rec); } catch {}
-    }
-    if (!path) return rec;
-    return _getByPath(parseValues(rec.values), path);
-  },
-};
-
-
-// Save the editor's current state as EO emissions into the active fork room.
-// Per-field changes decompose to DEF events; a raw-JSON tab edit replaces the
-// whole frame (REC). No app-specific verbs — every save is some combination of
-// the seven operators against (record_id.field) targets.
-async function saveEditToFork(saveBtn) {
-  if (!currentRec) return;
-  const oldVals = parseValues(currentRec.values);
-  const subject = currentRec.record_id;
-  const events = [];
-
-  if (editTab === 'json') {
-    let newValues;
-    try {
-      newValues = JSON.parse(document.getElementById('editJson').value);
-    } catch (e) {
-      showToast('Invalid JSON: ' + e.message, 'error');
-      return;
-    }
-    // Raw-JSON edit = frame replacement. REC carries the whole new frame.
-    events.push({ op: 'REC', target: subject, operand: newValues, before: oldVals });
-  } else {
-    let newHtml;
-    if (editTab === 'wysiwyg' && quillInstance) newHtml = quillInstance.root.innerHTML;
-    else newHtml = document.getElementById('editHtml').value;
-    newHtml = cleanPastedHtml(newHtml);
-
-    const newTitle = document.getElementById('editTitle').value.trim();
-    const newStatus = document.getElementById('editStatus').value;
-    const newTags = document.getElementById('editTags').value.split(',').map(t => t.trim()).filter(Boolean);
-    const newKeywords = document.getElementById('editKeywords').value.split(',').map(t => t.trim()).filter(Boolean);
-
-    const oldContent = extractContent(oldVals) || '';
-    const oldMeta = extractMeta(oldVals);
-
-    const def = (path, oldVal, newVal) => {
-      events.push({ op: 'DEF', target: subject + '.' + path, operand: newVal, before: oldVal });
-    };
-    if (oldContent !== newHtml) def('current_revision.content', oldContent, newHtml);
-    if (oldMeta.title !== newTitle) def('meta.title', oldMeta.title, newTitle);
-    if (oldMeta.status !== newStatus) def('meta.status', oldMeta.status, newStatus);
-    if (JSON.stringify(oldMeta.tags || []) !== JSON.stringify(newTags)) def('meta.tags', oldMeta.tags || [], newTags);
-    if (JSON.stringify(oldMeta.keywords || []) !== JSON.stringify(newKeywords)) def('meta.keywords', oldMeta.keywords || [], newKeywords);
-  }
-
-  if (events.length === 0) {
-    showToast('Nothing to save — no changes detected.');
-    isEditing = false;
-    quillInstance = null;
-    loadPage(subject);
-    return;
-  }
-
-  if (saveBtn) {
-    saveBtn.disabled = true;
-    saveBtn.innerHTML = '<i class="ph ph-spinner"></i> Saving to fork…';
-  }
-  try {
-    await eoEmit.batch(events);
-    const fork = getCurrentFork();
-    const transparency = fork && fork.meta && fork.meta.transparency;
-    showToast(transparency === 'private' ? 'Saved to fork (private — no events emitted)' : 'Saved to fork');
-    isEditing = false;
-    quillInstance = null;
-    loadPage(subject);
-  } catch (e) {
-    console.error('saveEditToFork failed', e);
-    showToast('Save failed: ' + (e.message || e), 'error');
-    if (saveBtn) {
-      saveBtn.disabled = false;
-      saveBtn.innerHTML = '<i class="ph ph-floppy-disk"></i> Save';
-    }
-  }
-}
 
 /* ═══════════════════════
    INIT
@@ -7619,68 +4965,35 @@ startCycling();
 startMeaningCycle();
 
 (async () => {
-  // Restore Matrix session first (validates with /whoami).
-  const savedMatrix = localStorage.getItem(MATRIX_SESSION_KEY);
-  if (savedMatrix) {
-    try {
-      matrixSession = JSON.parse(savedMatrix);
-      const who = await mxWhoami();
-      if (!who || who.user_id !== matrixSession.mxid) throw new Error('mxid mismatch');
-    } catch (e) {
-      console.warn('Matrix session invalid, clearing', e);
-      matrixSession = null;
-      localStorage.removeItem(MATRIX_SESSION_KEY);
-      localStorage.removeItem(SUGGESTION_ROOM_CACHE_KEY);
-    }
-  }
-
-  // Restore admin-key session. Any Matrix user with the right key is admin —
-  // verification is the SHA-256 check below.
+  // Restore the admin session from a remembered password (SHA-256 verified).
   const savedAdmin = localStorage.getItem('eo_session');
-  if (savedAdmin && matrixSession) {
+  if (savedAdmin) {
     try {
       const pw = atob(savedAdmin);
-      const hash = await sha256(pw);
-      if (hash === ADMIN_HASH) {
+      if (await sha256(pw) === ADMIN_HASH) {
         adminPassword = pw;
         isLoggedIn = true;
+        try { webhookUrl = await decryptWebhook(pw); } catch (e) { console.warn('webhook decrypt failed', e); }
       } else {
         localStorage.removeItem('eo_session');
       }
     } catch { localStorage.removeItem('eo_session'); }
-  } else if (savedAdmin && !matrixSession) {
-    // Stale admin session with no Matrix layer: drop it; admin must sign in via Matrix.
-    localStorage.removeItem('eo_session');
   }
 
-  // Apply UI for the resolved auth state.
-  if (isLoggedIn) {
-    applyAdminUI();
-    startSuggestionsPoller();
-  } else if (matrixSession) {
-    applyEditorUI();
-  }
-
-  // Render fork banner with whatever auth we have (visible to any Matrix user).
-  renderForkBanner();
-  if (matrixSession) {
-    discoverForks().catch(e => console.warn('fork discovery failed', e));
-  }
+  if (isLoggedIn) applyAdminUI();
 
   try {
-    const records = await fetchAllPages();
+    const records = await fetchAllArticles();
     buildIndex(records);
     buildSearchIndex();
     renderGetStarted();
-    // Honor initial #hash deep-link (e.g. ?/#wiki:emanon) after data is ready.
+    // Honor initial #hash deep-link (e.g. #wiki:emanon) after data is ready.
     if (location.hash && location.hash.length > 1) routeFromHash();
-    // On mobile, collapse the nav if we landed on the welcome page so the
-    // section/tag list doesn't push the welcome content out of view.
+    // On mobile, collapse the nav on the welcome page so the list doesn't push
+    // the welcome content out of view.
     else if (window.matchMedia('(max-width: 600px)').matches) {
       document.getElementById('nav').classList.add('collapsed');
     }
-    // Resolve hydration state (silent for non-admins; nudges admin if missing).
-    bootstrapHydrationOnLoad().catch(e => console.warn('hydration bootstrap', e));
   } catch (err) {
     document.getElementById('navList').innerHTML = `<div class="error">Failed to load: ${esc(err.message)}</div>`;
   }

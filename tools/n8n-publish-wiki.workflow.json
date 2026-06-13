@@ -1,0 +1,576 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "site/publish-wiki",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "ea3d0f32-ea7a-4cac-896a-efc0f103329b",
+      "name": "Publish Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -1472,
+        -48
+      ],
+      "webhookId": "site-publish"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "get",
+        "owner": "clovenbradshaw-ctrl",
+        "repository": {
+          "__rl": true,
+          "value": "eo-wiki",
+          "mode": ""
+        },
+        "filePath": "={{ $json.body ? $json.body.filename : $json.filename }}",
+        "additionalParameters": {
+          "reference": "main"
+        }
+      },
+      "id": "42971004-d856-4c7b-8ee0-0f5da36cc0b4",
+      "name": "GH Get File",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        -992,
+        -48
+      ],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "818QKPlLgc22aSHm",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build the article file content + capture SHA, then write to eo-wiki (main).\n// Body arrives as a JSON object, or a JSON string when the client sends\n// text/plain (which avoids a CORS preflight from the browser).\nconst hook = $('Publish Webhook').first().json;\nlet parsed = hook.body != null ? hook.body : hook;\nif (typeof parsed === 'string') {\n  try { parsed = JSON.parse(parsed); }\n  catch (e) { throw new Error('Build Content: body is not valid JSON'); }\n}\n\nconst filename   = parsed.filename;\nconst mode       = parsed.mode || 'overwrite';\nconst contentRaw = parsed.contentRaw != null ? String(parsed.contentRaw) : '';\nconst message    = parsed.message || ('update ' + filename);\nconst compress   = !!parsed.compress;\n\nif (!filename) {\n  throw new Error('Build Content: missing filename. Got keys: ' + Object.keys(parsed).join(','));\n}\n\n// GH Get File returns { content (base64), sha } on success, or a 404 error\n// object (continueOnFail). sha must be '' (not null) when absent.\nconst ghResp = $input.first().json || {};\nconst existingSha = ghResp.sha || '';\nconst existingB64 = ghResp.content || '';\n\nlet existingText = '';\nif (existingB64) {\n  try { existingText = Buffer.from(existingB64, 'base64').toString('utf8'); } catch (e) { existingText = ''; }\n}\n\nlet finalText;\nif (mode === 'append') {\n  const prev = existingText ? (existingText.endsWith('\\n') ? existingText : existingText + '\\n') : '';\n  const next = contentRaw.endsWith('\\n') ? contentRaw : contentRaw + '\\n';\n  finalText = prev + next;\n} else {\n  finalText = contentRaw;\n}\n\nlet b64;\nif (compress) {\n  const zlib = require('zlib');\n  b64 = zlib.gzipSync(Buffer.from(finalText, 'utf8')).toString('base64');\n} else {\n  b64 = Buffer.from(finalText, 'utf8').toString('base64');\n}\n\nreturn [{ json: { filename, message, contentBase64: b64, sha: existingSha, bytes: finalText.length } }];"
+      },
+      "id": "f5ba18d9-216f-47e6-94c5-61b334afe236",
+      "name": "Build Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -752,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.sha }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "51bcb946-c60e-423b-a74c-32adcd6a554f",
+      "name": "Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -512,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "edit",
+        "owner": "clovenbradshaw-ctrl",
+        "repository": "eo-wiki",
+        "filePath": "={{ $json.filename }}",
+        "fileContent": "={{ $json.contentBase64 }}",
+        "commitMessage": "={{ $json.message }}",
+        "additionalParameters": {
+          "branch": {}
+        }
+      },
+      "id": "8a1e3d97-c7d5-43ff-b5b9-11c05bad1912",
+      "name": "GH Update",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        -176
+      ],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "818QKPlLgc22aSHm",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "owner": "clovenbradshaw-ctrl",
+        "repository": "eo-wiki",
+        "filePath": "={{ $json.filename }}",
+        "fileContent": "={{ $json.contentBase64 }}",
+        "commitMessage": "={{ $json.message }}",
+        "additionalParameters": {
+          "branch": {}
+        }
+      },
+      "id": "e4f3366d-1b4c-4979-9254-79e49a57ac59",
+      "name": "GH Create",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        -272,
+        64
+      ],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "818QKPlLgc22aSHm",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: true, filename: $('Build Content').first().json.filename, bytes: $('Build Content').first().json.bytes }) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "db9328ca-6616-4ee5-b7c0-abe4449d58b8",
+      "name": "OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        0,
+        -48
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chain-head-wiki",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "49331abd-9ae2-42b4-811b-e9a60cfa2753",
+      "name": "Chain Head Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -912,
+        672
+      ],
+      "webhookId": "chain-head-publish"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "get",
+        "owner": "clovenbradshaw-ctrl",
+        "repository": {
+          "__rl": true,
+          "value": "eo-wiki",
+          "mode": ""
+        },
+        "filePath": "chain_head.json",
+        "additionalParameters": {
+          "reference": "main"
+        }
+      },
+      "id": "7becdcc8-4b98-4b07-ba2a-34825cc1a114",
+      "name": "GH Get File1",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        672
+      ],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "818QKPlLgc22aSHm",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build chain_head.json + capture SHA, then write to eo-wiki (main).\nconst hook = $('Chain Head Webhook').first().json;\nlet body = hook.body != null ? hook.body : hook;\nif (typeof body === 'string') {\n  try { body = JSON.parse(body); }\n  catch (e) { return [{ json: { __invalid: true, error: 'body is not valid JSON' } }]; }\n}\n\nif (!body || !body.head_id) {\n  return [{ json: { __invalid: true, error: 'missing head_id in body' } }];\n}\n\nconst text = JSON.stringify({\n  head_id:         body.head_id,\n  head_hash:       body.head_hash || null,\n  next_index:      body.next_index || 0,\n  last_block_date: body.last_block_date || null,\n  last_aggregate:  body.last_aggregate || null,\n  published_at:    new Date().toISOString(),\n}, null, 2) + '\\n';\n\nconst ghResp = $input.first().json || {};\nconst existingSha = ghResp.sha || '';\n\nreturn [{ json: {\n  filename: 'chain_head.json',\n  message: 'chain head -> ' + body.head_id + ' (block ' + ((body.next_index || 1) - 1) + ')',\n  contentBase64: Buffer.from(text, 'utf8').toString('base64'),\n  sha: existingSha,\n  bytes: text.length,\n}}];"
+      },
+      "id": "a408f7d8-af8f-48e4-a73c-9c664ff9d1a8",
+      "name": "Build Content1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -384,
+        672
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.__invalid }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6621fd07-6efa-4e38-b6bc-0d1e42d68e8e",
+      "name": "Invalid?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        -160,
+        672
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: false, error: $json.error }) }}",
+        "options": {
+          "responseCode": 400,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "3f0e8554-0416-47a5-97db-eda2fa09f163",
+      "name": "Respond Invalid",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        64,
+        544
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.sha }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b600d7b4-5eb9-40b0-9e84-ca9694a92777",
+      "name": "Exists?1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        64,
+        784
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "edit",
+        "owner": "clovenbradshaw-ctrl",
+        "repository": "eo-wiki",
+        "filePath": "chain_head.json",
+        "fileContent": "={{ $json.contentBase64 }}",
+        "commitMessage": "={{ $json.message }}",
+        "additionalParameters": {
+          "branch": {}
+        }
+      },
+      "id": "4cf13fcb-7403-4370-a348-35824eac3298",
+      "name": "GH Update1",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        288,
+        688
+      ],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "818QKPlLgc22aSHm",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "owner": "clovenbradshaw-ctrl",
+        "repository": "eo-wiki",
+        "filePath": "chain_head.json",
+        "fileContent": "={{ $json.contentBase64 }}",
+        "commitMessage": "={{ $json.message }}",
+        "additionalParameters": {
+          "branch": {}
+        }
+      },
+      "id": "c440e8ca-8967-4b64-a58d-a9a11e91c987",
+      "name": "GH Create1",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [
+        288,
+        896
+      ],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "818QKPlLgc22aSHm",
+          "name": "GitHub account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: true, filename: 'chain_head.json', head_id: ($('Chain Head Webhook').first().json.body || $('Chain Head Webhook').first().json).head_id, raw_url: 'https://raw.githubusercontent.com/clovenbradshaw-ctrl/eo-wiki/main/chain_head.json' }) }}",
+        "options": {
+          "responseCode": 200,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "7bd7ebf0-4161-41a8-9063-41040bdcb82c",
+      "name": "OK1",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        528,
+        784
+      ]
+    }
+  ],
+  "connections": {
+    "Publish Webhook": {
+      "main": [
+        [
+          {
+            "node": "GH Get File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GH Get File": {
+      "main": [
+        [
+          {
+            "node": "Build Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Content": {
+      "main": [
+        [
+          {
+            "node": "Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exists?": {
+      "main": [
+        [
+          {
+            "node": "GH Update",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GH Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GH Update": {
+      "main": [
+        [
+          {
+            "node": "OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GH Create": {
+      "main": [
+        [
+          {
+            "node": "OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chain Head Webhook": {
+      "main": [
+        [
+          {
+            "node": "GH Get File1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GH Get File1": {
+      "main": [
+        [
+          {
+            "node": "Build Content1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Content1": {
+      "main": [
+        [
+          {
+            "node": "Invalid?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Invalid?": {
+      "main": [
+        [
+          {
+            "node": "Respond Invalid",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exists?1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exists?1": {
+      "main": [
+        [
+          {
+            "node": "GH Update1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GH Create1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GH Update1": {
+      "main": [
+        [
+          {
+            "node": "OK1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GH Create1": {
+      "main": [
+        [
+          {
+            "node": "OK1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "5c737be3fd9beebae6ccb42a087a71b95589b90d613100d5ba10c73188a40d22"
+  }
+}
