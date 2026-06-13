@@ -3,7 +3,7 @@
 **Record ID:** wiki:the-experience-engine  
 **DB ID:** 44  
 **Status:** published  
-**Updated:** 2026-06-11T05:58:56.755Z  
+**Updated:** 2026-06-13T21:59:33.980Z  
 
 ---
 
@@ -32,7 +32,7 @@ The three data structures correspond to the three domains of the capacity ground
 | Structure-Lattice (*S*) | Structure | *How things connect* |
 | Meant-Graph (*M*) | Significance | *What things mean* |
 
-The three functions collectively constitute the **Horizon** — the act of looking. The Horizon is not a data structure. It is a projection: an observation of a query run against *G*, *S*, and *M* from a position within *S*. Every observation instantiates a projection. There is no unmediated access.
+The three functions collectively constitute the **Horizon** — the act of looking. The Horizon is not a data structure. It is a projection: an observation of a query run against *G*, *S*, and *M* from a position within *S*. Every observation instantiates a projection. There is no unmediated access.</p><h2>Truthfulness: What the Bar Guarantees</h2><p>The recursion has a corollary about reliability. The functions to the right of the bar need not be reliable. They may be approximate, lossy, even prone to fabrication, and the bar still holds, because the functions hold nothing. A function reads the stores, weighs, and returns a projection. It does not write. A projection that is wrong is a wrong reading, not a corrupted record. The given is untouched, and the next reading begins clean from the same stores.</p><p>This is what lets an honest system place a fallible projector to the right of the bar without surrendering the record to it. The projector may be a person, a heuristic, or a language model. It may propose, phrase, connect, and judge. It may not emit. The one discipline that keeps the system honest is that nothing crosses the bar leftward except by emission, and emission is reserved for what was given, not for what was inferred. A claim the projector cannot ground in a store is either bound to the store that carries it or marked absent. There is no third move.</p><p>Truthfulness is therefore not a property the functions achieve. It is a property the bar protects. The three Significance rules state the same thing from the interpretation side: the Meant-Graph is grounded (Rule 7, DEF), tested (Rule 8, EVA), and revisable (Rule 9, REC). Any single projection can be wrong and later superseded. What cannot happen, while the bar holds, is for a wrong projection to lower the integrity of the given it was projected from. Each reading is defeasible. The ground it reads is not.</p><p>A system built this way does not arrive at complete truthfulness. It approaches it. The record accumulates only witnessed emission, while the readings over that record are corrected without limit through the DEF to EVA to REC cycle. The asymptote is approached from below, and the bar is why the approach never reverses: no function-side error can become a store-side fact. Defeasibility keeps the door open at the top; the bar keeps the floor from sinking at the bottom. Between them the system can only grow more truthful over time, never less.
 
 ## The Given-Log (*G*)
 
