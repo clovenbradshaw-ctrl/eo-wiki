@@ -1,0 +1,48 @@
+name: Build full Markdown export
+
+# Regenerates eo-wiki.md (the full, unabridged wiki as one file) whenever
+# articles change, so https://experientialontology.org/eo-wiki.md is always
+# current. The n8n publish webhook commits article changes to main, which
+# triggers this; the regenerated commit only touches eo-wiki.md (not
+# articles/**), so it does not retrigger itself.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'articles/**'
+      - 'tools/build-full-md.js'
+      - '.github/workflows/build-full-md.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-full-md
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build eo-wiki.md
+        run: node tools/build-full-md.js eo-wiki.md
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- eo-wiki.md; then
+            echo "eo-wiki.md is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add eo-wiki.md
+          git commit -m "chore: rebuild full Markdown export (eo-wiki.md)"
+          git push

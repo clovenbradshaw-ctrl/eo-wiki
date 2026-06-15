@@ -11,6 +11,11 @@ forks/suggestions/hydration layer that sat on top of it) has been removed.
   so reads are same-origin static fetches — no server.
 - **Reading.** `index.html` fetches `articles/index.json`, then loads each
   article file and renders its Markdown body with `marked`.
+- **Full Markdown export (permanent URL).** The entire wiki, unabridged, is
+  always available as a single Markdown file at
+  **<https://experientialontology.org/eo-wiki.md>**. It is byte-for-byte the
+  in-app "Download all as Markdown" output (every article, title-ordered, joined
+  with `\n\n---\n\n---\n\n`). See "Full Markdown export" below.
 - **Editing (admin only).** Sign in with the editor password. On save, the app
   POSTs the changed file(s) to an **n8n webhook**, which commits them to this
   repo on `main`. GitHub Pages redeploys and the change goes live.
@@ -27,6 +32,28 @@ Create, edit (Markdown), search-and-replace, and bulk-edit articles, assign
 "Get started" operator cards, and download a full Markdown export. Each write
 publishes the affected `articles/<type>/<slug>.md` and refreshes
 `articles/index.json` through the webhook.
+
+## Full Markdown export
+
+The whole wiki, unabridged, lives at one stable URL:
+
+```
+https://experientialontology.org/eo-wiki.md
+```
+
+`eo-wiki.md` (repo root) is a static file served by GitHub Pages, so the URL is
+permanent — fetch it with `curl`, point an LLM at it, or open it in a browser.
+
+- **Build.** `tools/build-full-md.js` reads `articles/index.json`, concatenates
+  every article (title-ordered, `site:*` records dropped, joined with
+  `\n\n---\n\n---\n\n`) and writes `eo-wiki.md`. The output is byte-for-byte the
+  in-app "Download all as Markdown" button. Run manually with
+  `node tools/build-full-md.js`.
+- **Stays current automatically.** `.github/workflows/build-full-md.yml` reruns
+  the build on every push to `main` that touches `articles/**` (i.e. every n8n
+  publish) and commits the refreshed `eo-wiki.md`. That commit only touches
+  `eo-wiki.md`, never `articles/**`, so it does not retrigger itself. The
+  workflow can also be run on demand from the Actions tab (`workflow_dispatch`).
 
 ## n8n workflow
 
