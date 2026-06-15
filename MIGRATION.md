@@ -50,10 +50,14 @@ permanent — fetch it with `curl`, point an LLM at it, or open it in a browser.
   in-app "Download all as Markdown" button. Run manually with
   `node tools/build-full-md.js`.
 - **Stays current automatically.** `.github/workflows/build-full-md.yml` reruns
-  the build on every push to `main` that touches `articles/**` (i.e. every n8n
-  publish) and commits the refreshed `eo-wiki.md`. That commit only touches
-  `eo-wiki.md`, never `articles/**`, so it does not retrigger itself. The
-  workflow can also be run on demand from the Actions tab (`workflow_dispatch`).
+  the build on **every push to `main`** (every n8n publish lands there) and
+  commits the refreshed `eo-wiki.md` only when it actually changed. The rebuild
+  commit is pushed with the workflow's `GITHUB_TOKEN`, which by design does not
+  trigger another run, so there is no loop. If `main` moves mid-run (e.g. a
+  burst of bulk-edit publishes), the job resets to the new tip, rebuilds, and
+  retries its push — so the export always converges to the latest articles and
+  can't get stuck behind. It can also be run on demand from the Actions tab
+  (`workflow_dispatch`).
 
 ## n8n workflow
 
