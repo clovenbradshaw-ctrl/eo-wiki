@@ -1,23 +1,24 @@
 name: Build full Markdown export
 
-# Regenerates eo-wiki.md (the full, unabridged wiki as one file) whenever
-# articles change, so https://experientialontology.org/eo-wiki.md is always
-# current. The n8n publish webhook commits article changes to main, which
-# triggers this; the regenerated commit only touches eo-wiki.md (not
-# articles/**), so it does not retrigger itself.
+# Keeps eo-wiki.md — the full, unabridged wiki as one file — in sync with the
+# articles on every push to main, so https://experientialontology.org/eo-wiki.md
+# is always current.
+#
+# Article edits land on main via the n8n publish webhook, which triggers this.
+# The rebuild commit is pushed with the repo's GITHUB_TOKEN, which by design
+# does NOT trigger another workflow run, so there is no loop. We rebuild on
+# every push (no path filter) and only commit when the output actually changes,
+# so nothing can slip through.
 
 on:
   push:
     branches: [main]
-    paths:
-      - 'articles/**'
-      - 'tools/build-full-md.js'
-      - '.github/workflows/build-full-md.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
 
+# Serialize runs so two rebuilds never race each other to push.
 concurrency:
   group: build-full-md
   cancel-in-progress: false
@@ -27,22 +28,44 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
 
-      - name: Build eo-wiki.md
-        run: node tools/build-full-md.js eo-wiki.md
-
-      - name: Commit if changed
+      - name: Rebuild eo-wiki.md from the latest articles and push if changed
         run: |
-          if git diff --quiet -- eo-wiki.md; then
-            echo "eo-wiki.md is already up to date."
-            exit 0
-          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add eo-wiki.md
-          git commit -m "chore: rebuild full Markdown export (eo-wiki.md)"
-          git push
+
+          # Rebuild from the current tip and push. If main advanced while we ran
+          # (e.g. a burst of bulk-edit publishes), reset to the new tip, rebuild,
+          # and retry — so the export always converges to the latest articles and
+          # can never get stuck behind.
+          for attempt in 1 2 3 4 5; do
+            git fetch --quiet origin main
+            git reset --hard --quiet origin/main
+
+            node tools/build-full-md.js eo-wiki.md
+
+            if git diff --quiet -- eo-wiki.md; then
+              echo "eo-wiki.md is already up to date."
+              exit 0
+            fi
+
+            git add eo-wiki.md
+            git commit --quiet -m "chore: rebuild full Markdown export (eo-wiki.md)"
+
+            if git push origin HEAD:main; then
+              echo "Pushed refreshed eo-wiki.md."
+              exit 0
+            fi
+
+            echo "main advanced during the run; retrying (attempt ${attempt})..."
+            sleep "$((attempt * 3))"
+          done
+
+          echo "::error::Could not push eo-wiki.md after several attempts."
+          exit 1
