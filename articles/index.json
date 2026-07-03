@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated_at": "2026-06-13T21:59:35.254Z",
-  "count": 69,
+  "generated_at": "2026-07-03T21:13:31.000Z",
+  "count": 70,
   "articles": [
     {
       "record_id": "wiki:ancient-astronomy-eo-saving-the-appearances",
@@ -777,6 +777,27 @@
       "keywords": [],
       "updated_at": "2026-06-13T21:59:33.980Z",
       "path": "articles/wiki/the-experience-engine.md"
+    },
+    {
+      "record_id": "wiki:the-forced-measure",
+      "content_type": "wiki",
+      "slug": "the-forced-measure",
+      "title": "The Forced Measure",
+      "db_id": 72,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "born rule",
+        "gleason",
+        "quantum",
+        "measure",
+        "projection",
+        "cognition"
+      ],
+      "updated_at": "2026-07-03T21:13:31.000Z",
+      "path": "articles/wiki/the-forced-measure.md"
     },
     {
       "record_id": "wiki:the-integral-lineage",
