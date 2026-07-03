@@ -1,0 +1,6 @@
+{
+  "version": 1,
+  "comment": "\"Get started\" operator-card assignments ({slot index: record_id}). Empty means each card shows its built-in default. Edited in-app by an admin and committed here through the publish webhook, so every visitor sees the same curation.",
+  "updated": "2026-07-03T00:00:00.000Z",
+  "assignments": {}
+}

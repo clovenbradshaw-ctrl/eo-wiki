@@ -1,0 +1,476 @@
+{
+  "name": "EO Wiki — publish (GitHub-native, NPJ method)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "site/publish-eo-wiki",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000001",
+      "name": "Publish Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [-1760, 0],
+      "webhookId": "site-publish-eo-wiki"
+    },
+    {
+      "parameters": {
+        "url": "https://raw.githubusercontent.com/clovenbradshaw-ctrl/eo-wiki/main/site/auth.json",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "cb",
+              "value": "={{ Date.now() }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "neverError": true,
+              "responseFormat": "text"
+            }
+          }
+        }
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000002",
+      "name": "Fetch Auth",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [-1520, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "// NPJ-style server-side gate for the EO wiki.\n// The caller presents `Authorization: Bearer <admin key>`; its SHA-256 must\n// appear in the `admins` list of site/auth.json committed in the repo, so the\n// webhook URL itself is not a write capability.\nconst crypto = require('crypto');\nconst FILE_RE = /^(articles\\/[a-z0-9][a-z0-9._-]*\\/[a-z0-9][a-z0-9._-]*\\.md|articles\\/index\\.json|site\\/[a-z0-9][a-z0-9._-]*\\.json|eo-wiki\\.md)$/;\n\nconst hook = $('Publish Webhook').first().json;\nlet body = hook.body != null ? hook.body : hook;\nif (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }\n\nconst auth = (hook.headers && (hook.headers.authorization || hook.headers.Authorization)) || '';\nconst token = String(auth).replace(/^Bearer\\s+/i, '').trim();\nconst tokenHash = token ? crypto.createHash('sha256').update(token, 'utf8').digest('hex') : '';\n\nlet admins = [];\ntry {\n  const raw = $('Fetch Auth').first().json || {};\n  const text = typeof raw.data === 'string' ? raw.data : JSON.stringify(raw);\n  const parsed = JSON.parse(text);\n  if (parsed && Array.isArray(parsed.admins)) admins = parsed.admins.map(String);\n} catch (e) {}\n\nconst isAdmin = !!tokenHash && admins.includes(tokenHash);\nconst filename = body && body.filename ? String(body.filename) : '';\nconst mode = body && body.mode ? String(body.mode) : 'overwrite';\nconst modeOk = mode === 'overwrite' || mode === 'append' || mode === 'delete';\nconst authorized = isAdmin && !!filename && FILE_RE.test(filename) && modeOk;\nreturn [{ json: { authorized, filename, mode, role: isAdmin ? 'admin' : null } }];"
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000003",
+      "name": "Authorize",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-1280, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c-authz",
+              "leftValue": "={{ String($json.authorized === true) }}",
+              "rightValue": "true",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000004",
+      "name": "Authorized?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [-1040, 0]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify({ ok: false, error: 'unauthorized', filename: $json.filename || null }) }}",
+        "options": {
+          "responseCode": 401,
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000005",
+      "name": "Respond Unauthorized",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [-800, 176]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "get",
+        "owner": "clovenbradshaw-ctrl",
+        "repository": {
+          "__rl": true,
+          "value": "eo-wiki",
+          "mode": ""
+        },
+        "filePath": "={{ $json.filename }}",
+        "additionalParameters": {
+          "reference": "main"
+        }
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000006",
+      "name": "GH Get File",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [-800, -64],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "818QKPlLgc22aSHm",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build the commit payload. Runs only after Authorize passed.\nconst hook = $('Publish Webhook').first().json;\nlet body = hook.body != null ? hook.body : hook;\nif (typeof body === 'string') {\n  try { body = JSON.parse(body); }\n  catch (e) { throw new Error('Build Content: body is not valid JSON'); }\n}\n\nconst az = $('Authorize').first().json;\nconst filename = az.filename;\nconst mode = az.mode;\nconst contentRaw = body.contentRaw != null ? String(body.contentRaw) : '';\nconst message = body.message || ((mode === 'delete' ? 'delete ' : 'update ') + filename);\n\n// GH Get File returns { content (base64), sha } on success, or a 404 error\n// object (continueOnFail). sha must be '' (not null) when absent.\nconst ghResp = $input.first().json || {};\nconst existingSha = ghResp.sha || '';\nconst existingB64 = ghResp.content || '';\n\nlet existingText = '';\nif (existingB64) { try { existingText = Buffer.from(existingB64, 'base64').toString('utf8'); } catch (e) {} }\n\nlet finalText = contentRaw;\nif (mode === 'append') {\n  const prev = existingText ? (existingText.endsWith('\\n') ? existingText : existingText + '\\n') : '';\n  finalText = prev + (contentRaw.endsWith('\\n') ? contentRaw : contentRaw + '\\n');\n}\n\nreturn [{ json: {\n  filename, mode, message,\n  contentBase64: Buffer.from(finalText, 'utf8').toString('base64'),\n  sha: existingSha,\n  bytes: mode === 'delete' ? 0 : finalText.length,\n} }];"
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000007",
+      "name": "Build Content",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-560, -64]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "c-del",
+              "leftValue": "={{ $json.mode }}",
+              "rightValue": "delete",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000008",
+      "name": "Delete?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [-320, -64]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "delete",
+        "owner": "clovenbradshaw-ctrl",
+        "repository": "eo-wiki",
+        "filePath": "={{ $json.filename }}",
+        "commitMessage": "={{ $json.message }}",
+        "additionalParameters": {
+          "branch": {}
+        }
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000009",
+      "name": "GH Delete",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [-80, -256],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "818QKPlLgc22aSHm",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true
+          },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.sha }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000010",
+      "name": "Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [-80, -16]
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "operation": "edit",
+        "owner": "clovenbradshaw-ctrl",
+        "repository": "eo-wiki",
+        "filePath": "={{ $json.filename }}",
+        "fileContent": "={{ $json.contentBase64 }}",
+        "commitMessage": "={{ $json.message }}",
+        "additionalParameters": {
+          "branch": {}
+        }
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000011",
+      "name": "GH Update",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [160, -128],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "818QKPlLgc22aSHm",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "resource": "file",
+        "owner": "clovenbradshaw-ctrl",
+        "repository": "eo-wiki",
+        "filePath": "={{ $json.filename }}",
+        "fileContent": "={{ $json.contentBase64 }}",
+        "commitMessage": "={{ $json.message }}",
+        "additionalParameters": {
+          "branch": {}
+        }
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000012",
+      "name": "GH Create",
+      "type": "n8n-nodes-base.github",
+      "typeVersion": 1,
+      "position": [160, 96],
+      "credentials": {
+        "githubOAuth2Api": {
+          "id": "818QKPlLgc22aSHm",
+          "name": "GitHub account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalize n8n's varying GitHub error shapes into the response contract the\n// client judges on: { ok, gh_status, commit_sha, error }.\nconst gh = $input.first().json || {};\nconst build = $('Build Content').first().json || {};\nconst errObj = gh.error;\nconst errMsg = (typeof errObj === 'string' ? errObj : (errObj && (errObj.message || errObj.description))) || gh.message || null;\nconst ctx = (errObj && (errObj.context || errObj.cause)) || {};\nconst ghStatus = Number(gh.status || gh.statusCode || gh.httpCode || (errObj && (errObj.httpCode || errObj.status || errObj.statusCode)) || ctx.httpCode || ctx.statusCode || 0) || null;\nconst commitSha = (gh.commit && gh.commit.sha) || (gh.content && gh.content.sha) || null;\nconst deleted = build.mode === 'delete' && !errObj && !(ghStatus && ghStatus >= 400);\nconst hasError = !!errObj || (ghStatus && ghStatus >= 400) || (!commitSha && !deleted && !!errMsg);\nconst ok = !hasError;\nreturn [{ json: {\n  ok,\n  statusCode: ok ? 200 : (ghStatus && ghStatus >= 400 && ghStatus < 600 ? ghStatus : 502),\n  filename: build.filename,\n  mode: build.mode,\n  bytes: build.bytes,\n  commit_sha: commitSha,\n  gh_status: ghStatus,\n  error: ok ? null : (errMsg || 'github commit failed'),\n} }];"
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000013",
+      "name": "Check GH Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, -64]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "responseCode": "={{ $json.statusCode }}",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Access-Control-Allow-Origin",
+                "value": "*"
+              }
+            ]
+          }
+        }
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000014",
+      "name": "Publish OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [640, -64]
+    }
+  ],
+  "connections": {
+    "Publish Webhook": {
+      "main": [
+        [
+          {
+            "node": "Fetch Auth",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Auth": {
+      "main": [
+        [
+          {
+            "node": "Authorize",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Authorize": {
+      "main": [
+        [
+          {
+            "node": "Authorized?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Authorized?": {
+      "main": [
+        [
+          {
+            "node": "GH Get File",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Respond Unauthorized",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GH Get File": {
+      "main": [
+        [
+          {
+            "node": "Build Content",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Content": {
+      "main": [
+        [
+          {
+            "node": "Delete?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete?": {
+      "main": [
+        [
+          {
+            "node": "GH Delete",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exists?": {
+      "main": [
+        [
+          {
+            "node": "GH Update",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "GH Create",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GH Delete": {
+      "main": [
+        [
+          {
+            "node": "Check GH Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GH Update": {
+      "main": [
+        [
+          {
+            "node": "Check GH Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GH Create": {
+      "main": [
+        [
+          {
+            "node": "Check GH Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check GH Result": {
+      "main": [
+        [
+          {
+            "node": "Publish OK",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "5c737be3fd9beebae6ccb42a087a71b95589b90d613100d5ba10c73188a40d22"
+  }
+}
