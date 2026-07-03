@@ -89,13 +89,17 @@ Import `tools/n8n-publish-eo-wiki.workflow.json` (replaces the old
 `n8n-publish-wiki.workflow.json`). Node flow, modeled on NPJ's `publish-npj`:
 
 ```
-Publish Webhook → Fetch Auth → Authorize → Authorized?
+Publish Webhook → Extract Token → Hash Token → Fetch Auth → Authorize → Authorized?
   ├─ no  → Respond Unauthorized (401)
   └─ yes → GH Get File → Build Content → Delete?
              ├─ yes → GH Delete
              └─ no  → Exists? → GH Update / GH Create
            → Check GH Result → Publish OK ({ ok, gh_status, commit_sha, … })
 ```
+
+The Bearer key is hashed by the built-in **Crypto node** (`Hash Token`), so no
+Code node uses `require()` — the workflow runs even on n8n instances where
+`NODE_FUNCTION_ALLOW_BUILTIN` is unset.
 
 - **Fetch Auth** reads `site/auth.json` from
   `raw.githubusercontent.com/clovenbradshaw-ctrl/eo-wiki/main` (cache-busted),
