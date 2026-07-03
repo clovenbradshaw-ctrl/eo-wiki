@@ -704,6 +704,47 @@
   .gs-section {
     margin-top: 40px;
   }
+  /* Most recent updates */
+  .recent-section {
+    margin-top: 40px;
+    text-align: left;
+  }
+  .recent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .recent-item {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+  .recent-item:hover { background: var(--bg-nav-hover); }
+  .recent-item-title {
+    font-weight: 500;
+    color: var(--text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .recent-item-status {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--draft);
+    flex-shrink: 0;
+  }
+  .recent-item-date {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
   .gs-heading {
     font-family: 'Outfit', sans-serif;
     font-size: 13px;
@@ -2455,6 +2496,10 @@
         <div class="gs-heading">Get started</div>
         <div class="gs-grid" id="gsGrid"></div>
       </div>
+      <div class="recent-section" id="recentSection">
+        <div class="gs-heading">Most recent updates</div>
+        <div class="recent-list" id="recentList"></div>
+      </div>
     </div>
   </div>
 </main>
@@ -3461,6 +3506,10 @@ function backToIndex() {
       <div class="gs-section">
         <div class="gs-heading">Get started</div>
         <div class="gs-grid" id="gsGrid"></div>
+      </div>
+      <div class="recent-section" id="recentSection">
+        <div class="gs-heading">Most recent updates</div>
+        <div class="recent-list" id="recentList"></div>
       </div>
     </div>`;
   renderGetStarted();
@@ -4571,6 +4620,49 @@ function renderGetStarted() {
         }
         <div class="gs-dropdown" id="gsDrop${i}"></div>
       </div>`;
+  }).join('');
+
+  renderRecentUpdates();
+}
+
+/* ── Most recent updates (front page) ─────────────────────────────────── */
+
+const RECENT_COUNT = 6;
+
+function timeAgo(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  const days = Math.floor((Date.now() - d.getTime()) / 86400000);
+  if (days <= 0) return 'today';
+  if (days === 1) return 'yesterday';
+  if (days < 30) return days + ' days ago';
+  if (days < 365) { const m = Math.floor(days / 30); return m + (m === 1 ? ' month ago' : ' months ago'); }
+  return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+// The freshest articles, newest first — drafts included only for the admin.
+function renderRecentUpdates() {
+  const list = document.getElementById('recentList');
+  const section = document.getElementById('recentSection');
+  if (!list || !section) return;
+
+  let entries = indexEntries.filter(e => e.updated_at && e.status !== 'archived');
+  if (!isLoggedIn) entries = entries.filter(e => e.status === 'published');
+  entries = entries
+    .slice()
+    .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+    .slice(0, RECENT_COUNT);
+
+  if (!entries.length) { section.style.display = 'none'; return; }
+  section.style.display = '';
+  list.innerHTML = entries.map(e => {
+    const safeId = e.content_id.replace(/'/g, "\\'");
+    return `
+    <div class="recent-item" onclick="loadPage('${safeId}')">
+      <span class="recent-item-title">${esc(e.title)}</span>
+      ${e.status !== 'published' ? `<span class="recent-item-status">${esc(e.status)}</span>` : ''}
+      <span class="recent-item-date">${esc(timeAgo(e.updated_at))}</span>
+    </div>`;
   }).join('');
 }
 
