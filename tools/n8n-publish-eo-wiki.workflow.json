@@ -19,6 +19,28 @@
     },
     {
       "parameters": {
+        "jsCode": "// Pull the Bearer token and the request basics out of the webhook payload.\n// The token is hashed by the next node (the built-in Crypto node) so this\n// workflow never needs require() — Code-node built-ins are often disabled.\nconst hook = $input.first().json;\nlet body = hook.body != null ? hook.body : hook;\nif (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }\nconst auth = (hook.headers && (hook.headers.authorization || hook.headers.Authorization)) || '';\nconst token = String(auth).replace(/^Bearer\\s+/i, '').trim();\nreturn [{ json: {\n  token,\n  hasToken: !!token,\n  filename: body && body.filename ? String(body.filename) : '',\n  mode: body && body.mode ? String(body.mode) : 'overwrite',\n} }];"
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000015",
+      "name": "Extract Token",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [-1600, 0]
+    },
+    {
+      "parameters": {
+        "type": "SHA256",
+        "value": "={{ $json.token }}",
+        "dataPropertyName": "tokenHash"
+      },
+      "id": "b7a1f200-0000-4000-8000-000000000016",
+      "name": "Hash Token",
+      "type": "n8n-nodes-base.crypto",
+      "typeVersion": 1,
+      "position": [-1440, 0]
+    },
+    {
+      "parameters": {
         "url": "https://raw.githubusercontent.com/clovenbradshaw-ctrl/eo-wiki/main/site/auth.json",
         "sendQuery": true,
         "queryParameters": {
@@ -42,17 +64,17 @@
       "name": "Fetch Auth",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 4.2,
-      "position": [-1520, 0]
+      "position": [-1280, 0]
     },
     {
       "parameters": {
-        "jsCode": "// NPJ-style server-side gate for the EO wiki.\n// The caller presents `Authorization: Bearer <admin key>`; its SHA-256 must\n// appear in the `admins` list of site/auth.json committed in the repo, so the\n// webhook URL itself is not a write capability.\nconst crypto = require('crypto');\nconst FILE_RE = /^(articles\\/[a-z0-9][a-z0-9._-]*\\/[a-z0-9][a-z0-9._-]*\\.md|articles\\/index\\.json|site\\/[a-z0-9][a-z0-9._-]*\\.json|eo-wiki\\.md)$/;\n\nconst hook = $('Publish Webhook').first().json;\nlet body = hook.body != null ? hook.body : hook;\nif (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { body = {}; } }\n\nconst auth = (hook.headers && (hook.headers.authorization || hook.headers.Authorization)) || '';\nconst token = String(auth).replace(/^Bearer\\s+/i, '').trim();\nconst tokenHash = token ? crypto.createHash('sha256').update(token, 'utf8').digest('hex') : '';\n\nlet admins = [];\ntry {\n  const raw = $('Fetch Auth').first().json || {};\n  const text = typeof raw.data === 'string' ? raw.data : JSON.stringify(raw);\n  const parsed = JSON.parse(text);\n  if (parsed && Array.isArray(parsed.admins)) admins = parsed.admins.map(String);\n} catch (e) {}\n\nconst isAdmin = !!tokenHash && admins.includes(tokenHash);\nconst filename = body && body.filename ? String(body.filename) : '';\nconst mode = body && body.mode ? String(body.mode) : 'overwrite';\nconst modeOk = mode === 'overwrite' || mode === 'append' || mode === 'delete';\nconst authorized = isAdmin && !!filename && FILE_RE.test(filename) && modeOk;\nreturn [{ json: { authorized, filename, mode, role: isAdmin ? 'admin' : null } }];"
+        "jsCode": "// NPJ-style server-side gate for the EO wiki.\n// The caller presents `Authorization: Bearer <admin key>`; its SHA-256 (from\n// the Hash Token crypto node) must appear in the `admins` list of\n// site/auth.json committed in the repo, so the webhook URL itself is not a\n// write capability. No require() — works with Code-node built-ins disabled.\nconst FILE_RE = /^(articles\\/[a-z0-9][a-z0-9._-]*\\/[a-z0-9][a-z0-9._-]*\\.md|articles\\/index\\.json|site\\/[a-z0-9][a-z0-9._-]*\\.json|eo-wiki\\.md)$/;\n\nconst ex = $('Hash Token').first().json || {};\nconst tokenHash = ex.hasToken ? String(ex.tokenHash || '').toLowerCase() : '';\n\nlet admins = [];\ntry {\n  const raw = $('Fetch Auth').first().json || {};\n  const text = typeof raw.data === 'string' ? raw.data : JSON.stringify(raw);\n  const parsed = JSON.parse(text);\n  if (parsed && Array.isArray(parsed.admins)) admins = parsed.admins.map(s => String(s).toLowerCase());\n} catch (e) {}\n\nconst isAdmin = !!tokenHash && admins.includes(tokenHash);\nconst filename = ex.filename || '';\nconst mode = ex.mode || 'overwrite';\nconst modeOk = mode === 'overwrite' || mode === 'append' || mode === 'delete';\nconst authorized = isAdmin && !!filename && FILE_RE.test(filename) && modeOk;\nreturn [{ json: { authorized, filename, mode, role: isAdmin ? 'admin' : null } }];"
       },
       "id": "b7a1f200-0000-4000-8000-000000000003",
       "name": "Authorize",
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
-      "position": [-1280, 0]
+      "position": [-1120, 0]
     },
     {
       "parameters": {
@@ -83,7 +105,7 @@
       "name": "Authorized?",
       "type": "n8n-nodes-base.if",
       "typeVersion": 2.2,
-      "position": [-1040, 0]
+      "position": [-960, 0]
     },
     {
       "parameters": {
@@ -316,6 +338,28 @@
   ],
   "connections": {
     "Publish Webhook": {
+      "main": [
+        [
+          {
+            "node": "Extract Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Token": {
+      "main": [
+        [
+          {
+            "node": "Hash Token",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Hash Token": {
       "main": [
         [
           {
