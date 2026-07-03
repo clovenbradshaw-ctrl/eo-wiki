@@ -2608,13 +2608,28 @@
 const ARTICLES_DIR = 'articles';
 const MANIFEST_URL = ARTICLES_DIR + '/index.json';
 
-// Edits are published through an n8n webhook that commits the file to GitHub.
-// The webhook URL is NOT in the source: it is AES-GCM encrypted under a key
-// derived (PBKDF2) from the admin password and decrypted in memory only after
-// a correct admin login. Viewing source reveals nothing usable.
-const WEBHOOK_ENC = 'ozDZJBbXejzhi0ihxThO7VfIohnsMI1tVo/A8++2rvYWnhlpbIU2bVfwxp4on+i4yrdSJoF/xWuNJFZX5ah/AcjEXy37g0T125OyATSQJeFDtMAjo2jGdgqXu29XRTV5';
-const WEBHOOK_PBKDF2_ITERATIONS = 200000;
-let webhookUrl = '';  // set on admin login; '' means publishing is unavailable
+// Edits are published through an n8n webhook that commits the file to GitHub
+// (the NPJ method). The endpoint is public — authorization is enforced
+// SERVER-SIDE: the app sends `Authorization: Bearer <admin key>`, the workflow
+// SHA-256-hashes it and only commits when the hash appears in the `admins`
+// list of `site/auth.json` committed in this repo. See MIGRATION.md.
+const DEFAULT_PUBLISH_ENDPOINT = 'https://n8n.intelechia.com/webhook/site/publish-eo-wiki';
+const PUBLISH_CFG_KEY = 'eo_publish_cfg_v1';      // { endpoint } local override
+const PUBLISH_RECEIPTS_KEY = 'eo_publish_receipts_v1';
+const PUBLISH_TIMEOUT_MS = 120000;
+// A 408/429/5xx with NO JSON body is the gateway in front of n8n hiccuping —
+// retryable. A body-carrying response is a real verdict and is judged on the
+// body, never retried (except a GitHub 409/422 blob-SHA race).
+const PUBLISH_TRANSIENT_STATUS = new Set([408, 429, 502, 503, 504]);
+const PUBLISH_RETRY_BACKOFF_MS = [600, 1500, 3000];
+
+function publishEndpoint() {
+  try {
+    const cfg = JSON.parse(localStorage.getItem(PUBLISH_CFG_KEY) || 'null');
+    if (cfg && typeof cfg.endpoint === 'string' && /^https:\/\//.test(cfg.endpoint)) return cfg.endpoint;
+  } catch {}
+  return DEFAULT_PUBLISH_ENDPOINT;
+}
 
 const EO_MEANINGS = ['Experiential Ontology', 'Existential Ontology', 'Emergent Ontology'];
 let meaningIndex = 0;
@@ -2780,34 +2795,77 @@ async function fetchAllArticles() {
   }));
 }
 
-/* ── Publish (admin only) ─────────────────────────────────────────────── */
+/* ── Publish (admin only) — NPJ-style GitHub-native write path ────────── */
 
-// Decrypt the n8n webhook URL from WEBHOOK_ENC using a key derived from the
-// admin password. Only ever called after the password matches ADMIN_HASH.
-async function decryptWebhook(password) {
-  const raw = atob(WEBHOOK_ENC);
-  const bytes = new Uint8Array(raw.length);
-  for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
-  const salt = bytes.slice(0, 16), iv = bytes.slice(16, 28), data = bytes.slice(28);
-  const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(password), 'PBKDF2', false, ['deriveKey']);
-  const key = await crypto.subtle.deriveKey(
-    { name: 'PBKDF2', salt, iterations: WEBHOOK_PBKDF2_ITERATIONS, hash: 'SHA-256' },
-    km, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
-  const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
-  return new TextDecoder().decode(plain);
+const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+// Keep a small local trail of successful commits, like NPJ's publish receipts.
+function saveReceipt(receipt) {
+  try {
+    const all = JSON.parse(localStorage.getItem(PUBLISH_RECEIPTS_KEY) || '[]');
+    all.push(receipt);
+    localStorage.setItem(PUBLISH_RECEIPTS_KEY, JSON.stringify(all.slice(-100)));
+  } catch {}
 }
 
-async function publishFile(filename, contentRaw, message) {
-  if (!webhookUrl) throw new Error('Admin login required to publish.');
-  // Sent as text/plain so the browser treats this as a CORS "simple request"
-  // (no preflight). The n8n webhook parses the JSON string from the body.
-  const res = await fetch(webhookUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
-    body: JSON.stringify({ filename, mode: 'overwrite', contentRaw, message: message || ('update ' + filename) }),
-  });
-  if (!res.ok) throw new Error(`publish ${res.status}: ${await res.text().catch(() => '')}`);
-  return res.json().catch(() => ({}));
+// POST one file to the publish webhook, which verifies the Bearer key against
+// site/auth.json and commits to this repo via the GitHub Contents API.
+// Retries only genuine gateway blips (no JSON body) and GitHub 409/422 blob-SHA
+// races; a structured { ok:false } verdict from the workflow fails fast.
+// Safe to retry: every call overwrites the SAME file with bytes computed once.
+async function publishFile(filename, contentRaw, message, mode = 'overwrite') {
+  if (!isLoggedIn || !adminPassword) throw new Error('Admin login required to publish.');
+  const body = JSON.stringify({ filename, mode, contentRaw, message: message || ('update ' + filename) });
+  const endpoint = publishEndpoint();
+
+  let lastErr = null;
+  for (let attempt = 0; attempt <= PUBLISH_RETRY_BACKOFF_MS.length; attempt++) {
+    if (attempt > 0) await sleep(PUBLISH_RETRY_BACKOFF_MS[attempt - 1]);
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), PUBLISH_TIMEOUT_MS);
+    let res;
+    try {
+      res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + adminPassword },
+        body,
+        signal: ctrl.signal,
+      });
+    } catch (e) {
+      // No HTTP answer at all (offline, DNS, timeout) — transient by nature.
+      lastErr = new Error('publish failed (network error)');
+      continue;
+    } finally {
+      clearTimeout(timer);
+    }
+    if (res.status === 401 || res.status === 403) {
+      throw new Error('unauthorized — the webhook rejected this admin key');
+    }
+
+    let data = null;
+    try { data = await res.json(); } catch {} // HTML/empty body → no contract
+
+    if (res.ok && !(data && data.ok === false)) {
+      saveReceipt({ filename, commit_sha: (data && data.commit_sha) || null, bytes: (data && data.bytes) || contentRaw.length, published_at: new Date().toISOString() });
+      return data || { ok: true };
+    }
+
+    // A structured failure from the workflow is a real verdict, even on a 502.
+    // Only a GitHub 409/422 blob-SHA race is worth a re-POST.
+    if (data && (data.ok === false || data.error || data.gh_status)) {
+      const ghStatus = data.gh_status || null;
+      const err = new Error('publish rejected' + (data.error ? ' — ' + data.error : '') + (ghStatus ? ' (GitHub ' + ghStatus + ')' : ''));
+      if ((ghStatus === 409 || ghStatus === 422) && attempt < PUBLISH_RETRY_BACKOFF_MS.length) { lastErr = err; continue; }
+      throw err;
+    }
+
+    if (PUBLISH_TRANSIENT_STATUS.has(res.status)) {
+      lastErr = new Error('the publishing service is temporarily unavailable (' + res.status + ')');
+      continue;
+    }
+    throw new Error('publish failed (' + res.status + ')');
+  }
+  throw lastErr || new Error('publish failed');
 }
 
 // Rebuild the manifest from the in-memory records (skips any site:* records).
@@ -2927,21 +2985,18 @@ async function doAdminKey() {
   }
   adminPassword = key;
   isLoggedIn = true;
-  // Reveal the publish webhook now that the correct password is known.
-  try { webhookUrl = await decryptWebhook(key); }
-  catch (e) { console.warn('webhook decrypt failed', e); webhookUrl = ''; }
   const remember = document.getElementById('rememberMe');
   if (remember && remember.checked) localStorage.setItem('eo_session', btoa(key));
   hideLogin();
   applyAdminUI();
   showToast('Signed in');
+  migrateLocalGetStarted();
   if (currentRec) loadPage(currentRec.record_id);
 }
 
 async function doLogout() {
   isLoggedIn = false;
   adminPassword = '';
-  webhookUrl = '';
   localStorage.removeItem('eo_session');
   applyLoggedOutUI();
   if (currentRec) loadPage(currentRec.record_id);
@@ -3942,7 +3997,7 @@ async function doReplaceAll() {
       }
 
       // Update displayName too. record_id is intentionally left unchanged so the
-      // article's file path stays stable (the webhook can't delete an orphan).
+      // article's file path (and every deep link to it) stays stable.
       let newDisplay = fresh.displayName;
       if (typeof fresh.displayName === 'string') newDisplay = fresh.displayName.replace(regex, replace);
 
@@ -4406,17 +4461,87 @@ const OPERATORS = [
   { sigil: '⊛', defaultId: 'wiki:the-experience-engine' },
 ];
 
+// "Get started" card assignments are site data, stored natively on GitHub as
+// site/getstarted.json (every visitor sees the admin's curation). localStorage
+// is only a cache/offline fallback; admin edits publish through the webhook.
 const GS_KEY = 'eo-wiki-getstarted';
+const GS_FILE = 'site/getstarted.json';
+let gsMapping = null;        // in-memory assignments once loaded
+let gsNeedsMigration = false; // remote absent/empty while this browser has legacy data
+let gsPublishTimer = null;
 
-function getGSMapping() {
+function localGSMapping() {
   try {
     const raw = localStorage.getItem(GS_KEY);
     return raw ? JSON.parse(raw) : {};
   } catch { return {}; }
 }
 
+// Fetch the committed assignments (same-origin static file on GitHub Pages).
+// Assignments saved before GitHub storage existed live only in this browser's
+// localStorage; when the committed file is missing or still empty, keep showing
+// them and flag them for migration (published on the next admin login).
+async function loadGetStarted() {
+  const legacy = localGSMapping();
+  try {
+    const res = await fetch(GS_FILE + '?t=' + Date.now(), { cache: 'no-store' });
+    if (res.ok) {
+      const j = await res.json();
+      const remote = (j && j.assignments && typeof j.assignments === 'object') ? j.assignments : {};
+      if (!Object.keys(remote).length && Object.keys(legacy).length) {
+        gsMapping = legacy;
+        gsNeedsMigration = true;
+      } else {
+        gsMapping = remote;
+        try { localStorage.setItem(GS_KEY, JSON.stringify(remote)); } catch {}
+      }
+      return;
+    }
+    if (res.status === 404) gsNeedsMigration = Object.keys(legacy).length > 0;
+  } catch {}
+  gsMapping = legacy; // offline / not yet committed → cached copy
+}
+
+function getGSMapping() {
+  if (!gsMapping) gsMapping = localGSMapping();
+  return gsMapping;
+}
+
 function saveGSMapping(map) {
+  gsMapping = map;
   try { localStorage.setItem(GS_KEY, JSON.stringify(map)); } catch {}
+  schedulePublishGetStarted();
+}
+
+// Debounced so a burst of card edits lands as one commit.
+function schedulePublishGetStarted() {
+  if (!isLoggedIn) return;
+  clearTimeout(gsPublishTimer);
+  gsPublishTimer = setTimeout(() => {
+    publishGetStarted().catch(err => {
+      console.error('get-started publish failed', err);
+      showToast('Get-started publish failed: ' + err.message, 'error');
+    });
+  }, 800);
+}
+
+async function publishGetStarted() {
+  const text = JSON.stringify({
+    version: 1,
+    updated: new Date().toISOString(),
+    assignments: getGSMapping(),
+  }, null, 2) + '\n';
+  await publishFile(GS_FILE, text, 'update get-started assignments');
+  gsNeedsMigration = false;
+}
+
+// One-time move of assignments that pre-date GitHub storage: publish this
+// browser's legacy localStorage assignments the first time an admin signs in.
+function migrateLocalGetStarted() {
+  if (!gsNeedsMigration || !isLoggedIn) return;
+  publishGetStarted()
+    .then(() => showToast('Get-started assignments moved to GitHub'))
+    .catch(err => console.warn('get-started migration failed', err));
 }
 
 function renderGetStarted() {
@@ -4973,7 +5098,6 @@ startMeaningCycle();
       if (await sha256(pw) === ADMIN_HASH) {
         adminPassword = pw;
         isLoggedIn = true;
-        try { webhookUrl = await decryptWebhook(pw); } catch (e) { console.warn('webhook decrypt failed', e); }
       } else {
         localStorage.removeItem('eo_session');
       }
@@ -4983,10 +5107,11 @@ startMeaningCycle();
   if (isLoggedIn) applyAdminUI();
 
   try {
-    const records = await fetchAllArticles();
+    const [records] = await Promise.all([fetchAllArticles(), loadGetStarted()]);
     buildIndex(records);
     buildSearchIndex();
     renderGetStarted();
+    if (isLoggedIn) migrateLocalGetStarted();
     // Honor initial #hash deep-link (e.g. #wiki:emanon) after data is ready.
     if (location.hash && location.hash.length > 1) routeFromHash();
     // On mobile, collapse the nav on the welcome page so the list doesn't push
