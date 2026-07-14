@@ -795,383 +795,104 @@ The nine operators arise from crossing these two axes. The cell address is Mode 
 **Record ID:** wiki:canonical-examples-the-resolution-face  
 **DB ID:** 61  
 **Status:** published  
-**Updated:** 2026-03-19T01:25:52.015Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
-> *Each position defined by what the embedding space actually finds geometrically characteristic of it — the top-ranked clauses by discrimination margin. The Site face answers: where in reality is the target located? It crosses Domain with Object, describing the phenomenological terrain before any operation is performed.*
+> *The Resolution face (also called the **Stance** face) answers: in what **manner**, and at what **grain**, is the engagement carried out? It crosses **Mode** with **Object** — how something acts with what kind of thing it acts on — and yields the nine stances. Where the [Act face](/canonical-example-the-act-face-the-operators) names the operator and the [Site face](/canonical-examples-the-site-face) names the terrain, the Resolution face names the manner of resolution.*
 
 ---
 
-The Site face is **Domain × Object** — the crossing of *what level of reality the target belongs to* with *what grain of object it is*.
+> **Editorial note (2026-07): correction in progress.** This article previously contained, by a copy error, the body of the [Site face](/canonical-examples-the-site-face) article — the same terrains and the same clause tables, mislabeled. That content has been removed. What follows is the **correct** Resolution/Stance face: its axes and its nine stances, taken from the implementation's canonical table (`src/core/cube.js`, `STANCES`). The per-language *top-exemplars-by-discrimination-margin* tables that the Act and Site face articles carry are **not yet computed for the Stance face** and are marked as pending below rather than borrowed from another face.
 
-| Domain axis (Q2) | Object axis (Q3) |
+---
+
+The Resolution face is **Mode × Object** — the crossing of *how the transformation acts* with *what grain of object it targets*.
+
+| Mode axis (Q1) | Object axis (Q3) |
 | --- | --- |
-| EXISTENCE — being, presence, the substrate of the real | CONDITION — ambient background, ground, what is present before anything is picked out |
-| STRUCTURE — organization, relation, system | ENTITY — a specific thing, graspable, nameable, discrete |
-| SIGNIFICANCE — meaning, interpretation, value, the frame | PATTERN — a recurring regularity, a type, a category |
+| DIFFERENTIATING — pull apart, withdraw, distinguish | CONDITION — ambient background, ground, what is present before anything is picked out |
+| RELATING — bind, hold, connect | ENTITY — a specific thing, graspable, nameable, discrete |
+| GENERATING — produce, push outward | PATTERN — a recurring regularity, a type, a category |
 
-The nine terrain types arise from crossing these two axes. The cell address is Domain × Object.
+The nine stances arise from crossing these two axes. The cell address is Mode × Object.
 
----
+| | **Condition** (Ground) | **Entity** (Figure) | **Pattern** |
+| --- | --- | --- | --- |
+| **Differentiating** | Clearing | Dissecting | Unraveling |
+| **Relating** | Tending | Binding | Tracing |
+| **Generating** | Cultivating | Making | Composing |
 
-## Void — EXISTENCE × CONDITION
-
-**The ambient substrate of being.** What is present as background before anything is picked out — weather, atmosphere, the condition of a region before any particular event occurs in it.
-
-**Top 25 exemplars by discrimination margin:**
-
-| # | Language | Δ | Original | Translation |
-| --- | --- | --- | --- | --- |
-| 1 | Hindi | 0.092 | उत्तर भारत के कई स्थानों में बृहस्पतिवार की सुबह तक भारी वर्षा रिकॉर्ड की गई। | Heavy rainfall was recorded at several locations in northern India until Thursday morning. |
-| 2 | Tamil | 0.074 | 2022-ம் ஆண்டில் ஜெர்மனியில் அணுஉலைக் கூடங்களே இல்லாத நிலை ஏற்பட வேண்டும் என்பது தான் அது. | That is the goal that there should be a situation in Germany in 2022 where there are no nuclear reactors at all. |
-| 3 | Hindi | 0.072 | सप्ताह के दौरान औसत से ३२ फीसदी कम पानी बरसा। | Rainfall during the week was 32 percent below average. |
-| 4 | Portuguese | 0.071 | Porque a produção por hectare em África tem diminuído drasticamente, o campo está a desertificar-se. | Because production per hectare in Africa has decreased drastically, the countryside is becoming desert. |
-| 5 | Vietnamese | 0.070 | Trời tối hẳn và đối tượng chìm vào biển người hối hả... | The sky went completely dark and the subject was swallowed into a sea of rushing people... |
-| 6 | Korean | 0.069 | 1월에는 20여 년 만에 발생한 기록적인 한파와 폭설로 인해 여러 가지 사건 사고가 발생했다. | In January, record-breaking cold and heavy snowfall not seen in over 20 years caused various incidents and accidents. |
-| 7 | Hindi | 0.063 | देश का एक तिहाई हिस्सा सूखे की चपेट में आ चुका है। | A third of the country has already been gripped by drought. |
-| 8 | Korean | 0.063 | 그러나 다음날인 6일 새벽에는 대전을 비롯한 충청지역에 비 내리는 곳이 많겠다. | However, in the early morning of the 6th, the next day, rain is expected in many areas including Daejeon and the Chungcheong region. |
-| 9 | Urdu | 0.062 | ضلع عادل آباد کے اطراف و اکناف کے مواضعات میں بھی تیز بارش گرج چمک کے دوران ہونے کی اطلاعات ملی ہیں۔ | Reports have been received of heavy rain with thunder and lightning in the villages around and about Adilabad district. |
-| 10 | Tamil | 0.061 | அணுசக்தி ஒப்பந்தம் கையெழுத்தானதால் அத்துறையிலும் இனி இரு நாடுகளும் கூட்டாக ஈடுபடும் வாய்ப்பு பிரகாசமடைந்துள்ளது. | Since the nuclear agreement has been signed, the opportunity for the two countries to cooperate in that field has also brightened. |
-| 11 | Tamil | 0.061 | இதனால், தமிழகத்தின் வாழ்வாதரங்களுக்கு பாதுகாப்பற்ற சூழல் நிலவுகிறது. | Because of this, an unsafe environment prevails for the livelihoods of Tamil Nadu. |
-| 12 | Italian | 0.058 | la luce solare si offuscò e i funghi ereditarono la terra. | The sunlight darkened and the fungi inherited the earth. |
-| 13 | Dutch | 0.057 | Het regende gisteren klachten in 't Rijnmondgebied over luchtverontreiniging. | Yesterday it rained complaints in the Rhine-Maas delta region about air pollution. |
-| 14 | Urdu | 0.057 | برقی پراجکٹس کے قیام میں حکومت کی بدنیتی کی وجہ سے مقامی عوام کو مسائل کا خطرہ ہے۔ | Due to the government's bad faith in establishing power projects, local people face the threat of problems. |
-| 15 | Hindi | 0.053 | असम में ९० लाख से ज्यादा लोग बाढ़ से प्रभावित हुए हैं। | More than 9 million people in Assam have been affected by flooding. |
-| 16 | Hindi | 0.053 | देश अभी बिजली की १३ फीसदी कमी से जूझ रहा है। | The country is currently struggling with a 13 percent power deficit. |
-| 17 | Chinese | 0.052 | 春天天氣週期變化，也可能因寒冷旋渦的影響出現雷雨。 | Spring weather changes cyclically and thunderstorms may also occur due to the influence of cold vortices. |
-| 18 | Portuguese | 0.050 | Muita dessa desertificação tem sido disfarçada com o uso crescente de adubos, não tanto em África como na Índia e noutros sítios. | Much of this desertification has been disguised by the increasing use of fertilizers, not so much in Africa as in India and other places. |
-| 19 | Korean | 0.045 | 사람이 없는 곳이라 스피커도 고음에서 찢어지는 소리 남. | Since there is no one there, the speaker also makes a tearing sound at high volume. |
-| 20 | Finnish | 0.043 | Taivas oli tähtikirkas ja pakkanen, laskiessaan yöllä 20 asteeseen, ripisteli puiden latvoja ja paukutteli torpan seinämiä. | The sky was star-clear and the frost, dropping to 20 degrees at night, was nipping at the treetops and cracking the walls of the cottage. |
-| 21 | Spanish | 0.043 | Como se ve si una de las dos fuerzas fallase los acontecimientos se sucederían muy repentinamente hasta volver a recuperar el equilibrio. | As can be seen, if one of the two forces were to fail, events would unfold very rapidly until equilibrium was restored. |
-| 22 | Polish | 0.042 | Księżyc wypłynął zza chmury, w trawie potrzaskiwały świerszcze. | The moon emerged from behind a cloud; crickets chirped in the grass. |
-| 23 | Ukrainian | 0.041 | З того часу не стало на землі ясного спокою, потьмарилась блискуча божа мрія. | Since then, clear peace has gone from the earth, the shining divine dream has grown dark. |
-| 24 | Hindi | 0.041 | इस मंदिर में अखंड धूनी जलती रहती है। | In this temple an unceasing sacred fire burns continuously. |
-| 25 | Spanish | 0.041 | Las habitaciones tenian las paredes desconchadas, no funcionaba el aire acondicionado en ninguna de las habitaciones... | The rooms had peeling walls, the air conditioning didn't work in any of the rooms... |
-
-**Language weights:** Hindi (7), Tamil (3), Korean (3), Urdu (2), Portuguese (2), Spanish (2), Vietnamese, Italian, Dutch, Chinese, Finnish, Polish, Ukrainian.
-
-**Term/semantic pattern:** Ambient conditions as subject — rainfall recorded, drought spreading, frost at night, a region in darkness. Void clauses have no specific agent and no discrete event; they describe the condition of a territory or environment as a whole before anything particular happens in it.
+A stance shares its **Mode** with the operator of the same row and its **grain** with the terrain of the same column, so every cell of the cube can be read three ways at once — `operator(Site, Stance)` — the operator (what transformation), the terrain (where in reality), and the stance (in what manner). See [The Three Faces of Emergent Ontology](/the-three-faces-of-emergent-ontology).
 
 ---
 
-## Entity — EXISTENCE × ENTITY
+## Clearing — DIFFERENTIATING × CONDITION
 
-**A specific existent.** This person, this object, this event — discrete, graspable, nameable. The most concrete terrain in the capacity ground.
+**Dissolves ambient conditions.** Withdrawal applied to a ground: clearing the field, letting a background state lapse, removing an ambient constraint rather than any particular thing.
 
-**Top 25 exemplars by discrimination margin:**
+*Empirical top-exemplars by discrimination margin: pending Stance-face discrimination run.*
 
-| # | Language | Δ | Original | Translation |
-| --- | --- | --- | --- | --- |
-| 1 | French | 0.089 | Il renoua avec le succès vers la fin de la guerre, avant de mourir en 1925. | He regained success toward the end of the war, before dying in 1925. |
-| 2 | French | 0.083 | Vers la même période (la date est incertaine), ils détruisirent une légion romaine. | Around the same period (the date is uncertain), they destroyed a Roman legion. |
-| 3 | Italian | 0.083 | Poco dopo li fucilarono davanti a una folla delirante. | Shortly after, they shot them before a delirious crowd. |
-| 4 | Japanese | 0.077 | 男性は全身を強打してまもなく死亡。 | The man suffered injuries all over his body and soon died. |
-| 5 | French | 0.075 | En juillet 1941, une première attaque aérienne s'abattit sur la ville, quatre autres suivirent. | In July 1941, a first air attack struck the city; four others followed. |
-| 6 | English | 0.075 | The CURSE OF GOD carried on until he was shot dead. | — |
-| 7 | Japanese | 0.073 | 2007年12月26日に発売された2008年2月号で休刊。 | The February 2008 issue, released on December 26, 2007, was the final issue. |
-| 8 | German | 0.072 | Ein halbes Jahr später operierte man ihr einen kindskopfgroßen Tumor aus dem Darm. | Half a year later, a tumor the size of a child's head was surgically removed from her intestine. |
-| 9 | French | 0.072 | Celui-ci fait 5 000 morts mais s'arrête juste devant une petite chapelle dédiée à Marie. | This one caused 5,000 deaths but stopped just in front of a small chapel dedicated to Mary. |
-| 10 | Spanish | 0.071 | Falleció en la ciudad de Mérida en 1943. | He died in the city of Mérida in 1943. |
-| 11 | Dutch | 0.070 | De achttienjarige schippersknecht J. J. Christiaansen uit Breskens is vannacht door koolmonoxydevergiftiging om het leven gekomen. | The eighteen-year-old boathand J. J. Christiaansen from Breskens died last night of carbon monoxide poisoning. |
-| 12 | Hebrew | 0.070 | כתוצאה מזריקת אבנים לעבר אוטובוס ישראלי בחלחול, נפצעה ביום שישי קל תיירת בראשה. | As a result of stone-throwing at an Israeli bus in Halhul, a tourist was slightly wounded in the head on Friday. |
-| 13 | Hebrew | 0.069 | משאית פגעה במכוניתו, והוא נהרג במקום. | A truck struck his car and he was killed on the spot. |
-| 14 | Tamil | 0.069 | ரம்ஜானை முன்னிட்டு நல்லெண்ண நடவடிக்கையாக, பாகிஸ்தான் நாட்டைச் சேர்ந்த 85 கைதிகள் விடுதலை செய்யப்படுவதாக இந்தியா இன்று அறிவித்தது. | As a goodwill gesture ahead of Ramadan, India today announced the release of 85 prisoners belonging to Pakistan. |
-| 15 | Hungarian | 0.068 | A szobrot 1925-ben I. világháborús emlékműként a Budapesti Műszaki Egyetem udvarán állították fel. | The statue was erected in 1925 as a World War I memorial in the courtyard of the Budapest University of Technology. |
-| 16 | French | 0.068 | Le conflit dure un jour et Goshou perd la vie. | The conflict lasts one day and Goshou loses his life. |
-| 17 | Tamil | 0.068 | உக்ரைன் நாட்டில் பஸ் ஒன்றின் மீது ரயில் மோதியதில் 37 பேர் உயிரிழந்தனர். | In Ukraine, 37 people lost their lives when a train collided with a bus. |
-| 18 | Spanish | 0.067 | Muere el 21 de julio de 1984. | He dies on July 21, 1984. |
-| 19 | Tamil | 0.066 | அதிமுக பொதுச் செயலாளர் ஜெயலலிதா, மதுரையில் அக்டோபர் 18-ல் நடைபெறும் கட்சி மாநாட்டில் கலந்து கொள்வதையொட்டி... | AIADMK General Secretary Jayalalithaa, in connection with her attending the party conference in Madurai on October 18... |
-| 20 | Portuguese | 0.066 | O caso ocorreu numa noite de 1978, na ilha de Carvalo, ao largo da Córsega. | The incident occurred on a night in 1978, on the island of Carvalo, off the coast of Corsica. |
-| 21 | French | 0.066 | Son tombeau y fut retrouvé lorsque les ruines furent explorées au XIXe siècle. | His tomb was found there when the ruins were explored in the 19th century. |
-| 22 | Arabic | 0.065 | وأثارت هذه العملية تظاهرات دامية في الأراضي الفلسطينية في أيلول/سبتمبر 1996 أوقعت أكثر من 80 قتيلاً. | This operation sparked bloody protests in the Palestinian territories in September 1996, causing more than 80 deaths. |
-| 23 | Dutch | 0.065 | Hij liep een shock op en kneusde enkele ribben. | He went into shock and bruised several ribs. |
-| 24 | Urdu | 0.065 | اتنے میں تیسرے نوجوان نے اپنا عمل پورا کیا جس سے شیر کے مردہ جسم میں جان آ گئی۔ | At that point the third young man completed his act, which brought life back into the dead body of the lion. |
-| 25 | English | 0.064 | One week after that declaration, ONLY ONE WEEK LATER, Brian Epstein, forger of the Beatle farce, died from an overdose. | — |
+## Dissecting — DIFFERENTIATING × ENTITY
 
-**Language weights:** French (7), Tamil (3), Spanish (2), Hebrew (2), Dutch (2), Japanese (2), Italian, German, English (2), Hungarian, Portuguese, Arabic, Urdu.
+**Takes a specific thing apart.** Differentiation aimed at a particular: separating a discrete entity into its components, analysis in the literal sense.
 
-**Term/semantic pattern:** Specific deaths, specific dates, specific named persons and their fates. Entity is the terrain of historical chronicle — this person died on this date in this place; this event occurred; this name became this fact. French historical prose is the dominant carrier, consistently describing discrete irreversible events involving named individuals.
+*Empirical top-exemplars by discrimination margin: pending.*
 
----
+## Unraveling — DIFFERENTIATING × PATTERN
 
-## Kind — EXISTENCE × PATTERN
+**Deconstructs a regularity.** Differentiation aimed at a type or structure: pulling apart a pattern to show it was contingent, denaturalizing a regularity.
 
-**A type or category.** Not any particular instance but the recurring class — the regularity of a species, a demographic, a disease category. Existence is patterned here rather than instantiated.
+*Empirical top-exemplars by discrimination margin: pending.*
 
-**Top 25 exemplars by discrimination margin:**
+## Tending — RELATING × CONDITION
 
-| # | Language | Δ | Original | Translation |
-| --- | --- | --- | --- | --- |
-| 1 | Swedish | 0.089 | Under den tid som det tar att läsa den här meningen föds elva människor till världen. | In the time it takes to read this sentence, eleven people are born into the world. |
-| 2 | Swedish | 0.083 | Spädbarnsdödligheten har minskat särskilt kraftigt; det är inte så att varje kvinna föder fler barn än förr, men de som föds överlever i högre grad. | Infant mortality has decreased particularly sharply; it is not that each woman has more children than before, but those who are born survive to a greater degree. |
-| 3 | Swedish | 0.080 | Ungefär en procent av befolkningen har haft eller har denna sjukdom. | Approximately one percent of the population has had or has this disease. |
-| 4 | Swedish | 0.080 | Många svåra sjukdomar som malaria, smittkoppor och spetälska trängs alltmer tillbaka genom aktiva hälsovårdsinsatser. | Many serious diseases such as malaria, smallpox and leprosy are increasingly being pushed back through active health measures. |
-| 5 | Indonesian | 0.076 | Lambda Indonesia dan organisasi sejenis lainnya bermunculan pada akhir tahun 1980-an dan 1990-an. | Lambda Indonesia and similar organizations emerged at the end of the 1980s and 1990s. |
-| 6 | Russian | 0.074 | А на деле число полуголодных людей растет в разы. | But in reality the number of half-starved people is growing many times over. |
-| 7 | Swedish | 0.070 | Folkökningen i världen är så stor att antalet människor som varken kan läsa eller skriva (analfabeter) ökar. | Population growth in the world is so great that the number of people who can neither read nor write (illiterates) is increasing. |
-| 8 | Polish | 0.068 | Niestety, wiele z tych zabaw kończy się wypadkami. | Unfortunately, many of these games end in accidents. |
-| 9 | Swedish | 0.067 | Jordens sammanlagda befolkning ökar f.n. med 70-80 miljoner människor om året, och ökningen är störst där människorna är fattigast. | The world's total population is currently increasing by 70-80 million people per year, and the increase is greatest where people are poorest. |
-| 10 | Swedish | 0.066 | De blev i många fall gravida oavsiktligt. | In many cases they became pregnant unintentionally. |
-| 11 | Portuguese | 0.066 | Desempregados com licenciatura aumentaram 51 por cento em 1996. | Unemployed people with a university degree increased 51 percent in 1996. |
-| 12 | Russian | 0.065 | Европа (и Россия) мало рожают, по-стариковски долго болеют. | Europe (and Russia) has few births and falls ill for long periods in an aged manner. |
-| 13 | Swedish | 0.063 | Uppskattningsvis 400 milj lider av ögonsjukdomen trakom. | An estimated 400 million suffer from the eye disease trachoma. |
-| 14 | Italian | 0.062 | Vi sono migliaia di casi di questo genere. | There are thousands of cases of this kind. |
-| 15 | Catalan | 0.062 | Cada dia n'aconsegueixen volar uns quants. | Every day a few of them manage to fly. |
-| 16 | Hungarian | 0.061 | És még egy riasztó adat: 1999-ben 5,6 millió felnőttet és gyermeket fertőzött meg az AIDS kialakulását okozó HIV-vírus. | And one more alarming figure: in 1999 the HIV virus causing AIDS infected 5.6 million adults and children. |
-| 17 | Hungarian | 0.061 | Új népszokás született, aki unatkozik, kimegy a ház elé, és elhányja a havat. | A new folk custom was born: whoever is bored goes out in front of the house and shovels the snow. |
-| 18 | Swedish | 0.060 | Turkiets folkmängd ökar med en miljon om året och fördubblas vart 25:e år. | Turkey's population increases by one million per year and doubles every 25 years. |
-| 19 | English | 0.060 | Male cats very seldom live past 14-15 years. | — |
-| 20 | Swedish | 0.059 | Om tio år finns det ungefär 60 jättestäder, alltså städer som har mer än 2,5 miljoner invånare hopklumpade. | In ten years there will be approximately 60 giant cities, that is cities with more than 2.5 million inhabitants clustered together. |
-| 21 | Swedish | 0.057 | Om det så ska kosta oss ytterligare 50000 fall av blodkräfta per år. | Even if it costs us an additional 50,000 cases of leukemia per year. |
-| 22 | Slovenian | 0.056 | Kadar pride v tem procesu do motnje, izbruhne smrtna bolezen. | When a disturbance occurs in this process, a fatal disease breaks out. |
-| 23 | Slovenian | 0.055 | V Evropi se rodi z razcepljeno ustnico in razcepljenim nebom vsak 500. otrok. | In Europe, every 500th child is born with a cleft lip and palate. |
-| 24 | Russian | 0.052 | Да и новые экономические вузы и факультеты появляются сейчас все реже — специалистов и так много. | And new economics universities and faculties are appearing increasingly rarely — there are already too many specialists. |
-| 25 | Bulgarian | 0.051 | Все повече се увеличават случаите на вирусни инфекции на горните дихателни пътища, протичащи с повишена температура. | Cases of viral infections of the upper respiratory tract with elevated temperature are increasingly on the rise. |
+**Maintains conditions.** Relation applied to a ground: keeping an ambient state in being, husbandry, upkeep — holding a background steady rather than connecting particulars.
 
-**Language weights:** Swedish (11), Russian (3), Hungarian (2), Slovenian (2), Indonesian, Polish, Portuguese, Italian, Catalan, English, Bulgarian.
+*Empirical top-exemplars by discrimination margin: pending.*
 
-**Term/semantic pattern:** Population statistics, disease prevalence, demographic patterns. Kind clauses never refer to an individual — they operate at the level of types, rates, and categories. "Eleven people are born" not "a child was born." "One percent of the population" not "the patient." Swedish statistical prose dominates overwhelmingly, with its tradition of presenting demographic and epidemiological categories.
+## Binding — RELATING × ENTITY
+
+**Connects specific things.** Relation aimed at particulars: the stance of [CON](/the-nine-operators), the central operator — joining this entity to that one so a link holds.
+
+*Empirical top-exemplars by discrimination margin: pending.*
+
+## Tracing — RELATING × PATTERN
+
+**Maps regularities.** Relation aimed at types: following a pattern across instances, drawing the correspondence, charting a structure without taking it apart.
+
+*Empirical top-exemplars by discrimination margin: pending.*
+
+## Cultivating — GENERATING × CONDITION
+
+**Produces the conditions for emergence.** Generation aimed at a ground — and the **emptiest cell** in the corpus (the desert cell, SYN·Ground): *you cannot instruct Cultivating; you cultivate by arranging conditions.* This is the stance the [EO Reader's prompt census found chronically over-loaded and structurally unable to act](/the-model-is-the-leaf), and the one the constitution [forbids fabricating from](/nine-instructions).
+
+*Empirical top-exemplars by discrimination margin: pending (the corpus finds this cell near-empty — ≈ 0.6% of clauses).*
+
+## Making — GENERATING × ENTITY
+
+**Builds the specific thing.** Generation aimed at a particular — the **gravity well**, the densest cell in every language surveyed: bringing a concrete entity into being, creation in the ordinary sense.
+
+*Empirical top-exemplars by discrimination margin: pending.*
+
+## Composing — GENERATING × PATTERN
+
+**Produces regularities.** Generation aimed at a type: making something that recurs, establishing a structure meant to hold across instances.
+
+*Empirical top-exemplars by discrimination margin: pending.*
 
 ---
 
-## Field — STRUCTURE × CONDITION
-
-**The ambient relational environment.** The structural conditions of a territory, organization, or region — what relations are in place as background before any specific connection is made.
-
-**Top 25 exemplars by discrimination margin:**
-
-| # | Language | Δ | Original | Translation |
-| --- | --- | --- | --- | --- |
-| 1 | French | 0.086 | La commune dispose de 2 865 ha de terres arables et de 3 872 ha de pâturages. | The commune has 2,865 ha of arable land and 3,872 ha of pastures. |
-| 2 | French | 0.074 | On y retrouve les lieux de culte, la place, la mairie, et les magasins de toutes sortes. | There one finds places of worship, the square, the town hall, and shops of all kinds. |
-| 3 | Slovenian | 0.074 | V Čepincih je obilo možnosti za pešačenje in kolesarjenje, saj poti vodijo na vse strani. | In Čepinci there are ample opportunities for hiking and cycling, as paths lead in all directions. |
-| 4 | French | 0.070 | L'économie de la commune est due aux entreprises individuelles, transport routier de marchandises et produits fermiers. | The economy of the commune depends on individual enterprises, road freight transport, and farm produce. |
-| 5 | French | 0.069 | Le tracé du parc est conçu pour accueillir les pavillons des exposants. | The layout of the park is designed to accommodate the exhibitors' pavilions. |
-| 6 | Chinese | 0.066 | 為方便生意往來，帶水佬在香港、澳門設有臨時居住點。 | To facilitate business dealings, the water carriers have established temporary lodging points in Hong Kong and Macau. |
-| 7 | Spanish | 0.066 | Cuenta con una amplia extensión verde y arbolada, en la cual se instalan los campamentos de astures y romanos durante sus recreaciones. | It has a large green and wooded expanse in which the Asturian and Roman camps are set up during their reenactments. |
-| 8 | French | 0.065 | La tribu est peuplée de 700 habitants environ. | The tribe has a population of approximately 700 inhabitants. |
-| 9 | Spanish | 0.060 | Flanqueado al norte, sur y este por barreras naturales, el emplazamiento permitía a los conquistadores defender mejor el territorio. | Flanked to the north, south, and east by natural barriers, the location allowed the conquerors to better defend the territory. |
-| 10 | Spanish | 0.060 | El Dniéper tiene una densa red de afluentes, más de la mitad de los ríos del país pertenecen a su cuenca hidrográfica. | The Dnieper has a dense network of tributaries; more than half the country's rivers belong to its watershed. |
-| 11 | Croatian | 0.060 | Huruglica: Poslovna zajednica izrazila je nezadovoljstvo teškoćama s kojima se susreće i radi na njihovu uklanjanju. | Business community: The business community expressed dissatisfaction with the difficulties it faces and is working on their elimination. |
-| 12 | Slovenian | 0.059 | Najmočnejši smo na Hrvaškem, usmerjamo se tudi v Črno goro. | We are strongest in Croatia; we are also directing ourselves toward Montenegro. |
-| 13 | Indonesian | 0.059 | Struktur perekonomian masyarakatnya didominasi oleh kegiatan pertanian beserta kegiatan pendukung pertanian. | The economic structure of the community is dominated by agricultural activities and activities that support agriculture. |
-| 14 | Korean | 0.057 | 2층에는 등산, 캠핑, 텐트 이월특가 상품들이 있더군요. | On the second floor there were hiking, camping, and tent clearance sale items. |
-| 15 | Japanese | 0.056 | 総面積の2.08%が水地域となっている。 | 2.08% of the total area consists of water zones. |
-| 16 | Slovak | 0.056 | Prešli sme okolo supermarketov, veľkoskladov a obchodných domov a mierili sme k pohoriu Squaw Peak. | We passed supermarkets, wholesale warehouses and department stores and were heading toward the Squaw Peak mountain range. |
-| 17 | Spanish | 0.055 | La densidad de población era de 34,47 hab./km². | The population density was 34.47 inhabitants per km². |
-| 18 | Spanish | 0.055 | Hacia el oeste se conecta con las Montañas de Prades que constituyen el límite oriental de la comarca. | To the west it connects with the Prades Mountains which form the eastern boundary of the region. |
-| 19 | Spanish | 0.055 | Según la Oficina del Censo, el condado tiene un área total de, de la cual es tierra y es agua. | According to the Census Bureau, the county has a total area, of which is land and is water. |
-| 20 | Spanish | 0.054 | En el año 2010 tenía una población de 8.411 habitantes y una densidad poblacional de 568.3 personas por km². | In 2010 it had a population of 8,411 inhabitants and a population density of 568.3 people per km². |
-| 21 | Spanish | 0.054 | La densidad de población era de 133,45 hab./km². | The population density was 133.45 inhabitants per km². |
-| 22 | Spanish | 0.053 | El 25% de los requerimientos de los forrajes para los animales del zoológico crece en tierra propia. | 25% of the fodder requirements for the zoo animals grows on its own land. |
-| 23 | Spanish | 0.053 | En el Censo de 2010 tenía una población de 212 habitantes y una densidad poblacional de 524,7 personas por km². | In the 2010 Census it had a population of 212 inhabitants and a population density of 524.7 people per km². |
-| 24 | Spanish | 0.052 | En los últimos años ha sido remodelado para permitir operaciones con aviones de mayor tamaño. | In recent years it has been remodeled to allow operations with larger aircraft. |
-| 25 | Chinese | 0.052 | 主要街道有坡子街、洪家井、藩西巷、學院街、下黎家坡、三王街等。 | The main streets are Pozi Street, Hongjia Well, Fanxi Lane, Academy Street, Xia Lijia Slope, Sanwang Street, etc. |
-
-**Language weights:** French (5), Spanish (9), Slovenian (2), Chinese (2), Croatian, Indonesian, Korean, Japanese, Slovak.
-
-**Term/semantic pattern:** Territorial description — hectares of arable land, population density, roads and paths leading in all directions, economic structures, natural boundaries. Field clauses describe the ambient infrastructure of a place or organization: what is structurally present as background. French municipal and Spanish geographical Wikipedia prose dominates.
+The Ground column (Clearing / Tending / Cultivating) acts on ambient conditions; the Entity column (Dissecting / Binding / Making) acts on discrete particulars; the Pattern column (Unraveling / Tracing / Composing) acts on regularities. The asymmetry the corpus shows across the [Site face](/canonical-examples-the-site-face) — figures foregrounded, grounds backgrounded — is expected to recur here (Making dense, Cultivating sparse), which is exactly why computing the Stance-face exemplars is worth doing rather than assuming.
 
 ---
 
-## Link — STRUCTURE × ENTITY
+### See also
 
-**A specific connection.** This particular bond, this named relationship, this dependency between specific identified parties. Not the architecture of connections (Network) but one concrete instance.
-
-**Top 25 exemplars by discrimination margin:**
-
-| # | Language | Δ | Original | Translation |
-| --- | --- | --- | --- | --- |
-| 1 | Urdu | 0.072 | ڈی ایم وکاس گوتھلوال اور ایس پی نونیت کمار رانا کو اس معاملے کی جانچ کے لیے مقرر کیا گیا ہے۔ | DM Vikas Gothalwal and SP Nunit Kumar Rana have been appointed to investigate this matter. |
-| 2 | Arabic | 0.071 | وتولى جون نكومو الذي كان وزيراً للإدارة المحلية في الحكومة السابقة وزارة الداخلية بينما عُين نائب الجمهورية السابق باتريك... | John Nkomo, who had been Minister of Local Administration in the previous government, took over the Interior Ministry, while former Vice President Patrick... was appointed... |
-| 3 | Urdu | 0.069 | جبکہ جناب شیخ عبید بن عثمان العمودی اور جناب غلام حامد خان نقشبندی مہمان خصوصی کی حیثیت سے شرکت کریں گے۔ | While Sheikh Ubaid bin Uthman Al-Amudi and Ghulam Hamid Khan Naqshbandi will participate as special guests. |
-| 4 | Urdu | 0.067 | اس اجلاس میں نومنتخب رکن اسمبلی گجویل ٹی نرساریڈی شرکت کریں گے۔ | The newly elected assembly member Gajuwel T. Narsareddi will participate in this session. |
-| 5 | Serbian | 0.067 | On je nadgledao transfer zajedno sa arhitektom novog muzeja Bernarom Čumijem, 25 ambasadora država članica EU i brojnim posmatranjem. | He supervised the transfer together with the architect of the new museum Bernard Tschumi, 25 ambassadors of EU member states, and numerous observers. |
-| 6 | Arabic | 0.066 | وفي المقابل احتفظ ستان مودينغي بوزارة الخارجية وموفين مهاشي بالدفاع. | In return, Stan Mudenge retained the Foreign Ministry and Moven Mahachi Defense. |
-| 7 | Hindi | 0.066 | अपने व्यस्त कार्यक्रम के बावजूद सिंह पाकिस्तान में भारत के उच्चायुक्त शिवशंकर मेनन द्वारा दिए जाने वाले स्वागत समारोह में शामिल होंगे। | Despite his busy schedule, Singh will attend the reception hosted by India's High Commissioner in Pakistan, Shiv Shankar Menon. |
-| 8 | Urdu | 0.064 | ایم پی ڈی او نے منڈل کے سرپنچس ایم پی ٹی سیز کے علاوہ متعلقہ عہدیداروں سے اس اجلاس میں شرکت کرنے کی خواہش کی ہے۔ | The MPDO has requested the Mandal sarpanchs, MPTCs, and other concerned officials to attend this session. |
-| 9 | Polish | 0.063 | Chłopak biegnie, asekurując jadącego obok rowerem chłopca w kasku na głowie. | A boy runs alongside, supporting the boy cycling next to him wearing a helmet. |
-| 10 | Hindi | 0.063 | मुकेश अपनी पत्नी नीता के साथ आनंद जैन की बेटी की शादी में शामिल होंगे। | Mukesh will attend the wedding of Anand Jain's daughter together with his wife Nita. |
-| 11 | Urdu | 0.062 | یہ کمیٹی لوک پال بل اور جموں کشمیر انسداد رشوت ستانی قانون کے تحت اپنی سفارشات تیار کرے۔ | This committee should prepare its recommendations under the Lokpal Bill and the Jammu & Kashmir Anti-Corruption Law. |
-| 12 | Hindi | 0.061 | آیوگ کے فیصلے پر پٹی کے ساتھ اجونت سنگھ مان اور امریک سنگھ رندھاوا نے دستخط کیے۔ | Ajwant Singh Mann and Amreek Singh Randhawa signed the commission's decision along with Patti. |
-| 13 | Arabic | 0.061 | ومن المقرر أن يلتقي وزير الخارجية الإسرائيلي بالوكالة شلومو بن عامي برئيس المجلس التشريعي الفلسطيني أحمد قريع. | Acting Israeli Foreign Minister Shlomo Ben-Ami is scheduled to meet with Palestinian Legislative Council Chairman Ahmed Qurie. |
-| 14 | Croatian | 0.061 | Ministar vanjskih poslova Srbije i Crne Gore Vuk Drašković poziva Srbiju na suradnju s tribunalom UN-a za ratne zločine. | The Foreign Minister of Serbia and Montenegro Vuk Drašković calls on Serbia to cooperate with the UN war crimes tribunal. |
-| 15 | Arabic | 0.061 | وسيخلف جورج السعودي يوسف خميس الذي تسلم المهمة مؤقتاً خلفاً لليوغوسلافي ميلان زيفادينوفيتش. | George Al-Saudi will replace Yousef Khamis, who took on the task temporarily in succession to the Yugoslav Milan Živadinović. |
-| 16 | Dutch | 0.061 | De heer Sleiffer werkt als bankemployé buiten Gorkum en de heer Breen is verbonden aan een suikerfabriek. | Mr. Sleiffer works as a bank employee outside Gorkum and Mr. Breen is connected to a sugar factory. |
-| 17 | English | 0.061 | Please contact Sherri Sera (713/853-5984) or Bill Dorsey (713/646-6505) for the weekly dial-in number and passcode. | — |
-| 18 | Hebrew | 0.061 | וזכרו: אפשר שפקיד התוכנית של הקרן יצטרף גם הוא למסע; הקפידו איפוא בבחירת האתר. | Remember: it is possible that the fund's program officer will also join the journey; therefore be careful in choosing the site. |
-| 19 | Urdu | 0.060 | انہوں نے کابینی درجہ کے چھ وزرا کو برقرار رکھا ہے جبکہ دو نئے چہرے بھی شامل کیے ہیں۔ | He has retained six cabinet-level ministers while also including two new faces. |
-| 20 | English | 0.060 | And then another call with all folks or a meeting at the jobsite to lay out the plan. | — |
-| 21 | Indonesian | 0.060 | Dia mendapat dukungan komite pemilu Civic Center Aliansi, terkait erat tetapi tidak identik dengan partai politik Pusat Demokrat. | He received support from the Civic Center Alliance election committee, closely related to but not identical with the Democratic Center political party. |
-| 22 | Hindi | 0.059 | अब जोशीपुरा अनिल भारद्वाज के साथ मिलकर इस परियोजना पर काम करेंगे। | Now Joshipura will work together with Anil Bhardwaj on this project. |
-| 23 | Spanish | 0.059 | José Luis participa en representación del Grupo en las conversaciones auspiciadas por el histórico dirigente nacionalista... | José Luis participates on behalf of the Group in the talks sponsored by the historic nationalist leader... |
-| 24 | Vietnamese | 0.059 | Ông được điều về đơn vị thông tin thuộc sư đoàn 2, quân khu 5. | He was transferred to the information unit of the 2nd Division, Military Region 5. |
-| 25 | Bulgarian | 0.059 | В МС владиците бяха приети от началника на канцеларията Николай Вълчев, а в Главната прокуратура обядваха. | At the Council of Ministers the bishops were received by the head of the chancellery Nikolay Valchev, while at the General Prosecution they had lunch. |
-
-**Language weights:** Urdu (7), Arabic (5), Hindi (4), English (2), Serbian, Croatian, Dutch, Hebrew, Indonesian, Polish, Spanish, Vietnamese, Bulgarian.
-
-**Term/semantic pattern:** Named appointments, specific assignments, designated roles connecting identified persons to identified positions. The Link terrain is overwhelmingly administrative — X is appointed to investigate this matter; A and B will attend as special guests; the minister retained six of his cabinet members. Urdu and Arabic administrative journalism carry it most distinctly.
-
----
-
-## Network — STRUCTURE × PATTERN
-
-**An architecture of connections.** The system viewed as recurring structure — not any specific connection but the pattern by which connections are organized.
-
-**Top 25 exemplars by discrimination margin:**
-
-| # | Language | Δ | Original | Translation |
-| --- | --- | --- | --- | --- |
-| 1 | Italian | 0.109 | Il credito relativo è privilegiato a norma delle leggi speciali. | The relevant credit is privileged pursuant to special laws. |
-| 2 | Slovak | 0.090 | Pripraví návrhy na úpravu kľúčových inštitútov v oblasti všeobecnej časti občianskeho práva a na zosúladenie osobitných zákonov. | It will prepare proposals to amend key institutions in the area of the general part of civil law and to harmonize special laws. |
-| 3 | Bulgarian | 0.088 | Режимът на обектите на държавната и общинската собственост се определя със закон. | The regime of state and municipal property objects is determined by law. |
-| 4 | Slovenian | 0.086 | Določbe o minimalni plači veljajo za vse delodajalce, ki zaposlujejo delavce v Republiki Sloveniji. | The provisions on minimum wage apply to all employers who employ workers in the Republic of Slovenia. |
-| 5 | Slovak | 0.086 | Vytvorí tiež predpoklady pre unifikáciu právnej terminológie ako podmienky zvýšenia kvality právnych noriem. | It will also create preconditions for the unification of legal terminology as a condition for improving the quality of legal norms. |
-| 6 | Russian | 0.085 | На бирже предложат минимум два варианта работы по профессии. | The exchange will offer at least two job options in the profession. |
-| 7 | Hindi | 0.085 | इस दौरान इस कानून को लेकर राज्यों के साथ विचार-विमर्श किया जाएगा व इसके दिशा-निर्देश तैयार किए जाएंगे। | During this time, consultations will be held with the states on this law and its guidelines will be prepared. |
-| 8 | Romanian | 0.085 | Deciziile respective trebuie să aibă la bază legislația comunitară în vigoare și să ia în considerare interdicțiile sau restricțiile specifice. | These decisions must be based on current Community legislation and must take into account specific prohibitions or restrictions. |
-| 9 | Chinese | 0.084 | 比賽依照國際帆船總會頒布的競賽規則進行。 | Competitions are conducted in accordance with the competition rules promulgated by the International Sailing Federation. |
-| 10 | Romanian | 0.083 | Deciziile respective trebuie să aibă la bază legislația comunitară în vigoare. | These decisions must be based on current Community legislation. |
-| 11 | Italian | 0.082 | La legge provvede all'ordinamento della Presidenza del Consiglio e determina il numero, le attribuzioni e l'organizzazione dei ministeri. | The law provides for the organization of the Presidency of the Council and determines the number, attributions, and organization of the ministries. |
-| 12 | Romanian | 0.082 | În afară de aceasta, și produsele chimice care sunt supuse procedurii APS internaționale trebuie să respecte aceleași norme. | In addition, chemical products subject to international APS procedures must also comply with the same norms. |
-| 13 | Chinese | 0.082 | 合作的形式，既有版權授權，也有中外雙方共同開發選題合作出版。 | The forms of cooperation include both copyright licensing and joint development and co-publication between Chinese and foreign parties. |
-| 14 | Swedish | 0.082 | Man kan dock avtala om att sådan egendom som annars skulle ha ingått i giftorätten ska vara enskild egendom. | One can however agree that property which would otherwise form part of marital property shall be separate property. |
-| 15 | Italian | 0.081 | Le norme relative all'espropriazione per causa di pubblico interesse sono determinate da leggi speciali. | The rules relating to expropriation for reasons of public interest are determined by special laws. |
-| 16 | Romanian | 0.080 | Se va proceda la modificări ale legislației comunitare, dacă acest lucru se justifică. | Amendments will be made to Community legislation if this is justified. |
-| 17 | Italian | 0.079 | L'ordinamento giuridico italiano si conforma alle norme del diritto internazionale generalmente riconosciute. | The Italian legal system conforms to generally recognized norms of international law. |
-| 18 | Italian | 0.077 | Particolarmente interessante è la disciplina dei limiti legali della proprietà che possono essere divisi in due categorie. | Particularly interesting is the regulation of the legal limits of property which can be divided into two categories. |
-| 19 | Swedish | 0.077 | Såväl folkpensioneringen som ATP ger möjligheter till följande förmåner. | Both the national pension and the ATP provide opportunities for the following benefits. |
-| 20 | Swedish | 0.077 | Inkomst av annat förvärvsarbete än anställning kan undantas från ATP. | Income from gainful employment other than salaried work can be excluded from ATP. |
-| 21 | Korean | 0.075 | 대한민국 헌법은 국민의 보통·평등·직접·비밀선거를 선거의 기본원칙으로 규정하고 있다. | The Constitution of the Republic of Korea stipulates universal, equal, direct, and secret elections as the basic principles of elections. |
-| 22 | Catalan | 0.074 | Pares, escoles, Administració, mitjans de comunicació, etcètera, són diferents elements que intervenen en aquest procés. | Parents, schools, Administration, media, etc. are different elements that intervene in this process. |
-| 23 | French | 0.074 | Les conventions signées entre l'UFE et les universités françaises partenaires garantissent que l'université est qualifiée. | The agreements signed between the UFE and French partner universities guarantee that the university is qualified. |
-| 24 | Slovak | 0.074 | Aby sa mohli používať rozličné postupy výroby kompaktných diskov, špecifikácia pripúšťa ukladanie údajov aj hustejším spôsobom. | In order to allow various methods of manufacturing compact discs, the specification permits data storage in a denser manner as well. |
-| 25 | Croatian | 0.073 | Prema novim propisima, državne tvrtke moraju uplaćivati do 90% svojeg profita u proračun, za razliku od dosadašnjih 50%. | Under the new regulations, state companies must pay up to 90% of their profit into the budget, unlike the previous 50%. |
-
-**Language weights:** Italian (6), Romanian (4), Swedish (4), Slovak (3), Chinese (2), Bulgarian, Slovenian, Russian, Hindi, Korean, Catalan, French, Croatian.
-
-**Term/semantic pattern:** Legal and regulatory frameworks — laws determining rights, regulations governing categories, statutes applying to all instances of a class. Network clauses encode the structural pattern of how relationships are organized in general, not any specific relationship. Italian legal prose and Romanian EU regulatory text are the dominant carriers.
-
----
-
-## Atmosphere — SIGNIFICANCE × CONDITION
-
-**The ambient interpretive weather.** What makes certain readings feel obvious and others feel strange — the conditions of meaning before any particular meaning is assigned.
-
-**Top 25 exemplars by discrimination margin:**
-
-| # | Language | Δ | Original | Translation |
-| --- | --- | --- | --- | --- |
-| 1 | German | 0.131 | Sauberkeit, Ordnung und Freundlichkeit brauche ich hier nicht zu erwähnen, denn das gehört für mich zum Standard, der ab dem ersten Besuch gilt. | Cleanliness, order, and friendliness I don't need to mention here, as these are for me part of the standard that applies from the first visit. |
-| 2 | German | 0.125 | Ein richtiges Landgasthaus in dem man sich wohl fühlt. | A proper country inn where you feel at home. |
-| 3 | German | 0.122 | Das essen ist sehr lecker und man hat viel auf dem Teller, es ist wirklich kaum zu übertreffen. | The food is very tasty and you get a lot on your plate; it is truly hard to surpass. |
-| 4 | German | 0.119 | Das Team ist super nett, ich fühle mich sehr gut aufgehoben und der Wohlfühlfaktor ist zu 100% gegeben. | The team is super friendly; I feel very well taken care of and the comfort factor is 100% present. |
-| 5 | German | 0.119 | Hier kann man ein paar schöne Stunden verbringen, denn auch die Gäste sind stets gut gelaunt und man will garnicht mehr weg. | Here you can spend a few lovely hours, as the guests are always in good spirits and you just don't want to leave. |
-| 6 | German | 0.112 | Das Restaurant bietet gute bis sehr gute Qualität zu annehmbaren Preisen. | The restaurant offers good to very good quality at reasonable prices. |
-| 7 | German | 0.108 | Hab mich noch nie so wohl gefühlt. | I have never felt so comfortable. |
-| 8 | Japanese | 0.105 | 店内のインテリアはとってもお洒落で雰囲気があります。 | The interior decor is very stylish and has great atmosphere. |
-| 9 | Japanese | 0.099 | 寡黙なご主人も店の雰囲気をいっそう引き立てています。 | The taciturn owner also enhances the atmosphere of the shop even more. |
-| 10 | German | 0.099 | Die Preise im Laden sind durchweg in Ordnung. | The prices in the shop are consistently reasonable. |
-| 11 | Korean | 0.097 | 괜찮은 인테리어는 아닌데 시장 횟집 분위기에 매운탕도 좋고 회가 좋네요. | The interior isn't great but the market sashimi restaurant atmosphere is nice, the spicy stew is good and the sashimi is good. |
-| 12 | German | 0.094 | Im italienischen Restaurant Pinnocchio kann man nicht nur wunderbar Pizza essen, auch alle anderen Gerichte schmecken herrlich. | At the Italian restaurant Pinnocchio you can not only eat wonderful pizza, all the other dishes also taste delicious. |
-| 13 | Japanese | 0.094 | 雰囲気のみならず、料理もかなり美味しいと感じたので、思わず書き込みしてしまいました。 | Not only the atmosphere, but I also found the food quite delicious, so I couldn't help but write a review. |
-| 14 | Japanese | 0.093 | お店の雰囲気もよく、隣の席との間隔も丁度よく、リラックス出来ますので食べすぎちゃいますね。 | The shop atmosphere is good, the spacing between seats is just right, you can relax so you end up eating too much. |
-| 15 | German | 0.091 | Tische nicht abgeräumt, ewig keinen Kaffee bekommen und die Auswahl eher Durchschnitt. | Tables not cleared, endlessly unable to get coffee, and the selection rather average. |
-| 16 | German | 0.091 | Sehr beruhigend ein solches Geschäft in der Nähe zu haben... | Very reassuring to have such a shop nearby... |
-| 17 | Korean | 0.089 | 사장님도 좋은 분 같으시고 손님 만나 얘기 나누기 좋은 장소입니다. | The owner seems like a good person too and it's a good place to meet customers and chat. |
-| 18 | German | 0.088 | Hier sieht man wirklich was man für seine Wohnung haben muss. | Here you can really see what you need for your apartment. |
-| 19 | French | 0.085 | En outre les salles sont très belles ce qui ne gâte rien. | Moreover the rooms are very beautiful which doesn't hurt at all. |
-| 20 | German | 0.085 | Der Service und die Qualität der Bilder hat einfach gestimmt. | The service and the quality of the pictures simply worked. |
-| 21 | Japanese | 0.082 | 緊張しなくていい環境は上がり症の私にはとても助かった。 | An environment where you don't have to be nervous was very helpful for me as someone who gets stage fright. |
-| 22 | German | 0.077 | Man fühlte sich sehr gut bei ihr aufgehoben. | One felt very well taken care of by her. |
-| 23 | French | 0.076 | Si vous avez envie de manger dans un endroit où l'hygiène laisse à désirer, je vous conseille vivement ce restaurant. | If you feel like eating in a place where hygiene leaves something to be desired, I highly recommend this restaurant. |
-| 24 | German | 0.072 | Ein Nachmittag in Strassenhof fühlt sich an einem warmen Frühlingssonntag im April schon fast wie Urlaub an. | An afternoon in Strassenhof on a warm spring Sunday in April feels almost like a holiday. |
-| 25 | English | 0.072 | What a joy to stroll off historic Canyon Road in Santa Fe into a gallery with a gorgeous diversity of art. | — |
-
-**Language weights:** German (14), Japanese (5), Korean (2), French (2), English. ⚠ German concentration flagged — 14 of 25 from German service review corpus.
-
-**Term/semantic pattern:** Ambient quality of a place as a whole — "you feel at home," "the atmosphere works," "reassuring to have nearby." Atmosphere clauses don't describe any event within a place; they describe the interpretive condition of the place itself, the ambient feeling that determines whether any particular event there will feel right. Japanese *雰囲気* (atmosphere/ambience) appears repeatedly in the exemplars.
-
----
-
-## Lens — SIGNIFICANCE × ENTITY
-
-**A specific reading.** A particular interpretation applied to a particular situation — one take, one diagnosis, one frame brought to bear on one thing.
-
-**Top 25 exemplars by discrimination margin:**
-
-| # | Language | Δ | Original | Translation |
-| --- | --- | --- | --- | --- |
-| 1 | Arabic | 0.103 | وعلق عليه بقوله "كان خطاباً عظيماً". | And he commented on it saying "It was a great speech." |
-| 2 | Vietnamese | 0.102 | Hùng nói năng rất cảnh giác và cuối cùng anh ta hỏi: "thế sao mày biết tên thật của tao?" | Hung spoke very cautiously and finally asked: "So how do you know my real name?" |
-| 3 | Vietnamese | 0.101 | Hùng giật mình: "Sao tôi không biết ông nhỉ?" | Hung was startled: "How come I don't know you?" |
-| 4 | Turkish | 0.096 | Hiç bilmiyorum nasıl bir kadın olduğunu, dedi. | I don't know at all what kind of woman she is, he said. |
-| 5 | Turkish | 0.088 | Nasıl bir kadın o? diye sordum. | What kind of woman is she? I asked. |
-| 6 | Korean | 0.087 | "그런 김경주의 감정을 어떤 식으로 표현해야 할지 많이 고민하고 있다"고 짧게 답했다. | "I am thinking a lot about how to express Kim Gyeong-ju's emotions," she answered briefly. |
-| 7 | Dutch | 0.085 | "Het is waanzin wat er geschreven is," zei hij, "ik ben zeer tevreden over Corry." | "It is madness what has been written," he said, "I am very satisfied with Corry." |
-| 8 | Urdu | 0.084 | انہوں نے کہا کہ کپتان یونس خان کی ناراضگی کے بارے میں باتیں درست نہیں ہیں۔ | He said that the talk about captain Younis Khan's displeasure is not correct. |
-| 9 | Urdu | 0.083 | گیل کے مطابق انہیں یہ سن کر دھکا لگا کہ وہ پاکستان کے خلاف سیریز میں ٹیم کا حصہ نہیں ہیں۔ | According to Gayle, he was shocked to hear that he was not part of the team for the series against Pakistan. |
-| 10 | Slovak | 0.083 | Nechcela som, aby si myslel, že som nejaký bezcitný robot, najmä keď sa mi chcelo od radosti vykrikovať jeho meno. | I didn't want him to think I was some cold-hearted robot, especially when I felt like shouting his name for joy. |
-| 11 | Vietnamese | 0.081 | Có phải là cô biết "nó" sẽ nhắn cho cô? | Did you know that "it" would message you? |
-| 12 | Arabic | 0.081 | وانتقد حاكم تكساس المرشح بوش خطاب كلينتون بقوله "بيل كلينتون حاول الكتابة في سبيل الخلود وليس من أجل مستقبل آل غور". | Texas Governor candidate Bush criticized Clinton's speech saying "Bill Clinton tried to write for immortality and not for the future of the Gore family." |
-| 13 | Hungarian | 0.080 | S bár nagyon jó viszonyban voltunk, és meghatározó volt életemben ez a vendégszereplés, nemet mondtam. | And although we were on very good terms, and this guest appearance was significant in my life, I said no. |
-| 14 | Slovenian | 0.080 | "Mi je čisto vseeno," je z brezbarvnim glasom odvrnila Janet Patzig. | "I don't care at all," Janet Patzig replied in a colorless voice. |
-| 15 | Arabic | 0.080 | وقال بصوت خافت يكاد لا يسمع "الأمر يخيفني بعض الشيء (...) إنها مفاجأة بالفعل." | And he said in a barely audible soft voice "The matter frightens me a little (...) It is indeed a surprise." |
-| 16 | Vietnamese | 0.080 | Chắc Kim đoán có chuyện không hay nên gặng hỏi nhưng ông Chương không tiết lộ. | Kim probably guessed something bad had happened so she kept asking but Mr. Chuong didn't reveal anything. |
-| 17 | Vietnamese | 0.080 | Có lẽ vì lịch sự Hùng cũng nói: "Tôi cũng thấy hình như gặp ông ở đâu." | Perhaps out of politeness Hung also said: "I also feel like I've met you somewhere." |
-| 18 | Slovak | 0.079 | Dal som mu takéto meno, keď som s akousi ľahkosťou presvedčil sám seba, že toto meno najlepšie pristane môjmu hrdinovi. | I gave him this name when I somehow easily convinced myself that this name suits my hero best. |
-| 19 | English | 0.079 | "In retrospect, we should have told them," Robinson said. | — |
-| 20 | Hindi | 0.078 | सुनवाई के दौरान मजिस्ट्रेट ने शंकराचार्य से उनके स्वास्थ्य के बारे में पूछा तो उन्होंने कहा, मैं कह नहीं सकता कि ठीक हूं। | During the hearing, when the magistrate asked Shankaracharya about his health, he said, I cannot say I am well. |
-| 21 | Slovak | 0.078 | Čo si mi to urobila, chcel som jej povedať v presvedčení, že mi odpovie. | What have you done to me, I wanted to tell her, convinced that she would answer me. |
-| 22 | Turkish | 0.078 | Hiçbir şey anlatamadım, diye acıyla inledi. | I couldn't tell anything, he moaned painfully. |
-| 23 | Vietnamese | 0.077 | Cường hỏi: "thâm tâm anh có nghi ngờ vợ anh không?" | Cuong asked: "In your heart, do you suspect your wife?" |
-| 24 | Norwegian | 0.077 | Det nordkoreanske utenriksdepartementet protesterte på det sterkeste på en slik karakteristikk, og kalte Clinton en "rar politiker". | The North Korean Foreign Ministry protested in the strongest terms against such a characterization, calling Clinton a "strange politician." |
-| 25 | Slovak | 0.076 | Nerozumiem, prečo Irma chcela zveriť túto povinnosť práve mne, vzdychla si. | I don't understand why Irma wanted to entrust this duty precisely to me, she sighed. |
-
-**Language weights:** Vietnamese (6), Slovak (5), Arabic (3), Turkish (3), Urdu (2), Korean, Dutch, Hungarian, Slovenian, English, Hindi, Norwegian.
-
-**Term/semantic pattern:** Single-sentence takes, reactions, characterizations — "it was a great speech," "what kind of woman is she," "I don't care at all," "we should have told them." Lens clauses apply one specific reading to one specific situation. Vietnamese fictional dialogue dominates here, along with Slovak fiction and Arabic reported speech — contexts where characters are constantly interpreting specific situations.
-
----
-
-## Paradigm — SIGNIFICANCE × PATTERN
-
-**A worldview.** An interpretive framework through which everything is filtered — not a reading of one situation but the recurring structure through which situations in general are read.
-
-**Top 25 exemplars by discrimination margin:**
-
-| # | Language | Δ | Original | Translation |
-| --- | --- | --- | --- | --- |
-| 1 | Finnish | 0.117 | Todellisuus on usein kuitenkin muuta: moni ei halua myöntää julkisesti, että seksi olisi suhteessa huonoa. | Reality is often different, however: many people don't want to publicly admit that sex in a relationship could be bad. |
-| 2 | Finnish | 0.102 | Voimme uskotella itsellemme, ettei seksi ole tärkeää, että tyydytyksen saaminen ei ole tärkeää. | We can tell ourselves that sex is not important, that getting satisfaction is not important. |
-| 3 | Korean | 0.100 | 몽정을 할 경우 심리적인 죄책감이나 부끄러움을 느끼는 사람이 상당수이며 이것은 올바른 성의식이 확립되지 않았기 때문이라 할 수 있다. | A considerable number of people experience psychological guilt or shame about nocturnal emissions, which can be attributed to the fact that a correct sexual awareness has not been established. |
-| 4 | Finnish | 0.097 | Häpeää tunteva luulee, että hänen pitäisi olla toisenlainen. | A person feeling shame believes that they should be different. |
-| 5 | Italian | 0.094 | Per lo stesso motivo però, spesso, fanno fatica ad ammettere che qualcun altro sia veramente più dotato, possegga qualità superiori... | For the same reason, however, they often have difficulty admitting that someone else is truly more gifted, possesses superior qualities... |
-| 6 | English | 0.094 | We become most fully human when we love another person. | — |
-| 7 | Finnish | 0.086 | Usein kuulee ja voi lukeakin, että hyvä itsetunto ja itseluottamus ovat seksikästä, se herättää mielenkiintoa ja on kiihottavaa. | One often hears and can also read that good self-esteem and self-confidence are sexy, that it attracts interest and is arousing. |
-| 8 | Italian | 0.085 | Se pensi a queste cose, se ci rifletti su finisci per sbagliare. | If you think about these things, if you reflect on them, you end up making mistakes. |
-| 9 | Urdu | 0.083 | تمام معنی باہم مناسبت رکھتے ہیں اور سب کا خلاصہ یہ ہے کہ آدمی اللہ تعالیٰ سے صحیح معنی میں ڈر جائے۔ | All meanings are mutually appropriate and the summary of all is that a person should truly fear Allah. |
-| 10 | Norwegian | 0.083 | Det beste, de viktigste lærdommene, lærer vi ikke noe av. | The best, the most important lessons, we don't learn anything from. |
-| 11 | Czech | 0.082 | Víra je ubezpečení v tom, v co doufáme, a jistota v tom, co nemůžeme vidět. | Faith is the assurance of what we hope for, and the certainty of what we cannot see. |
-| 12 | Finnish | 0.081 | Osa ihmisistä omaa varmasti tämän taidon, joten heillä on ilmeisesti sitten seksuaalista itseluottamusta. | Some people certainly have this skill, so they apparently have sexual self-confidence. |
-| 13 | Latin | 0.081 | facilius est camelum per foramen acus transire quam divitem intrare in regnum caelorum | It is easier for a camel to pass through the eye of a needle than for a rich man to enter the kingdom of heaven. |
-| 14 | Finnish | 0.080 | Senhän olemme jo usein todenneet, että seksistä, sen tavoista ja haluista on vaikeaa keskustella, varsinkin kumppanin kanssa. | We have already often noted that it is difficult to discuss sex, its ways and desires, especially with one's partner. |
-| 15 | Czech | 0.080 | Víra je být přesvědčeni o tom, v co doufáte, a být si jist tím, co nevidíte. | Faith is to be convinced of what you hope for, and to be certain of what you do not see. |
-| 16 | Finnish | 0.080 | Siihen voi tietysti olla tuhat ja yksi syytä, mutta tutkijat ovat vahvasti sitä mieltä, että häpeän tunne saadaan jo lapsuudessa. | There can of course be a thousand and one reasons for that, but researchers strongly believe that the sense of shame is acquired already in childhood. |
-| 17 | Turkish | 0.080 | Yalanlara ve yanlışlara ömür boyu mahkum edilmiş bireyler ve toplumların dışarıdan görüntüsünün zeka sefaletiyle eşdeğer olduğu... | That the external appearance of individuals and societies condemned for a lifetime to lies and mistakes is equivalent to intellectual poverty... |
-| 18 | Finnish | 0.079 | Jos nainen näyttää liian varmalta kyvyistään tehdä mies villiksi, se saattaakin pelottaa miestä. | If a woman appears too confident in her ability to drive a man wild, it might actually frighten him. |
-| 19 | Norwegian | 0.077 | Man bryter anstendighet for å si seg enig i det alle er enige om. | One breaks decency to agree with what everyone agrees on. |
-| 20 | Danish | 0.077 | For det andet: Mennesker oplever verden forskelligt. | Secondly: People experience the world differently. |
-| 21 | Finnish | 0.077 | Mitä sinne heijastat, se heijastaa kuvajaisensa takaisin. | Whatever you project there, it reflects its image back. |
-| 22 | Finnish | 0.077 | Se voi pinnallisesti näyttää seksuaaliselta vapaudelta, mutta tällaiselta ihmiseltä puuttuu kyky tuntea läheisyyttä, intiimiyttä. | It may superficially look like sexual freedom, but such a person lacks the ability to feel closeness, intimacy. |
-| 23 | Finnish | 0.076 | Rakkaus ilmentyy siinä, miten kohtelemme toinen toisiamme. | Love manifests in how we treat each other. |
-| 24 | Finnish | 0.076 | Aina toki löytyy myös niitä, jotka eivät osaa antaa anteeksi toisille, saatikka itselleen. | There are of course always those who cannot forgive others, let alone themselves. |
-| 25 | Finnish | 0.075 | Häpeämmekö seksiä, koska se tuntuu "likaiselta", eläimelliseltä, irstaalta, arvaamattomalta, hallitsemattomalta. | Do we feel ashamed of sex because it feels "dirty," animalistic, lewd, unpredictable, uncontrollable. |
-
-**Language weights:** Finnish (13), Italian (2), Czech (2), Norwegian (2), Korean, English, Urdu, Turkish, Latin, Danish.
-
-**Term/semantic pattern:** Universal claims about how human experience works — not "she felt ashamed" but "a person feeling shame believes they should be different"; not "he didn't learn" but "we don't learn from the most important lessons." The Paradigm terrain is marked by the shift from individual instance to universal pattern of significance. Finnish reflective prose on sexuality and psychology dominates massively — a corpus of therapeutic and educational writing that habitually operates at the level of interpretive framework rather than individual case.
+- [Canonical Example: The Act Face (The Operators)](/canonical-example-the-act-face-the-operators)
+- [Canonical Examples: The Site Face](/canonical-examples-the-site-face)
+- [The Three Faces of Emergent Ontology](/the-three-faces-of-emergent-ontology)
+- [The Nine Operators](/the-nine-operators) · [Dwell, Never Fabricate — the desert cell](/nine-instructions)
 
 ---
 
@@ -2459,6 +2180,65 @@ This is the same structural boundary as the phase transition's holonic threshold
 
 ---
 
+# Deep Reading: What the Machine Does at Rest
+
+**Record ID:** wiki:deep-reading  
+**DB ID:** 77  
+**Tags:** 301  
+**Keywords:** deep reading, idle, reflection, rumination, metacognition, habituation, monologue  
+**Status:** published  
+**Updated:** 2026-07-14T00:00:00.000Z  
+
+---
+
+*A chatbot is inert between turns. The [EO Reader](/the-eo-reader) treats that inertness as "a gate held shut, not the machine's nature" — and opens it safely. This is EO's mechanical answer to the question **what is thinking?***
+
+---
+
+## The loop
+
+When idle, the reader turns back on the document it is holding, surfs to the **place of most interest** (the peak of [Bayesian surprise](/signal-from-noise), not mere improbability), folds that passage, and **reflects** on it. The reflection is not a fact about the world — ontologically it *is* an [EVA](/the-triads), an interpretation, tagged `register:'enacted'`, band `void`, riding the enactor door so it can never witness (see [The Two Doors](/the-two-doors)). It lands in a Reflections surface, never in the record. (`src/surfer/fold/deep-reading.js`; `src/rooms/reader/app.js` `deepTick`)
+
+## Why it doesn't spin
+
+The obvious failure of any idle loop is rumination — chewing the same thought forever. The reader is built not to:
+
+- **Habituation.** It advances past any peak it has already reflected on; no two reflections land on the same place. Habituation is the cure for rumination (`deep-reading.js:296-312`).
+- **A median-band governor.** It commits a reflection only where surprise clears a band derived from the reading's own distribution — if the band sits above every peak, it reflects zero times and the log is untouched.
+- **An apparatus filter.** Bibliography and citation lines spike surprise hardest and are excluded, so the machine does not "think" about a reference list (`deep-reading.js:163-182`).
+- **A restatement guard on the voice.** A candidate reflection whose trigrams are largely contained in a source span is rejected as parroting (`src/surfer/fold/reflect-prompt.js`).
+
+The loop **quiesces** — it reaches a resting state and stops, rather than needing to be interrupted. That self-termination is a tested invariant.
+
+## The nest: thinking about thinking, without breaching the firewall
+
+Deep reading nests three concentric loops, each quiescing on its own physics so an outer loop never has to police an inner one (`src/surfer/fold/weave.js`):
+
+1. **Deep reading** (per document): surf → fold → reflect.
+2. **Metacognition**: fold the reflections themselves and evaluate their *pattern* — an EVA one grain up. Two patterns are read off the log: *recurring-focus* (returned to the same figure) and *standing-strain* (a focus that only ever strained, never confirmed — the honest open-question tell). Crucially, loop 2 reads loop 1 and never itself, and habituates on the pattern signature — the cure for meta-rumination.
+3. **Cross-connections**: `CON` bonds between held interpretations — *echo* (the same proposition twice, Born-gated so a meaningless embedder asserts nothing), *bears-on* (a reflection touching an earlier tension), and *analogy* (same relational structure, different entities, via label-abstracted Weisfeiler–Lehman role signatures and Gentner systematicity — conservative by design, because *the one thing worse than missing a connection is inventing one*).
+
+Every layer is reafference by type, so the entire nest can run unattended and none of it can enter the witnessed record.
+
+## Is the inner voice actually helping?
+
+The reader can **grade its own monologue**, model-free, on the system's own terms: *helping / ruminating / echoing / idle / noise / unsafe* (`src/surfer/fold/audit.js`). Rumination is measured as the maximum pairwise content-word n-gram overlap among reflections — the same churn instrument validated at **r = +0.84** ([The Evidence](/the-evidence)). An **unsafe** verdict — a reflection that entered the witnessed record — scores 0 however eloquently it reads, and across every run the firewall reports **INTACT**.
+
+This is the payoff: an account of idle cognition that is *safe by construction* (nothing it does can corrupt the record) and *auditable* (its quality is a number, not a vibe). Rumination, habituation, metacognition, analogy — the vocabulary of a mind at rest — turned into measured, firewalled mechanism.
+
+---
+
+### See also
+
+- [The Two Doors](/the-two-doors) — the firewall that makes this safe
+- [Signal from Noise](/signal-from-noise) — the surprise peak the surfer arrests on
+- [The Evidence](/the-evidence) — the churn and monologue-audit results
+- [Going and Looking](/going-and-looking) — the outward-facing sibling of the idle loop
+
+---
+
+---
+
 # Degrees of Freedom
 
 **Record ID:** wiki:degrees-of-freedom  
@@ -3216,7 +2996,7 @@ The structural requirement for this is REC at the governance level: the organiza
 **DB ID:** 20  
 **Keywords:** operators, schema, field, event, operator  
 **Status:** draft  
-**Updated:** 2026-04-21T01:23:15.210Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -3281,11 +3061,11 @@ Helix ordering: NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → 
 | # | Operator | Glyph | Greek | Triad | Function |
 | --- | --- | --- | --- | --- | --- |
 | 1 | NUL | ∅ | ν | Existence | Recognize and record absence; explicit null marker |
-| 2 | SIG | ⊡ | σ | Existence | Direct attention; register a signal |
-| 3 | INS | △ | α | Existence | Instantiate a concrete entity under a type; mint the entity's anchor |
+| 2 | SIG | ○ | σ | Existence | Direct attention; register a signal |
+| 3 | INS | ● | α | Existence | Instantiate a concrete entity under a type; mint the entity's anchor |
 | 4 | SEG | ｜ | κ | Structure | Establish a boundary or partition |
 | 5 | CON | ⋈ | ε | Structure | Create a relationship between entities |
-| 6 | SYN | ∨ | η | Structure | Produce a derived whole; aggregate |
+| 6 | SYN | △ | η | Structure | Produce a derived whole; aggregate |
 | 7 | DEF | ⊢ | δ | Significance | Establish what holds within a stable interpretive frame |
 | 8 | EVA | ⊨ | ψ | Significance | Render judgment by testing a particular against a general |
 | 9 | REC | ⊛ | Ω | Significance | Transform the interpretive frame itself |
@@ -5590,7 +5370,7 @@ Languages get by on roughly thirty phonemes. Music uses twelve notes. Logic has 
 **Record ID:** wiki:eo-in-60-min  
 **DB ID:** 48  
 **Status:** draft  
-**Updated:** 2026-03-27T14:55:14.671Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -5937,7 +5717,7 @@ The quantum circuit mappings are the most demanding test of the framework becaus
 | --- | --- | --- |
 | Hadamard gate | EVA(⊨) × Ground | Creates superposition — holding both states simultaneously without resolution |
 | Bit-flip gate | DEF(⊢) × Figure | Establishes what holds within a stable frame |
-| Entanglement (CNOT) | CON(⋈) × Figure + INS(△) × Pattern + SYN(∨) × Figure | A multi-step binding that creates irreducible composite states |
+| Entanglement (CNOT) | CON(⋈) × Figure + INS(●) × Pattern + SYN(△) × Figure | A multi-step binding that creates irreducible composite states |
 | Measurement | NUL → SIG multi-cell dynamic | Collapse from superposition to a definite value |
 | Quantum contextuality | Rule 4 (no God's-eye view) | Measurement outcomes cannot be assigned independent of measurement context |
 
@@ -6729,7 +6509,7 @@ Cells where the two models' percentage distributions differ most. Large divergen
 **Tags:** 201  
 **Keywords:** register, operator, polish notation, lukasiewicz  
 **Status:** published  
-**Updated:** 2026-03-26T22:20:29.564Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -7220,13 +7000,13 @@ The top-level expression captures the cross-grain mediation (what caused what ac
 | Code | Glyph | Greek | Triad | Mode | Function |
 | --- | --- | --- | --- | --- | --- |
 | NUL | ∅ | ν | Existence | Differentiating | Withdraw determination |
-| SIG | ⊡ | σ | Existence | Relating | Direct attention; register signal |
-| INS | △ | α | Existence | Generating | Instantiate a particular |
-| SEG | | | κ | Structure | Differentiating | Partition, draw boundary |
-| CON | ⤫ | ε | Structure | Relating | Establish connection |
-| SYN | ∨ | η | Structure | Generating | Synthesize into whole |
-| EVA | ∿ | δ | Significance | Differentiating | Shift state |
-| DEF | ∥ | ψ | Significance | Relating | Hold multiplicity |
+| SIG | ○ | σ | Existence | Relating | Direct attention; register signal |
+| INS | ● | α | Existence | Generating | Instantiate a particular |
+| SEG | ｜ | κ | Structure | Differentiating | Partition, draw boundary |
+| CON | ⋈ | ε | Structure | Relating | Establish connection |
+| SYN | △ | η | Structure | Generating | Synthesize into whole |
+| DEF | ⊢ | δ | Significance | Differentiating | Assert/define what holds |
+| EVA | ⊨ | ψ | Significance | Relating | Render judgment |
 | REC | ⊛ | Ω | Significance | Generating | Recursive revision |
 
 Helix ordering:
@@ -10529,6 +10309,56 @@ above for which axes or claims are not supported by the data.
 
 ---
 
+# EOT: The Text of Experience
+
+**Record ID:** wiki:eot  
+**DB ID:** 80  
+**Tags:** 201  
+**Keywords:** eot, notation, wire format, locus, sense, provenance, ingestion  
+**Status:** published  
+**Updated:** 2026-07-14T00:00:00.000Z  
+
+---
+
+*[EO Notation](/eo-notation) describes a syntax for writing operators. **EOT** — EO Text — is that syntax as a working wire format inside the [EO Reader](/the-eo-reader): the single surface every one of ~17 sense organs lowers onto, and the thing the [code organ](/the-eo-reader) reads a program into. This is where "the operator is carried by the surface syntax" ([Nine Instructions](/nine-instructions)) stops being an aspiration and becomes a parser.*
+
+---
+
+## Surface syntax with operator recovery
+
+An EOT line carries its operator in its punctuation, and the ingester recovers the operator from the surface — it never has to *infer* which operator a natural-language sentence meant (`src/organs/ingest/eot.js`). This is the escape from the mapping problem that killed Schank's primitives (see [Nine Instructions](/nine-instructions)): you do not guess the road from English to the operators, because the notation *is* the road.
+
+Two disciplines make it trustworthy rather than merely parseable:
+
+- **Provenance is load-bearing.** A model's note enters through the enactor door (`canWitness:false`); an external import enters through the perceiver door. The door is part of the line, not metadata bolted on afterward (see [The Two Doors](/the-two-doors)).
+- **Nothing inert is emitted silently.** A malformed line becomes a diagnostic, never a dropped fact; the emitter reports what it `skipped` and why (`src/organs/ingest/eot-emit.js`). Honesty about coverage is built into the format.
+
+## Carrying *where* and *which sense*
+
+Multimodal reading forced two additions to the format (`docs/multimodal-eot-foundation.md`):
+
+- **The `^locus` trailer.** A third trailer sigil beside `@agent` and `~ts`, carrying a W3C Media Fragment (an image region `#xywh=…`, a document block `#page=N`) as an **opaque string** the core never resolves — only the organ that minted it can open it. Because a fragment contains `#` (EOT's own comment sigil), the locus rides *quoted*, round-tripping byte-exact. The geometry that used to live only on a document's spans now rides the event, so it survives serialization and compositing.
+- **The sense axis.** Each event knows which door of the world it came through — sight, hearing, tabular, structural, text (`senseOfModality`). This is what lets two senses **corroborate** the same fact, and it is distinct from *modality* (already taken for realis/irrealis mood).
+
+Together these give the witness ladder its top rung: **cross-modal** corroboration (≥2 root origins across ≥2 senses), with a derivation fold so a transcript of a recording is not miscounted as a second, independent witness. See [Signal from Noise](/signal-from-noise).
+
+## The checkpoint is in the language
+
+Because the surface is typed, defects are properties of the *sentence*, catchable without running anything: a grain-mixed event, a reference before its instantiation, an import of a name never exported. The EOT coder makes these unsamplable at emission (`src/coder/`), and the checkpoint reads the rest off the algebra with a face, an address, and a fix — the *"a grain-mixed event is a sentence the language should not be able to say"* discipline ([Nine Instructions](/nine-instructions); `docs/eo-for-coders.md`). EOT is where EO's claim to be a checkable notation, rather than a suggestive one, is cashed out.
+
+---
+
+### See also
+
+- [EO Notation](/eo-notation) — the syntax EOT implements
+- [Nine Instructions](/nine-instructions) — why a syntax that carries the operator escapes Schank's fate
+- [The Two Doors](/the-two-doors) — the provenance every EOT line carries
+- [The EO Reader](/the-eo-reader) · [Signal from Noise](/signal-from-noise)
+
+---
+
+---
+
 # Experiential Ontology (EO)
 
 **Record ID:** wiki:emergent-ontology-eo  
@@ -10536,11 +10366,11 @@ above for which axes or claims are not supported by the data.
 **Tags:** 101  
 **Keywords:** transformation, relational, operator, space  
 **Status:** published  
-**Updated:** 2026-03-27T14:55:14.382Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
-**EO** (/ɛkˌspɛriˈɛnʃəl ɑnˈtɑləʤi/; abbreviated **EO** /ˌiːˈoʊ/) is a meta-theoretical framework built on a single claim: whatever can be expressed about transformation has tripartite structure. The underlying space — prior to any distinction, prior to any form — is khōra: undifferentiated, generative, undepleted by what it generates. As soon as any difference is discernible, three dimensions co-arise necessarily: ground, figure, and pattern, or abstractly −1, +1, √2 (the Structure triad's coordinates, used as default shorthand; see Triad-Specific Coordinate Systems for the full coordinate geometry). Applied at three independent levels (how something acts, where it acts, what it acts on), this generates a Capacity Ground: a structured possibility space whose geometry precedes any particular transformation occurring within it. That space is populated by distinct kinds of entities that interact differently depending on what they are, what they encounter, and where in the space the encounter occurs. The framework does not model particular changes but the expressible geometry of how anything becomes something else — and the ecology of what lives inside that geometry.
+**EO** is a meta-theoretical framework built on a single claim: whatever can be expressed about transformation has tripartite structure. The two-letter name is the stable one; it expands, by design, to **three** — **Existential Ontology**, **Emergent Ontology**, and **Experiential Ontology**. These are not competing labels but three facets of one framework: its concern with *what it is to be* (Existential), with *structure that arises rather than being imposed* (Emergent), and with *the record as something that appears to an observer* (Experiential). The expansions are used interchangeably across the wiki — where an article says "Emergent" and another says "Experiential," the difference is one of emphasis, not of subject. The underlying space — prior to any distinction, prior to any form — is khōra: undifferentiated, generative, undepleted by what it generates. As soon as any difference is discernible, three dimensions co-arise necessarily: ground, figure, and pattern, or abstractly −1, +1, √2 (the Structure triad's coordinates, used as default shorthand; see Triad-Specific Coordinate Systems for the full coordinate geometry). Applied at three independent levels (how something acts, where it acts, what it acts on), this generates a Capacity Ground: a structured possibility space whose geometry precedes any particular transformation occurring within it. That space is populated by distinct kinds of entities that interact differently depending on what they are, what they encounter, and where in the space the encounter occurs. The framework does not model particular changes but the expressible geometry of how anything becomes something else — and the ecology of what lives inside that geometry.
 
 EO was developed by Michael T. Lacy beginning in 2024, drawing on investigative journalism, data systems architecture, and cross-disciplinary pattern analysis.
 
@@ -10556,7 +10386,7 @@ A preceding project building a community intelligence platform for Nashville, in
 
 EO rests on a single generative unit: the distinction between **ground** (what enables), **figure** (what emerges), and **pattern** (what coheres). This trichotomy — borrowed from Gestalt psychology but applied without requiring a perceiver — recurs at every scale of the framework and, EO claims, at every scale of the phenomena it describes. A thermal gradient has a ground state, figures that stand out against it, and patterns across those figures. So does a language. So does an institution. So does a database.
 
-The recursion is not metaphorical. Applying the ground/figure/pattern distinction at three independent levels produces three axes, each with three values, yielding a 3 × 3 × 3 = 27-cell capacity ground. Empirical research using high-dimensional semantic embeddings has confirmed that the three axes are statistically independent (Adjusted Rand Index ≈ 0.05), meaning the same cognitive distinction applied at different levels generates genuinely new degrees of freedom rather than relabeling.
+The recursion is not metaphorical. Applying the ground/figure/pattern distinction at three independent levels produces three axes, each with three values, yielding a 3 × 3 × 3 = 27-cell capacity ground. Empirical work with high-dimensional semantic embeddings offers *partial, mixed* support for treating the three axes as independent: the v2 lexical study found strong proportionality and face-level clustering, but measured an Adjusted Rand Index of ≈ 0.185 between two of the axes — low, yet short of the near-zero a clean independence claim needs — and did not meet its coordinate-geometry predictions (see [The Lexical Analysis](/lexical-analysis)). The defensible reading is that applying the same distinction at different levels *tends to* open genuinely new degrees of freedom rather than merely relabel; calling axis-independence *confirmed* overstates the evidence — the framework's own report says otherwise, and treating a working hypothesis as a settled result is precisely the overreach [Nine Instructions](/nine-instructions) warns against.
 
 ### The three axes
 
@@ -10616,11 +10446,11 @@ The first two axes — Mode and Domain — cross to produce nine primitive trans
 
 **Significance**
 
-**EVA**  — change value within frame
+**DEF** — assert what holds within a frame
 
-**DEF**  — hold contradictions simultaneously
+**EVA** — render judgment by testing against a definition
 
-**REC**  — change the frame itself
+**REC** — change the frame itself
 
 The operators group into three **triads** (rows), each addressing a different domain of reality:
 
@@ -10632,13 +10462,13 @@ NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC
 
 This is a dependency map, not a checklist. Existence must be established before Structure can be organized; Structure must exist before Significance can operate on it. Within each triad, operators presuppose ground → figure → pattern: you cannot direct attention (SIG) without first recognizing what is absent (NUL); you cannot connect across boundaries (CON) without first drawing them (SEG); you cannot change the frame (REC) without first encountering the contradictions (DEF) that reveal the frame's insufficiency.
 
-The helix ordering was derived by exhaustive computational verification: of the 1,296 possible orderings of nine operators, 1,295 fail non-degeneracy criteria from Codd's relational algebra. Only one survives.
+The helix ordering was narrowed by exhaustive computational testing: of the 1,296 possible orderings of nine operators, the large majority fail non-degeneracy criteria drawn from Codd's relational algebra, and the remainder — differing only in intra-triad arrangement — are eliminated by the presupposition argument (see [The Three Triads](/the-triads) for the two-stage account and exact counts). This test certifies the dependency *ordering*, not the completeness of the nine operators; see [Nine Instructions](/nine-instructions).
 
 ## The 27-cell capacity ground
 
 Adding the third axis — **Object** (whether the transformation targets a ground condition, a specific figure, or a pattern) — extends the 3 × 3 lattice into a 3 × 3 × 3 capacity ground of 27 cells, each specifying a unique combination of how, where, and what.
 
-The capacity ground and the capacity ground are the same object viewed from different angles. The operator capacity ground asks: *what transformation is happening?* The capacity ground asks: *what does it feel like to be at this coordinate?*
+The operator lattice and the 27-cell capacity ground are the same object viewed from different angles. The operator view asks: *what transformation is happening?* The capacity-ground view asks: *what does it feel like to be at this coordinate?*
 
 ### Distribution asymmetry
 
@@ -11245,6 +11075,54 @@ window.addEventListener("keydown", e => {
 
 ---
 
+# Going and Looking: Research That Tries to Be Wrong
+
+**Record ID:** wiki:going-and-looking  
+**DB ID:** 78  
+**Tags:** 301  
+**Keywords:** research, disproof, falsification, curiosity, corroboration, stopping rule, saliency  
+**Status:** published  
+**Updated:** 2026-07-14T00:00:00.000Z  
+
+---
+
+*The [EO Reader](/the-eo-reader)'s research room is built on one sentence: **a research tool that only ever makes you more confident is not researching — it is collecting.** So it is built to try to be wrong.*
+
+---
+
+## The disproof stance
+
+About a third of the searches in a study are seeded not to confirm the emerging reading but to **falsify** it — *go find the document that would exist only if this reading were wrong* (`disproofQueries`, `src/rooms/research/driver.js`). These disproof searches are always drained, even past the point where the confirming corpus is satisfied. A source found by a disproof search is traceable as such (the pin carries its `via`; claims carry `fromDisprove`), so the trail shows the reading survived an attempt on its life rather than merely accumulating agreement.
+
+## The watchable stop rule
+
+Research stops when it stops *learning*, and the stopping is legible: per-document information gain, a quiet-countdown, `quietNeeded` consecutive quiet documents before it halts (`src/rooms/research/project.js`). You can watch it decide it is done. And a mid-study **reframe** — the story changing — flags every earlier answer `staleAfterRec` for re-check, because an answer given under the old frame may no longer hold under the new one. The research report is a pure projection of an append-only event log; the claim-to-passage links are never severed.
+
+## Curiosity, leashed
+
+The multi-hop walk that follows leads is not a shotgun. It is **best-first over the one [surprise](/signal-from-noise)** — curiosity is that surprise pointed at freshly fetched pages, and `bayesBy` (which dimensions belief moved along) names the next leads (`src/turn/research.js`). But surprise alone wanders: *a page is often surprising precisely because it has gone off-topic* (the classic drift, X-Files → one actor → an unrelated film → metallurgy). So surprise is **leashed by saliency** — a Born-rule cosine against a topic frame frozen on the original question. A hop that strays below a self-calibrating fraction of the seed's saliency, for enough consecutive hops, ends the walk (`src/turn/research.js`, salience leash). Surprise pulls out; saliency pulls back.
+
+## Corroboration with an honest terminal
+
+When the answer rests on a single source, the reader goes looking for a second, distinct witness (`src/turn/corroborate.js`). A fetched page counts only if it *both* supports the answer's distinctive claim *and* is a distinct witness by provenance (not merely similar text — see [Signal from Noise](/signal-from-noise)). The walk has three terminals, and the third is the point: **FOUND** (a distinct witness), **DRY** (searched and found none — *"I couldn't find an independent source; treat it as single-source"*), or **SPENT**. "I looked and could not corroborate this" is a designed, honest output, not a failure to be hidden.
+
+## Why it is EO
+
+Going and looking is [search as the door between the two doors](/the-two-doors): it converts the engine's own reafferent guess into an exafferent witness, at a measured toll. It is [saving the appearances](/ancient-astronomy-eo-saving-the-appearances) as a method — the standard is to contain every observation, including the one that would break your reading, without remainder. A good search, the docs say, *hands you back a better silence.*
+
+---
+
+### See also
+
+- [The Two Doors](/the-two-doors) — reafference converted to exafference
+- [Signal from Noise](/signal-from-noise) — the curiosity metric and the corroboration bar
+- [Deep Reading](/deep-reading) — the inward-facing sibling
+- [The EO Reader](/the-eo-reader) · [The Evidence](/the-evidence)
+
+---
+
+---
+
 # Ground / Figure / Pattern
 
 **Record ID:** wiki:ground-figure-pattern  
@@ -11252,7 +11130,7 @@ window.addEventListener("keydown", e => {
 **Tags:** 101  
 **Keywords:** triad, trichotomy, ground, figure, three  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:46.351Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -11286,7 +11164,7 @@ EO's three axes — α (Mode), η (Domain), Ω (Object) — are independent stru
 
 An earlier account framed GFP as the generative unit: one distinction, applied recursively to three questions, producing the capacity ground. This was elegant but wrong. It required one distinction *plus* three ungrounded questions, while presenting itself as requiring only the distinction. The three questions were smuggled in. The account was also circular: GFP was said to generate the Object axis, and then appeared *as the values on* that axis. Pattern was simultaneously the generator and the generated.
 
-The corrected account: GFP is the *recurring internal structure* found within each independently motivated axis. Each axis has three values. When you examine those values, they stand in the same three-role relationship — one enabling condition, one differentiated element, one stabilizing integration. This recurrence is an empirical finding (ARI ≈ 0.05 between axes) and a structural observation. It is not a derivation mechanism.
+The corrected account: GFP is the *recurring internal structure* found within each independently motivated axis. Each axis has three values. When you examine those values, they stand in the same three-role relationship — one enabling condition, one differentiated element, one stabilizing integration. This recurrence is primarily a *structural* observation; the empirical picture is mixed rather than clean — the v2 lexical study measured an inter-axis Adjusted Rand Index of ≈ 0.185 (low but non-zero, short of a clean independence result). It is not a derivation mechanism.
 
 GFP tells you about the *inside* of each dimension. It does not tell you what the dimensions are, where they come from, or what their relationship to each other is. For that, see *The Three Dimensions of EO* and *The Axis Triad and Its Coordinates*.
 
@@ -11414,7 +11292,7 @@ The pattern-position coordinates form a provable progression: 2 (rational), √2
 
 ## Status
 
-The Triadic Minimum (three co-constitutive roles are required for stable differentiation) is definitional within EO — the framework's foundational postulate. The fractal self-similarity is a structural observation within the framework. The claim that the three axes are independent is supported empirically (ARI ≈ 0.05). The triad-specific coordinate assignments are independently motivated (von Neumann ordinals, Pythagorean theorem, Gelfond–Schneider), and the type progression is a proven mathematical result. The interpretation of the type progression as corresponding to the helix's dependency irreversibility is a structural parallel, not an identity proof. None of these claims have undergone independent peer review.
+The Triadic Minimum (three co-constitutive roles are required for stable differentiation) is definitional within EO — the framework's foundational postulate. The fractal self-similarity is a structural observation within the framework. The claim that the three axes are independent is *partially and unevenly* supported: the v2 lexical study found strong proportionality and clustering but an inter-axis Adjusted Rand Index of ≈ 0.185 and unmet coordinate-geometry predictions, so axis-independence is better held as a working hypothesis than a confirmed result (see [The Lexical Analysis](/lexical-analysis)). The triad-specific coordinate assignments are independently motivated (von Neumann ordinals, Pythagorean theorem, Gelfond–Schneider), and the type progression is a proven mathematical result. The interpretation of the type progression as corresponding to the helix's dependency irreversibility is a structural parallel, not an identity proof. None of these claims have undergone independent peer review.
 
 ### Open Questions
 
@@ -12162,7 +12040,7 @@ This line of argument remains informal and speculative.
 **Tags:** operator, 101  
 **Keywords:** ins, existence  
 **Status:** published  
-**Updated:** 2026-03-23T17:01:44.022Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -12170,11 +12048,11 @@ This line of argument remains informal and speculative.
 
 > *What the schema won't hold doesn't stop existing. It just stops being seen.*
 
-**INS** (△ / α) is the third operator in the helix and the third member of the Existence triad. It sits at **Generating ⤫ Existence** — the position where something crosses from potential into the particular. Before INS, you have NUL (the capacity for absence) and SIG (the capacity for distinction). INS is the moment a thing becomes concrete.
+**INS** (● / α) is the third operator in the helix and the third member of the Existence triad. It sits at **Generating ⤫ Existence** — the position where something crosses from potential into the particular. Before INS, you have NUL (the capacity for absence) and SIG (the capacity for appearing). INS is the moment a thing becomes concrete.
 
 |  |  |
 | --- | --- |
-| **Glyph** | △ |
+| **Glyph** | ● |
 | **Greek** | α (alpha) — *archē*. The first. Every instance is an α-event. |
 | **Position** | Generating ⤫ Existence |
 | **Helix position** | Third (after NUL → SIG) |
@@ -12460,7 +12338,7 @@ Every 2×2 framework in the history of ideas is a still image with its motion bl
 **Record ID:** wiki:mhc-and-eo  
 **DB ID:** 53  
 **Status:** draft  
-**Updated:** 2026-03-26T22:16:39.400Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -12576,7 +12454,7 @@ This reading predicts something testable: the same operator type should appear t
 
 ### The Axioms as Dependency Ordering
 
-The MHC's three axioms — *defined in terms of*, *organizes*, *non-arbitrarily* — are structurally identical to the requirement that governs E.O.'s helix. In the helix, NUL(∅) must be available before SIG(○) can be instantiated; SIG before INS(△); INS before SEG(|); and so on. Each operator is defined in terms of prior operators, organizes them, and does so non-arbitrarily. The MHC formalizes this same logic for cognitive task sequences across whatever object class is currently in scope; E.O. formalizes it as a fixed nine-position dependency structure.
+The MHC's three axioms — *defined in terms of*, *organizes*, *non-arbitrarily* — are structurally identical to the requirement that governs E.O.'s helix. In the helix, NUL(∅) must be available before SIG(○) can be instantiated; SIG before INS(●); INS before SEG(｜); and so on. Each operator is defined in terms of prior operators, organizes them, and does so non-arbitrarily. The MHC formalizes this same logic for cognitive task sequences across whatever object class is currently in scope; E.O. formalizes it as a fixed nine-position dependency structure.
 
 ### Task vs. Performance = Structural Address vs. Event
 
@@ -13242,6 +13120,177 @@ Signs of failure:
 - Generatings solutions in parallel rather than deriving them from a single traversal
 - SIG produces a correct but generic Ground that doesn't change downstream analysis
 - Predictions follow one link without tracing the cascade
+
+---
+
+---
+
+# Nine Instructions: EO Is an Effect System, Not an Ontology
+
+**Record ID:** wiki:nine-instructions  
+**DB ID:** 72  
+**Tags:** 301  
+**Keywords:** effect system, schank, codd, compiler, closure, capability, defeat conditions, conceptual dependency  
+**Status:** published  
+**Updated:** 2026-07-14T00:00:00.000Z  
+
+---
+
+*This article reframes EO's central claim. It argues that the operator algebra is best understood not as a metaphysics but as an engineering artifact with sixty years of proven ancestry — and that seeing it that way makes its one genuinely novel bet **sharper, smaller, and much harder to knock down**. It is written to be defensible to a hostile reader.*
+
+---
+
+## The intuition, and its real name
+
+The motivating complaint is old and correct: in an ordinary application you have indefinitely many particular cases, and you rethink the logic for every one. Put a fixed set of operations in the middle — everything *lowers* into it, everything *lifts* out of it — and you write **N + M pieces of logic instead of N × M**. N lowerings, M passes. This is the N-by-M collapse, and it is the single most reliable win in the history of software: it is what every compiler does.
+
+The second half of the intuition — *if these things nest, they need uniform ways to interact* — also has a name: the **uniform interface**. It is why Unix pipes compose into things their authors never imagined; it is the constraint at the center of how the web works; it is Christopher Alexander's claim that the same patterns hold at the scale of a region and a doorknob; and, most precisely, it is Stafford Beer's **Viable System Model** — five functions recurring *identically* at every level of recursion, so a viable system contains viable systems and is contained in one.
+
+None of this is new, and that is the good news. Koestler's *holon* is from 1967; Simon's two-watchmakers parable from 1962; Beer and Alexander are contemporaries of both. The two laws at the front of EO's coder's manual — *the cube* and *the watchmaker* (see [Holons](/holons)) — are a paper and a book older than personal computing. That they still hold is not an embarrassment. It is a **load test** passed. Sixty years of people leaning on that ground, and it has not given.
+
+So the intuition is right. The useful question is not *whether it works* but **which part is actually doing the work** — and that has a sharper answer than one might expect.
+
+## Take the metaphysics off and see what is left
+
+Delete every philosophical claim from the framework. No von Neumann ordinals, no Peirce, no transcendental coordinate. Look only at what the kernel mechanically does:
+
+- Every part declares a set of operations it is **permitted** to perform.
+- That set gets **narrower** going down — a view can never do more than the room it draws from.
+- It gets **unioned** going up — an application's permissions are the computed sum of its parts', not a fresh declaration.
+- Any attempt to **widen** a permission must be explicit and logged.
+- The kernel **refuses, statically**, to let a part perform an operation it did not declare.
+
+That is not an ontology. **That is an effect system** — in the precise, forty-year-old, programming-language-theory sense.
+
+An *algebraic effect* is an operation a computation is permitted to perform, tracked in the computation's own type (Plotkin & Power; later Plotkin & Pretnar). A function's type says not only what it returns but **what it is allowed to do on the way**. The set of permitted effects is a *row*; one row fitting inside another is **subeffecting**; computing an outer permission set as the union of inner ones is **effect inference**; a computation that performs an effect it never declared is the discipline's signature failure — the **unhandled effect**.
+
+Map it straight across:
+
+| EO contract system | Effect-system name |
+|---|---|
+| Contract narrows downward | Subeffecting |
+| App contract envelopes upward | Effect inference |
+| Logged widening | Row extension |
+| Kernel rejection of an undeclared op | Unhandled effect |
+| Authority never ambient; a part only attenuates what it was given | Object-capability security |
+
+The honest structural diagnosis: **EO's contract system is a row-based algebraic effect system in capability-passing style, over a closed semantic alphabet, with an added coherence check and a typed rejection vocabulary.**
+
+Every clause in that sentence is standard, well-proven, and safe — **except one.** Ordinary effect systems track *computational* effects (I/O, state, exceptions) and their entire selling point is that the effects are **user-definable**: you add one whenever your domain needs it. EO does the opposite. It says: *nine, closed, forever.* That single inversion is the whole bet. Everything else is somebody else's proven ground.
+
+> **This is not a hypothetical.** The EO Reader ([EO Implemented](/the-eo-reader)) ships this effect system. Each holon carries an `eo-contract.js` manifest declaring its `{ops, terrains, stances}`; `core/contracts.js` merges every manifest into an application-level envelope (effect inference); contracts narrow toward the leaves (subeffecting); a widening is a logged `!REC` (row extension); and `tests/contracts.test.js` proves 100 % contract coverage and cube coherence on every run — a part performing an undeclared op is a build-time failure, not a runtime surprise. The model itself is handed the narrowest grant of all: a `MODEL_CONTRACT` **without** DEF/EVA/REC (the defamation firewall — it may *render* a logged judgment, never *originate* one) and **without** the Entity terrain (PII protection as an address the model does not possess). See [The Model Is the Leaf](/the-model-is-the-leaf). EO did not describe an effect system. It **built** one, and then forgot to call it that.
+
+## Two graveyards and one palace
+
+Three traditions have made a closure claim of this shape. Their fates diverge, and the reason they diverge is the most useful thing in this article.
+
+**The graveyard, headstone: Roger Schank.** In 1969 Schank's *Conceptual Dependency* proposed that every human action verb decomposes into ~eleven primitive acts — physical transfer, abstract transfer of possession, mental transfer of information, mental construction, grasp, ingest, speak, attend — each instantiated with role fillers (agent, object, source, destination). *A small closed set of language-independent primitives; everything decomposes into combinations; you aim targets at the operators; canonical form so that synonymous sentences collapse to one structure.* **That is EO's claim, made in 1969, with very nearly EO's operator count.** EO's evidence — 32,000+ verbs across 41 languages ([Lexical Analysis](/lexical-analysis)) — is a *Schankian move performed with better tools.*
+
+It died. Not because Schank was a fool — he was among the sharpest in the field — but for four specific reasons, and all four must be heard:
+
+1. **The primitive set kept needing exceptions.** Every new domain surfaced a verb that would not decompose; you distorted the verb or quietly added a primitive.
+2. **Decomposition threw away what mattered.** *Give* and *sell* are both "abstract transfer of possession." The difference between them is the entire subject matter of commerce.
+3. **The mapping problem was the hard problem.** Getting from actual English to the primitives had no theory. The framework named a destination and no road.
+4. **It never left the micro-world.** Every demonstration was hand-built.
+
+Schank has company in the graveyard: Wierzbicka & Goddard's ~65 universal semantic primes (forty years defended, used by no one building anything); Jackendoff; Dowty; Fillmore's cases; Halliday's process types; Rhetorical Structure Theory's two dozen discourse relations — which *do* nest recursively, exactly as EO wants, and which no one ever closed. Intellectually enormous; practically thin.
+
+**The palace, one architect: Codd, 1970.** Six operations — select, project, union, difference, product, rename — and relational algebra ate the world. Every database is its descendant. Same shape of claim. One man is a footnote; the other founded a trillion-dollar industry. The difference is not intelligence and not luck.
+
+## Why Codd won
+
+Codd's closure claim was **relative to a precisely defined target class** and it was **provable.** He did not say *six operators for all of reality.* He said: here is exactly the class of queries expressible in first-order logic over relations, and here is the proof my six express precisely that class and nothing more. **Relational completeness is a theorem.** You can check it, attack it, and — decisively — *build* on it, because you know exactly where the ground ends and the swamp begins.
+
+Schank said *all of meaning*: uncheckable, unfalsifiable, unbuildable-upon, because you never learn you have walked off the edge until you are already falling.
+
+And here is the sentence a hostile reader will reach first, so EO should reach it first:
+
+> **EO currently makes Schank's claim while citing Codd's proof.**
+
+The framework reports testing all 1,296 admissible operator orderings against Codd's functional-dependency closure criterion, eliminating 92 % as closure violations (see [The Three Triads](/the-triads)). Grant it entirely. But look at *which* operators that test touches. Codd's algebra is about **existence and structure** — instances, boundaries, joins, projections. It maps onto **instantiate, resplit, bond** and that neighborhood. It has:
+
+- **no *evaluate* (EVA)** — there is no relational operator for rendering judgment against a definition;
+- **no *learn-rule* (REC)** — schema migration is famously *outside* the relational algebra, the thing you do at 3 a.m. with a separate tool;
+- **no *hold* (NUL)** and **no *attribute* (SIG)** — observation and attention are not operations in a query algebra; they are free, invisible.
+
+So the proof certifies the operators nobody doubted, and leaves untouched the **Significance triad — assert, evaluate, restructure (DEF · EVA · REC)** — which is where *every interesting thing in the architecture lives.* The fold is assert–evaluate–restructure. The contract system is assert. The verifier is evaluate. Defeasibility is restructure. **EO's whole product is the triad its proof does not cover.**
+
+That is not fatal. It may be a gap in the write-up, not the work. But it is the first thing a hostile reader finds, and they are right to find it, so **find it first.**
+
+## The gap the proof leaves is exactly what the implementation fills
+
+Here is the turn the original critique could not make, because it predates the evidence. **Codd's proof reaches Existence and Structure. The EO Reader's measurements reach Significance.** The two evidence legs, together, cover the nine — and the second leg is new as of 2026 (see [The Evidence](/the-evidence)):
+
+- **EVA made measurable.** A judgment is scored not for fluency and not against a frozen gold answer, but for *confident-wrongness*: correct suspension counts as correct, confident guessing is the counted failure. A deterministic scorer agreed with hand labels 19/20 (95 %) where a local 7B LLM judge agreed 20/39 (51 %), 17 of its 19 disagreements invented. Evaluation is not "free and invisible" here — it is a first-class, contracted, logged, *audited* operation.
+- **REC made observable.** Defeasible conventions are learned, tested, and *defeated-or-reinstated* on the record; a restructuring pays a supersession cost that unsettles every dependent claim. Schema change is no longer out of band — it is an event in the same log as the data.
+- **NUL and SIG made first-class.** Observation and attention — the operations a query algebra cannot see — are the reader's most instrumented surfaces: the derived void-null decides what counts as signal without a hand-set threshold, and Bayesian surprise decides where attention goes (*"TV-snow is maximally improbable yet inert"*). See [Signal from Noise](/signal-from-noise).
+
+So the response to "your proof only covers the boring operators" is not a defense. It is: **yes — and here is the second body of evidence, measured rather than proven, that covers the rest.** Proof for the query-algebra neighborhood; falsifier-gated measurement for the significance neighborhood. That is a stronger epistemic position than Codd alone and an incomparably stronger one than Schank.
+
+## The reframe worth staking the argument on
+
+Schank died on the mapping problem — arbitrary English to primitives, with no road. **EO does not have a mapping problem, because it built the road.** The notation recovers the operator from punctuation: the colon *is* instantiate, the arrow *is* bond, the dot-equals *is* assert ([EO Notation](/eo-notation); [EOT](/eot)). The system never *infers* which operator a sentence instantiates; the operator is carried by the surface syntax of a language EO controls. In the EO Reader, malformed EOT lines become diagnostics, never silent guesses, and provenance rides every event.
+
+Which licenses the reframe:
+
+> **EO has not built an ontology. It has built a compiler, and its intermediate representation happens to have nine instructions.**
+
+This is a promotion, not a demotion. LLVM has an instruction set; it does not claim that set is the true instruction set of all possible computation. It claims something more modest and more useful: every source language lowers in, every target lifts out, every optimization pass is written *once*. That is the N-by-M collapse — the exact argument the framework already makes, now with the vocabulary. The compiler framing:
+
+- makes the value proposition legible in one sentence;
+- makes the completeness claim **bounded and checkable**;
+- **survives being wrong about the number** — an IR that gains an instruction is Tuesday; an ontology that gains a tenth category was never an ontology;
+- stops serious people from bouncing off silently.
+
+And it costs nothing. The metaphysics can still be true. You simply need not bet the codebase on it.
+
+## What the nine actually buy
+
+Set the philosophy aside and ask the engineer's question: what do nine operators give that create-read-update-delete's four, or Codd's six, do not? The answer is precise and worth more than the ontology:
+
+**Observation, attention, evaluation, and schema change become first-class, contracted, logged operations.** That is the product. Consider what those four are in a normal system:
+
+- A **read** is invisible to the permission model — which is exactly why access logging is always bolted on, always incomplete, always the thing that fails the audit.
+- **Attention** (flagging something as worth noticing) is a boolean column and one-off code; never an operation, so never permissioned, never composed.
+- **Validation** is the single most duplicated, least auditable layer in all of software — living in DB constraints *and* the object mapper *and* the controller *and* the form *and* a cron job, none speaking the same language, no two agreeing.
+- **Schema change** is out of band: different tool, different model, different log, different person, different night.
+
+Hoisting those four into the algebra means validation happens **in one place, in one vocabulary, with one audit trail**, and the schema's history lives in the same event stream as the data's. Notice that this is *exactly the original complaint*: the logic being rethought every time **was validation**. The algebra's real gift is making evaluation a citizen. Everything else is scaffolding around that.
+
+## Turn the knife on the handle
+
+One last move, and it is the one EO should want said to itself. Ask what would **falsify nine** — in EO's own vocabulary, because the framework already contains the answer, and the answer is brutal and beautiful:
+
+The nine-operator closure claim is a **Pattern-grain holon.** Therefore it can never reach *established.* Therefore it must carry declared **defeat conditions** at emission. Therefore, **by its own algebra, EO is forbidden from believing its algebra is settled.**
+
+That is not a rhetorical trick; it is the framework applied to itself, and it is the highest compliment available — a framework that licenses its own defeat can do something a framework that does not cannot, and can never learn to do. So write the defeat conditions down:
+
+- What observation would show the ninth operator is really two?
+- What would show a tenth is needed?
+- What recurring construct fails to lower into the nine without distorting it? (Schank's death-by-exception, stated as a test.)
+
+If those cannot be answered, then *nine* is not a claim — it is a **frame.** Frames are enormously useful and they are not verified, and calling one verified is the fastest possible way to lose the one reader whose respect was the point. (This is the same discipline the implementation already practices: pre-registered falsifiers that are allowed to return negative, and do — see the refused length-as-field-property build in [The Evidence](/the-evidence).)
+
+## Whose ground
+
+Obvious things are usually old, and that is the good news: the ground under EO has been load-tested by sixty years of people leaning on it — Simon, Koestler, Beer, Alexander, Codd, and yes Schank, who leaned and went through. The task is to know **whose** ground it is, and to **cite Schank before someone cites him at you.** The paragraph that converts the greatest liability into the greatest credibility is short:
+
+> *This claim has been made before. It failed for four specific reasons. Here is why the one that killed it — the mapping problem — cannot kill a system whose surface syntax carries the operator.*
+
+Write that paragraph and a reader two seconds from closing the tab decides instead that this is the first person in fifty years to read the obituary carefully.
+
+**Nine instructions. Not nine truths.** Nine instructions, closed over a domain you can actually name, in a compiler you actually built. That is smaller. And it is so much harder to knock down.
+
+---
+
+### See also
+
+- [The EO Reader: EO Implemented](/the-eo-reader) — the effect system, running
+- [The Model Is the Leaf](/the-model-is-the-leaf) — the capability contract handed to the LLM
+- [Signal from Noise](/signal-from-noise) · [The Evidence](/the-evidence) — how the Significance triad is grounded
+- [The Three Triads](/the-triads) · [The Nine Operators](/the-nine-operators) — the algebra being reframed
+- [Influences and Lineage](/influences-and-lineage) — the sixty years of ancestry
+- [Ancient Astronomy & EO: Saving the Appearances](/ancient-astronomy-eo-saving-the-appearances) — the completeness-as-coverage standard, applied to the framework itself
 
 ---
 
@@ -14109,13 +14158,13 @@ The deepest failure is not in the data. It is in the system's relationship to it
 **Tags:** 101  
 **Keywords:** operator, position  
 **Status:** draft  
-**Updated:** 2026-05-16T01:25:49.567Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
 # Operator Naming in EO
 
-In **EO**, the nine primitive operators carry three parallel naming systems: three-letter abbreviations (NUL, SIG, INS, etc.), practitioner glyphs (∅, ⊡, △, etc.), and Greek letters (ν, θ, α, etc.). Each system was developed for a different context — abbreviations for prose and documentation, glyphs for practitioner notation and data lineage, Greek letters for algebraic composition and formal work.
+In **EO**, the nine primitive operators carry three parallel naming systems: three-letter abbreviations (NUL, SIG, INS, etc.), practitioner glyphs (∅, ○, ●, etc.), and Greek letters (ν, σ, α, etc.). Each system was developed for a different context — abbreviations for prose and documentation, glyphs for practitioner notation and data lineage, Greek letters for algebraic composition and formal work.
 
 None of these systems was finalized in a single pass. The naming history of the operators — particularly the operator at position two in the dependency helix — illustrates a broader principle within the framework: that all names, symbols, and labels in EO are **resonant signifiers**, natural-language or notational pointers toward dimensional positions in the framework's capacity ground. The positions are structural. The names are approximations.
 
@@ -14223,19 +14272,19 @@ Across all three names — and across the pre-naming Airtable phase where the po
 
 ### Practitioner Glyphs
 
-The practitioner glyph system (∅ ⊡ △ | ⤫ ∨ ⊢ ⊨ ⊛) was developed for annotating operator logs, data lineage, and natural-language analysis. Glyphs were selected for visual iconicity — each symbol suggests its operator's action:
+The practitioner glyph system is **∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛** — one mark per operator, made authoritative in the implementation (`src/core/operators.js`) so every surface draws the same mark for a given act and a graph edge never disagrees with a legend chip. The marks read by domain column: Existence **∅ ○ ●**, Structure **｜ ⋈ △**, Interpretation **⊢ ⊨ ⊛**. Glyphs were selected for visual iconicity:
 
 - **∅** (empty set) for NUL: the void as a well-defined mathematical object.
-- **⊡** (squared dot) for SIG/SIG: a point of registration within an undifferentiated field — something has become salient against a ground. The glyph visually encodes the operation: a dot (figure) appearing within a frame (ground), prior to any boundary being drawn around it.
-- **△** (triangle) for INS: an upward gesture, something entering existence.
-- **|** (vertical bar) for SEG: a boundary, a wall, a partition.
-- **⤫** (bowtie/natural join) for CON: two things meeting at a point — borrowed from relational algebra's join symbol.
-- **∨** (vee/disjunction) for SYN: convergence, things coming together from below.
-- **∿** (sine wave) — legacy glyph, replaced by ⊢ for DEF. Originally represented oscillation/alternation.
-- **∥** (parallel lines) — legacy glyph, replaced by ⊨ for EVA. Originally represented simultaneous holding. (An earlier version used ∥, which was identified as a collision with XOR/direct sum in standard notation.)
+- **○** (open circle) for SIG: attention directed but not yet filled — a point of registration, something becoming salient against a ground, prior to any boundary being drawn around it.
+- **●** (filled circle) for INS: the registration made concrete — a particular brought into being.
+- **｜** (vertical bar, U+FF5C) for SEG: a boundary, a wall, a partition.
+- **⋈** (bowtie/natural join) for CON: two things meeting at a point — borrowed from relational algebra's join symbol.
+- **△** (triangle) for SYN: parts rising into an emergent whole.
+- **⊢** (turnstile) for DEF: entailment — what follows given the terms; a definition asserted.
+- **⊨** (double turnstile) for EVA: satisfaction — testing whether a structure models a formula.
 - **⊛** (rightwards arrow with loop) for REC: output feeding back as input, the helix bending into a spiral.
 
-Two unresolved symbol collisions remain as of this writing: the legacy glyph ∿ was shared between the old EVA and a composition-level entry; ⤫ is shared between CON and a composition-level entry.
+**Superseded glyphs**, kept for reading older material: ⊡ (was SIG, now ○); △ (was INS — now SYN's mark, INS is ●); ⤫ (was CON, now ⋈); ∨ (was SYN, now △); ∿ (was DEF, now ⊢); ∥ (was EVA, now ⊨). The earlier set drifted from the implementation; the marks above are the ones the shipped reader draws.
 
 ### Greek Letters
 
@@ -14554,7 +14603,7 @@ This asymmetry may itself be structural. Protogons are defined by movement and i
 **DB ID:** 43  
 **Tags:** 201  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:41.561Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -14634,7 +14683,7 @@ Non-quantum instances are pervasive. The felt quality of a place — what makes 
 
 In quantum programming, measurement (`M(q)` in Q#, `qc.measure(qubit, cbit)` in Qiskit) is the operation that resists single-cell assignment in the capacity ground. It simultaneously registers a distinction (SIG × Figure), destroys a pattern (NUL × Pattern, as the DEF state is lost), and creates a classical bit (INS × Figure). This multi-cell character may reflect the emanon dynamic: a ground-dominant process forced into figure-dominant resolution spans multiple operator positions because no single position can contain the structural mismatch.
 
-### Entanglement → SYN (∨) × Figure
+### Entanglement → SYN (△) × Figure
 
 Quantum entanglement — where composite systems have states that cannot be decomposed into states of their parts — corresponds to SYN at the Figure level. The Bell state (|00⟩ + |11⟩)/√2 is not a pair of correlated qubits. It is a single irreducible entity. Measuring one qubit constrains the other regardless of distance.
 
@@ -15073,8 +15122,8 @@ The [Codd](https://en.wikipedia.org/wiki/Edgar_F._Codd) precedent is instructive
 **Record ID:** wiki:sig  
 **DB ID:** 35  
 **Tags:** operator  
-**Status:** draft  
-**Updated:** 2026-03-26T22:16:39.679Z  
+**Status:** published  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -15084,7 +15133,9 @@ SIG is the capacity for appearing. Not for naming, not for partitioning, not for
 
 A system that has SIG available can have things show up for it. A system that has lost SIG is anesthetic — undifferentiated with respect to its environment, incapable of registering anything as present. The degradation of SIG is not the loss of a vocabulary or a boundary. It is the loss of the capacity for anything to matter.
 
-## <table> <tr><th></th><th>Differentiating</th><th>Relating</th><th>Generating</th></tr> <tr><td><strong>Existence</strong></td><td>NUL</td><td><strong>SIG</strong></td><td>INS</td></tr> <tr><td><strong>Structure</strong></td><td>SEG</td><td>CON</td><td>SYN</td></tr> <tr><td><strong>Significance</strong></td><td>DEF</td><td>EVA</td><td>REC</td></tr> </table> What the coordinates demand
+## What the coordinates demand
+
+<table> <tr><th></th><th>Differentiating</th><th>Relating</th><th>Generating</th></tr> <tr><td><strong>Existence</strong></td><td>NUL</td><td><strong>SIG</strong></td><td>INS</td></tr> <tr><td><strong>Structure</strong></td><td>SEG</td><td>CON</td><td>SYN</td></tr> <tr><td><strong>Significance</strong></td><td>DEF</td><td>EVA</td><td>REC</td></tr> </table>
 
 SIG occupies Mode = 1 (Relating), Domain = −1 (Existence).
 
@@ -15323,7 +15374,9 @@ Korean is the diagnostic outlier. SIG accounts for 27% of Korean's classified ve
 
 ### By polarity: three compositional forms
 
-## <table> <tr><th>Polarity</th><th>Form</th><th>Name</th><th>Term</th><th>What it is</th></tr> <tr><td><strong>Reversal (−1)</strong></td><td>NUL(SIG(x))</td><td><strong>Disappearing</strong></td><td><em>haeje</em> [Korean]</td><td>Nullifying an appearance. The formal dissolution of a registration.</td></tr> <tr><td><strong>Forward (+1)</strong></td><td>SIG(x)</td><td><strong>Appearing</strong></td><td><em>gyujeong</em> [Korean]</td><td>The operation as such. Something shows up.</td></tr> <tr><td><strong>Self-application (√2)</strong></td><td>SIG(SIG(x))</td><td><strong>Reading the Room</strong></td><td><em>nunchi</em> [Korean]</td><td>Registering the registration itself — sensing what is showing up <em>for the system</em> and adjusting in real time. Meta-awareness of how you are attending.</td></tr> </table> Cross-linguistic findings
+## Cross-linguistic findings
+
+<table> <tr><th>Polarity</th><th>Form</th><th>Name</th><th>Term</th><th>What it is</th></tr> <tr><td><strong>Reversal (−1)</strong></td><td>NUL(SIG(x))</td><td><strong>Disappearing</strong></td><td><em>haeje</em> [Korean]</td><td>Nullifying an appearance. The formal dissolution of a registration.</td></tr> <tr><td><strong>Forward (+1)</strong></td><td>SIG(x)</td><td><strong>Appearing</strong></td><td><em>gyujeong</em> [Korean]</td><td>The operation as such. Something shows up.</td></tr> <tr><td><strong>Self-application (√2)</strong></td><td>SIG(SIG(x))</td><td><strong>Reading the Room</strong></td><td><em>nunchi</em> [Korean]</td><td>Registering the registration itself — sensing what is showing up <em>for the system</em> and adjusting in real time. Meta-awareness of how you are attending.</td></tr> </table>
 
 *Status: Empirical. Based on a corpus of 19,764 clauses across 41 languages. English counts from 1,192 classified verbs.*
 
@@ -15392,6 +15445,94 @@ The deepest failure is not in the data. It is in the system's relationship to it
 **The performative dimension.** The Yoruba concept of *àṣẹ* suggests that SIG has a constitutive performative pole: to register is to register-as-effective. Appearing, on the *àṣẹ* model, is not passive but a bringing-to-bear of content on a system's subsequent dynamics. Whether EO should formally encode this performative dimension — and if so, how — is unresolved.
 
 **Verb reclassification under Appearing.** Some verbs currently in the SIG cell are partition-verbs (*classify, categorize, sort, type*) that may belong closer to SEG's territory under the appearing framing, since partitioning is structurally a boundary operation. Other verbs currently in adjacent cells may migrate inward: *notice, detect, sense, register, spot* — verbs of salience and registration. A reclassification under the appearing semantic context should produce tighter clustering in embedding space, cleaner boundaries with SEG and DEF, and better classification accuracy. If it produces worse results, that would be evidence that "Distinction" was the right level of abstraction after all.
+
+---
+
+---
+
+# Signal from Noise: EO's Measurement Doctrine
+
+**Record ID:** wiki:signal-from-noise  
+**DB ID:** 74  
+**Tags:** 301  
+**Keywords:** signal, noise, salience, significance, null, born rule, surprise, corroboration, threshold  
+**Status:** published  
+**Updated:** 2026-07-14T00:00:00.000Z  
+
+---
+
+*EO has always claimed that meaning is about what stands out against a field — [SIG](/sig) is the capacity for appearing, [significance](/the-triads) is the whole third triad. The claim was qualitative. The [EO Reader](/the-eo-reader) makes it a **measurement doctrine**, and this article states it with the code that implements it.*
+
+*The doctrine in one sentence: **wherever the system needs to separate signal from noise, it derives the cut from the material's own chance background rather than setting a threshold by hand — and when meaning cannot be measured, abstention is the honest output.** Propose a structure, measure it against a null, act only past chance. The witness does not decide.*
+
+*Citations are paths into `eoreader4.2`.*
+
+---
+
+## Primitive 1 — the derived void-null (no chosen bar)
+
+The anti-threshold at the center of everything. Instead of a magic constant ("cite if overlap > 0.4"), the reader fits the **noise mode** of the field's own non-cohering background and cuts at the extreme-value quantile that a tolerated false-positive rate `α` implies:
+
+> `z = Φ⁻¹((1 − α)^(1/N))`  — `src/core/voidnull.js:113` (`deriveNull`), `:219` (`boundedNull`)
+
+It is **leave-one-out** (a candidate never contributes to the bar that judges it), and it **abstains** — returns "unmeasurable" — below a minimum sample size. `α` is the only human input, and it is a declared false-positive tolerance, not a tuned outcome.
+
+The same primitive is consumed all over the system, which is what makes it a *doctrine* and not a trick: graph-edge pruning (`src/core/project.js`), the point where the surfer arrests on a peak (`src/surfer/surf.js`), whether a field is answerable at all (`src/surfer/answerable.js`), the speech gate (`src/enactor/gate.js`), route/intent crosstalk nulls (`src/turn/intent.js`, `src/turn/meta-route.js`), the chorus's signal cut (`src/surfer/lineup/signal.js`), the prompt's ground-inflation check (`src/model/prompt-checkpoint.js`), and identity/equivalence floors (`src/perceiver/equivalence.js`). One law of measurement, applied everywhere a cut is needed.
+
+## Primitive 2 — the one surprise, two channels
+
+There is exactly **one** surprise metric, computed once, and it is deliberately **not** surprisal:
+
+> `surpriseAt` = `D_KL(posterior ‖ prior)` in bits over a γ-decayed profile — `src/core/surprise.js:63`
+
+The distinction is load-bearing. Surprisal (−log p) measures improbability; Bayesian surprise measures *how much belief actually moved*. **TV-snow is maximally improbable yet moves no belief** — so surprisal is the wrong invariant for where a reading's attention should go. Surprisal survives only as a secondary *novelty* channel; the **Bayesian** channel is what the surfer rides (`src/perceiver/reading.js:203-244`). Calibration is **causal**: the bands that judge a line are fit only from surprises seen up to that point — the future cannot set the band that judged an early line.
+
+Because there is only one metric, it composes without ever needing a second thing kept in sync:
+
+- Pointed at the web, it **is** curiosity — best-first over expected information gain, with `bayesBy` (per-dimension KL contribution) naming the next leads (`src/turn/research.js`; see [Going and Looking](/going-and-looking)).
+- Pointed at the system's own draft, it detects **retreads** — repetition is belief sliding back onto ground it already held (`src/surfer/salience.js:123`).
+
+## Primitive 3 — the Born gate (squaring is the noise step)
+
+Where the system commits stochastically, it squares an amplitude before committing — and the squaring **is** the signal-from-noise operation, because it suppresses weak projections quadratically:
+
+- Thread salience against the activated question: `bornSalience = |⟨topic | span⟩|²` (`src/surfer/salience.js`) — this is also the **leash** on curiosity: a page is often surprising *because* it has wandered off-topic, so surprise pulls out and saliency pulls back (`src/turn/research.js`).
+- The murmur steer: `P(commit) = |√(s·d)|² = s·d` — "0.3 · 0.3 → 0.09 stays a private mutter" (`src/murmur/steer/collapse.js:36`).
+- The 27-cell generative chorus voices cells to a cumulative-mass budget; the tail self-silences (`src/weave/chorus/born.js` — *"why we say Born and not 'use the scores'"*).
+- The self-reaction validate stage projects the reader's reaction to its own draft onto a valence basis and squares it: *"a single strong 'this is wrong' outweighs several faint 'seems okay's, quadratically"* (`src/enactor/ground/validate.js`).
+
+This is [the Born rule made operational](/quantum-weirdness-in-eo-contained-but-not-tamed) — borrowed mathematics used as a noise gate, not a derivation of quantum mechanics.
+
+## Primitive 4 — corroboration is provenance, never content
+
+Two sources corroborate only if they are **distinct witnesses**, and distinctness is an *identity* fact, not a similarity score:
+
+> `sameWitness` = same id / content-hash / registrable host / byline — deliberately **no** content-similarity — `src/enactor/ground/corroboration.js:82-107`
+
+Content sameness is not source sameness: two independent reports of one event share the fact precisely because they are about the same event. The corroboration bar is **two distinct voices** — a *definition*, not a tuned number. The top rung is **cross-modal** (≥2 root origins across ≥2 senses — text and hearing, say), and a **derivation fold** walks each witness to its root so a transcript never counts as a second witness for the recording it came from (`docs/multimodal-eot-foundation.md`). A sock-puppet guard collapses `k` coordinated sources toward an effective sample size of one (`src/perceiver/credence/`).
+
+## The doctrine, stated
+
+Gather the four and the shape is one idea:
+
+1. **Propose** a structure (an edge, a citation, a route, a reflection, a connection).
+2. **Measure** it against a null derived from the field's own chance background.
+3. **Act only past chance** — commit if it beats the null, hold it as a firewalled candidate if it does not.
+4. **Abstain honestly** when meaning cannot be measured — a spelling-space embedder measures nothing, so it raises nothing; a tied referent field returns *"The text does not say."* rather than a guess.
+
+This is why the reader can say **less** than a conventional model and mean **more**: every commitment has passed a measured cut, and every abstention is a first-class, typed outcome ([INDETERMINATE](/nul) is a verdict, not a failure). It is [saving the appearances](/ancient-astronomy-eo-saving-the-appearances) applied to the machine's own speech — contain every observation without remainder, and where you cannot, say so.
+
+For the specific mechanisms that ride on these primitives — the self-read weld, the deep-reading governor, the monologue audit, citation birth — see [The Evidence](/the-evidence), which reports what each has actually measured, negatives included.
+
+---
+
+### See also
+
+- [The EO Reader](/the-eo-reader) — the system these primitives run inside
+- [The Evidence](/the-evidence) — measured results
+- [Nine Instructions](/nine-instructions) — why the Significance triad needs measurement where the proof can't reach
+- [SIG](/sig) — the operator this doctrine operationalizes
+- [The Two Doors](/the-two-doors) — the firewall that makes an abstention safe
 
 ---
 
@@ -15837,7 +15978,7 @@ Together, targeting and scoping fully specify the target position in `OP(target,
 **Tags:** 101  
 **Keywords:** sanskrit, arabic, greek, operator  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:40.256Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -15859,12 +16000,12 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 | --- |
 | 1 | NUL(Condition) | ∅- | (0, −1, 2) |
 | 2 | SIG(Condition) | ○- | (1, −1, 2) |
-| 3 | INS(Condition) | △- | (2, −1, 2) |
-| 4 | SEG(Condition) | ǀ- | (0, +1, 2) |
+| 3 | INS(Condition) | ●- | (2, −1, 2) |
+| 4 | SEG(Condition) | ｜- | (0, +1, 2) |
 | 5 | CON(Condition) | ⋈- | (1, +1, 2) |
-| 6 | SYN(Condition) | ∨- | (2, +1, 2) |
-| 7 | EVA(Condition) | ∿- | (0, √2, 2) |
-| 8 | DEF(Condition) | ∥- | (1, √2, 2) |
+| 6 | SYN(Condition) | △- | (2, +1, 2) |
+| 7 | DEF(Condition) | ⊢- | (0, √2, 2) |
+| 8 | EVA(Condition) | ⊨- | (1, √2, 2) |
 | 9 | REC(Condition) | ⊛- | (2, √2, 2) |
 
 ### Entity (+)   Object = √2
@@ -15873,12 +16014,12 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 | --- |
 | 10 | NUL(Entity) | ∅+ | (0, −1, √2) |
 | 11 | SIG(Entity) | ○+ | (1, −1, √2) |
-| 12 | INS(Entity) | △+ | (2, −1, √2) |
-| 13 | SEG(Entity) | ǀ+ | (0, +1, √2) |
+| 12 | INS(Entity) | ●+ | (2, −1, √2) |
+| 13 | SEG(Entity) | ｜+ | (0, +1, √2) |
 | 14 | CON(Entity) | ⋈+ | (1, +1, √2) |
-| 15 | SYN(Entity) | ∨+ | (2, +1, √2) |
-| 16 | EVA(Entity) | ∿+ | (0, √2, √2) |
-| 17 | DEF(Entity) | ∥+ | (1, √2, √2) |
+| 15 | SYN(Entity) | △+ | (2, +1, √2) |
+| 16 | DEF(Entity) | ⊢+ | (0, √2, √2) |
+| 17 | EVA(Entity) | ⊨+ | (1, √2, √2) |
 | 18 | REC(Entity) | ⊛+ | (2, √2, √2) |
 
 ### Pattern (*)   Object = 2^√2
@@ -15887,12 +16028,12 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 | --- |
 | 19 | NUL(Pattern) | ∅* | (0, −1, 2^√2) |
 | 20 | SIG(Pattern) | ○* | (1, −1, 2^√2) |
-| 21 | INS(Pattern) | △* | (2, −1, 2^√2) |
-| 22 | SEG(Pattern) | ǀ* | (0, +1, 2^√2) |
+| 21 | INS(Pattern) | ●* | (2, −1, 2^√2) |
+| 22 | SEG(Pattern) | ｜* | (0, +1, 2^√2) |
 | 23 | CON(Pattern) | ⋈* | (1, +1, 2^√2) |
-| 24 | SYN(Pattern) | ∨* | (2, +1, 2^√2) |
-| 25 | EVA(Pattern) | ∿* | (0, √2, 2^√2) |
-| 26 | DEF(Pattern) | ∥* | (1, √2, 2^√2) |
+| 24 | SYN(Pattern) | △* | (2, +1, 2^√2) |
+| 25 | DEF(Pattern) | ⊢* | (0, √2, 2^√2) |
+| 26 | EVA(Pattern) | ⊨* | (1, √2, 2^√2) |
 | 27 | REC(Pattern) | ⊛* | (2, √2, 2^√2) |
 
 ## What Each Position Means
@@ -15911,15 +16052,15 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 
 **INS — instantiating**
 
-1. △- (2, −1, 2) — a background is established; a field is opened
-2. △+ (2, −1, √2) — a specific thing is brought into being; creation
-3. △* (2, −1, 2^√2) — a regularity is established; a structure is made to recur
+1. ●- (2, −1, 2) — a background is established; a field is opened
+2. ●+ (2, −1, √2) — a specific thing is brought into being; creation
+3. ●* (2, −1, 2^√2) — a regularity is established; a structure is made to recur
 
 **SEG — segmenting**
 
-1. ǀ- (0, +1, 2) — an ambient field is partitioned into regions
-2. ǀ+ (0, +1, √2) — a bounded thing is divided into distinguishable parts
-3. ǀ* (0, +1, 2^√2) — sub-patterns are distinguished within a larger regularity
+1. ｜- (0, +1, 2) — an ambient field is partitioned into regions
+2. ｜+ (0, +1, √2) — a bounded thing is divided into distinguishable parts
+3. ｜* (0, +1, 2^√2) — sub-patterns are distinguished within a larger regularity
 
 **CON — connecting**
 
@@ -15929,21 +16070,21 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 
 **SYN — synthesizing**
 
-1. ∨- (2, +1, 2) — connected conditions produce a new emergent background state
-2. ∨+ (2, +1, √2) — connected entities produce a new composite whole
-3. ∨* (2, +1, 2^√2) — connected patterns produce a higher-order regularity
+1. △- (2, +1, 2) — connected conditions produce a new emergent background state
+2. △+ (2, +1, √2) — connected entities produce a new composite whole
+3. △* (2, +1, 2^√2) — connected patterns produce a higher-order regularity
 
 **DEF — defining**
 
-1. ∿- (0, √2, 2) — this background state is marked as distinct from that one
-2. ∿+ (0, √2, √2) — this entity carries a different meaning from that one
-3. ∿* (0, √2, 2^√2) — this paradigm is marked as distinct from that one
+1. ⊢- (0, √2, 2) — this background state is marked as distinct from that one
+2. ⊢+ (0, √2, √2) — this entity carries a different meaning from that one
+3. ⊢* (0, √2, 2^√2) — this paradigm is marked as distinct from that one
 
 **EVA — evaluating**
 
-1. ∥- (1, √2, 2) — multiple background states are simultaneously operative
-2. ∥+ (1, √2, √2) — an entity holds multiple simultaneous interpretations
-3. ∥* (1, √2, 2^√2) — multiple paradigms are held as simultaneously valid
+1. ⊨- (1, √2, 2) — competing background states are judged; a criterion selects among them
+2. ⊨+ (1, √2, √2) — an entity's competing interpretations are weighed and a judgment is rendered
+3. ⊨* (1, √2, 2^√2) — rival paradigms are tested against one another
 
 **REC — recursing**
 
@@ -15953,7 +16094,7 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 
 ## Note on SEG Symbol
 
-SEG's symbol `|` is the markdown table column delimiter and will render as a blank cell in table contexts. The substitute `ǀ` (U+01C0, latin letter dental click) is used throughout. In non-table prose, `|` is fine.
+SEG's symbol `|` is the markdown table column delimiter and will render as a blank cell in table contexts. The canonical glyph `｜` (U+FF5C, fullwidth vertical line) is used throughout, distinct from the ASCII pipe `|` (U+007C). In non-table prose, `|` is fine.
 
 ---
 
@@ -16138,7 +16279,7 @@ Whether the axis-level coordinates and the operator-level coordinates interact �
 **Record ID:** wiki:the-def-eva-rec-loop  
 **DB ID:** 70  
 **Status:** published  
-**Updated:** 2026-03-26T21:59:46.858Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -16156,6 +16297,16 @@ Operators 7, 8, and 9 don't just occupy the third row of the grid — they form 
 
 The loop: DEF ⊢ → EVA ⊨ → REC ⊛ → DEF ⊢ ...
 
+## Two Loops: Depicted and Enacted
+
+The loop this article traces — in quantum states, in chemistry, in life, in law, in mathematics — is the **depicted** loop: DEF, EVA, and REC as they appear *in the phenomenon being described*. It is timeless and recomputable. The court rewrote the statute; the Great Vowel Shift restructured English; selection rewrote allele frequencies. These are classified facts about transformations in the world, and reading the same record again classifies them the same way.
+
+The [EO Reader](/the-eo-reader) makes visible a second loop the depicted account hides: the **enacted** loop — a reader's *own* act of establishing a frame, testing each arrival against it, and restructuring when strain accumulates. This loop is temporal and generation-order constitutive: it runs *as* the reading happens, and the same text read only to an earlier point yields a genuinely different reading. Where the depicted loop is a fact about the world, the enacted loop is the reading's own conduct.
+
+The two must never be conflated, and the implementation enforces the separation structurally (see [The Two Doors](/the-two-doors)). A *depicted* REC — "the court rewrote the definition" — is an exafferent fact the record can witness. An *enacted* REC — the reader restructured its own working frame mid-read — is reafference, the system's own act, `canWitness === false`. Collapsing the two is precisely how a system would launder its own interpretation into a fact; keeping them apart is what lets a reader think without corrupting its record.
+
+The enacted loop also carries mechanics the depicted account never needed (`src/core/enacted/loop.js`): an EVA *confirms* when surprise falls below a band derived from the reading's own history, and otherwise feeds a **strain** accumulator; REC fires only on *accumulated* strain — Piaget's accommodation after enough failed assimilations, Lakatos's protective belt yielding only under sustained pressure — never on a single anomaly. The calibration is causal: the band that judges a line is fit only from what came before it, so the future can never set the standard that judged the past. See [Signal from Noise](/signal-from-noise).
+
 ## DEF Depends on SYN
 
 DEF cannot operate on nothing. Before you can formalize, there must already be a coherent composition to formalize. SYN is that prior operator — it brings elements into co-presence. A crystal forming, neurons binding into a percept, molecules assembling. SYN produces configurations that "say something" about what goes with what, without requiring consciousness, language, or formalism.
@@ -16170,7 +16321,7 @@ The pre-life world is not blank. The operator triads come online at different th
 
 ### Existence Triad at the Quantum Level (NUL, SIG, INS)
 
-The Existence triad is already operative at the most fundamental physical level. Quantum particles have **NUL** — superposition, the vacuum, the state of not-yet-resolved. They have **DES** — every particle is marked, distinguishable, bearing its interaction history. The no-cloning theorem makes this rigorous: a quantum state cannot be copied. Every particle is irreducibly individual. And they have **INS** — each particle exists as *this* particular instance with *this* particular history.
+The Existence triad is already operative at the most fundamental physical level. Quantum particles have **NUL** — superposition, the vacuum, the state of not-yet-resolved. They have **SIG** — every particle is marked, distinguishable, bearing its interaction history. The no-cloning theorem makes this rigorous: a quantum state cannot be copied. Every particle is irreducibly individual. And they have **INS** — each particle exists as *this* particular instance with *this* particular history.
 
 But here's the critical limit: the particle's history is not **encoded separately** from the particle. The particle doesn't *carry* a record of its interactions — it *is* the record. Its state is its history. There's no separation between the pattern and the carrier. Individuality exists, but it is **non-transmissible**. The history is trapped in the particle that lived it.
 
@@ -16271,6 +16422,15 @@ Systems fail by blocking one of the three transitions.
 A healthy system needs all three operators and needs the transitions to be permeable but not frictionless. DEF should resist change — that's stability. EVA should be honest — no fudging results to fit definitions. REC should be possible but costly — genuine restructuring, not relabeling.
 
 The character of any system comes from how hard each transition is. Rigid systems have high DEF resistance. Empiricist systems have high EVA fidelity. Adaptive systems have low REC friction. The question is always: what's the resistance profile, and is it appropriate to what the system is doing?
+
+---
+
+### See also
+
+- [The Nine Operators](/the-nine-operators) — DEF, EVA, REC in the full lattice
+- [The EO Reader](/the-eo-reader) · [The Two Doors](/the-two-doors) — where the enacted loop runs, and the firewall that keeps it distinct from the depicted one
+- [Signal from Noise](/signal-from-noise) — the derived band and strain accumulator that drive the enacted REC
+- [The Three Triads](/the-triads) — the Significance triad this loop lives in
 
 ---
 
@@ -16787,6 +16947,83 @@ The EO capacity ground has the same property. The axes were derived independentl
 
 ---
 
+# The EO Reader: EO Implemented
+
+**Record ID:** wiki:the-eo-reader  
+**DB ID:** 73  
+**Tags:** 301  
+**Keywords:** eo reader, implementation, holon, event log, effect system, provenance  
+**Status:** published  
+**Updated:** 2026-07-14T00:00:00.000Z  
+
+---
+
+*For most of its life EO was a framework with an anecdote for evidence. The **EO Reader** (`eoreader`, current line 4.2, "the holonic refactor") is the framework running as software: a document-reading and research instrument whose every faculty is an EO contract, and whose behavior can be cited module by module. This article is the map. The two companion articles — [Signal from Noise](/signal-from-noise) and [The Evidence](/the-evidence) — are the parts that matter most for grounding EO's claims about meaning.*
+
+*Citations below are paths into the `eoreader4.2` source tree. They are references, not hyperlinks — the point is that each claim in this article resolves to code you can open.*
+
+---
+
+## The one fact
+
+> The append-only event log is the source of truth. Everything you see is a recomputed **projection** of it. (`README.md`; `src/core/log.js`, `src/core/project.js`)
+
+There is no wall-clock and no mutable store of record. Every event in the log is one of the nine operators, addressed as `operator(Site, Resolution)` at read time. Re-projecting the same log is byte-identical; a retraction is a `SEG` event, never an erasure; nothing derived is ever persisted — the graph, spans, and mentions are always rebuilt by replay (`src/persist/`). This is [The Integral Model](/the-integral-model) made concrete: state as the integral of a typed-transformation log.
+
+## The body: faculties and holons
+
+4.2 is "the holonic refactor" — the engine re-cut along faculty seams into a nested tree of [holons](/holons), each a directory with one entrance (`index.js`), its own `eo-contract.js` manifest, swappable, whole at its own scale (Koestler's watchmaker). The contracts are **mechanically enforced**: `src/core/contracts.js` merges every manifest and `tests/contracts.test.js` proves 100 % coverage, cube coherence, and "no desert cell" on every run. (This is the effect system diagnosed in [Nine Instructions](/nine-instructions): a manifest is a declared permission row, the merge is effect inference, the coverage test is the kernel refusing an undeclared operation.)
+
+| Faculty | What it is |
+|---|---|
+| `core/` | The physics — operators, cube, faces, log, projection, the contract factory, and the two universal signal primitives (surprise, void-null) |
+| `frame/` | The one interior spine — log / projection / active-path / bind — instantiated recursively on the generation axis |
+| `organs/` | The modality membrane — ~17 sense organs (`in/`), renderers (`out/`), ingestion (`ingest/`), and code (`code/`), all lowering onto one log through the nine operators |
+| `perceiver/` | Reading — text → event log → the three reading levels (parse / predict / credence / classify) |
+| `surfer/` | Relating — navigation over what the reading maintains (retrieve / fold / flow / dag / reason / the nine-operator `lineup/` chorus) |
+| `enactor/` | Gating — "nothing is asserted that the record can't witness" (ground / factcheck / veto / answer) |
+| `model/` | **The leaf** — LLM backends, prompt, stream. Deliberately at the bottom of the tree. See [The Model Is the Leaf](/the-model-is-the-leaf) |
+| `turn/` | The fold of ~19 auditable stages: route → converse → retrieve → fold → prompt → llm → bind → factcheck → veto → answer |
+| `weave/` | Generation over a moving fold — longform, multi-prompt, the self-read weld |
+| `rooms/` | The places the user stands — reader, workspace, research, doc, audit, archive, data |
+| `metabolism/` | Evolution — no longer only tuning weights on a fixed body; it grows the body (organs as cube-cell contracts) |
+| `murmur/` | The peripheral sense — drift/novelty/recognition geometry, a Born-rule steer, a tiny narrator, all behind a firewall where a murmur can never cite, ground, or reach the answer |
+
+Two design principles recur in the code (`src/architecture` docs): **the low sets the possibility for the high** (core imports nothing; the parser's admission gate is a hard ceiling on what can ever be cited; the model can never invent a citation — the binder re-cites mechanically), and **the high sets the probabilities for the low** (the frame re-weights the projection; audit history shapes routing; the conversation fold carries stance forward).
+
+## The deepest invariant: two doors
+
+Every event enters through a **door**. Perceiver-door events are **exafference** — the witnessed world, `canWitness === true`. Enactor-door events are **reafference** — the system's own output, `canWitness === false` **by type, not by flag** (`src/core/provenance.js`). Reflections, murmur nominations, inferred connections, and code-organ findings all ride the enactor door at band `void`; only a human witness act can promote them. *You cannot tickle yourself; the voice cannot corroborate itself through the user's mouth.* This is the mechanism the wiki's [Experience Engine](/the-experience-engine) described as the Given/Meant boundary — with one amendment the implementation earned: inferences **do** reach the graph, distinguishable, with a measured `factsAdded: 0` audit. The firewall was never "keep interpretation off the graph"; it is "keep it distinguishable on the graph." Full treatment in [The Two Doors](/the-two-doors).
+
+## What it actually does — behavioral commitments, shipped and tested
+
+Each of these is a decision the reader makes differently from an ordinary chatbot, and each has a test pinning it:
+
+- **Ask is record-only.** The "Ask the record" surface never reaches the web to answer; on an empty record it says so and offers nothing, even when the global mode is set to auto. The web pin is per-turn and never mutates the global. (`src/rooms/reader/app.js` `ask()`; `tests/ask-record-only.test.js`) The old confident-but-ungrounded mechanical answerers (who/confirm/smalltalk) were *retired from the live route* because they shipped claims past the veto layer.
+- **The search box ingests, it does not answer.** A query opens a dedicated **search topic** first, makes it active, and files the fetched pages under it as ordinary sources — the opposite motion from Ask. An empty search topic is discarded, not stranded. (`src/rooms/reader/app.js` `searchTopic`)
+- **The reader reads at rest.** When idle, it surfs the held document to the place of most interest, folds it, and reflects — habituating so it never ruminates, quiescing on its own. The whole lull collapses into one ticking "Reflected at rest — N notes so far" line so the activity log stays about actions. Reflections are firewalled (`canWitness:false`) and never touch the record. See [Deep Reading](/deep-reading). (`src/surfer/fold/deep-reading.js`; `src/rooms/reader/app.js` `deepTick`)
+- **Audio is a Listen surface with a living transcript.** The transcript is a *pure fold* of an immutable heard baseline plus an append-only edit log; edits and redactions are non-destructive events (nothing is overwritten), and transcription runs only over windows the acoustic organ marked as signal above the noise floor. (`src/rooms/reader/transcript-edit.js`, `src/organs/in/acoustic.js`; `tests/transcript-edit.test.js`)
+- **Murmur points; it never asserts.** A recognition that an earlier passage has recurred becomes a *reafferent candidate connection* on a read side-channel — never the log. Only a promotion gate, corroborating the two passages against the actual document text, writes a real `CON` edge; every other echo stays a firewalled margin note. (`src/murmur/link/`, `src/enactor/connect/promote.js`; `tests/murmur-connect-loop.test.js`)
+- **Research tries to be wrong.** About a third of a study's searches are seeded as *disproof* queries ("go find the document that would exist only if this reading were wrong"), always drained; the stopping rule is watchable; a mid-study reframe flags earlier answers `staleAfterRec` for re-check. *A research tool that only ever makes you more confident is not researching — it is collecting.* See [Going and Looking](/going-and-looking). (`src/rooms/research/driver.js`)
+
+## Why this matters for the framework
+
+The wiki's persistent weakness has been asserting in the indicative what was never tested. The EO Reader supplies the missing evidence leg — and, crucially, it supplies it exactly where the framework's older proof could not reach. [Nine Instructions](/nine-instructions) shows that EO's relational-algebra closure result certifies only the Existence and Structure operators; the **Significance triad** (assert / evaluate / restructure) is where the reader's distinctive machinery lives, and it is grounded not by proof but by measurement. How that measurement works is [Signal from Noise](/signal-from-noise); what it has actually shown — including the negatives left honestly on the record — is [The Evidence](/the-evidence).
+
+---
+
+### See also
+
+- [Nine Instructions](/nine-instructions) — why the reader is best understood as a compiler, not an ontology
+- [Signal from Noise](/signal-from-noise) — the measurement doctrine, with module citations
+- [The Evidence](/the-evidence) — what the reader has measured, negatives included
+- [The Two Doors](/the-two-doors) · [Deep Reading](/deep-reading) · [Going and Looking](/going-and-looking)
+- [The Integral Model](/the-integral-model) · [The Experience Engine](/the-experience-engine) — the specifications it implements
+
+---
+
+---
+
 # The EO Spiral
 
 **Record ID:** wiki:the-eo-spiral  
@@ -17076,12 +17313,104 @@ The spiral doesn't ascend toward an omega point. It ascends because completed lo
 
 ---
 
+# The Evidence: What the EO Reader Has Measured
+
+**Record ID:** wiki:the-evidence  
+**DB ID:** 75  
+**Tags:** 301  
+**Keywords:** evidence, evaluation, falsifier, churn, weld, judgment, results, negatives  
+**Status:** published  
+**Updated:** 2026-07-14T00:00:00.000Z  
+
+---
+
+*This is the honest results page. EO's oldest stated standard is [saving the appearances](/ancient-astronomy-eo-saving-the-appearances) — contain every observation without remainder — so applying it to EO itself means reporting the measurements that failed alongside the ones that held. The [EO Reader](/the-eo-reader) is built with pre-registered falsifiers that are allowed to return negative, and do. What follows is drawn from the reader's dated evaluation records and the tests that pin them; each entry cites where it lives in `eoreader4.2`.*
+
+---
+
+## Where the framework's proof stops, the measurements begin
+
+[Nine Instructions](/nine-instructions) makes the structural point: EO's relational-algebra closure result certifies the Existence and Structure operators but is silent on the **Significance triad** — evaluate (EVA), restructure (REC), and the "free" operations of a query algebra, observe (NUL) and attend (SIG). Those are exactly the operators the results below instrument. Proof for the query-algebra neighborhood; falsifier-gated measurement for the significance neighborhood.
+
+## Churn: quality lives in a reading, not in the text
+
+Can the system tell developing prose from prose that just repeats itself?
+
+- Flow features over Existence + Structure: correlation **≈ 0** with quality — the structural channel is *blind* to whether writing is good.
+- The model reading its **own** Bayesian-surprise peaks and articulating significance, then measuring how much it repeats itself: **r = +0.84** with an independent churn measure; separation nearly clean (every pure-churn output has repeating reflections, every developing output at zero).
+
+Conclusion the reader draws: *quality is dense only in a **reading** — churn is the reader saying the same thing twice.* Honest edge: the signal is bimodal, not graded, and was measured with a small (0.5B) model. (`docs/deep-reading-churn-2026-07.md`; `src/surfer/fold/audit.js`)
+
+## The self-read weld: catching drift the birth gate can't
+
+Before a generated paragraph becomes the prior for the next, it is re-read through the grounder (`src/weave/longgen/weld.js:68-112`). Measured against five modelled drift modes (n = 90):
+
+- The naive birth gate caught **0.0 %** — "the gap is real and total."
+- A weld built from existing organs caught cross-document splice **95.8 %**, number drift **87.5 %**, off-fold splice **75 %**, at **0.0 % false positives**.
+- Two blind spots are on the record, not hidden: negation-flip (+1.1, invisible to every read-only organ) and entity-swap (0 as shipped).
+
+(`docs/self-read-weld-measurement.md`)
+
+## Judgment: confident-wrongness, not fluency
+
+The judgment scoreboard "scores DEFs as DEFs": never fluency, never a verdict against a frozen gold answer. **Correct suspension counts as correct; confident guessing is the counted failure.** Headline metrics are the confident-wrong rate per grain and the overturn rate between a partial and a full read (`src/metabolism/defscore.js`; `tools/judgment-battery.mjs`; `docs/judgment-eval-battery-2026-07.md`).
+
+The meta-finding that shapes the whole architecture: a **deterministic** scorer agreed with hand labels **19/20 (95 %)** while a local 7B **LLM judge** agreed **20/39 (51 %)** — and 17 of its 19 disagreements were *invented* failures. This is the empirical case for keeping the model a [leaf](/the-model-is-the-leaf) and the kernel the judge.
+
+## Reflecting before writing: net-negative until it wasn't
+
+Does letting the reader reflect before it writes actually help? First result: **net-negative unconditionally** — reflection made outputs worse on average. Then, with a surprise **decomposition** added to the reflect prompt plus a restatement guard, the sign **flipped**: the churning baseline was pulled from 0.349 toward 0.09, while a clean baseline came out **byte-identical** (the guards correctly rejected everything — a no-op on already-good prose). *It is the combination — a real reaction plus reject-unless-genuine — that flips the sign.* Caveat honestly stated: n = 2 churning topics. (`docs/deep-reading-gen-battery-2026-07.md`)
+
+## The build that was refused
+
+The strongest signal of the discipline: a proposed feature — treating answer length as a property of the field rather than the user's adverbs — was gated behind three pre-registered falsifiers. F2 came back **negative** (the richer predictor did worse than the simpler one), F1/F3 inconclusive, **so nothing was built**. The framework changed nothing because no empirical gate licensed a change. (`docs/length-is-a-property-of-the-field.md`)
+
+## Code as an EO reading
+
+Lowering a codebase to EOT and reading defects off the dependency order (`docs/code-organ.md`):
+
+- Multi-language benchmark: **18/18** planted defects flagged across JavaScript, Go, and Rust with **0 false positives** on clean twins — versus **1/18** for the standard toolchain (`go vet` + `rustc` + `node --check`).
+- Self-read: the whole `src/` tree (≈ 460 files, ≈ 156k EOT lines) folds in ≈ 3 s with **zero error-grade findings**; the first issue it ever found was in itself.
+
+## The monologue firewall held
+
+Across every deep-reading run, the audit that strips inferences and re-projects the graph reports the firewall **INTACT — 0 facts added to any record** (`src/surfer/fold/audit.js`). The inner voice can be graded helping / ruminating / echoing / idle / noise / unsafe, and an unsafe monologue — one that leaked into the witnessed record — scores 0 however eloquently it reads. It never has.
+
+## The lexical studies, told straight
+
+The empirical grounding that predates the reader, reported without the overstatement the wiki elsewhere carried (now corrected — see [Emergent Ontology](/emergent-ontology-eo)):
+
+- **Empirically strong:** proportionality of the operator distribution, and face-level clustering.
+- **Mixed:** axis independence — the v2 study measured an inter-axis Adjusted Rand Index of **≈ 0.185**, low but short of a clean independence result.
+- **Not met:** the coordinate-geometry step-ratio predictions.
+
+The corpus figures cited variously across the wiki are two different studies: a v1 verb inventory (~32,000 verbs, 41 languages) and a v2 clause study (19,764 clauses, 9,221 consensus). See [The Lexical Analysis](/lexical-analysis) and the v2 results report.
+
+---
+
+## How to read this page
+
+Nothing here is "EO is proven." The honest summary is narrower and stronger: *a working system, built on EO's operator algebra, discriminates signal from noise on several concrete tasks at rates far above its tool floor and its own naive baselines — and it records where it does not.* That is a second evidence leg beside the lexical studies, measured rather than asserted, with the failures kept in view. It is the most EO-consistent thing the project has produced: a framework that [licenses its own defeat](/nine-instructions) and then goes looking for it.
+
+---
+
+### See also
+
+- [Signal from Noise](/signal-from-noise) — the primitives these results ride on
+- [The EO Reader](/the-eo-reader) — the system measured here
+- [Nine Instructions](/nine-instructions) — why measurement is the right evidence for the Significance triad
+- [The Lexical Analysis](/lexical-analysis) — the other evidence leg
+
+---
+
+---
+
 # The Experience Engine
 
 **Record ID:** wiki:the-experience-engine  
 **DB ID:** 44  
 **Status:** published  
-**Updated:** 2026-06-13T21:59:33.980Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -17104,13 +17433,23 @@ where:
 
 The three data structures correspond to the three domains of the capacity ground:
 
-| ComponentDomainQuestion |
-| --- |
+| Component | Domain | Question |
+| --- | --- | --- |
 | Given-Log (*G*) | Existence | *Whether things are* |
 | Structure-Lattice (*S*) | Structure | *How things connect* |
 | Meant-Graph (*M*) | Significance | *What things mean* |
 
-The three functions collectively constitute the **Horizon** — the act of looking. The Horizon is not a data structure. It is a projection: an observation of a query run against *G*, *S*, and *M* from a position within *S*. Every observation instantiates a projection. There is no unmediated access.</p><h2>Truthfulness: What the Bar Guarantees</h2><p>The recursion has a corollary about reliability. The functions to the right of the bar need not be reliable. They may be approximate, lossy, even prone to fabrication, and the bar still holds, because the functions hold nothing. A function reads the stores, weighs, and returns a projection. It does not write. A projection that is wrong is a wrong reading, not a corrupted record. The given is untouched, and the next reading begins clean from the same stores.</p><p>This is what lets an honest system place a fallible projector to the right of the bar without surrendering the record to it. The projector may be a person, a heuristic, or a language model. It may propose, phrase, connect, and judge. It may not emit. The one discipline that keeps the system honest is that nothing crosses the bar leftward except by emission, and emission is reserved for what was given, not for what was inferred. A claim the projector cannot ground in a store is either bound to the store that carries it or marked absent. There is no third move.</p><p>Truthfulness is therefore not a property the functions achieve. It is a property the bar protects. The three Significance rules state the same thing from the interpretation side: the Meant-Graph is grounded (Rule 7, DEF), tested (Rule 8, EVA), and revisable (Rule 9, REC). Any single projection can be wrong and later superseded. What cannot happen, while the bar holds, is for a wrong projection to lower the integrity of the given it was projected from. Each reading is defeasible. The ground it reads is not.</p><p>A system built this way does not arrive at complete truthfulness. It approaches it. The record accumulates only witnessed emission, while the readings over that record are corrected without limit through the DEF to EVA to REC cycle. The asymptote is approached from below, and the bar is why the approach never reverses: no function-side error can become a store-side fact. Defeasibility keeps the door open at the top; the bar keeps the floor from sinking at the bottom. Between them the system can only grow more truthful over time, never less.
+The three functions collectively constitute the **Horizon** — the act of looking. The Horizon is not a data structure. It is a projection: an observation of a query run against *G*, *S*, and *M* from a position within *S*. Every observation instantiates a projection. There is no unmediated access.
+
+## Truthfulness: What the Bar Guarantees
+
+The recursion has a corollary about reliability. The functions to the right of the bar need not be reliable. They may be approximate, lossy, even prone to fabrication, and the bar still holds, because the functions hold nothing. A function reads the stores, weighs, and returns a projection. It does not write. A projection that is wrong is a wrong reading, not a corrupted record. The given is untouched, and the next reading begins clean from the same stores.
+
+This is what lets an honest system place a fallible projector to the right of the bar without surrendering the record to it. The projector may be a person, a heuristic, or a language model. It may propose, phrase, connect, and judge. It may not emit. The one discipline that keeps the system honest is that nothing crosses the bar leftward except by emission, and emission is reserved for what was given, not for what was inferred. A claim the projector cannot ground in a store is either bound to the store that carries it or marked absent. There is no third move.
+
+Truthfulness is therefore not a property the functions achieve. It is a property the bar protects. The three Significance rules state the same thing from the interpretation side: the Meant-Graph is grounded (Rule 7, DEF), tested (Rule 8, EVA), and revisable (Rule 9, REC). Any single projection can be wrong and later superseded. What cannot happen, while the bar holds, is for a wrong projection to lower the integrity of the given it was projected from. Each reading is defeasible. The ground it reads is not.
+
+A system built this way does not arrive at complete truthfulness. It approaches it. The record accumulates only witnessed emission, while the readings over that record are corrected without limit through the DEF to EVA to REC cycle. The asymptote is approached from below, and the bar is why the approach never reverses: no function-side error can become a store-side fact. Defeasibility keeps the door open at the top; the bar keeps the floor from sinking at the bottom. Between them the system can only grow more truthful over time, never less.
 
 ## The Given-Log (*G*)
 
@@ -17137,8 +17476,8 @@ These fields are not optional. An emission missing any of them is not a phenomen
 
 The log distinguishes three structurally distinct kinds of empty cell, detected by operator history on a path:
 
-| StateDetectionWhat's in the log |
-| --- |
+| State | Detection | What's in the log |
+| --- | --- | --- |
 | **Cleared** | Most recent DEF on this path has empty operand | `DEF(field, "")` with provenance |
 | **Unknown** | INS exists for the field at schema level, no DEF for this entity | INS entry exists, no DEF entry |
 | **Never-set** | No INS for this path in this context | The log is silent |
@@ -17201,8 +17540,8 @@ The Horizon is the act of looking — a projection over (G, S, M) from a positio
 
 Querying is structural operators used as lenses, not as emissions:
 
-| SQL clauseStructural lens |
-| --- |
+| SQL clause | Structural lens |
+| --- | --- |
 | `SELECT` | The Horizon function itself — the act of projecting |
 | `WHERE` | SEG — boundary constraining what's visible |
 | `JOIN` | CON — connection across which the projection reaches |
@@ -17250,7 +17589,7 @@ Nine rules govern the system, organized in three triads that mirror the operator
 
 *The proposal: the governing functions of any Experience Engine are projections of another Experience Engine. The conventions live on their own append-only ledger. That ledger is a Given-Log whose entries are rule events, shipped seeds and induced deltas alike. Its Structure-Lattice is the pack structure: which buckets exist and how they merge, by accumulation and never by overwrite. Its Meant-Graph is the active ruleset, projected under the current frame. The outer engine's functions read their parameters from the inner engine's projection. Formally: for any 𝓔 = ⟨G, S, M | π, γ, σ⟩ there exists 𝓔′ such that π, γ, and σ are projections of 𝓔′.*
 
-*Admission is the same at both levels. A convention enters the inner Given-Log the way an entity enters the outer one: sighted twice, then kept. The witness is small but exact. A reading engine implementing this specification induced the attribution verb “says” from the typography of the quote-attribution slot, basis `slot_sightings: 2`, and committed it to its rules ledger with full provenance. The admission gate operating one level up, on the reader's own rules. Nobody designed that symmetry in. It fell out of building both layers honestly.*
+*Admission is the same at both levels. A convention enters the inner Given-Log the way an entity enters the outer one: sighted twice, then kept. The witness is small but exact. The [EO Reader](/the-eo-reader) — a reading engine implementing this specification — induced the attribution verb “says” from the typography of the quote-attribution slot, basis `slot_sightings: 2`, and committed it to its defeasible convention ledger (`src/core/conventions/`) with full provenance. The admission gate operating one level up, on the reader's own rules. Nobody designed that symmetry in. It fell out of building both layers honestly.*
 
 *The recursion does not regress without end. It terminates in the medium constants: parameters that are contents of no engine because they are the shape of the tuple itself. Everything above that floor is convention, and every convention can name the ledger event that admitted it.*
 
@@ -17260,7 +17599,7 @@ Nine rules govern the system, organized in three triads that mirror the operator
 
 ## Implementation Surface
 
-The integrity rules govern what the data must be. They do not, by themselves, prevent an implementation from exposing a low-level interface that bypasses the rules — a "raw write" path that appends to G without going through the operator algebra, or a query path that returns derived state without applying EVA at projection. This concern is handled by the **EO Compliance Specification** (`wiki:eo-compliance-spec`), a sibling document that governs the surface area an implementation may expose. The two layers are required together: integrity rules without compliance leave room for syntax-survives-while-semantics-erodes; compliance without integrity rules has nothing to enforce.
+The integrity rules govern what the data must be. They do not, by themselves, prevent an implementation from exposing a low-level interface that bypasses the rules — a "raw write" path that appends to G without going through the operator algebra, or a query path that returns derived state without applying EVA at projection. This concern — that an implementation might expose a bypass path — is addressed concretely in the [EO Reader](/the-eo-reader) by the holon contract system: every faculty declares the operations it may perform, `src/core/contracts.js` composes them into an application-level envelope, and `tests/contracts.test.js` fails the build if any part performs an operation it did not declare — so there is no raw-write path around the operator algebra (this is the effect-system reading of [Nine Instructions](/nine-instructions)). A dedicated *EO Compliance Specification* article, generalizing that enforcement away from the one implementation, is forthcoming; until then the integrity rules here and the reader's contract system are the two layers, and both are required together.
 
 The cautionary precedent is Codd's. He published twelve rules in 1985 specifying what a relational system must do; the market preserved the syntax and quietly gutted the semantics. The Experience Engine treats this as a structural warning. The integrity rules are necessary; they are not sufficient on their own to prevent the same trajectory.
 
@@ -17292,7 +17631,7 @@ The cautionary precedent is Codd's. He published twelve rules in 1985 specifying
 
 ## Storage Architectures
 
-Experience Engine systems can be implemented under two broad storage strategies.
+Experience Engine systems can be implemented under two broad storage strategies. (The [EO Reader](/the-eo-reader) takes the stream-only path: the append-only log is the sole source of truth and every projection is rebuilt by replay — `src/core/log.js`, `src/core/project.js` — with nothing derived ever persisted.)
 
 ### Dual-database architecture
 
@@ -18310,13 +18649,13 @@ The consensus set shows the strongest signal. Claude labels are notably weaker t
 
 ---
 
-# The Measurement Paraxoc
+# The Measurement Paradox
 
 **Record ID:** wiki:the-measurement-paraxoc  
 **DB ID:** 67  
 **Tags:** emanons, quantum mechanics  
 **Status:** published  
-**Updated:** 2026-03-22T20:29:49.321Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -18422,13 +18761,62 @@ The measurement paradox is the framework's honest statement of its own limit. Th
 
 ---
 
+# The Model Is the Leaf
+
+**Record ID:** wiki:the-model-is-the-leaf  
+**DB ID:** 79  
+**Tags:** 301  
+**Keywords:** llm, model, contract, capability, prompt, site, defamation firewall, injection  
+**Status:** published  
+**Updated:** 2026-07-14T00:00:00.000Z  
+
+---
+
+*Where a conventional AI application puts the language model at the center and arranges everything around it, the [EO Reader](/the-eo-reader) puts it at the bottom of the tree — a contracted part with the narrowest possible grant of authority. "The model proposes, the kernel disposes."*
+
+---
+
+## The prompt is a Site, not a struct
+
+A prompt is not an unstructured block of instructions; it is a projection over a catalog of **bands**, each declaring the [terrain](/the-nine-operators) it occupies (`src/model/bands.js`; `docs/prompt-as-site.md`). This is not decoration — it exposes a measurable pathology. A census of the reader's own instructional prose found its terrain distribution **inverts** the population gradient of natural language: the Ground row runs ~66 % of instruction characters against a corpus baseline of ~6 % — roughly **×10.7 over-represented**. Ground-row inflation is *the accretion pathology* of prompts, and now it has a checkpoint: `judgePrompt` scores it against the corpus gradient via a [derived null](/signal-from-noise) (`src/model/prompt-checkpoint.js`), the input-side mirror of the output-side veto.
+
+There is a sharper diagnosis still. The instruction that tries to make the model *compose in a voice* occupies the **desert cell** — SYN at Ground, the one cell empty across 41 languages. *You cannot instruct Cultivating; you cultivate by arranging conditions.* An instruction placed there is on a patch treadmill against the mass of the actual material: the material always wins, because that is where the mass is.
+
+## The model gets a capability contract
+
+The model is handed a `MODEL_CONTRACT` — a narrow `{ops, terrains, stances}` grant (`docs/model-as-contracted-part.md`). Two clauses matter most:
+
+- **No DEF/EVA/REC — the defamation firewall.** The model may *render* a judgment the kernel has already logged; it may never *originate* one. A verdict comes from the grounding machinery, not the talker's fluency.
+- **No Entity terrain — PII protection as an address the model does not have.** The model cannot name a private individual because that terrain is simply not in its grant.
+
+The security property falls out of the contract width, not a bolted-on filter: **prompt-injection blast radius is bounded by the output alphabet.** A document that tries to hijack the model can only make it emit within operators it was granted; it cannot manufacture a citation, because the model never writes citations — the binder re-cites mechanically (`src/enactor/ground/bind.js`). This is the [effect system](/nine-instructions) pointed at the least-trusted component: authority is attenuated, never amplified.
+
+## The empirical case for the demotion
+
+Keeping the model a leaf is not an aesthetic preference; it is a measured result. On the judgment battery, a **deterministic** scorer agreed with hand labels **19/20 (95 %)** while a local 7B **LLM judge** agreed **20/39 (51 %)** — and 17 of its 19 disagreements were *invented* failures ([The Evidence](/the-evidence)). A model asked to be the judge reverts to its priors and confabulates. So the reader's endgame, stated in its own docs, is that the model is *"only ever a ranker in a sandbox, and the sandbox is the whole invention."*
+
+This inverts the wiki's older framing (e.g. in [The Nine Operators](/the-nine-operators)) of LLMs as a NUL-degraded technology to be prompted into doing EO. The reader does not prompt a model into EO. It builds EO as a kernel and hands the model the smallest job it can be trusted with.
+
+---
+
+### See also
+
+- [Nine Instructions](/nine-instructions) — the contract as an effect system / capability
+- [The EO Reader](/the-eo-reader) — where the model sits in the body
+- [Signal from Noise](/signal-from-noise) · [The Evidence](/the-evidence)
+- [MVP: Minimum Viable Prompt](/mvp-minimum-viable-prompt) — the prompt-era proxy this supersedes
+
+---
+
+---
+
 # The Nine Operators
 
 **Record ID:** wiki:the-nine-operators  
 **DB ID:** 10  
 **Tags:** 101  
 **Status:** published  
-**Updated:** 2026-05-16T01:25:51.154Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -18463,11 +18851,11 @@ The operators are **acts,** not locations. They name what a system *does* at a j
 | # | Operator | Symbol | Greek | Triad | Role | Capacity |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | NUL | ∅ | ν | Existence | Ground | Not transform |
-| 2 | SIG | ○ | σ | Existence | Figure | Draw a distinction |
+| 2 | SIG | ○ | σ | Existence | Figure | Register an appearance |
 | 3 | INS | ● | α | Existence | Pattern | Create a concrete instance |
 | 4 | SEG | ｜ | κ | Structure | Ground | Draw boundaries |
-| 5 | CON | ⤫ | ε | Structure | Figure | Establish relationships |
-| 6 | SYN | ∨ | η | Structure | Pattern | Produce emergent wholes |
+| 5 | CON | ⋈ | ε | Structure | Figure | Establish relationships |
+| 6 | SYN | △ | η | Structure | Pattern | Produce emergent wholes |
 | 7 | DEF | ⊢ | δ | Significance | Ground | Establish what holds within a stable interpretive frame |
 | 8 | EVA | ⊨ | ψ | Significance | Figure | Render judgment by testing a particular against a general |
 | 9 | REC | ⊛ | Ω | Significance | Pattern | Restructure the frame itself |
@@ -18498,21 +18886,21 @@ A rock in a chemical soup does not have NUL. A rock is inert. A bacterium has NU
 
 ---
 
-### SIG — Distinction
+### SIG — Appearing (Registration)
 
 > *Every name is a conquest that has forgotten there was a war.*
 
-**Capacity:** The system can draw a distinction — mark something as a kind of thing, differentiate it from other kinds.
+**Capacity:** The system can *register* — something shows up for it. Not yet named, not yet partitioned, not yet interpreted: simply present-for-the-system where a moment before it was not.
 
-SIG is the most primitive act of differentiation: the capacity to register that something is *this* and not *that.* At its most basic, it is a receptor responding to a molecule — not "naming" the molecule, not "classifying" it, but distinguishing it from the surrounding medium. The bare minimum of difference. Naming, typing, labeling, defining, and classifying are all downstream implementations of SIG — they are ways of drawing distinctions. The core operation is prior to any particular naming scheme: it is the act of carving the undifferentiated (where NUL has not-acted) into regions where different kinds of things can exist.
+SIG sits at **Relating × Existence**, the figure role of the Existence triad. Its most basic instance is a receptor responding to a molecule: the molecule *appears* to the system's machinery. Before the receptor fires the molecule is physically present but not present-*for*-the-bacterium; after, it registers. Nothing was partitioned, nothing named — something appeared. Naming, typing, labeling, and classifying are all downstream operations that presuppose SIG and build on it.
 
-In a database, SIG shows up as schema definition — CREATE TABLE, type constraints, ENUM declarations. But the capacity is more general than any implementation. When a caseworker decides that this person is a "client" rather than a "resident" or a "patient," that is SIG. When a journalist decides that this event is a "procurement" rather than a "donation," that is SIG. The distinction comes first; the label follows.
+**Not "Distinction," and not SEG.** SIG was formerly named *Distinction*, but distinction is a *Differentiating* act (Mode 0) that cuts this-from-that, whereas SIG lives at *Relating* (Mode 1), which preserves what it touches. Partitioning — drawing a boundary — is the job of SEG (Differentiating × Structure), the fourth operator. SIG *registers*; SEG *bounds*. Keeping them apart dissolves a long-standing overlap. The full argument, the naming history (Designate → Distinction → SIG → Appearing), and the cross-traditional grounding are in [SIG](/sig).
 
-**Relational equivalent:** CREATE TABLE / DDL / type constraints / CHECK constraints / ENUM definitions.
+**Relational equivalent:** Not DDL. Creating a table is INS; declaring what it tracks is DEF; the *decision* to create it — ephemeral attention, a selection, a focus — is SIG. SIG is the operator that carries no enduring value: clicks, selections, hovers, the cursor landing here rather than there.
 
-**Why it requires NUL:** A type system that cannot represent non-action cannot define NOT NULL, cannot distinguish "unknown" from "inapplicable," and cannot properly classify the phenomena it represents. Distinction without non-action produces impoverished types — you cannot say what a kind excludes if you have no concept of the untransformed.
+**Why it requires NUL:** A system that cannot *not*-register (NUL) cannot register selectively — a receptor that fires on everything is indistinguishable from no receptor at all. NUL is the ground condition for selective appearing.
 
-**Invariants:** SIG never destroys distinctions; it adds or supersedes. Multiple distinctions can coexist (which may produce DEF if they conflict).
+**Invariants:** SIG never destroys what has appeared; it adds or supersedes. Multiple appearances can coexist; where they carry conflicting interpretations, that is resolved downstream by EVA, not SIG.
 
 **What goes wrong without it:** The system has the capacity to not-act (NUL) but no capacity to differentiate. Data accumulates without classification — records with no type, columns with no defined meaning, entities whose identity is implicit in code rather than explicit in structure. Every downstream query inherits the ambiguity.
 
@@ -18718,7 +19106,7 @@ EO uses [Polish (prefix) notation](https://en.wikipedia.org/wiki/Polish_notation
 
 The operator comes first, followed by its target (what is being transformed) and operand (what it is being transformed with or into). This is position-independent — the meaning is determined by structure, not by word order.
 
-In mathematical contexts, a Greek letter notation is also used: ν (NUL), σ (SIG), α (INS), κ (SEG), ε (CON), η (SYN), δ (EVA), ψ (DEF), Ω (REC).
+In mathematical contexts, a Greek letter notation is also used: ν (NUL), σ (SIG), α (INS), κ (SEG), ε (CON), η (SYN), δ (DEF), ψ (EVA), Ω (REC).
 
 Each operator also has a practitioner glyph (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛) used in compact notation.
 
@@ -18831,7 +19219,7 @@ Rule 9 — **Defeasibility** — adds that no decomposition is globally immune t
 **Record ID:** wiki:the-pythagorean-theorem-plato-s-meno-x-and-eo  
 **DB ID:** 41  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:39.848Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -18921,7 +19309,7 @@ Socrates establishes that the boy has never studied geometry. The absence of ins
 
 Socrates draws a square in the sand. A bounded figure registers as distinct against undifferentiated ground.
 
-### INS(△)
+### INS(●)
 
 `INS(square_kind, this_square, side=2, area=4)`
 
@@ -19628,7 +20016,7 @@ The question "Is EO primarily about change, state, or stance?" is not a question
 **Tags:** 101  
 **Keywords:** triad, operators, existence, domain  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:43.661Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -19656,7 +20044,7 @@ According to EO, each domain instantiates the Triadic Minimum in a different ont
 | --- | --- | --- | --- |
 | **Existence** | Non-transformation (NUL) | Registered salience (SIG) | Concrete instance (INS) |
 | **Structure** | Differentiated space (SEG) | Specific relation (CON) | Unified whole (SYN) |
-| **Significance** | Value field (DEF) | Coexisting states (EVA) | Reframed system (REC) |
+| **Significance** | Asserted definition (DEF) | Rendered judgment (EVA) | Reframed system (REC) |
 
 In each case:
 
@@ -19728,13 +20116,13 @@ The Significance triad concerns meaning, value, and frame.
 
 | Operator | Role | Description |
 | --- | --- | --- |
-| **DEF** | Ground | Value change or alternation within a field of interpretation |
-| **EVA** | Figure | Simultaneous validity of multiple states |
+| **DEF** | Ground | Assert or define what holds within a field of interpretation |
+| **EVA** | Figure | Render judgment by testing a particular against the definition |
 | **REC** | Pattern | Reframing or restructuring of the interpretive system |
 
 Significance-domain transformation is the event in which meaning changes.
 
-A value shift (DEF) introduces variation. Coexisting valid states (EVA) expose tension within the interpretive frame. Recursion (REC) restructures that frame to accommodate or resolve the tension.
+A definition (DEF) establishes what holds. Evaluation (EVA) renders judgment by testing against it, and competing definitions held in the log expose tension the current frame cannot resolve. Recursion (REC) restructures that frame to accommodate or resolve the tension.
 
 **Presupposition ordering:** DEF → EVA → REC. DEF establishes what holds; EVA assesses whether it satisfies criteria. An evaluation requires that terms have first been defined — you cannot judge without a standard. And REC is triggered by representational insufficiency — the schema cannot house what the data requires — which requires EVA to have revealed the inadequacy.
 
@@ -19759,6 +20147,8 @@ EO proposes a domain-level dependency:
 Entities must be present before they can be structurally related; structural organization must be available before interpretive modification is meaningful. In relational database terms: you cannot join tables that have not been created and populated; you cannot update values in a structure that has not been relationally organized.
 
 EO reports computational testing of all 1,296 structurally admissible operator orderings against Codd's functional dependency closure criterion. Every ordering that violates the Existence → Structure → Significance sequence produces closure violations — operations that cannot execute because their input relations do not exist. This eliminates 1,188 of 1,296 candidate orderings (92%). The remaining 108, which differ only in the internal arrangement of operators within each triad, are eliminated by the presupposition argument described above.
+
+**What this test does and does not certify.** Codd's functional-dependency criterion is a statement about *existence and structure* — instances, boundaries, joins, projections. It therefore reaches the Existence and Structure operators (instantiate, resplit, bond, and their neighbors) but is silent about the Significance triad: relational algebra has no operator for *evaluating against a definition* (EVA) and none for *restructuring the schema itself* (REC — schema migration is famously outside the algebra), and it treats observation (NUL) and attention (SIG) as free, invisible acts rather than operations. So the closure test certifies the **dependency ordering** and the query-algebra operators — not the completeness of all nine. The Significance triad, where most of EO's distinctive machinery lives, rests on a *separate* evidence leg: falsifier-gated measurement in the [EO Reader](/the-eo-reader) rather than proof. Conflating the two — citing a proof about existence and structure as if it certified evaluation and restructuring — is the framework's most common overreach; see [Nine Instructions](/nine-instructions).
 
 These results are described in EO documentation and have not been independently peer-reviewed.
 
@@ -20169,6 +20559,52 @@ REC (⊛) ⤫ Ground is nearly as sparse, with *incubate* as English's only occu
 The Triadic Minimum is a theoretical principle within EO. Its philosophical parallels are well-documented across traditions; its mathematical instantiations (Peirce's Reduction Theorem, the simplex sequence, Borromean topology) are independently established results. The dimensional emergence argument (Section 3) — deriving the necessity and sufficiency of three from the √2 mechanism and the recursion threshold — is original to the framework. The triad-specific coordinate assignments are independently motivated (von Neumann ordinals for Existence, the Pythagorean theorem for Structure, Gelfond–Schneider for Significance), and the type progression at pattern positions (rational → algebraic irrational → transcendental) is a proven mathematical result. The interpretation of the type progression as corresponding to the helix's dependency irreversibility is a structural parallel, not an identity proof. EO's derivation of the 3⤫3⤫3 capacity ground, the dependency helix, and the exhaustive computational argument against Codd's closure criterion has not undergone external peer review.
 
 Cross-linguistic empirical validation is in progress. The framework predicts that the triadic structure should appear as a universal feature of transformation vocabulary, recoverable through geometric embedding methods that do not presuppose EO's categories. Results of this validation will be reported separately.
+
+---
+
+---
+
+# The Two Doors: Witness and Firewall
+
+**Record ID:** wiki:the-two-doors  
+**DB ID:** 76  
+**Tags:** 301  
+**Keywords:** provenance, exafference, reafference, firewall, canWitness, doors, witness  
+**Status:** published  
+**Updated:** 2026-07-14T00:00:00.000Z  
+
+---
+
+*The deepest invariant in the [EO Reader](/the-eo-reader), and the one the older wiki never named. Every event enters the log through one of two doors, and which door it came through is a fact about the event that can never be forged.*
+
+---
+
+## The law
+
+- **Perceiver door — exafference.** The witnessed world: a source read from disk, a page fetched, a sentence the user typed. `canWitness === true`. It can ground a claim.
+- **Enactor door — reafference.** The system's own output: a reflection, a murmur, an inferred connection, a generated paragraph, a code-organ finding. `canWitness === false` — **by type, not by flag** (`src/core/provenance.js`).
+
+"Reafference" is borrowed from biology: the sensory consequences of your own action, which the nervous system must distinguish from sensation caused by the world, or it cannot tell perception from prediction. *You cannot tickle yourself.* The reader enforces the same distinction structurally: a piece of the system's own reasoning can never be laundered into evidence for itself, because `canWitness` is a property of the door it came through, not a boolean anyone can set.
+
+## Why it is a *type*, not a flag
+
+A flag can be flipped; a type cannot be argued with. Because me-ness is constitutive rather than annotated, the firewall is preserved by *composition* — the whole nest of idle cognition ([deep reading](/deep-reading), metacognition, cross-connections) can run unattended and none of it can enter the witnessed record, without the firewall being re-checked at each level. The monologue audit confirms this empirically: strip everything tagged as inference, re-project the graph, and the depicted facts are identical — `factsAdded: 0` across every run (`src/surfer/fold/audit.js`; see [The Evidence](/the-evidence)).
+
+## The amendment the implementation earned
+
+The wiki's [Experience Engine](/the-experience-engine) framed the Given/Meant boundary as *segregation*: keep interpretation out of the record. The reader found a better rule. Reader-inferred edges — *this contradicts that*, *this connects to that* — **do** reach the graph, promoted as real `CON` edges that **carry their enactor provenance with them** (`src/enactor/connect/promote.js`, `src/surfer/fold/significance.js`). The attention field moves; the witnessed record is byte-unchanged. The firewall was never "keep inferences off the graph." It is **"keep them distinguishable on the graph."** Impact without laundering.
+
+## Search is the door between the doors
+
+The most important consequence: an interpretation the system is uncertain about can be *converted* into a witness by going and looking. A search takes the engine's own guess (reafference) and fetches an external page that either corroborates it or does not (exafference). *The grounding gap is the query* — the unresolved span becomes the question to the world (`docs/web-search.md`). This is why the reader can hold a belief honestly and still improve it: the two doors are not a wall, they are a *turnstile* with a measured toll. See [Going and Looking](/going-and-looking).
+
+---
+
+### See also
+
+- [The EO Reader](/the-eo-reader) · [Signal from Noise](/signal-from-noise) · [The Evidence](/the-evidence)
+- [Deep Reading](/deep-reading) — what runs safely behind the firewall
+- [The Experience Engine](/the-experience-engine) — the boundary this refines
 
 ---
 
