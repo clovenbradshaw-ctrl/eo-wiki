@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** triad, operators, existence, domain  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:43.661Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -136,6 +136,8 @@ EO proposes a domain-level dependency:
 Entities must be present before they can be structurally related; structural organization must be available before interpretive modification is meaningful. In relational database terms: you cannot join tables that have not been created and populated; you cannot update values in a structure that has not been relationally organized.
 
 EO reports computational testing of all 1,296 structurally admissible operator orderings against Codd's functional dependency closure criterion. Every ordering that violates the Existence → Structure → Significance sequence produces closure violations — operations that cannot execute because their input relations do not exist. This eliminates 1,188 of 1,296 candidate orderings (92%). The remaining 108, which differ only in the internal arrangement of operators within each triad, are eliminated by the presupposition argument described above.
+
+**What this test does and does not certify.** Codd's functional-dependency criterion is a statement about *existence and structure* — instances, boundaries, joins, projections. It therefore reaches the Existence and Structure operators (instantiate, resplit, bond, and their neighbors) but is silent about the Significance triad: relational algebra has no operator for *evaluating against a definition* (EVA) and none for *restructuring the schema itself* (REC — schema migration is famously outside the algebra), and it treats observation (NUL) and attention (SIG) as free, invisible acts rather than operations. So the closure test certifies the **dependency ordering** and the query-algebra operators — not the completeness of all nine. The Significance triad, where most of EO's distinctive machinery lives, rests on a *separate* evidence leg: falsifier-gated measurement in the [EO Reader](/the-eo-reader) rather than proof. Conflating the two — citing a proof about existence and structure as if it certified evaluation and restructuring — is the framework's most common overreach; see [Nine Instructions](/nine-instructions).
 
 These results are described in EO documentation and have not been independently peer-reviewed.
 

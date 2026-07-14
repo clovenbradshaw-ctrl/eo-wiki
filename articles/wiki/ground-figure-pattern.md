@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** triad, trichotomy, ground, figure, three  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:46.351Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -39,7 +39,7 @@ EO's three axes — α (Mode), η (Domain), Ω (Object) — are independent stru
 
 An earlier account framed GFP as the generative unit: one distinction, applied recursively to three questions, producing the capacity ground. This was elegant but wrong. It required one distinction *plus* three ungrounded questions, while presenting itself as requiring only the distinction. The three questions were smuggled in. The account was also circular: GFP was said to generate the Object axis, and then appeared *as the values on* that axis. Pattern was simultaneously the generator and the generated.
 
-The corrected account: GFP is the *recurring internal structure* found within each independently motivated axis. Each axis has three values. When you examine those values, they stand in the same three-role relationship — one enabling condition, one differentiated element, one stabilizing integration. This recurrence is an empirical finding (ARI ≈ 0.05 between axes) and a structural observation. It is not a derivation mechanism.
+The corrected account: GFP is the *recurring internal structure* found within each independently motivated axis. Each axis has three values. When you examine those values, they stand in the same three-role relationship — one enabling condition, one differentiated element, one stabilizing integration. This recurrence is primarily a *structural* observation; the empirical picture is mixed rather than clean — the v2 lexical study measured an inter-axis Adjusted Rand Index of ≈ 0.185 (low but non-zero, short of a clean independence result). It is not a derivation mechanism.
 
 GFP tells you about the *inside* of each dimension. It does not tell you what the dimensions are, where they come from, or what their relationship to each other is. For that, see *The Three Dimensions of EO* and *The Axis Triad and Its Coordinates*.
 
@@ -167,7 +167,7 @@ The pattern-position coordinates form a provable progression: 2 (rational), √2
 
 ## Status
 
-The Triadic Minimum (three co-constitutive roles are required for stable differentiation) is definitional within EO — the framework's foundational postulate. The fractal self-similarity is a structural observation within the framework. The claim that the three axes are independent is supported empirically (ARI ≈ 0.05). The triad-specific coordinate assignments are independently motivated (von Neumann ordinals, Pythagorean theorem, Gelfond–Schneider), and the type progression is a proven mathematical result. The interpretation of the type progression as corresponding to the helix's dependency irreversibility is a structural parallel, not an identity proof. None of these claims have undergone independent peer review.
+The Triadic Minimum (three co-constitutive roles are required for stable differentiation) is definitional within EO — the framework's foundational postulate. The fractal self-similarity is a structural observation within the framework. The claim that the three axes are independent is *partially and unevenly* supported: the v2 lexical study found strong proportionality and clustering but an inter-axis Adjusted Rand Index of ≈ 0.185 and unmet coordinate-geometry predictions, so axis-independence is better held as a working hypothesis than a confirmed result (see [The Lexical Analysis](/lexical-analysis)). The triad-specific coordinate assignments are independently motivated (von Neumann ordinals, Pythagorean theorem, Gelfond–Schneider), and the type progression is a proven mathematical result. The interpretation of the type progression as corresponding to the helix's dependency irreversibility is a structural parallel, not an identity proof. None of these claims have undergone independent peer review.
 
 ### Open Questions
 

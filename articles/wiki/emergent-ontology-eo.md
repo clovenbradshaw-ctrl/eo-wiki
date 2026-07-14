@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** transformation, relational, operator, space  
 **Status:** published  
-**Updated:** 2026-03-27T14:55:14.382Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -25,7 +25,7 @@ A preceding project building a community intelligence platform for Nashville, in
 
 EO rests on a single generative unit: the distinction between **ground** (what enables), **figure** (what emerges), and **pattern** (what coheres). This trichotomy — borrowed from Gestalt psychology but applied without requiring a perceiver — recurs at every scale of the framework and, EO claims, at every scale of the phenomena it describes. A thermal gradient has a ground state, figures that stand out against it, and patterns across those figures. So does a language. So does an institution. So does a database.
 
-The recursion is not metaphorical. Applying the ground/figure/pattern distinction at three independent levels produces three axes, each with three values, yielding a 3 × 3 × 3 = 27-cell capacity ground. Empirical research using high-dimensional semantic embeddings has confirmed that the three axes are statistically independent (Adjusted Rand Index ≈ 0.05), meaning the same cognitive distinction applied at different levels generates genuinely new degrees of freedom rather than relabeling.
+The recursion is not metaphorical. Applying the ground/figure/pattern distinction at three independent levels produces three axes, each with three values, yielding a 3 × 3 × 3 = 27-cell capacity ground. Empirical work with high-dimensional semantic embeddings offers *partial, mixed* support for treating the three axes as independent: the v2 lexical study found strong proportionality and face-level clustering, but measured an Adjusted Rand Index of ≈ 0.185 between two of the axes — low, yet short of the near-zero a clean independence claim needs — and did not meet its coordinate-geometry predictions (see [The Lexical Analysis](/lexical-analysis)). The defensible reading is that applying the same distinction at different levels *tends to* open genuinely new degrees of freedom rather than merely relabel; calling axis-independence *confirmed* overstates the evidence — the framework's own report says otherwise, and treating a working hypothesis as a settled result is precisely the overreach [Nine Instructions](/nine-instructions) warns against.
 
 ### The three axes
 
@@ -101,13 +101,13 @@ NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC
 
 This is a dependency map, not a checklist. Existence must be established before Structure can be organized; Structure must exist before Significance can operate on it. Within each triad, operators presuppose ground → figure → pattern: you cannot direct attention (SIG) without first recognizing what is absent (NUL); you cannot connect across boundaries (CON) without first drawing them (SEG); you cannot change the frame (REC) without first encountering the contradictions (DEF) that reveal the frame's insufficiency.
 
-The helix ordering was derived by exhaustive computational verification: of the 1,296 possible orderings of nine operators, 1,295 fail non-degeneracy criteria from Codd's relational algebra. Only one survives.
+The helix ordering was narrowed by exhaustive computational testing: of the 1,296 possible orderings of nine operators, the large majority fail non-degeneracy criteria drawn from Codd's relational algebra, and the remainder — differing only in intra-triad arrangement — are eliminated by the presupposition argument (see [The Three Triads](/the-triads) for the two-stage account and exact counts). This test certifies the dependency *ordering*, not the completeness of the nine operators; see [Nine Instructions](/nine-instructions).
 
 ## The 27-cell capacity ground
 
 Adding the third axis — **Object** (whether the transformation targets a ground condition, a specific figure, or a pattern) — extends the 3 × 3 lattice into a 3 × 3 × 3 capacity ground of 27 cells, each specifying a unique combination of how, where, and what.
 
-The capacity ground and the capacity ground are the same object viewed from different angles. The operator capacity ground asks: *what transformation is happening?* The capacity ground asks: *what does it feel like to be at this coordinate?*
+The operator lattice and the 27-cell capacity ground are the same object viewed from different angles. The operator view asks: *what transformation is happening?* The capacity-ground view asks: *what does it feel like to be at this coordinate?*
 
 ### Distribution asymmetry
 
