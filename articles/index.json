@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generated_at": "2026-06-13T21:59:35.254Z",
-  "count": 69,
+  "count": 70,
   "articles": [
     {
       "record_id": "wiki:ancient-astronomy-eo-saving-the-appearances",
@@ -1007,6 +1007,29 @@
       ],
       "updated_at": "2026-05-16T01:25:52.808Z",
       "path": "articles/wiki/why-crud-is-shit.md"
+    },
+    {
+      "record_id": "wiki:nine-instructions",
+      "content_type": "wiki",
+      "slug": "nine-instructions",
+      "title": "Nine Instructions: EO Is an Effect System, Not an Ontology",
+      "db_id": 72,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "effect system",
+        "schank",
+        "codd",
+        "compiler",
+        "closure",
+        "capability",
+        "defeat conditions",
+        "conceptual dependency"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/nine-instructions.md"
     }
   ]
 }
