@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generated_at": "2026-06-13T21:59:35.254Z",
-  "count": 70,
+  "count": 73,
   "articles": [
     {
       "record_id": "wiki:ancient-astronomy-eo-saving-the-appearances",
@@ -1030,6 +1030,73 @@
       ],
       "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/nine-instructions.md"
+    },
+    {
+      "record_id": "wiki:the-eo-reader",
+      "content_type": "wiki",
+      "slug": "the-eo-reader",
+      "title": "The EO Reader: EO Implemented",
+      "db_id": 73,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "eo reader",
+        "implementation",
+        "holon",
+        "event log",
+        "effect system",
+        "provenance"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/the-eo-reader.md"
+    },
+    {
+      "record_id": "wiki:signal-from-noise",
+      "content_type": "wiki",
+      "slug": "signal-from-noise",
+      "title": "Signal from Noise: EO's Measurement Doctrine",
+      "db_id": 74,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "signal",
+        "noise",
+        "salience",
+        "significance",
+        "null",
+        "born rule",
+        "surprise",
+        "corroboration"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/signal-from-noise.md"
+    },
+    {
+      "record_id": "wiki:the-evidence",
+      "content_type": "wiki",
+      "slug": "the-evidence",
+      "title": "The Evidence: What the EO Reader Has Measured",
+      "db_id": 75,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "evidence",
+        "evaluation",
+        "falsifier",
+        "churn",
+        "weld",
+        "judgment",
+        "results",
+        "negatives"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/the-evidence.md"
     }
   ]
 }
