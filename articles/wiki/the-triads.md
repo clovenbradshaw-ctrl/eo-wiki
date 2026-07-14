@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** triad, operators, existence, domain  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:43.661Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -33,7 +33,7 @@ According to EO, each domain instantiates the Triadic Minimum in a different ont
 | --- | --- | --- | --- |
 | **Existence** | Non-transformation (NUL) | Registered salience (SIG) | Concrete instance (INS) |
 | **Structure** | Differentiated space (SEG) | Specific relation (CON) | Unified whole (SYN) |
-| **Significance** | Value field (DEF) | Coexisting states (EVA) | Reframed system (REC) |
+| **Significance** | Asserted definition (DEF) | Rendered judgment (EVA) | Reframed system (REC) |
 
 In each case:
 
@@ -105,13 +105,13 @@ The Significance triad concerns meaning, value, and frame.
 
 | Operator | Role | Description |
 | --- | --- | --- |
-| **DEF** | Ground | Value change or alternation within a field of interpretation |
-| **EVA** | Figure | Simultaneous validity of multiple states |
+| **DEF** | Ground | Assert or define what holds within a field of interpretation |
+| **EVA** | Figure | Render judgment by testing a particular against the definition |
 | **REC** | Pattern | Reframing or restructuring of the interpretive system |
 
 Significance-domain transformation is the event in which meaning changes.
 
-A value shift (DEF) introduces variation. Coexisting valid states (EVA) expose tension within the interpretive frame. Recursion (REC) restructures that frame to accommodate or resolve the tension.
+A definition (DEF) establishes what holds. Evaluation (EVA) renders judgment by testing against it, and competing definitions held in the log expose tension the current frame cannot resolve. Recursion (REC) restructures that frame to accommodate or resolve the tension.
 
 **Presupposition ordering:** DEF → EVA → REC. DEF establishes what holds; EVA assesses whether it satisfies criteria. An evaluation requires that terms have first been defined — you cannot judge without a standard. And REC is triggered by representational insufficiency — the schema cannot house what the data requires — which requires EVA to have revealed the inadequacy.
 
@@ -136,6 +136,8 @@ EO proposes a domain-level dependency:
 Entities must be present before they can be structurally related; structural organization must be available before interpretive modification is meaningful. In relational database terms: you cannot join tables that have not been created and populated; you cannot update values in a structure that has not been relationally organized.
 
 EO reports computational testing of all 1,296 structurally admissible operator orderings against Codd's functional dependency closure criterion. Every ordering that violates the Existence → Structure → Significance sequence produces closure violations — operations that cannot execute because their input relations do not exist. This eliminates 1,188 of 1,296 candidate orderings (92%). The remaining 108, which differ only in the internal arrangement of operators within each triad, are eliminated by the presupposition argument described above.
+
+**What this test does and does not certify.** Codd's functional-dependency criterion is a statement about *existence and structure* — instances, boundaries, joins, projections. It therefore reaches the Existence and Structure operators (instantiate, resplit, bond, and their neighbors) but is silent about the Significance triad: relational algebra has no operator for *evaluating against a definition* (EVA) and none for *restructuring the schema itself* (REC — schema migration is famously outside the algebra), and it treats observation (NUL) and attention (SIG) as free, invisible acts rather than operations. So the closure test certifies the **dependency ordering** and the query-algebra operators — not the completeness of all nine. The Significance triad, where most of EO's distinctive machinery lives, rests on a *separate* evidence leg: falsifier-gated measurement in the [EO Reader](/the-eo-reader) rather than proof. Conflating the two — citing a proof about existence and structure as if it certified evaluation and restructuring — is the framework's most common overreach; see [Nine Instructions](/nine-instructions).
 
 These results are described in EO documentation and have not been independently peer-reviewed.
 

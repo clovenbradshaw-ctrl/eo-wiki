@@ -3,7 +3,7 @@
 **Record ID:** wiki:the-experience-engine  
 **DB ID:** 44  
 **Status:** published  
-**Updated:** 2026-06-13T21:59:33.980Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -26,13 +26,23 @@ where:
 
 The three data structures correspond to the three domains of the capacity ground:
 
-| ComponentDomainQuestion |
-| --- |
+| Component | Domain | Question |
+| --- | --- | --- |
 | Given-Log (*G*) | Existence | *Whether things are* |
 | Structure-Lattice (*S*) | Structure | *How things connect* |
 | Meant-Graph (*M*) | Significance | *What things mean* |
 
-The three functions collectively constitute the **Horizon** — the act of looking. The Horizon is not a data structure. It is a projection: an observation of a query run against *G*, *S*, and *M* from a position within *S*. Every observation instantiates a projection. There is no unmediated access.</p><h2>Truthfulness: What the Bar Guarantees</h2><p>The recursion has a corollary about reliability. The functions to the right of the bar need not be reliable. They may be approximate, lossy, even prone to fabrication, and the bar still holds, because the functions hold nothing. A function reads the stores, weighs, and returns a projection. It does not write. A projection that is wrong is a wrong reading, not a corrupted record. The given is untouched, and the next reading begins clean from the same stores.</p><p>This is what lets an honest system place a fallible projector to the right of the bar without surrendering the record to it. The projector may be a person, a heuristic, or a language model. It may propose, phrase, connect, and judge. It may not emit. The one discipline that keeps the system honest is that nothing crosses the bar leftward except by emission, and emission is reserved for what was given, not for what was inferred. A claim the projector cannot ground in a store is either bound to the store that carries it or marked absent. There is no third move.</p><p>Truthfulness is therefore not a property the functions achieve. It is a property the bar protects. The three Significance rules state the same thing from the interpretation side: the Meant-Graph is grounded (Rule 7, DEF), tested (Rule 8, EVA), and revisable (Rule 9, REC). Any single projection can be wrong and later superseded. What cannot happen, while the bar holds, is for a wrong projection to lower the integrity of the given it was projected from. Each reading is defeasible. The ground it reads is not.</p><p>A system built this way does not arrive at complete truthfulness. It approaches it. The record accumulates only witnessed emission, while the readings over that record are corrected without limit through the DEF to EVA to REC cycle. The asymptote is approached from below, and the bar is why the approach never reverses: no function-side error can become a store-side fact. Defeasibility keeps the door open at the top; the bar keeps the floor from sinking at the bottom. Between them the system can only grow more truthful over time, never less.
+The three functions collectively constitute the **Horizon** — the act of looking. The Horizon is not a data structure. It is a projection: an observation of a query run against *G*, *S*, and *M* from a position within *S*. Every observation instantiates a projection. There is no unmediated access.
+
+## Truthfulness: What the Bar Guarantees
+
+The recursion has a corollary about reliability. The functions to the right of the bar need not be reliable. They may be approximate, lossy, even prone to fabrication, and the bar still holds, because the functions hold nothing. A function reads the stores, weighs, and returns a projection. It does not write. A projection that is wrong is a wrong reading, not a corrupted record. The given is untouched, and the next reading begins clean from the same stores.
+
+This is what lets an honest system place a fallible projector to the right of the bar without surrendering the record to it. The projector may be a person, a heuristic, or a language model. It may propose, phrase, connect, and judge. It may not emit. The one discipline that keeps the system honest is that nothing crosses the bar leftward except by emission, and emission is reserved for what was given, not for what was inferred. A claim the projector cannot ground in a store is either bound to the store that carries it or marked absent. There is no third move.
+
+Truthfulness is therefore not a property the functions achieve. It is a property the bar protects. The three Significance rules state the same thing from the interpretation side: the Meant-Graph is grounded (Rule 7, DEF), tested (Rule 8, EVA), and revisable (Rule 9, REC). Any single projection can be wrong and later superseded. What cannot happen, while the bar holds, is for a wrong projection to lower the integrity of the given it was projected from. Each reading is defeasible. The ground it reads is not.
+
+A system built this way does not arrive at complete truthfulness. It approaches it. The record accumulates only witnessed emission, while the readings over that record are corrected without limit through the DEF to EVA to REC cycle. The asymptote is approached from below, and the bar is why the approach never reverses: no function-side error can become a store-side fact. Defeasibility keeps the door open at the top; the bar keeps the floor from sinking at the bottom. Between them the system can only grow more truthful over time, never less.
 
 ## The Given-Log (*G*)
 
@@ -59,8 +69,8 @@ These fields are not optional. An emission missing any of them is not a phenomen
 
 The log distinguishes three structurally distinct kinds of empty cell, detected by operator history on a path:
 
-| StateDetectionWhat's in the log |
-| --- |
+| State | Detection | What's in the log |
+| --- | --- | --- |
 | **Cleared** | Most recent DEF on this path has empty operand | `DEF(field, "")` with provenance |
 | **Unknown** | INS exists for the field at schema level, no DEF for this entity | INS entry exists, no DEF entry |
 | **Never-set** | No INS for this path in this context | The log is silent |
@@ -123,8 +133,8 @@ The Horizon is the act of looking — a projection over (G, S, M) from a positio
 
 Querying is structural operators used as lenses, not as emissions:
 
-| SQL clauseStructural lens |
-| --- |
+| SQL clause | Structural lens |
+| --- | --- |
 | `SELECT` | The Horizon function itself — the act of projecting |
 | `WHERE` | SEG — boundary constraining what's visible |
 | `JOIN` | CON — connection across which the projection reaches |
@@ -172,7 +182,7 @@ Nine rules govern the system, organized in three triads that mirror the operator
 
 *The proposal: the governing functions of any Experience Engine are projections of another Experience Engine. The conventions live on their own append-only ledger. That ledger is a Given-Log whose entries are rule events, shipped seeds and induced deltas alike. Its Structure-Lattice is the pack structure: which buckets exist and how they merge, by accumulation and never by overwrite. Its Meant-Graph is the active ruleset, projected under the current frame. The outer engine's functions read their parameters from the inner engine's projection. Formally: for any 𝓔 = ⟨G, S, M | π, γ, σ⟩ there exists 𝓔′ such that π, γ, and σ are projections of 𝓔′.*
 
-*Admission is the same at both levels. A convention enters the inner Given-Log the way an entity enters the outer one: sighted twice, then kept. The witness is small but exact. A reading engine implementing this specification induced the attribution verb “says” from the typography of the quote-attribution slot, basis `slot_sightings: 2`, and committed it to its rules ledger with full provenance. The admission gate operating one level up, on the reader's own rules. Nobody designed that symmetry in. It fell out of building both layers honestly.*
+*Admission is the same at both levels. A convention enters the inner Given-Log the way an entity enters the outer one: sighted twice, then kept. The witness is small but exact. The [EO Reader](/the-eo-reader) — a reading engine implementing this specification — induced the attribution verb “says” from the typography of the quote-attribution slot, basis `slot_sightings: 2`, and committed it to its defeasible convention ledger (`src/core/conventions/`) with full provenance. The admission gate operating one level up, on the reader's own rules. Nobody designed that symmetry in. It fell out of building both layers honestly.*
 
 *The recursion does not regress without end. It terminates in the medium constants: parameters that are contents of no engine because they are the shape of the tuple itself. Everything above that floor is convention, and every convention can name the ledger event that admitted it.*
 
@@ -182,7 +192,7 @@ Nine rules govern the system, organized in three triads that mirror the operator
 
 ## Implementation Surface
 
-The integrity rules govern what the data must be. They do not, by themselves, prevent an implementation from exposing a low-level interface that bypasses the rules — a "raw write" path that appends to G without going through the operator algebra, or a query path that returns derived state without applying EVA at projection. This concern is handled by the **EO Compliance Specification** (`wiki:eo-compliance-spec`), a sibling document that governs the surface area an implementation may expose. The two layers are required together: integrity rules without compliance leave room for syntax-survives-while-semantics-erodes; compliance without integrity rules has nothing to enforce.
+The integrity rules govern what the data must be. They do not, by themselves, prevent an implementation from exposing a low-level interface that bypasses the rules — a "raw write" path that appends to G without going through the operator algebra, or a query path that returns derived state without applying EVA at projection. This concern — that an implementation might expose a bypass path — is addressed concretely in the [EO Reader](/the-eo-reader) by the holon contract system: every faculty declares the operations it may perform, `src/core/contracts.js` composes them into an application-level envelope, and `tests/contracts.test.js` fails the build if any part performs an operation it did not declare — so there is no raw-write path around the operator algebra (this is the effect-system reading of [Nine Instructions](/nine-instructions)). A dedicated *EO Compliance Specification* article, generalizing that enforcement away from the one implementation, is forthcoming; until then the integrity rules here and the reader's contract system are the two layers, and both are required together.
 
 The cautionary precedent is Codd's. He published twelve rules in 1985 specifying what a relational system must do; the market preserved the syntax and quietly gutted the semantics. The Experience Engine treats this as a structural warning. The integrity rules are necessary; they are not sufficient on their own to prevent the same trajectory.
 
@@ -214,7 +224,7 @@ The cautionary precedent is Codd's. He published twelve rules in 1985 specifying
 
 ## Storage Architectures
 
-Experience Engine systems can be implemented under two broad storage strategies.
+Experience Engine systems can be implemented under two broad storage strategies. (The [EO Reader](/the-eo-reader) takes the stream-only path: the append-only log is the sole source of truth and every projection is rebuilt by replay — `src/core/log.js`, `src/core/project.js` — with nothing derived ever persisted.)
 
 ### Dual-database architecture
 

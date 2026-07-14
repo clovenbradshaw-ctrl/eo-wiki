@@ -4,7 +4,7 @@
 **DB ID:** 10  
 **Tags:** 101  
 **Status:** published  
-**Updated:** 2026-05-16T01:25:51.154Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -39,11 +39,11 @@ The operators are **acts,** not locations. They name what a system *does* at a j
 | # | Operator | Symbol | Greek | Triad | Role | Capacity |
 | --- | --- | --- | --- | --- | --- | --- |
 | 1 | NUL | ∅ | ν | Existence | Ground | Not transform |
-| 2 | SIG | ○ | σ | Existence | Figure | Draw a distinction |
+| 2 | SIG | ○ | σ | Existence | Figure | Register an appearance |
 | 3 | INS | ● | α | Existence | Pattern | Create a concrete instance |
 | 4 | SEG | ｜ | κ | Structure | Ground | Draw boundaries |
-| 5 | CON | ⤫ | ε | Structure | Figure | Establish relationships |
-| 6 | SYN | ∨ | η | Structure | Pattern | Produce emergent wholes |
+| 5 | CON | ⋈ | ε | Structure | Figure | Establish relationships |
+| 6 | SYN | △ | η | Structure | Pattern | Produce emergent wholes |
 | 7 | DEF | ⊢ | δ | Significance | Ground | Establish what holds within a stable interpretive frame |
 | 8 | EVA | ⊨ | ψ | Significance | Figure | Render judgment by testing a particular against a general |
 | 9 | REC | ⊛ | Ω | Significance | Pattern | Restructure the frame itself |
@@ -74,21 +74,21 @@ A rock in a chemical soup does not have NUL. A rock is inert. A bacterium has NU
 
 ---
 
-### SIG — Distinction
+### SIG — Appearing (Registration)
 
 > *Every name is a conquest that has forgotten there was a war.*
 
-**Capacity:** The system can draw a distinction — mark something as a kind of thing, differentiate it from other kinds.
+**Capacity:** The system can *register* — something shows up for it. Not yet named, not yet partitioned, not yet interpreted: simply present-for-the-system where a moment before it was not.
 
-SIG is the most primitive act of differentiation: the capacity to register that something is *this* and not *that.* At its most basic, it is a receptor responding to a molecule — not "naming" the molecule, not "classifying" it, but distinguishing it from the surrounding medium. The bare minimum of difference. Naming, typing, labeling, defining, and classifying are all downstream implementations of SIG — they are ways of drawing distinctions. The core operation is prior to any particular naming scheme: it is the act of carving the undifferentiated (where NUL has not-acted) into regions where different kinds of things can exist.
+SIG sits at **Relating × Existence**, the figure role of the Existence triad. Its most basic instance is a receptor responding to a molecule: the molecule *appears* to the system's machinery. Before the receptor fires the molecule is physically present but not present-*for*-the-bacterium; after, it registers. Nothing was partitioned, nothing named — something appeared. Naming, typing, labeling, and classifying are all downstream operations that presuppose SIG and build on it.
 
-In a database, SIG shows up as schema definition — CREATE TABLE, type constraints, ENUM declarations. But the capacity is more general than any implementation. When a caseworker decides that this person is a "client" rather than a "resident" or a "patient," that is SIG. When a journalist decides that this event is a "procurement" rather than a "donation," that is SIG. The distinction comes first; the label follows.
+**Not "Distinction," and not SEG.** SIG was formerly named *Distinction*, but distinction is a *Differentiating* act (Mode 0) that cuts this-from-that, whereas SIG lives at *Relating* (Mode 1), which preserves what it touches. Partitioning — drawing a boundary — is the job of SEG (Differentiating × Structure), the fourth operator. SIG *registers*; SEG *bounds*. Keeping them apart dissolves a long-standing overlap. The full argument, the naming history (Designate → Distinction → SIG → Appearing), and the cross-traditional grounding are in [SIG](/sig).
 
-**Relational equivalent:** CREATE TABLE / DDL / type constraints / CHECK constraints / ENUM definitions.
+**Relational equivalent:** Not DDL. Creating a table is INS; declaring what it tracks is DEF; the *decision* to create it — ephemeral attention, a selection, a focus — is SIG. SIG is the operator that carries no enduring value: clicks, selections, hovers, the cursor landing here rather than there.
 
-**Why it requires NUL:** A type system that cannot represent non-action cannot define NOT NULL, cannot distinguish "unknown" from "inapplicable," and cannot properly classify the phenomena it represents. Distinction without non-action produces impoverished types — you cannot say what a kind excludes if you have no concept of the untransformed.
+**Why it requires NUL:** A system that cannot *not*-register (NUL) cannot register selectively — a receptor that fires on everything is indistinguishable from no receptor at all. NUL is the ground condition for selective appearing.
 
-**Invariants:** SIG never destroys distinctions; it adds or supersedes. Multiple distinctions can coexist (which may produce DEF if they conflict).
+**Invariants:** SIG never destroys what has appeared; it adds or supersedes. Multiple appearances can coexist; where they carry conflicting interpretations, that is resolved downstream by EVA, not SIG.
 
 **What goes wrong without it:** The system has the capacity to not-act (NUL) but no capacity to differentiate. Data accumulates without classification — records with no type, columns with no defined meaning, entities whose identity is implicit in code rather than explicit in structure. Every downstream query inherits the ambiguity.
 
@@ -294,7 +294,7 @@ EO uses [Polish (prefix) notation](https://en.wikipedia.org/wiki/Polish_notation
 
 The operator comes first, followed by its target (what is being transformed) and operand (what it is being transformed with or into). This is position-independent — the meaning is determined by structure, not by word order.
 
-In mathematical contexts, a Greek letter notation is also used: ν (NUL), σ (SIG), α (INS), κ (SEG), ε (CON), η (SYN), δ (EVA), ψ (DEF), Ω (REC).
+In mathematical contexts, a Greek letter notation is also used: ν (NUL), σ (SIG), α (INS), κ (SEG), ε (CON), η (SYN), δ (DEF), ψ (EVA), Ω (REC).
 
 Each operator also has a practitioner glyph (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛) used in compact notation.
 

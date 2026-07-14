@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generated_at": "2026-06-13T21:59:35.254Z",
-  "count": 69,
+  "count": 78,
   "articles": [
     {
       "record_id": "wiki:ancient-astronomy-eo-saving-the-appearances",
@@ -62,7 +62,7 @@
       "status": "published",
       "tags": [],
       "keywords": [],
-      "updated_at": "2026-03-19T01:25:52.015Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/canonical-examples-the-resolution-face.md"
     },
     {
@@ -218,7 +218,7 @@
         "event",
         "operator"
       ],
-      "updated_at": "2026-04-21T01:23:15.210Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/eo-event-streaming.md"
     },
     {
@@ -268,7 +268,7 @@
       "status": "draft",
       "tags": [],
       "keywords": [],
-      "updated_at": "2026-03-27T14:55:14.671Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/eo-in-60-min.md"
     },
     {
@@ -299,7 +299,7 @@
         "polish notation",
         "lukasiewicz"
       ],
-      "updated_at": "2026-03-26T22:20:29.564Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/eo-notation.md"
     },
     {
@@ -358,7 +358,7 @@
         "operator",
         "space"
       ],
-      "updated_at": "2026-03-27T14:55:14.382Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/emergent-ontology-eo.md"
     },
     {
@@ -390,7 +390,7 @@
         "figure",
         "three"
       ],
-      "updated_at": "2026-03-26T22:16:46.351Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/ground-figure-pattern.md"
     },
     {
@@ -462,7 +462,7 @@
         "ins",
         "existence"
       ],
-      "updated_at": "2026-03-23T17:01:44.022Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/ins.md"
     },
     {
@@ -486,7 +486,7 @@
       "status": "draft",
       "tags": [],
       "keywords": [],
-      "updated_at": "2026-03-26T22:16:39.400Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/mhc-and-eo.md"
     },
     {
@@ -572,7 +572,7 @@
         "operator",
         "position"
       ],
-      "updated_at": "2026-05-16T01:25:49.567Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/operator-naming-in-emergent-ontology.md"
     },
     {
@@ -603,7 +603,7 @@
         "201"
       ],
       "keywords": [],
-      "updated_at": "2026-03-26T22:16:41.561Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/quantum-weirdness-in-eo-contained-but-not-tamed.md"
     },
     {
@@ -624,12 +624,12 @@
       "slug": "sig",
       "title": "SIG",
       "db_id": 35,
-      "status": "draft",
+      "status": "published",
       "tags": [
         "operator"
       ],
       "keywords": [],
-      "updated_at": "2026-03-26T22:16:39.679Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/sig.md"
     },
     {
@@ -696,7 +696,7 @@
         "greek",
         "operator"
       ],
-      "updated_at": "2026-03-26T22:16:40.256Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-27-phase-posts.md"
     },
     {
@@ -720,7 +720,7 @@
       "status": "published",
       "tags": [],
       "keywords": [],
-      "updated_at": "2026-03-26T21:59:46.858Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-def-eva-rec-loop.md"
     },
     {
@@ -775,7 +775,7 @@
       "status": "published",
       "tags": [],
       "keywords": [],
-      "updated_at": "2026-06-13T21:59:33.980Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-experience-engine.md"
     },
     {
@@ -836,7 +836,7 @@
       "record_id": "wiki:the-measurement-paraxoc",
       "content_type": "wiki",
       "slug": "the-measurement-paraxoc",
-      "title": "The Measurement Paraxoc",
+      "title": "The Measurement Paradox",
       "db_id": 67,
       "status": "published",
       "tags": [
@@ -844,7 +844,7 @@
         "quantum mechanics"
       ],
       "keywords": [],
-      "updated_at": "2026-03-22T20:29:49.321Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-measurement-paraxoc.md"
     },
     {
@@ -858,7 +858,7 @@
         "101"
       ],
       "keywords": [],
-      "updated_at": "2026-05-16T01:25:51.154Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-nine-operators.md"
     },
     {
@@ -884,7 +884,7 @@
       "status": "published",
       "tags": [],
       "keywords": [],
-      "updated_at": "2026-03-26T22:16:39.848Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-pythagorean-theorem-plato-s-meno-x-and-eo.md"
     },
     {
@@ -952,7 +952,7 @@
         "existence",
         "domain"
       ],
-      "updated_at": "2026-03-26T22:16:43.661Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-triads.md"
     },
     {
@@ -1007,6 +1007,198 @@
       ],
       "updated_at": "2026-05-16T01:25:52.808Z",
       "path": "articles/wiki/why-crud-is-shit.md"
+    },
+    {
+      "record_id": "wiki:nine-instructions",
+      "content_type": "wiki",
+      "slug": "nine-instructions",
+      "title": "Nine Instructions: EO Is an Effect System, Not an Ontology",
+      "db_id": 72,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "effect system",
+        "schank",
+        "codd",
+        "compiler",
+        "closure",
+        "capability",
+        "defeat conditions",
+        "conceptual dependency"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/nine-instructions.md"
+    },
+    {
+      "record_id": "wiki:the-eo-reader",
+      "content_type": "wiki",
+      "slug": "the-eo-reader",
+      "title": "The EO Reader: EO Implemented",
+      "db_id": 73,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "eo reader",
+        "implementation",
+        "holon",
+        "event log",
+        "effect system",
+        "provenance"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/the-eo-reader.md"
+    },
+    {
+      "record_id": "wiki:signal-from-noise",
+      "content_type": "wiki",
+      "slug": "signal-from-noise",
+      "title": "Signal from Noise: EO's Measurement Doctrine",
+      "db_id": 74,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "signal",
+        "noise",
+        "salience",
+        "significance",
+        "null",
+        "born rule",
+        "surprise",
+        "corroboration"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/signal-from-noise.md"
+    },
+    {
+      "record_id": "wiki:the-evidence",
+      "content_type": "wiki",
+      "slug": "the-evidence",
+      "title": "The Evidence: What the EO Reader Has Measured",
+      "db_id": 75,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "evidence",
+        "evaluation",
+        "falsifier",
+        "churn",
+        "weld",
+        "judgment",
+        "results",
+        "negatives"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/the-evidence.md"
+    },
+    {
+      "record_id": "wiki:the-two-doors",
+      "content_type": "wiki",
+      "slug": "the-two-doors",
+      "title": "The Two Doors: Witness and Firewall",
+      "db_id": 76,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "provenance",
+        "exafference",
+        "reafference",
+        "firewall",
+        "canWitness"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/the-two-doors.md"
+    },
+    {
+      "record_id": "wiki:deep-reading",
+      "content_type": "wiki",
+      "slug": "deep-reading",
+      "title": "Deep Reading: What the Machine Does at Rest",
+      "db_id": 77,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "deep reading",
+        "idle",
+        "reflection",
+        "rumination",
+        "metacognition"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/deep-reading.md"
+    },
+    {
+      "record_id": "wiki:going-and-looking",
+      "content_type": "wiki",
+      "slug": "going-and-looking",
+      "title": "Going and Looking: Research That Tries to Be Wrong",
+      "db_id": 78,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "research",
+        "disproof",
+        "falsification",
+        "curiosity",
+        "corroboration"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/going-and-looking.md"
+    },
+    {
+      "record_id": "wiki:the-model-is-the-leaf",
+      "content_type": "wiki",
+      "slug": "the-model-is-the-leaf",
+      "title": "The Model Is the Leaf",
+      "db_id": 79,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "llm",
+        "model",
+        "contract",
+        "capability",
+        "prompt",
+        "defamation firewall"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/the-model-is-the-leaf.md"
+    },
+    {
+      "record_id": "wiki:eot",
+      "content_type": "wiki",
+      "slug": "eot",
+      "title": "EOT: The Text of Experience",
+      "db_id": 80,
+      "status": "published",
+      "tags": [
+        "201"
+      ],
+      "keywords": [
+        "eot",
+        "notation",
+        "wire format",
+        "locus",
+        "sense",
+        "provenance"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/eot.md"
     }
   ]
 }

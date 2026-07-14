@@ -5,7 +5,7 @@
 **Tags:** operator, 101  
 **Keywords:** ins, existence  
 **Status:** published  
-**Updated:** 2026-03-23T17:01:44.022Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -13,11 +13,11 @@
 
 > *What the schema won't hold doesn't stop existing. It just stops being seen.*
 
-**INS** (△ / α) is the third operator in the helix and the third member of the Existence triad. It sits at **Generating ⤫ Existence** — the position where something crosses from potential into the particular. Before INS, you have NUL (the capacity for absence) and SIG (the capacity for distinction). INS is the moment a thing becomes concrete.
+**INS** (● / α) is the third operator in the helix and the third member of the Existence triad. It sits at **Generating ⤫ Existence** — the position where something crosses from potential into the particular. Before INS, you have NUL (the capacity for absence) and SIG (the capacity for appearing). INS is the moment a thing becomes concrete.
 
 |  |  |
 | --- | --- |
-| **Glyph** | △ |
+| **Glyph** | ● |
 | **Greek** | α (alpha) — *archē*. The first. Every instance is an α-event. |
 | **Position** | Generating ⤫ Existence |
 | **Helix position** | Third (after NUL → SIG) |

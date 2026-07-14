@@ -1,10 +1,10 @@
-# The Measurement Paraxoc
+# The Measurement Paradox
 
 **Record ID:** wiki:the-measurement-paraxoc  
 **DB ID:** 67  
 **Tags:** emanons, quantum mechanics  
 **Status:** published  
-**Updated:** 2026-03-22T20:29:49.321Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 

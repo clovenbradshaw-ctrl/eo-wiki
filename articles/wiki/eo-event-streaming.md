@@ -4,7 +4,7 @@
 **DB ID:** 20  
 **Keywords:** operators, schema, field, event, operator  
 **Status:** draft  
-**Updated:** 2026-04-21T01:23:15.210Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -69,11 +69,11 @@ Helix ordering: NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → 
 | # | Operator | Glyph | Greek | Triad | Function |
 | --- | --- | --- | --- | --- | --- |
 | 1 | NUL | ∅ | ν | Existence | Recognize and record absence; explicit null marker |
-| 2 | SIG | ⊡ | σ | Existence | Direct attention; register a signal |
-| 3 | INS | △ | α | Existence | Instantiate a concrete entity under a type; mint the entity's anchor |
+| 2 | SIG | ○ | σ | Existence | Direct attention; register a signal |
+| 3 | INS | ● | α | Existence | Instantiate a concrete entity under a type; mint the entity's anchor |
 | 4 | SEG | ｜ | κ | Structure | Establish a boundary or partition |
 | 5 | CON | ⋈ | ε | Structure | Create a relationship between entities |
-| 6 | SYN | ∨ | η | Structure | Produce a derived whole; aggregate |
+| 6 | SYN | △ | η | Structure | Produce a derived whole; aggregate |
 | 7 | DEF | ⊢ | δ | Significance | Establish what holds within a stable interpretive frame |
 | 8 | EVA | ⊨ | ψ | Significance | Render judgment by testing a particular against a general |
 | 9 | REC | ⊛ | Ω | Significance | Transform the interpretive frame itself |

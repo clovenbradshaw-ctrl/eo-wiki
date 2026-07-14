@@ -3,7 +3,7 @@
 **Record ID:** wiki:eo-in-60-min  
 **DB ID:** 48  
 **Status:** draft  
-**Updated:** 2026-03-27T14:55:14.671Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -350,7 +350,7 @@ The quantum circuit mappings are the most demanding test of the framework becaus
 | --- | --- | --- |
 | Hadamard gate | EVA(⊨) × Ground | Creates superposition — holding both states simultaneously without resolution |
 | Bit-flip gate | DEF(⊢) × Figure | Establishes what holds within a stable frame |
-| Entanglement (CNOT) | CON(⋈) × Figure + INS(△) × Pattern + SYN(∨) × Figure | A multi-step binding that creates irreducible composite states |
+| Entanglement (CNOT) | CON(⋈) × Figure + INS(●) × Pattern + SYN(△) × Figure | A multi-step binding that creates irreducible composite states |
 | Measurement | NUL → SIG multi-cell dynamic | Collapse from superposition to a definite value |
 | Quantum contextuality | Rule 4 (no God's-eye view) | Measurement outcomes cannot be assigned independent of measurement context |
 

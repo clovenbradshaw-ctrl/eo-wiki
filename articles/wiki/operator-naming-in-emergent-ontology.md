@@ -5,13 +5,13 @@
 **Tags:** 101  
 **Keywords:** operator, position  
 **Status:** draft  
-**Updated:** 2026-05-16T01:25:49.567Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
 # Operator Naming in EO
 
-In **EO**, the nine primitive operators carry three parallel naming systems: three-letter abbreviations (NUL, SIG, INS, etc.), practitioner glyphs (∅, ⊡, △, etc.), and Greek letters (ν, θ, α, etc.). Each system was developed for a different context — abbreviations for prose and documentation, glyphs for practitioner notation and data lineage, Greek letters for algebraic composition and formal work.
+In **EO**, the nine primitive operators carry three parallel naming systems: three-letter abbreviations (NUL, SIG, INS, etc.), practitioner glyphs (∅, ○, ●, etc.), and Greek letters (ν, σ, α, etc.). Each system was developed for a different context — abbreviations for prose and documentation, glyphs for practitioner notation and data lineage, Greek letters for algebraic composition and formal work.
 
 None of these systems was finalized in a single pass. The naming history of the operators — particularly the operator at position two in the dependency helix — illustrates a broader principle within the framework: that all names, symbols, and labels in EO are **resonant signifiers**, natural-language or notational pointers toward dimensional positions in the framework's capacity ground. The positions are structural. The names are approximations.
 
@@ -119,19 +119,19 @@ Across all three names — and across the pre-naming Airtable phase where the po
 
 ### Practitioner Glyphs
 
-The practitioner glyph system (∅ ⊡ △ | ⤫ ∨ ⊢ ⊨ ⊛) was developed for annotating operator logs, data lineage, and natural-language analysis. Glyphs were selected for visual iconicity — each symbol suggests its operator's action:
+The practitioner glyph system is **∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛** — one mark per operator, made authoritative in the implementation (`src/core/operators.js`) so every surface draws the same mark for a given act and a graph edge never disagrees with a legend chip. The marks read by domain column: Existence **∅ ○ ●**, Structure **｜ ⋈ △**, Interpretation **⊢ ⊨ ⊛**. Glyphs were selected for visual iconicity:
 
 - **∅** (empty set) for NUL: the void as a well-defined mathematical object.
-- **⊡** (squared dot) for SIG/SIG: a point of registration within an undifferentiated field — something has become salient against a ground. The glyph visually encodes the operation: a dot (figure) appearing within a frame (ground), prior to any boundary being drawn around it.
-- **△** (triangle) for INS: an upward gesture, something entering existence.
-- **|** (vertical bar) for SEG: a boundary, a wall, a partition.
-- **⤫** (bowtie/natural join) for CON: two things meeting at a point — borrowed from relational algebra's join symbol.
-- **∨** (vee/disjunction) for SYN: convergence, things coming together from below.
-- **∿** (sine wave) — legacy glyph, replaced by ⊢ for DEF. Originally represented oscillation/alternation.
-- **∥** (parallel lines) — legacy glyph, replaced by ⊨ for EVA. Originally represented simultaneous holding. (An earlier version used ∥, which was identified as a collision with XOR/direct sum in standard notation.)
+- **○** (open circle) for SIG: attention directed but not yet filled — a point of registration, something becoming salient against a ground, prior to any boundary being drawn around it.
+- **●** (filled circle) for INS: the registration made concrete — a particular brought into being.
+- **｜** (vertical bar, U+FF5C) for SEG: a boundary, a wall, a partition.
+- **⋈** (bowtie/natural join) for CON: two things meeting at a point — borrowed from relational algebra's join symbol.
+- **△** (triangle) for SYN: parts rising into an emergent whole.
+- **⊢** (turnstile) for DEF: entailment — what follows given the terms; a definition asserted.
+- **⊨** (double turnstile) for EVA: satisfaction — testing whether a structure models a formula.
 - **⊛** (rightwards arrow with loop) for REC: output feeding back as input, the helix bending into a spiral.
 
-Two unresolved symbol collisions remain as of this writing: the legacy glyph ∿ was shared between the old EVA and a composition-level entry; ⤫ is shared between CON and a composition-level entry.
+**Superseded glyphs**, kept for reading older material: ⊡ (was SIG, now ○); △ (was INS — now SYN's mark, INS is ●); ⤫ (was CON, now ⋈); ∨ (was SYN, now △); ∿ (was DEF, now ⊢); ∥ (was EVA, now ⊨). The earlier set drifted from the implementation; the marks above are the ones the shipped reader draws.
 
 ### Greek Letters
 

@@ -3,7 +3,7 @@
 **Record ID:** wiki:the-pythagorean-theorem-plato-s-meno-x-and-eo  
 **DB ID:** 41  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:39.848Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -93,7 +93,7 @@ Socrates establishes that the boy has never studied geometry. The absence of ins
 
 Socrates draws a square in the sand. A bounded figure registers as distinct against undifferentiated ground.
 
-### INS(△)
+### INS(●)
 
 `INS(square_kind, this_square, side=2, area=4)`
 

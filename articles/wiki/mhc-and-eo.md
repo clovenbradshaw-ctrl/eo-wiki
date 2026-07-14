@@ -3,7 +3,7 @@
 **Record ID:** wiki:mhc-and-eo  
 **DB ID:** 53  
 **Status:** draft  
-**Updated:** 2026-03-26T22:16:39.400Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -119,7 +119,7 @@ This reading predicts something testable: the same operator type should appear t
 
 ### The Axioms as Dependency Ordering
 
-The MHC's three axioms — *defined in terms of*, *organizes*, *non-arbitrarily* — are structurally identical to the requirement that governs E.O.'s helix. In the helix, NUL(∅) must be available before SIG(○) can be instantiated; SIG before INS(△); INS before SEG(|); and so on. Each operator is defined in terms of prior operators, organizes them, and does so non-arbitrarily. The MHC formalizes this same logic for cognitive task sequences across whatever object class is currently in scope; E.O. formalizes it as a fixed nine-position dependency structure.
+The MHC's three axioms — *defined in terms of*, *organizes*, *non-arbitrarily* — are structurally identical to the requirement that governs E.O.'s helix. In the helix, NUL(∅) must be available before SIG(○) can be instantiated; SIG before INS(●); INS before SEG(｜); and so on. Each operator is defined in terms of prior operators, organizes them, and does so non-arbitrarily. The MHC formalizes this same logic for cognitive task sequences across whatever object class is currently in scope; E.O. formalizes it as a fixed nine-position dependency structure.
 
 ### Task vs. Performance = Structural Address vs. Event
 
