@@ -3,8 +3,8 @@
 **Record ID:** wiki:sig  
 **DB ID:** 35  
 **Tags:** operator  
-**Status:** draft  
-**Updated:** 2026-03-26T22:16:39.679Z  
+**Status:** published  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -14,7 +14,9 @@ SIG is the capacity for appearing. Not for naming, not for partitioning, not for
 
 A system that has SIG available can have things show up for it. A system that has lost SIG is anesthetic — undifferentiated with respect to its environment, incapable of registering anything as present. The degradation of SIG is not the loss of a vocabulary or a boundary. It is the loss of the capacity for anything to matter.
 
-## <table> <tr><th></th><th>Differentiating</th><th>Relating</th><th>Generating</th></tr> <tr><td><strong>Existence</strong></td><td>NUL</td><td><strong>SIG</strong></td><td>INS</td></tr> <tr><td><strong>Structure</strong></td><td>SEG</td><td>CON</td><td>SYN</td></tr> <tr><td><strong>Significance</strong></td><td>DEF</td><td>EVA</td><td>REC</td></tr> </table> What the coordinates demand
+## What the coordinates demand
+
+<table> <tr><th></th><th>Differentiating</th><th>Relating</th><th>Generating</th></tr> <tr><td><strong>Existence</strong></td><td>NUL</td><td><strong>SIG</strong></td><td>INS</td></tr> <tr><td><strong>Structure</strong></td><td>SEG</td><td>CON</td><td>SYN</td></tr> <tr><td><strong>Significance</strong></td><td>DEF</td><td>EVA</td><td>REC</td></tr> </table>
 
 SIG occupies Mode = 1 (Relating), Domain = −1 (Existence).
 
@@ -253,7 +255,9 @@ Korean is the diagnostic outlier. SIG accounts for 27% of Korean's classified ve
 
 ### By polarity: three compositional forms
 
-## <table> <tr><th>Polarity</th><th>Form</th><th>Name</th><th>Term</th><th>What it is</th></tr> <tr><td><strong>Reversal (−1)</strong></td><td>NUL(SIG(x))</td><td><strong>Disappearing</strong></td><td><em>haeje</em> [Korean]</td><td>Nullifying an appearance. The formal dissolution of a registration.</td></tr> <tr><td><strong>Forward (+1)</strong></td><td>SIG(x)</td><td><strong>Appearing</strong></td><td><em>gyujeong</em> [Korean]</td><td>The operation as such. Something shows up.</td></tr> <tr><td><strong>Self-application (√2)</strong></td><td>SIG(SIG(x))</td><td><strong>Reading the Room</strong></td><td><em>nunchi</em> [Korean]</td><td>Registering the registration itself — sensing what is showing up <em>for the system</em> and adjusting in real time. Meta-awareness of how you are attending.</td></tr> </table> Cross-linguistic findings
+## Cross-linguistic findings
+
+<table> <tr><th>Polarity</th><th>Form</th><th>Name</th><th>Term</th><th>What it is</th></tr> <tr><td><strong>Reversal (−1)</strong></td><td>NUL(SIG(x))</td><td><strong>Disappearing</strong></td><td><em>haeje</em> [Korean]</td><td>Nullifying an appearance. The formal dissolution of a registration.</td></tr> <tr><td><strong>Forward (+1)</strong></td><td>SIG(x)</td><td><strong>Appearing</strong></td><td><em>gyujeong</em> [Korean]</td><td>The operation as such. Something shows up.</td></tr> <tr><td><strong>Self-application (√2)</strong></td><td>SIG(SIG(x))</td><td><strong>Reading the Room</strong></td><td><em>nunchi</em> [Korean]</td><td>Registering the registration itself — sensing what is showing up <em>for the system</em> and adjusting in real time. Meta-awareness of how you are attending.</td></tr> </table>
 
 *Status: Empirical. Based on a corpus of 19,764 clauses across 41 languages. English counts from 1,192 classified verbs.*
 

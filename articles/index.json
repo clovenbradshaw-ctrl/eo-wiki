@@ -624,12 +624,12 @@
       "slug": "sig",
       "title": "SIG",
       "db_id": 35,
-      "status": "draft",
+      "status": "published",
       "tags": [
         "operator"
       ],
       "keywords": [],
-      "updated_at": "2026-03-26T22:16:39.679Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/sig.md"
     },
     {
