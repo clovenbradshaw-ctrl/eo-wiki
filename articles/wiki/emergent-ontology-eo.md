@@ -85,11 +85,11 @@ The first two axes — Mode and Domain — cross to produce nine primitive trans
 
 **Significance**
 
-**EVA**  — change value within frame
+**DEF** — assert what holds within a frame
 
-**DEF**  — hold contradictions simultaneously
+**EVA** — render judgment by testing against a definition
 
-**REC**  — change the frame itself
+**REC** — change the frame itself
 
 The operators group into three **triads** (rows), each addressing a different domain of reality:
 

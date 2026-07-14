@@ -33,7 +33,7 @@ According to EO, each domain instantiates the Triadic Minimum in a different ont
 | --- | --- | --- | --- |
 | **Existence** | Non-transformation (NUL) | Registered salience (SIG) | Concrete instance (INS) |
 | **Structure** | Differentiated space (SEG) | Specific relation (CON) | Unified whole (SYN) |
-| **Significance** | Value field (DEF) | Coexisting states (EVA) | Reframed system (REC) |
+| **Significance** | Asserted definition (DEF) | Rendered judgment (EVA) | Reframed system (REC) |
 
 In each case:
 
@@ -105,13 +105,13 @@ The Significance triad concerns meaning, value, and frame.
 
 | Operator | Role | Description |
 | --- | --- | --- |
-| **DEF** | Ground | Value change or alternation within a field of interpretation |
-| **EVA** | Figure | Simultaneous validity of multiple states |
+| **DEF** | Ground | Assert or define what holds within a field of interpretation |
+| **EVA** | Figure | Render judgment by testing a particular against the definition |
 | **REC** | Pattern | Reframing or restructuring of the interpretive system |
 
 Significance-domain transformation is the event in which meaning changes.
 
-A value shift (DEF) introduces variation. Coexisting valid states (EVA) expose tension within the interpretive frame. Recursion (REC) restructures that frame to accommodate or resolve the tension.
+A definition (DEF) establishes what holds. Evaluation (EVA) renders judgment by testing against it, and competing definitions held in the log expose tension the current frame cannot resolve. Recursion (REC) restructures that frame to accommodate or resolve the tension.
 
 **Presupposition ordering:** DEF → EVA → REC. DEF establishes what holds; EVA assesses whether it satisfies criteria. An evaluation requires that terms have first been defined — you cannot judge without a standard. And REC is triggered by representational insufficiency — the schema cannot house what the data requires — which requires EVA to have revealed the inadequacy.
 

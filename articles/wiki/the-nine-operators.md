@@ -4,7 +4,7 @@
 **DB ID:** 10  
 **Tags:** 101  
 **Status:** published  
-**Updated:** 2026-05-16T01:25:51.154Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -42,7 +42,7 @@ The operators are **acts,** not locations. They name what a system *does* at a j
 | 2 | SIG | ○ | σ | Existence | Figure | Draw a distinction |
 | 3 | INS | ● | α | Existence | Pattern | Create a concrete instance |
 | 4 | SEG | ｜ | κ | Structure | Ground | Draw boundaries |
-| 5 | CON | ⤫ | ε | Structure | Figure | Establish relationships |
+| 5 | CON | ⋈ | ε | Structure | Figure | Establish relationships |
 | 6 | SYN | ∨ | η | Structure | Pattern | Produce emergent wholes |
 | 7 | DEF | ⊢ | δ | Significance | Ground | Establish what holds within a stable interpretive frame |
 | 8 | EVA | ⊨ | ψ | Significance | Figure | Render judgment by testing a particular against a general |
@@ -294,7 +294,7 @@ EO uses [Polish (prefix) notation](https://en.wikipedia.org/wiki/Polish_notation
 
 The operator comes first, followed by its target (what is being transformed) and operand (what it is being transformed with or into). This is position-independent — the meaning is determined by structure, not by word order.
 
-In mathematical contexts, a Greek letter notation is also used: ν (NUL), σ (SIG), α (INS), κ (SEG), ε (CON), η (SYN), δ (EVA), ψ (DEF), Ω (REC).
+In mathematical contexts, a Greek letter notation is also used: ν (NUL), σ (SIG), α (INS), κ (SEG), ε (CON), η (SYN), δ (DEF), ψ (EVA), Ω (REC).
 
 Each operator also has a practitioner glyph (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛) used in compact notation.
 
