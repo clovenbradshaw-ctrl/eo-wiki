@@ -18,7 +18,14 @@ Priorities: **P0** = wiki says something now false or internally contradicted; *
 - **Wave 1 correctness (A1 + parts of the sweep):** the "ARI ≈ 0.05 confirmed independence" overstatement corrected to the framework's own v2 finding (≈ 0.185, mixed) in `emergent-ontology-eo` and `ground-figure-pattern`; a "what this test does and does not certify" caveat added to `the-triads` (Codd reaches Existence/Structure, not Significance); the helix "1,295 fail / only one survives" claim reconciled with `the-triads`; the collapsed find/replace sentence ("the capacity ground and the capacity ground…") fixed.
 - **Nine net-new articles** (the reframing spine): `nine-instructions` (flagship reframing), `the-eo-reader` (C1), `signal-from-noise` (C2), `the-evidence` (C3), `the-two-doors` (C4), `deep-reading` (C5), `going-and-looking` (C6), `the-model-is-the-leaf` (C14), `eot` (C13). All internal links resolve; all cite modules by path (and, where measured, `path:line`).
 
-**Still open (next waves):** A2 (DEF/EVA grid position + semantics — deliberately deferred; needs one careful grid reconciliation across all grid-bearing pages, not a drive-by), A3 (glyphs), A4 (`the-def-eva-rec-loop` two-register rewrite + purge "DES"), A5 (publish `sig`, retire "Distinction"), A6 (Experience Engine update + HTML-corruption fix), A9–A15, the B-series grounding upgrades, C7–C12/C15, and the Part D hygiene sweep (esp. **D1**: `canonical-examples-the-resolution-face` is a byte-for-byte duplicate of the Site-face article — still needs real content).
+**Also landed (second/third pass, 2026-07-14):**
+- **A2 (DEF/EVA)** — reconciled to `src/core/operators.js`: fixed the position swap in `the-27-phase-posts` (DEF at Mode 0, EVA at Mode 1) and the swapped/stale semantics in `emergent-ontology-eo` and `the-triads`; `the-nine-operators` was already canonical.
+- **A3 (glyphs, partial)** — internal-consistency fixes in `the-nine-operators` (CON glyph, Greek DEF/EVA). *Still open:* full glyph-set canonicalization across the decal-notation pages (`the-27-phase-posts` still uses a non-canonical base set — needs a decal-notation reconciliation).
+- **A4** — `the-def-eva-rec-loop`: added the depicted/enacted two-register split; purged the retired "DES".
+- **A5** — published `sig` (appearing/registration); retired "Distinction" in `the-nine-operators`.
+- **D1** — replaced the duplicate-body `canonical-examples-the-resolution-face` with the real Stance face (Mode × Object, the nine stances from `src/core/cube.js`); exemplar tables marked pending rather than borrowed.
+
+**Still open (next waves):** A3-glyphs (full decal reconciliation), A6 (Experience Engine update + HTML-corruption fix + dangling `eo-compliance-spec`), A9–A15, the B-series grounding upgrades, C7/C9/C10/C11/C12/C15, and the rest of the Part D hygiene sweep (rename shrapnel, "Paraxoc" typo, `test-page`/empty stubs, archived duplicate).
 
 ---
 
