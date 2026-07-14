@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generated_at": "2026-06-13T21:59:35.254Z",
-  "count": 73,
+  "count": 78,
   "articles": [
     {
       "record_id": "wiki:ancient-astronomy-eo-saving-the-appearances",
@@ -1097,6 +1097,108 @@
       ],
       "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-evidence.md"
+    },
+    {
+      "record_id": "wiki:the-two-doors",
+      "content_type": "wiki",
+      "slug": "the-two-doors",
+      "title": "The Two Doors: Witness and Firewall",
+      "db_id": 76,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "provenance",
+        "exafference",
+        "reafference",
+        "firewall",
+        "canWitness"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/the-two-doors.md"
+    },
+    {
+      "record_id": "wiki:deep-reading",
+      "content_type": "wiki",
+      "slug": "deep-reading",
+      "title": "Deep Reading: What the Machine Does at Rest",
+      "db_id": 77,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "deep reading",
+        "idle",
+        "reflection",
+        "rumination",
+        "metacognition"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/deep-reading.md"
+    },
+    {
+      "record_id": "wiki:going-and-looking",
+      "content_type": "wiki",
+      "slug": "going-and-looking",
+      "title": "Going and Looking: Research That Tries to Be Wrong",
+      "db_id": 78,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "research",
+        "disproof",
+        "falsification",
+        "curiosity",
+        "corroboration"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/going-and-looking.md"
+    },
+    {
+      "record_id": "wiki:the-model-is-the-leaf",
+      "content_type": "wiki",
+      "slug": "the-model-is-the-leaf",
+      "title": "The Model Is the Leaf",
+      "db_id": 79,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "llm",
+        "model",
+        "contract",
+        "capability",
+        "prompt",
+        "defamation firewall"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/the-model-is-the-leaf.md"
+    },
+    {
+      "record_id": "wiki:eot",
+      "content_type": "wiki",
+      "slug": "eot",
+      "title": "EOT: The Text of Experience",
+      "db_id": 80,
+      "status": "published",
+      "tags": [
+        "201"
+      ],
+      "keywords": [
+        "eot",
+        "notation",
+        "wire format",
+        "locus",
+        "sense",
+        "provenance"
+      ],
+      "updated_at": "2026-07-14T00:00:00.000Z",
+      "path": "articles/wiki/eot.md"
     }
   ]
 }
