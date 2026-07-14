@@ -8,6 +8,20 @@ Priorities: **P0** = wiki says something now false or internally contradicted; *
 
 ---
 
+## Progress log (2026-07-14)
+
+**Naming:** the implementation is the **EO Reader** (`eoreader`). "eel-reader" throughout this doc and in the branch name is the phonetic legacy of "EO reader" — read it as **EO Reader**. New articles use the correct name.
+
+**A reframing became the centerpiece.** An audio essay ("Nine Instructions") reframed the whole operator algebra as a *row-based algebraic effect system in capability-passing style over a closed semantic alphabet* — proven ground everywhere except the closure claim, which is Schank's claim (Conceptual Dependency) and must be defended as such. Its sharpest technical point folds directly into A1/A2: EO cites **Codd's proof** (Existence/Structure) for a claim about the **Significance triad** (DEF/EVA/REC), which the proof does not reach — but which the EO Reader now *grounds by measurement*. This is now the spine the net-new articles hang from.
+
+**Landed and pushed on this branch:**
+- **Wave 1 correctness (A1 + parts of the sweep):** the "ARI ≈ 0.05 confirmed independence" overstatement corrected to the framework's own v2 finding (≈ 0.185, mixed) in `emergent-ontology-eo` and `ground-figure-pattern`; a "what this test does and does not certify" caveat added to `the-triads` (Codd reaches Existence/Structure, not Significance); the helix "1,295 fail / only one survives" claim reconciled with `the-triads`; the collapsed find/replace sentence ("the capacity ground and the capacity ground…") fixed.
+- **Nine net-new articles** (the reframing spine): `nine-instructions` (flagship reframing), `the-eo-reader` (C1), `signal-from-noise` (C2), `the-evidence` (C3), `the-two-doors` (C4), `deep-reading` (C5), `going-and-looking` (C6), `the-model-is-the-leaf` (C14), `eot` (C13). All internal links resolve; all cite modules by path (and, where measured, `path:line`).
+
+**Still open (next waves):** A2 (DEF/EVA grid position + semantics — deliberately deferred; needs one careful grid reconciliation across all grid-bearing pages, not a drive-by), A3 (glyphs), A4 (`the-def-eva-rec-loop` two-register rewrite + purge "DES"), A5 (publish `sig`, retire "Distinction"), A6 (Experience Engine update + HTML-corruption fix), A9–A15, the B-series grounding upgrades, C7–C12/C15, and the Part D hygiene sweep (esp. **D1**: `canonical-examples-the-resolution-face` is a byte-for-byte duplicate of the Site-face article — still needs real content).
+
+---
+
 ## Part A — Contradictions & supersessions (edit existing articles)
 
 ### A1. ~~"ARI ≈ 0.05 confirmed independence"~~ — **P0**
