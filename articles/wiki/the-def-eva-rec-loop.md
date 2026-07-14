@@ -3,7 +3,7 @@
 **Record ID:** wiki:the-def-eva-rec-loop  
 **DB ID:** 70  
 **Status:** published  
-**Updated:** 2026-03-26T21:59:46.858Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -21,6 +21,16 @@ Operators 7, 8, and 9 don't just occupy the third row of the grid — they form 
 
 The loop: DEF ⊢ → EVA ⊨ → REC ⊛ → DEF ⊢ ...
 
+## Two Loops: Depicted and Enacted
+
+The loop this article traces — in quantum states, in chemistry, in life, in law, in mathematics — is the **depicted** loop: DEF, EVA, and REC as they appear *in the phenomenon being described*. It is timeless and recomputable. The court rewrote the statute; the Great Vowel Shift restructured English; selection rewrote allele frequencies. These are classified facts about transformations in the world, and reading the same record again classifies them the same way.
+
+The [EO Reader](/the-eo-reader) makes visible a second loop the depicted account hides: the **enacted** loop — a reader's *own* act of establishing a frame, testing each arrival against it, and restructuring when strain accumulates. This loop is temporal and generation-order constitutive: it runs *as* the reading happens, and the same text read only to an earlier point yields a genuinely different reading. Where the depicted loop is a fact about the world, the enacted loop is the reading's own conduct.
+
+The two must never be conflated, and the implementation enforces the separation structurally (see [The Two Doors](/the-two-doors)). A *depicted* REC — "the court rewrote the definition" — is an exafferent fact the record can witness. An *enacted* REC — the reader restructured its own working frame mid-read — is reafference, the system's own act, `canWitness === false`. Collapsing the two is precisely how a system would launder its own interpretation into a fact; keeping them apart is what lets a reader think without corrupting its record.
+
+The enacted loop also carries mechanics the depicted account never needed (`src/core/enacted/loop.js`): an EVA *confirms* when surprise falls below a band derived from the reading's own history, and otherwise feeds a **strain** accumulator; REC fires only on *accumulated* strain — Piaget's accommodation after enough failed assimilations, Lakatos's protective belt yielding only under sustained pressure — never on a single anomaly. The calibration is causal: the band that judges a line is fit only from what came before it, so the future can never set the standard that judged the past. See [Signal from Noise](/signal-from-noise).
+
 ## DEF Depends on SYN
 
 DEF cannot operate on nothing. Before you can formalize, there must already be a coherent composition to formalize. SYN is that prior operator — it brings elements into co-presence. A crystal forming, neurons binding into a percept, molecules assembling. SYN produces configurations that "say something" about what goes with what, without requiring consciousness, language, or formalism.
@@ -35,7 +45,7 @@ The pre-life world is not blank. The operator triads come online at different th
 
 ### Existence Triad at the Quantum Level (NUL, SIG, INS)
 
-The Existence triad is already operative at the most fundamental physical level. Quantum particles have **NUL** — superposition, the vacuum, the state of not-yet-resolved. They have **DES** — every particle is marked, distinguishable, bearing its interaction history. The no-cloning theorem makes this rigorous: a quantum state cannot be copied. Every particle is irreducibly individual. And they have **INS** — each particle exists as *this* particular instance with *this* particular history.
+The Existence triad is already operative at the most fundamental physical level. Quantum particles have **NUL** — superposition, the vacuum, the state of not-yet-resolved. They have **SIG** — every particle is marked, distinguishable, bearing its interaction history. The no-cloning theorem makes this rigorous: a quantum state cannot be copied. Every particle is irreducibly individual. And they have **INS** — each particle exists as *this* particular instance with *this* particular history.
 
 But here's the critical limit: the particle's history is not **encoded separately** from the particle. The particle doesn't *carry* a record of its interactions — it *is* the record. Its state is its history. There's no separation between the pattern and the carrier. Individuality exists, but it is **non-transmissible**. The history is trapped in the particle that lived it.
 
@@ -136,3 +146,12 @@ Systems fail by blocking one of the three transitions.
 A healthy system needs all three operators and needs the transitions to be permeable but not frictionless. DEF should resist change — that's stability. EVA should be honest — no fudging results to fit definitions. REC should be possible but costly — genuine restructuring, not relabeling.
 
 The character of any system comes from how hard each transition is. Rigid systems have high DEF resistance. Empiricist systems have high EVA fidelity. Adaptive systems have low REC friction. The question is always: what's the resistance profile, and is it appropriate to what the system is doing?
+
+---
+
+### See also
+
+- [The Nine Operators](/the-nine-operators) — DEF, EVA, REC in the full lattice
+- [The EO Reader](/the-eo-reader) · [The Two Doors](/the-two-doors) — where the enacted loop runs, and the firewall that keeps it distinct from the depicted one
+- [Signal from Noise](/signal-from-noise) — the derived band and strain accumulator that drive the enacted REC
+- [The Three Triads](/the-triads) — the Significance triad this loop lives in
