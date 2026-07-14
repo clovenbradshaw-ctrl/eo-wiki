@@ -25,7 +25,11 @@ Priorities: **P0** = wiki says something now false or internally contradicted; *
 - **A5** — published `sig` (appearing/registration); retired "Distinction" in `the-nine-operators`.
 - **D1** — replaced the duplicate-body `canonical-examples-the-resolution-face` with the real Stance face (Mode × Object, the nine stances from `src/core/cube.js`); exemplar tables marked pending rather than borrowed.
 
-**Still open (next waves):** A3-glyphs (full decal reconciliation), A6 (Experience Engine update + HTML-corruption fix + dangling `eo-compliance-spec`), A9–A15, the B-series grounding upgrades, C7/C9/C10/C11/C12/C15, and the rest of the Part D hygiene sweep (rename shrapnel, "Paraxoc" typo, `test-page`/empty stubs, archived duplicate).
+**Also landed (later 2026-07-14):** **A6** (Experience Engine repaired — HTML corruption, tables, dangling `eo-compliance-spec`, recursion witness named). **A3-glyphs** — the full operator glyph set canonicalized to `src/core/operators.js` (`∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛`) across every carrier (`the-27-phase-posts`, `the-nine-operators`, `ins`, `eo-notation` incl. its swapped DEF/EVA rows, `eo-event-streaming`, `quantum-weirdness`, `eo-in-60-min`, `mhc-and-eo`, `the-pythagorean-theorem`, and the `operator-naming` rationale + superseded-glyph history). **D3** (Paraxoc → Paradox).
+
+**Naming — important:** recorded that **EO expands to three: Existential, Emergent, and Experiential Ontology** (flagship intro). This makes the "Emergent vs Experiential" variance across the wiki *intentional multiplicity*, so the D2 normalization sweep is **withdrawn** — the expansions are interchangeable by design and should not be flattened.
+
+**Still open:** A9–A15 and the B-series grounding upgrades; net-new C7/C9–C12/C15; remaining Part D hygiene (`test-page`/empty-stub deletions — need confirmation before deleting; the archived lexical-report duplicate).
 
 ---
 
