@@ -218,7 +218,7 @@
         "event",
         "operator"
       ],
-      "updated_at": "2026-04-21T01:23:15.210Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/eo-event-streaming.md"
     },
     {
@@ -268,7 +268,7 @@
       "status": "draft",
       "tags": [],
       "keywords": [],
-      "updated_at": "2026-03-27T14:55:14.671Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/eo-in-60-min.md"
     },
     {
@@ -299,7 +299,7 @@
         "polish notation",
         "lukasiewicz"
       ],
-      "updated_at": "2026-03-26T22:20:29.564Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/eo-notation.md"
     },
     {
@@ -462,7 +462,7 @@
         "ins",
         "existence"
       ],
-      "updated_at": "2026-03-23T17:01:44.022Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/ins.md"
     },
     {
@@ -486,7 +486,7 @@
       "status": "draft",
       "tags": [],
       "keywords": [],
-      "updated_at": "2026-03-26T22:16:39.400Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/mhc-and-eo.md"
     },
     {
@@ -572,7 +572,7 @@
         "operator",
         "position"
       ],
-      "updated_at": "2026-05-16T01:25:49.567Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/operator-naming-in-emergent-ontology.md"
     },
     {
@@ -603,7 +603,7 @@
         "201"
       ],
       "keywords": [],
-      "updated_at": "2026-03-26T22:16:41.561Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/quantum-weirdness-in-eo-contained-but-not-tamed.md"
     },
     {
@@ -884,7 +884,7 @@
       "status": "published",
       "tags": [],
       "keywords": [],
-      "updated_at": "2026-03-26T22:16:39.848Z",
+      "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-pythagorean-theorem-plato-s-meno-x-and-eo.md"
     },
     {

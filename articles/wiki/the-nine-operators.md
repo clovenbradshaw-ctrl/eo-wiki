@@ -43,7 +43,7 @@ The operators are **acts,** not locations. They name what a system *does* at a j
 | 3 | INS | ● | α | Existence | Pattern | Create a concrete instance |
 | 4 | SEG | ｜ | κ | Structure | Ground | Draw boundaries |
 | 5 | CON | ⋈ | ε | Structure | Figure | Establish relationships |
-| 6 | SYN | ∨ | η | Structure | Pattern | Produce emergent wholes |
+| 6 | SYN | △ | η | Structure | Pattern | Produce emergent wholes |
 | 7 | DEF | ⊢ | δ | Significance | Ground | Establish what holds within a stable interpretive frame |
 | 8 | EVA | ⊨ | ψ | Significance | Figure | Render judgment by testing a particular against a general |
 | 9 | REC | ⊛ | Ω | Significance | Pattern | Restructure the frame itself |

@@ -5,7 +5,7 @@
 **Tags:** 201  
 **Keywords:** register, operator, polish notation, lukasiewicz  
 **Status:** published  
-**Updated:** 2026-03-26T22:20:29.564Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -496,13 +496,13 @@ The top-level expression captures the cross-grain mediation (what caused what ac
 | Code | Glyph | Greek | Triad | Mode | Function |
 | --- | --- | --- | --- | --- | --- |
 | NUL | ∅ | ν | Existence | Differentiating | Withdraw determination |
-| SIG | ⊡ | σ | Existence | Relating | Direct attention; register signal |
-| INS | △ | α | Existence | Generating | Instantiate a particular |
-| SEG | | | κ | Structure | Differentiating | Partition, draw boundary |
-| CON | ⤫ | ε | Structure | Relating | Establish connection |
-| SYN | ∨ | η | Structure | Generating | Synthesize into whole |
-| EVA | ∿ | δ | Significance | Differentiating | Shift state |
-| DEF | ∥ | ψ | Significance | Relating | Hold multiplicity |
+| SIG | ○ | σ | Existence | Relating | Direct attention; register signal |
+| INS | ● | α | Existence | Generating | Instantiate a particular |
+| SEG | ｜ | κ | Structure | Differentiating | Partition, draw boundary |
+| CON | ⋈ | ε | Structure | Relating | Establish connection |
+| SYN | △ | η | Structure | Generating | Synthesize into whole |
+| DEF | ⊢ | δ | Significance | Differentiating | Assert/define what holds |
+| EVA | ⊨ | ψ | Significance | Relating | Render judgment |
 | REC | ⊛ | Ω | Significance | Generating | Recursive revision |
 
 Helix ordering:

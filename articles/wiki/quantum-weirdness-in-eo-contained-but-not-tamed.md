@@ -4,7 +4,7 @@
 **DB ID:** 43  
 **Tags:** 201  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:41.561Z  
+**Updated:** 2026-07-14T00:00:00.000Z  
 
 ---
 
@@ -84,7 +84,7 @@ Non-quantum instances are pervasive. The felt quality of a place — what makes 
 
 In quantum programming, measurement (`M(q)` in Q#, `qc.measure(qubit, cbit)` in Qiskit) is the operation that resists single-cell assignment in the capacity ground. It simultaneously registers a distinction (SIG × Figure), destroys a pattern (NUL × Pattern, as the DEF state is lost), and creates a classical bit (INS × Figure). This multi-cell character may reflect the emanon dynamic: a ground-dominant process forced into figure-dominant resolution spans multiple operator positions because no single position can contain the structural mismatch.
 
-### Entanglement → SYN (∨) × Figure
+### Entanglement → SYN (△) × Figure
 
 Quantum entanglement — where composite systems have states that cannot be decomposed into states of their parts — corresponds to SYN at the Figure level. The Bell state (|00⟩ + |11⟩)/√2 is not a pair of correlated qubits. It is a single irreducible entity. Measuring one qubit constrains the other regardless of distance.
 
