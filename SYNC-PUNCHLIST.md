@@ -1,8 +1,8 @@
-# Wiki ⇄ eel-reader 4.2 Sync Punch List
+# Wiki ⇄ EO Reader 4.2 Sync Punch List
 
 *Prepared 2026-07-13 from a deep reading of `clovenbradshaw-ctrl/eoreader4.2` (all 49 design docs, the full `src/` tree, tests, and probes) against all 69 wiki articles.*
 
-**The headline:** the wiki does not mention eel-reader anywhere (grep for `eel` returns zero hits). Its only implementation trace is one anonymized anecdote in *The Experience Engine* ("a reading engine implementing this specification induced the attribution verb 'says'…"), self-graded as "a proposal carrying one data point." Meanwhile 4.2 is a full working implementation with 140+ engine-behavior tests, dated eval batteries (2026-07), and — most importantly for the wiki — a family of concrete, citable **signal-from-noise mechanisms** that turn EO's asserted claims into measured physics. Several wiki articles are now contradicted; many more can be upgraded from "asserted" to "grounded, with a module citation."
+**The headline:** the wiki does not mention the EO Reader anywhere (grep for `eoreader` returns zero hits). Its only implementation trace is one anonymized anecdote in *The Experience Engine* ("a reading engine implementing this specification induced the attribution verb 'says'…"), self-graded as "a proposal carrying one data point." Meanwhile 4.2 is a full working implementation with 140+ engine-behavior tests, dated eval batteries (2026-07), and — most importantly for the wiki — a family of concrete, citable **signal-from-noise mechanisms** that turn EO's asserted claims into measured physics. Several wiki articles are now contradicted; many more can be upgraded from "asserted" to "grounded, with a module citation."
 
 Priorities: **P0** = wiki says something now false or internally contradicted; **P1** = high-value grounding upgrade or flagship net-new article; **P2** = worthwhile but deferrable; **P3** = mechanical hygiene.
 
@@ -10,7 +10,7 @@ Priorities: **P0** = wiki says something now false or internally contradicted; *
 
 ## Progress log (2026-07-14)
 
-**Naming:** the implementation is the **EO Reader** (`eoreader`). "eel-reader" throughout this doc and in the branch name is the phonetic legacy of "EO reader" — read it as **EO Reader**. New articles use the correct name.
+**Naming:** the implementation is the **EO Reader** (`eoreader`). New articles use this name.
 
 **A reframing became the centerpiece.** An audio essay ("Nine Instructions") reframed the whole operator algebra as a *row-based algebraic effect system in capability-passing style over a closed semantic alphabet* — proven ground everywhere except the closure claim, which is Schank's claim (Conceptual Dependency) and must be defended as such. Its sharpest technical point folds directly into A1/A2: EO cites **Codd's proof** (Existence/Structure) for a claim about the **Significance triad** (DEF/EVA/REC), which the proof does not reach — but which the EO Reader now *grounds by measurement*. This is now the spine the net-new articles hang from.
 
@@ -109,7 +109,7 @@ Each has (or should have) a "tested against reality" section currently resting o
 The "Level 4?" speculation has a candidate answer in organ-level evolution: the system rewriting its own body plan under a frozen constitution (`docs/organ-level-evolution.md`). One paragraph.
 
 ### B7. `experiment/eo-terminal` — supersede — **P2**
-The in-browser "EO vs Vanilla event store benchmark" predates the reader and is the repo's only executable artifact. Archive it with a pointer to eel-reader 4.2, or replace with a linked live demo.
+The in-browser "EO vs Vanilla event store benchmark" predates the reader and is the repo's only executable artifact. Archive it with a pointer to EO Reader 4.2, or replace with a linked live demo.
 
 ---
 
@@ -117,7 +117,7 @@ The in-browser "EO vs Vanilla event store benchmark" predates the reader and is 
 
 Ordered by leverage. C1–C3 are the spine the user asked for: grounding EO in the demonstrated ability to discern signal from noise, with module citations.
 
-### C1. **"The Eel Reader: EO Implemented"** — **P1, flagship**
+### C1. **"The EO Reader: EO Implemented"** — **P1, flagship**
 The article the see-also link "Experience Engines — systems built on the operator algebra" has always pointed at and never had. Content: what it is (document-chat over an append-only event log; everything visible a recomputed projection); the holonic body (faculties: core / frame / organs / perceiver / surfer / enactor / model / turn / weave / rooms / metabolism / murmur — each holon one entrance + its own EO contract, enforced by `tests/contracts.test.js`); the two principles in code ("the low sets the possibility for the high; the high sets the probabilities for the low"); the model as the leaf; the behavioral commitments now shipped (Ask is record-only; search ingests into a search topic; the at-rest deep reader; the audio Listen surface with a non-destructive transcript fold; the murmur that points but never asserts). Version it (4.2), date it, link the repo.
 
 ### C2. **"Signal from Noise: EO's Measurement Doctrine"** — **P1, the centerpiece**
