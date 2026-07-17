@@ -11,7 +11,7 @@
 
 # Protogon
 
-In **EO (E.O.)**, a **protogon** (/ˈproʊ.tə.ɡɒn/, PRO-tuh-gon) is one of three entity types — alongside **emanons** and **holons** — that describe how phenomena manifest in the framework's 27-position capacity ground. Protogons are **pattern-dominant** configurations: phenomena whose relational and processual character is strong relative to their figure (distinct identity) and ground (ambient context) aspects. They are characterized by **active transformation** — identities that are crystallizing but have not yet stabilized into self-maintaining wholes.
+In **EO (E.O.)**, a **protogon** (/ˈproʊ.tə.ɡɒn/, PRO-tuh-gon) is one of three entity types — alongside **emanons** and **holons** — that describe how phenomena manifest in the framework's 27-position capacity ground. Protogons are **figure-dominant** configurations: phenomena whose identity-forming character is strong relative to their pattern (relational structure) and ground (ambient context) aspects. They are characterized by **active crystallization** — identities that are becoming nameable and distinguishable but whose relational structure has not yet cohered enough to make them self-maintaining.
 
 Where emanons are "too vague" and holons are "too rigid," protogons are "too unstable." Their characteristic problem is that they won't settle. This instability is not a deficiency but the structural signature of becoming.
 
@@ -34,13 +34,13 @@ E.O. classifies every phenomenon as a configuration of three aspects — **Figur
 | Entity Type | Dominant Aspect | Characteristic | Infinity Type |
 | --- | --- | --- | --- |
 | **Emanon** | Ground | Ambient, contextual influence; weak or ephemeral figure and pattern | ∞⤫ (multiplicative) |
-| **Protogon** | Pattern | Active transformation; identity still crystallizing | — |
-| **Holon** | Balanced | Figure, pattern, and ground integrated; self-maintaining | ∞↻ (recursive) |
+| **Protogon** | Figure | Identity actively crystallizing; pattern and self-maintenance not yet achieved | — |
+| **Holon** | Pattern | Self-sustaining recursive process; figure and ground stabilized around it | ∞↻ (recursive) |
 
 A protogon's defining configuration is:
 
-- **Figure aspect:** Identities still crystallizing — something is *becoming* identifiable but has not yet achieved stable boundaries.
-- **Pattern aspect:** Active transformation processes — the relational dynamics are the most salient feature, the part that can be tracked and described.
+- **Figure aspect:** Actively crystallizing — the most salient, developing feature. Something is coming to be nameable and distinguishable, though its boundaries are not yet stable.
+- **Pattern aspect:** Relational structure is forming around the figure but has not yet cohered into a self-sustaining process — connections exist but do not yet reproduce themselves.
 - **Ground aspect:** A space of possibility is opening — the contextual substrate is active, not merely ambient.
 
 The diagnostic question for protogonic phenomena is: *is it becoming something it isn't yet?*
@@ -51,9 +51,9 @@ The diagnostic question for protogonic phenomena is: *is it becoming something i
 
 A structurally significant feature of the protogon is that it carries **no associated infinity type**. Emanons are marked with ∞⤫ (multiplicative infinity — discrete proliferation under observation). Holons are marked with ∞↻ (recursive infinity — self-reference depth). Protogons carry neither marker.
 
-This absence is not a gap in the notation. It reflects the protogon's structural position as a *transitional* configuration. Protogons have moved past the emanon's ground-dominant indeterminacy — they are no longer subject to ∞⤫ multiplication because their pattern aspect has cohered enough to resist proliferation under observation. But they have not yet achieved the integrated self-reference that would enable ∞↻ recursion.
+This absence is not a gap in the notation. It reflects the protogon's structural position as a *transitional* configuration. Protogons have moved past the emanon's ground-dominant indeterminacy — they are no longer subject to ∞⤫ multiplication because their figure aspect has crystallized enough to resist proliferation under observation. But they have not yet achieved the self-sustaining recursive pattern that would enable ∞↻ recursion.
 
-A protogon can be measured without multiplying, but it cannot yet sustain itself through its own operation. It exists in the interval between unnameable and self-maintaining — the zone where things have names but not yet stories, where processes are visible but outcomes are not yet determined.
+A protogon can be named without multiplying, but it cannot yet sustain itself through its own operation. It exists in the interval between unnameable and self-maintaining — the zone where things have names but not yet stories, where processes are visible but outcomes are not yet determined.
 
 ---
 
@@ -100,20 +100,20 @@ Position 18 (Trajectory, CON ⤫ Pattern) describes the binding of patterns to p
 
 ## The Protogonic Interval
 
-Protogons occupy a structurally distinctive position in E.O.'s ontology: they are the only entity type defined primarily by what they are *between* rather than what they *are*. An emanon is ground. A holon is balance. A protogon is *the movement from ground to balance* — or, more precisely, the configuration that obtains when pattern has outpaced figure in the crystallization process.
+Protogons occupy a structurally distinctive position in E.O.'s ontology: they are the only entity type defined primarily by what they are *between* rather than what they *are*. An emanon is ground. A holon is pattern — the recursive relational operation that sustains an entity through its own process. A protogon is *the movement from ground to pattern* — or, more precisely, the configuration that obtains when figure has outpaced pattern in the crystallization process: an identity has begun to differentiate from ambient ground before the relational structure that would let it sustain itself has cohered.
 
 This gives protogons a temporal character that the other entity types lack. Emanons are structurally atemporal — their ground-dominant character is not a stage they will grow out of but their native mode (market confidence does not "mature" into a holon). Holons, once achieved, are self-maintaining and can persist indefinitely through recursive self-reference. But protogons are inherently transitional. They are moving *toward* something — either holonic integration or emanonic dissolution.
 
 The two failure modes of protogonic phenomena reflect these two directions:
 
-- **Premature crystallization:** A protogon is forced into figure-dominant stability before its pattern aspect has fully developed. The result is a holon that appears stable but lacks the internal relational depth to sustain itself. Institutions built too quickly, theories formalized too early, relationships committed to before they have been tested — all are premature crystallizations. They produce brittle holons that fracture under stress, collapsing back through protogonic instability toward emanonic ground.
-- **Indefinite deferral:** A protogon remains in its transitional state without achieving integration. The pattern aspect continues to develop, relationships multiply, connections proliferate — but the figure never stabilizes. The phenomenon remains permanently "in progress," endlessly becoming without arriving. Chronic reorganizations, perpetual beta products, and relationships that are always "figuring things out" are examples of indefinitely deferred protogons.
+- **Premature crystallization:** A protogon is forced into pattern-dominant holonic stability — required to behave as a self-sustaining, recursive whole — before its figure has genuinely differentiated. The result is a holon that appears stable but whose identity was never allowed to fully form; the recursive pattern is imposed on a figure that has not earned it. Institutions built too quickly, theories formalized before their objects were clearly identified, relationships committed to before either party knows who they are — all are premature crystallizations. They produce brittle holons that fracture under stress, collapsing back through protogonic instability toward emanonic ground.
+- **Indefinite deferral:** A protogon remains in its transitional state without achieving integration. The figure continues to differentiate and redefine itself, but the pattern never coheres into a self-sustaining recursive process. The phenomenon remains permanently "in progress," endlessly becoming without ever learning to sustain itself. Chronic reorganizations, perpetual beta products, and relationships that are always "figuring out who they are to each other" are examples of indefinitely deferred protogons.
 
 ---
 
 ## Protogons by Domain
 
-Unlike emanons, which are catalogued in a formal appendix of the E.O. Handbook by domain, protogons have not received equivalent systematic treatment. This asymmetry is itself structurally revealing: emanons and holons are easier to identify because they occupy stable configurations (ground-dominant and balanced, respectively), while protogons are defined by *movement* and therefore resist static cataloguing.
+Unlike emanons, which are catalogued in a formal appendix of the E.O. Handbook by domain, protogons have not received equivalent systematic treatment. This asymmetry is itself structurally revealing: emanons and holons are easier to identify because they occupy stable configurations (ground-dominant and pattern-dominant, respectively), while protogons are defined by *movement* and therefore resist static cataloguing.
 
 Nevertheless, protogonic phenomena are pervasive:
 
@@ -132,13 +132,13 @@ In each case, the diagnostic marker is the same: *is it becoming something it is
 
 ## Relationship to Emanons and Holons
 
-The three entity types form a developmental gradient — emanon → protogon → holon — corresponding to the progression from ground-dominant through pattern-dominant to balanced configuration. This gradient maps onto the five realms of the capacity ground: Realm I is emanon territory, Realms II–III are protogon territory, and Realms IV–V are holon-prone territory.
+The three entity types form a developmental gradient — emanon → protogon → holon — corresponding to the progression from ground-dominant through figure-dominant to pattern-dominant configuration. This gradient maps onto the five realms of the capacity ground: Realm I is emanon territory, Realms II–III are protogon territory, and Realms IV–V are holon-prone territory.
 
 However, the gradient is not a developmental ladder. Several important qualifications apply:
 
 ### Directionality Is Not Guaranteed
 
-Not all emanons become protogons. Not all protogons become holons. Some phenomena are structurally emanonic — their ground-dominant character is not a stage but their nature. Attempting to force an emanon into protogonic formation (by imposing premature pattern) or directly into holonic stability (by imposing premature figure) triggers ∞⤫ multiplication rather than development.
+Not all emanons become protogons. Not all protogons become holons. Some phenomena are structurally emanonic — their ground-dominant character is not a stage but their nature. Attempting to force an emanon into protogonic formation (by imposing premature figure) or directly into holonic stability (by imposing premature pattern) triggers ∞⤫ multiplication rather than development.
 
 ### The Gradient Is Reversible
 
@@ -176,9 +176,9 @@ The E.O. framework identifies consciousness as a phenomenon that manifests simul
 
 The protogon concept addresses a problem that Western philosophy has handled unevenly: the ontological status of *becoming* as distinct from both being and non-being. Aristotle's distinction between *dynamis* (potentiality) and *energeia* (actuality) captures part of the protogonic interval but tends to subordinate becoming to its endpoint — the actual. Hegel's dialectical process comes closer, treating becoming as ontologically fundamental rather than derivative, but (in E.O.'s analysis) carries a Structure-triad bias that privileges the synthetic resolution over the processual middle.
 
-E.O.'s protogon formalizes becoming as a specific *configuration* — pattern-dominant, figure-forming, ground-active — rather than as a transitional moment between two stable states. This treats the interval itself as ontologically real and structurally characterizable, not merely as the absence of a settled outcome.
+E.O.'s protogon formalizes becoming as a specific *configuration* — figure-dominant, pattern-forming, ground-active — rather than as a transitional moment between two stable states. This treats the interval itself as ontologically real and structurally characterizable, not merely as the absence of a settled outcome.
 
-The concept has resonances with Whitehead's "actual occasions" (events of becoming that are the fundamental units of reality), with Deleuze's "virtual" (the field of differential relations from which actualization proceeds), and with the Buddhist concept of *pratītyasamutpāda* (dependent origination — phenomena arising in dependence on conditions and relations rather than from independent substance). In each case, E.O.'s contribution is to locate the protogonic within a coordinate system that specifies its relationship to ground-dominant (emanonic) and balance-dominant (holonic) configurations, making the structural analysis of becoming as precise as the structural analysis of being.
+The concept has resonances with Whitehead's "actual occasions" (events of becoming that are the fundamental units of reality), with Deleuze's "virtual" (the field of differential relations from which actualization proceeds), and with the Buddhist concept of *pratītyasamutpāda* (dependent origination — phenomena arising in dependence on conditions and relations rather than from independent substance). In each case, E.O.'s contribution is to locate the protogonic within a coordinate system that specifies its relationship to ground-dominant (emanonic) and pattern-dominant (holonic) configurations, making the structural analysis of becoming as precise as the structural analysis of being.
 
 ---
 
@@ -186,16 +186,16 @@ The concept has resonances with Whitehead's "actual occasions" (events of becomi
 
 It is worth noting that within the existing E.O. literature, protogons have received less systematic theoretical treatment than either emanons or holons. The E.O. Handbook devotes a full chapter (Chapter 13) to emanon management principles — recognition, channeling, monitoring, protection — and provides extensive diagnostic and practical guidance for working with emanonic phenomena. Holons receive comparable attention through the ∞↻ recursion framework and the holonic integration criteria. Protogons, by contrast, are defined primarily through the phase-space table (positions 10–18) and through contrastive references in the entity-type diagnostic.
 
-This asymmetry may itself be structural. Protogons are defined by movement and instability; they resist the kind of systematic codification that emanons and holons invite. A "protogon management chapter" would risk the paradox of stabilizing the concept of instability — imposing holonic structure on a phenomenon whose nature is to resist it. Whether this gap is a productive feature of the framework or a lacuna requiring attention remains an open question within E.O.'s development.
+This asymmetry may itself be structural. Protogons are defined by movement and instability — a figure caught mid-crystallization; they resist the kind of systematic codification that emanons and holons invite. A "protogon management chapter" would risk the paradox of stabilizing the concept of instability — imposing holonic structure on a phenomenon whose nature is to resist it. Whether this gap is a productive feature of the framework or a lacuna requiring attention remains an open question within E.O.'s development.
 
 ---
 
 ## See Also
 
 - **Emanon** — ground-dominant entity type with ∞⤫ multiplication property.
-- **Holon** — balanced entity type with recursive potential (∞↻).
+- **Holon** — pattern-dominant entity type with recursive potential (∞↻).
 - **capacity ground** — the 27-position coordinate system in which protogon territory is mapped.
-- **Pattern** — the emergent aspect of the Figure/Pattern/Ground trichotomy that protogons are dominant in.
+- **Figure** — the distinct-identity aspect of the Figure/Pattern/Ground trichotomy that protogons are dominant in.
 - **Realm II: Systemic Settings** — the phase-space region where protogon formation begins (positions 7–12).
 - **Realm III: Semantic Mechanics** — the phase-space region of maximum protogonic activity (positions 13–18).
 - **CON (Connection)** — the operator most associated with protogonic work, particularly at position 17 (Intervention).

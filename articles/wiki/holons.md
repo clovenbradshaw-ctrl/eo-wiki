@@ -11,7 +11,7 @@
 
 # Holon
 
-In **EO (E.O.)**, a **holon **(ˈhoʊ.lɒn/ [HOH-lon]) is one of three entity types — alongside **emanon** and **protogons** — that describe how phenomena manifest in the framework's 27-position capacity ground. Holons are **balanced** configurations: phenomena in which figure (distinct identity), pattern (relational process), and ground (contextual substrate) are integrated and mutually reinforcing. They are characterized by **recursive infinity (∞↻)**, the capacity for self-reference to depth — the ability to sustain themselves through their own operation.
+In **EO (E.O.)**, a **holon **(ˈhoʊ.lɒn/ [HOH-lon]) is one of three entity types — alongside **emanon** and **protogons** — that describe how phenomena manifest in the framework's 27-position capacity ground. Holons are **pattern-dominant** configurations: phenomena whose recursive relational process is the most active, defining aspect — the mechanism that binds figure (distinct identity) and ground (contextual substrate) into mutual reinforcement rather than the state of balance itself. They are characterized by **recursive infinity (∞↻)**, the capacity for self-reference to depth — the ability to sustain themselves through their own operation.
 
 Where emanon are "too vague" and protogons are "too unstable," holons are "too rigid." Their characteristic problem is that they won't adapt. This rigidity is not inherent to the concept but the pathological form of its strength: the same mutual reinforcement that makes a holon self-maintaining can also make it self-enclosing.
 
@@ -21,7 +21,7 @@ Where emanon are "too vague" and protogons are "too unstable," holons are "too r
 
 **Holon** (from Greek *ὅλον*, *holon*, "whole," neuter of *ὅλος*, *holos*, "entire") was coined by Arthur Koestler in *The Ghost in the Machine* (1967) to name entities that are simultaneously wholes in their own right and parts of larger wholes. Koestler's insight was that natural and social systems are neither reducible to their components nor describable only as totalities; they are organized in nested hierarchies — which he termed **holarchies** — where every level functions both as an autonomous unit and as a constituent of the level above it.
 
-E.O. inherits Koestler's term but redefines it within the Figure/Pattern/Ground framework. In E.O., a holon is not defined by its position in a nested hierarchy but by its **configuration**: the balanced integration of all three aspects — figure, pattern, and ground — such that each aspect reinforces the others. Koestler's part-whole duality is one consequence of this configuration, not its definition. A cell is a holon because its identity (figure), its metabolic processes (pattern), and its biochemical environment (ground) mutually sustain each other — and this integration is what makes it simultaneously a whole in itself and a viable part of a tissue.
+E.O. inherits Koestler's term but redefines it within the Figure/Pattern/Ground framework. In E.O., a holon is not defined by its position in a nested hierarchy but by its **configuration**: a dominant, self-sustaining pattern that actively integrates the other two aspects — figure and ground — such that each reinforces the others. Koestler's part-whole duality is one consequence of this configuration, not its definition. A cell is a holon because its metabolic processes (pattern) actively sustain its identity (figure) and its biochemical environment (ground), and are in turn sustained by them — and this recursive integration is what makes it simultaneously a whole in itself and a viable part of a tissue.
 
 The plural is standard: one holon, many holons.
 
@@ -34,14 +34,14 @@ E.O. classifies every phenomenon as a configuration of three aspects — **Figur
 | Entity Type | Dominant Aspect | Characteristic | Infinity Type |
 | --- | --- | --- | --- |
 | **Emanon** | Ground | Ambient, contextual influence; weak or ephemeral figure and pattern | ∞⤫ (multiplicative) |
-| **Protogon** | Pattern | Active transformation; identity still crystallizing | — |
-| **Holon** | Balanced | Figure, pattern, and ground integrated; self-maintaining | ∞↻ (recursive) |
+| **Protogon** | Figure | Identity actively crystallizing; pattern and self-maintenance not yet achieved | — |
+| **Holon** | Pattern | Self-sustaining recursive process; figure and ground stabilized around it | ∞↻ (recursive) |
 
 A holon's defining configuration is:
 
-- **Figure aspect:** Clear, stable identity — the entity can be pointed at, named, and distinguished from its context.
-- **Pattern aspect:** Self-maintaining processes — the relational dynamics that constitute the entity actively reproduce themselves.
-- **Ground aspect:** Organized context — the substrate is not merely ambient but structured in a way that supports and is supported by the entity's figure and pattern.
+- **Pattern aspect:** Self-maintaining, recursive process — the relational dynamics that constitute the entity actively reproduce themselves, and it is this reproducing process, more than either of the other two aspects, that defines the entity as holonic.
+- **Figure aspect:** Clear, stable identity — the entity can be pointed at, named, and distinguished from its context, because the recursive pattern continually regenerates that identity.
+- **Ground aspect:** Organized context — the substrate is not merely ambient but structured in a way that supports and is supported by the entity's self-sustaining pattern.
 
 The diagnostic question for holonic phenomena is: *does it sustain itself through its own operation?*
 
@@ -122,7 +122,7 @@ A pathological holon is one whose self-maintenance has become self-enclosure. Th
 
 Institutional examples are abundant: bureaucracies that have optimized for their own perpetuation rather than their stated mission; academic disciplines that have become self-referential closed systems; legal frameworks that protect precedent at the expense of justice; biological organisms that have over-specialized to the point of evolutionary fragility.
 
-The structural diagnosis is an imbalance within the balanced configuration: the figure aspect has become dominant, and the ground aspect — which should remain a space of possibility — has been captured by the figure's self-maintenance requirements. The holon looks balanced because all three aspects are active, but the ground has been colonized. It no longer enables; it merely supports.
+The structural diagnosis is that the figure aspect has usurped the pattern's proper dominance: instead of a recursive process that continually regenerates identity, a fixed identity has taken over and stopped the process that produced it. The ground aspect — which should remain a space of possibility — has been captured by the figure's self-maintenance requirements. The holon looks pattern-dominant because all three aspects are still active, but the pattern has stopped reproducing anything new; it merely reproduces the existing figure, and the ground has been colonized to serve that reproduction rather than enabling it.
 
 ### The REC Requirement
 
@@ -148,7 +148,7 @@ Holonic phenomena are identifiable across domains by the self-maintenance diagno
 
 ## Relationship to Emanon and Protogons
 
-The three entity types form a developmental gradient — emanon → protogon → holon — corresponding to the progression from ground-dominant through pattern-dominant to balanced configuration. Holons sit at the integrated end of this gradient. But several structural qualifications apply.
+The three entity types form a developmental gradient — emanon → protogon → holon — corresponding to the progression from ground-dominant through figure-dominant to pattern-dominant configuration. Holons sit at the integrated end of this gradient. But several structural qualifications apply.
 
 ### Holons Depend on Emanon
 
@@ -156,11 +156,11 @@ A healthy holonic system requires emanonic elements. The emanon management princ
 
 ### Protogons as the Formation Path
 
-Holons typically form through protogonic intermediaries. The protogon's pattern-dominant configuration — active transformation with forming identity — is the developmental stage through which ambient emanonic ground crystallizes into self-maintaining holonic structure. Attempting to impose holonic integration directly on emanonic ground (skipping the protogonic stage) triggers ∞⤫ multiplication: the emanon responds to the figure-dominant imposition by proliferating phantom copies.
+Holons typically form through protogonic intermediaries. The protogon's figure-dominant configuration — active crystallization of identity — is the developmental stage through which ambient emanonic ground crystallizes into self-maintaining holonic structure. Attempting to impose holonic integration directly on emanonic ground (skipping the protogonic stage) triggers ∞⤫ multiplication: the emanon responds to the figure-dominant imposition by proliferating phantom copies.
 
 ### Dissolution Is Always Possible
 
-Holonic integration is not permanent. A holon can dissolve — through catastrophic disruption (NUL), through environmental change that undermines its ground, or through internal rigidity that makes it unable to adapt. The dissolution path runs holon → protogon → emanon: the self-maintaining structure loses its recursive coherence, passes through a stage of unstable pattern-dominance, and returns to ambient ground. Ecosystems burn. Languages die. Institutions collapse. The gradient runs in both directions.
+Holonic integration is not permanent. A holon can dissolve — through catastrophic disruption (NUL), through environmental change that undermines its ground, or through internal rigidity that makes it unable to adapt. The dissolution path runs holon → protogon → emanon: the self-maintaining structure loses its recursive coherence, passes through a stage of unstable figure-dominance, and returns to ambient ground. Ecosystems burn. Languages die. Institutions collapse. The gradient runs in both directions.
 
 ### The Holonic Bias
 
@@ -205,7 +205,7 @@ E.O.'s claim system addresses this through entity-type marking (`entity_type: "e
 ## See Also
 
 - **Emanon** — ground-dominant entity type with ∞⤫ multiplication property.
-- **Protogon** — pattern-dominant entity type; forming identity.
+- **Protogon** — figure-dominant entity type; forming identity.
 - **Recursive Infinity (∞↻)** — the infinity type associated with holonic self-reference.
 - **capacity ground** — the 27-position coordinate system in which holon territory is mapped.
 - **Realm IV: Worldmaking** — the phase-space region where holonic potential first appears (positions 19–24).

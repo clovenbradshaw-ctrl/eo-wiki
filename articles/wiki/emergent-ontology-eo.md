@@ -133,11 +133,11 @@ Emanon are not bugs. They are structurally necessary features of any system comp
 
 ### Protogons
 
-Pattern-dominant phenomena with forming figures and active ground. Identities are still crystallizing; transformation processes are underway; the space of possibility is opening. Protogons are unstable because patterns are seeking figure stability. Examples: forming relationships, developing theories, startups, emerging political movements.
+Figure-dominant phenomena with forming patterns and active ground. Identities are actively crystallizing; relational structure is underway but not yet self-sustaining; the space of possibility is opening. Protogons are unstable because figure is outpacing the pattern that would stabilize it. Examples: forming relationships, developing theories, startups, emerging political movements.
 
 ### Holons (∞↻)
 
-Balanced configurations where figure, pattern, and ground reinforce each other. Clear identity, self-maintaining processes, organized context. Holons achieve recursive depth (∞↻) — they can apply the framework's own operations to themselves without collapse. Examples: living cells, mature ecosystems, established languages, stable institutions.
+Pattern-dominant configurations where a self-sustaining recursive process binds figure and ground together. Clear identity, self-maintaining processes, organized context. Holons achieve recursive depth (∞↻) — they can apply the framework's own operations to themselves without collapse. Examples: living cells, mature ecosystems, established languages, stable institutions.
 
 ## Dependency argument
 
