@@ -34,8 +34,8 @@ E.O. classifies every phenomenon as a configuration of three aspects — **Figur
 | Entity Type | Dominant Aspect | Characteristic | Infinity Type |
 | --- | --- | --- | --- |
 | **Emanon** | Ground | Ambient, contextual influence; weak or ephemeral figure and pattern | ∞⤫ (multiplicative) |
-| **Protogon** | Pattern | Active transformation; identity still crystallizing | — |
-| **Holon** | Balanced | Figure, pattern, and ground integrated; self-maintaining | ∞↻ (recursive) |
+| **Protogon** | Figure | Identity actively crystallizing; pattern and self-maintenance not yet achieved | — |
+| **Holon** | Pattern | Self-sustaining recursive process; figure and ground stabilized around it | ∞↻ (recursive) |
 
 An emanon's defining configuration is:
 
@@ -127,7 +127,7 @@ Emanons are necessary components of any complex system. Attempting to convert al
 
 ### Channeling
 
-Rather than measuring or defining an emanon directly, effective practice builds structures *around* it. Protogons (emerging patterns with forming identity) serve as natural interfaces between emanonic ground and holonic structure. The goal is to create conditions favorable to the emanon's productive influence without attempting to capture it.
+Rather than measuring or defining an emanon directly, effective practice builds structures *around* it. Protogons (crystallizing identities not yet self-sustaining) serve as natural interfaces between emanonic ground and holonic structure. The goal is to create conditions favorable to the emanon's productive influence without attempting to capture it.
 
 ### Monitoring
 
@@ -242,8 +242,8 @@ Whether these two cases are distinguishable from within the claim system — or 
 
 ## See Also
 
-- **Protogon** — pattern-dominant entity type; forming identity.
-- **Holon** — balanced entity type with recursive potential (∞↻).
+- **Protogon** — figure-dominant entity type; forming identity.
+- **Holon** — pattern-dominant entity type with recursive potential (∞↻).
 - **Multiplicative Infinity (∞⤫)** — the infinity type associated with emanonic proliferation.
 - **capacity ground** — the 27-position coordinate system in which emanon territory is mapped.
 - **Ground** — the contextual/substrate aspect of the Figure/Pattern/Ground trichotomy.

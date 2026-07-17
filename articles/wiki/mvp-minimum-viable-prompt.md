@@ -268,7 +268,7 @@ Available in the full EO documentation but not required for competent discourse:
 
 - **The full 27-cell capacity ground and Three Faces.** The spec seeds all three faces of the capacity ground: the Act Face (operators), the Site Face (terrain), and the Stance Face (grain). The complete capacity ground with coordinates, verb counts per cell, desert/gravity designations, entity types, and the full Three Faces document is a substantial upgrade for fine-grained diagnostics.
 - **The 81 Names.** The spec seeds operator nesting (pipeline + self-application). The complete vocabulary of all 81 named compositions — 27 Act, 27 Site, 27 Resolution — with cross-linguistic precision terms from 15 languages is the upgrade for practitioners who need the full vocabulary.
-- **Entity types (Emanon, Protogon, Holon).** Ground-dominant, pattern-dominant, and balanced configurations. Useful for classification.
+- **Entity types (Emanon, Protogon, Holon).** Ground-dominant, figure-dominant, and pattern-dominant configurations. Useful for classification.
 - **Experience Engine rules.** Nine rules governing how raw experience relates to interpretation through perspectival context. Important for system design.
 - **Cross-linguistic evidence.** 27 languages, 11 families, 32,000+ verbs confirming the lattice as geometric structure in embedding space.
 - **The formal proof.** Exhaustive computational verification of the helix ordering against Codd's relational algebra.

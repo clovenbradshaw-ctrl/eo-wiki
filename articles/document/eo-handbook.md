@@ -990,17 +990,17 @@ The ∞× notation means: multiplicative under observation. Each attempt to pin 
 
 Emanons are not broken holons. They are not entities that haven't been properly recorded yet. They are entities whose ground-dominant character is their actual nature. Forcing them into figure-dominant form destroys information.
 
-## 8.2 Protogon — Pattern-Dominant
+## 8.2 Protogon — Figure-Dominant
 
-Identity crystallizing, actively becoming. The entity has moved past the emanon's ground-dominant indeterminacy — it is no longer subject to ∞× multiplication because its pattern aspect has cohered enough to resist proliferation under observation. But it hasn't yet achieved the integrated self-reference of the holon.
+Identity crystallizing, actively becoming. The entity has moved past the emanon's ground-dominant indeterminacy — it is no longer subject to ∞× multiplication because its figure aspect has crystallized enough to resist proliferation under observation. But it hasn't yet achieved the integrated self-reference of the holon.
 
 The teenager who is figuring out who they are. The startup that has a product but not yet a culture. The diagnosis that the clinician senses but can't yet name. The social movement that has momentum but hasn't stabilized its identity.
 
 Protogons are transitional. They are moving toward holon status but haven't arrived. The becoming is their defining characteristic. In system design, protogons frequently serve as interfaces between emanonic ground and holonic structure — the structural layer through which ground-level dynamics become tractable to figure-level operations.
 
-## 8.3 Holon (∞↻) — Balanced
+## 8.3 Holon (∞↻) — Pattern-Dominant
 
-Recursive depth, self-maintaining. Figure, pattern, and ground integrated. The entity whose identity is stable enough to persist through transformation, to be queried from any angle and return a coherent answer, to be connected to other entities without losing itself.
+Recursive depth, self-maintaining. A self-sustaining pattern binds figure and ground together and continually regenerates both. The entity whose identity is stable enough to persist through transformation, to be queried from any angle and return a coherent answer, to be connected to other entities without losing itself.
 
 The ∞↻ notation means: recursive. The holon can apply the framework's own operations to itself without collapse. A living cell. A mature ecosystem. An established language. A stable institution. A person who knows who they are.
 
@@ -1261,7 +1261,7 @@ The comments field may still be needed — not for what the structured fields mi
 
 **Helix:** The unique non-degenerate dependency ordering of the nine operators: NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC. Each position contains all prior capacities.
 
-**Holon (∞↻):** Balanced entity type. Recursive depth, self-maintaining.
+**Holon (∞↻):** Pattern-dominant entity type. Recursive depth, self-maintaining.
 
 **Horizon:** The projection function. Observation (NUL) of derived state from a position (SIG) shaped by structural lenses (SEG, CON, SYN). Produces no log entries.
 
@@ -1275,7 +1275,7 @@ The comments field may still be needed — not for what the structured fields mi
 
 **NUL (∅, ν):** Non-transformation. The identity function on system states. Observation. The pass-through. Does not produce log entries. The ground of the Existence triad. Not to be confused with Void (Site Face) or Clearing (Stance Face).
 
-**Protogon:** Pattern-dominant entity type. Identity crystallizing, actively becoming.
+**Protogon:** Figure-dominant entity type. Identity crystallizing, actively becoming.
 
 **REC (⊛, Ω):** Recontextualization. Restructuring the interpretive frame itself. The pattern of the Significance triad.
 

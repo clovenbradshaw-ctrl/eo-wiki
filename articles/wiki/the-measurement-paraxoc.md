@@ -26,9 +26,9 @@ EO identifies three fundamental entity configurations, each characterized by a d
 
 **Emanon** (∞×) — ground-dominant. The entity that proliferates under measurement. Ask a question, get multiple answers, each legitimate, none exhaustive. The emanon doesn't have a single identity you haven't found yet. It has multiple simultaneous configurations, and the act of selecting one collapses the others. The family at intake is an emanon. So is a quantum superposition. So is a community before it has named itself.
 
-**Protogon** — pattern-dominant. Identity crystallizing, actively becoming. The entity has moved past the emanon's ground-dominant indeterminacy — it's no longer subject to ∞× multiplication because its pattern aspect has cohered enough to resist proliferation under observation. But it hasn't yet achieved the integrated self-reference of the holon. The teenager who is figuring out who they are. The startup that has a product but not yet a culture. The diagnosis that the clinician senses but can't yet name.
+**Protogon** — figure-dominant. Identity crystallizing, actively becoming. The entity has moved past the emanon's ground-dominant indeterminacy — it's no longer subject to ∞× multiplication because its figure aspect has crystallized enough to resist proliferation under observation. But it hasn't yet achieved the integrated self-reference of the holon. The teenager who is figuring out who they are. The startup that has a product but not yet a culture. The diagnosis that the clinician senses but can't yet name.
 
-**Holon** (∞↻) — balanced, self-maintaining. Recursive depth. The entity whose identity is stable enough to persist through transformation, to be queried from any angle and return a coherent answer, to be connected to other entities without losing itself. The anchored record. The established institution. The person who knows who they are.
+**Holon** (∞↻) — pattern-dominant, self-maintaining. Recursive depth. The entity whose identity is stable enough to persist through transformation, to be queried from any angle and return a coherent answer, to be connected to other entities without losing itself. The anchored record. The established institution. The person who knows who they are.
 
 ## The Paradox
 

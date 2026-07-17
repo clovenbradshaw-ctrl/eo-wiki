@@ -93,7 +93,7 @@ The structural result: the schema emerges from the interaction rather than prece
 
 ## The Protogon as the Unit of Emergent Organizing
 
-In hierarchical and bureaucratic systems, the stable unit of organizing is the holon: the bounded, self-maintaining institution with clear identity, established procedures, and recursive self-governance. Emergent organizing works differently. Its characteristic unit is the **protogon**: the pattern-dominant configuration where identity is actively forming, relational structure is crystallizing, but stable self-maintenance has not yet been achieved.
+In hierarchical and bureaucratic systems, the stable unit of organizing is the holon: the bounded, self-maintaining institution with clear identity, established procedures, and recursive self-governance. Emergent organizing works differently. Its characteristic unit is the **protogon**: the figure-dominant configuration where identity is actively forming, relational structure is crystallizing, but stable self-maintenance has not yet been achieved.
 
 Movements, projects, communities of practice, open-source initiatives in their formative phases — these are protogons. They have more structure than emanonic ground (not just ambient energy, but discernible pattern) and less rigidity than holonic institutions (not yet self-enclosing, still responsive to new information and new participants).
 
