@@ -5,7 +5,7 @@
 **Tags:** operator, 101  
 **Keywords:** ins, existence  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -35,7 +35,7 @@ INS creates. A value, a record, an entity, an observation — something that did
 ```
 INS(target, operand)
   adds operand to the observation set
-  mints an anchor (content-addressed hash) for the new entity
+  mints an anchor (a birth-id, fixed at first admission — never a hash of content)
   updates lineage with creation event
 ```
 
@@ -55,9 +55,11 @@ A field value changes (that is DEF — it already existed). Something is restore
 
 INS is the only operator that mints anchors.
 
-An **anchor** is a content-addressed hash — an opaque, stable identifier derived from the entity's content at the moment of instantiation. It does not tell you what the entity is. It tells you that it exists and has not been altered. Anchors are frame-independent and immutable.
+An **anchor** is a birth-minted identifier, not a content hash: given once, at first admission, and kept across every later refresh — a rename, a reassignment, a witnessed merge. It does not tell you what the entity is. It tells you that this is the same thing that was born there, however much else about it has since changed. Anchors are frame-independent because they never move — but they hold that position by law, not by recomputation: "an address is a birth, not a spelling" (`native/docs/THE-ADDRESS.md`, invariant A2). A referent's id is set at first admission and never re-derived from its bytes; two figures are the same referent iff folding on either makes the same difference to the ground, never because their content happens to match.
 
-This is distinct from the event UUID. Every operator event in the log — regardless of type — receives a UUID. That is the *event's* identity: "this transformation happened." The anchor is the *entity's* identity: "this thing now exists." The UUID is bookkeeping. The anchor is ontology.
+This is distinct from an act's hash. Every event the kernel appends is sealed by a SHA-256 chained over `seq`, `prev`, and the act's own canonical payload — the act, its giver, and the recipe it was performed under (`THE-ADDRESS.md` §3.3). That is the *event's* identity: "this transformation happened, verifiably, in this order." The anchor is the *entity's* identity: "this thing now exists, and stays this thing." The act-hash is bookkeeping over the log. The anchor is ontology over the referent. In the kernel itself, `eoOperation` takes its `id` as a caller-supplied value, never a computed one, and every upsert (`upsertById`, `upsertManyById`) is keyed by that same caller-given id (`native/kernel/fold.js`) — nothing in the fold hashes an entity's content to name it.
+
+A real content hash exists elsewhere in the system, but it is reserved for bytes, never for entities: `materialHash` seals raw text as a SHA-256 over its bytes, for artifacts, not referents (`native/kernel/artifact.js`). THE-ADDRESS.md draws this boundary explicitly: a byte address is a hash of its bytes (invariant A4), but content-hash as identity for a *being* is the "spelling model," and it is refused — the measured failure is an address that oscillates every time the content it names is refreshed.
 
 Other operators that appear to produce new entities do so through nested INS operations. SEG partitions a collection into two — each new partition receives its anchor through a contained INS. SYN merges entities into a whole — the merged whole receives its anchor through a contained INS. The anchor-minting responsibility belongs to INS alone. Nesting handles the rest.
 
@@ -69,9 +71,9 @@ The three Existence operators produce the components of identification:
 
 **SIG → produces the sign.** The first distinction — "this is *this* and not *that*." The human-readable, frame-dependent name. The dot path, the label, the ref. Mutable, meaningful, context-bound.
 
-**INS → produces the anchor.** The content hash that stamps the entity's existence as concrete and verifiable. Frame-independent, immutable, opaque.
+**INS → produces the anchor.** The birth-id that stamps the entity's existence as concrete and persistent — set once, at the moment of first admission, and never revised even when everything else about the entity is. Frame-independent, immutable, opaque — opaque because it carries no content, not because it is a hash of any.
 
-The sign floats. The anchor holds. Together they form a two-register identification system: the sign is for reading, the anchor is for verifying.
+The sign floats. The anchor holds. Together they form a two-register identification system: the sign is for reading, the anchor is for verifying — a birth kept, not a spelling recomputed.
 
 ---
 

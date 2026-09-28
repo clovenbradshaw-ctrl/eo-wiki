@@ -3,7 +3,7 @@
 **Record ID:** wiki:scope  
 **DB ID:** 37  
 **Status:** draft  
-**Updated:** 2026-03-26T22:16:41.758Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -33,7 +33,7 @@ These references operate at the level of bare existence. They do not describe th
 
 `client:james`
 
-**By anchor (Generating ⤫ Existence).** The content-addressed hash. The entity produces its own identifier from what it is. Frame-independent, immutable, opaque. This is INS-shaped reference — the anchor is minted at the moment of instantiation and never changes. When you need a reference that survives frame changes, reorganizations, and renaming, the anchor is the only option.
+**By anchor (Generating ⤫ Existence).** The birth-minted identifier. The entity is given its identifier once, at the moment it is admitted, and the identifier is never re-derived from what the entity currently is. Frame-independent, immutable, opaque. This is INS-shaped reference — the anchor is minted at the moment of instantiation and never changes. When you need a reference that survives frame changes, reorganizations, and renaming, the anchor is the only option.
 
 `@a3f2b7c9`
 
@@ -53,19 +53,19 @@ These references operate at the level of relationship and arrangement. They loca
 
 `SUM(team_northwest.clients.*.sessions.count)` `AVG(provider.reyes.clients.*.outcomes.score)`
 
-### Significance References — Identifying by *What Entities Mean*
+### Interpretation References — Identifying by *What Entities Mean*
 
 These references operate at the level of significance. They pick out the target by its state, its properties, or its name — by what it means within the active frame.
 
-**By state (Differentiate ⤫ Significance).** Filtering by current condition. DEF-shaped reference — you are identifying the target by which state it occupies. "The active ones." "The one that changed." "The open cases."
+**By state (Differentiate ⤫ Interpretation).** Filtering by current condition. DEF-shaped reference — you are identifying the target by which state it occupies. "The active ones." "The one that changed." "The open cases."
 
 `clients[status=active]` `referrals[state=open]`
 
-**By constraint (Relate ⤫ Significance).** Multiple simultaneous filters held together. EVA-shaped reference — you are holding multiple conditions under simultaneous evaluation and the target is their intersection. This is closest to SQL's WHERE clause, and it is Codd's great contribution: constraint-based, unordered, storage-independent identification.
+**By constraint (Relate ⤫ Interpretation).** Multiple simultaneous filters held together. EVA-shaped reference — you are holding multiple conditions under simultaneous evaluation and the target is their intersection. This is closest to SQL's WHERE clause, and it is Codd's great contribution: constraint-based, unordered, storage-independent identification.
 
 `clients[age<18, provider=reyes, status=active]` `sessions[date=2024-03-12, type=intake, clinic=tuesday]`
 
-**By name (Generating ⤫ Significance).** The human-assigned label. The sign someone produced within a frame to mean this thing. REC-shaped reference because the name is an artifact of how the system was organized — rename the client, the name changes, the anchor doesn't. Names are meaningful, portable, ambiguous, and political.
+**By name (Generating ⤫ Interpretation).** The human-assigned label. The sign someone produced within a frame to mean this thing. REC-shaped reference because the name is an artifact of how the system was organized — rename the client, the name changes, the anchor doesn't. Names are meaningful, portable, ambiguous, and political.
 
 `"James Smith"` `"Northwest Team"`
 
@@ -146,9 +146,9 @@ Any referent in EO can be held in two registers:
 
 **The sign** is any human-readable reference — a dot path, a name, a constraint expression, a relationship chain. It is meaningful, mutable, and frame-dependent. The sign can float: what it points to might change if the frame is restructured. Signs are for reading.
 
-**The anchor** is a content-addressed hash — an opaque, stable identifier derived from the content itself. It does not tell you what something is. It tells you that it exists and has never been altered. Anchors are for verifying.
+**The anchor** is a birth-minted identifier — given once, at the moment the entity is first admitted, and kept across every later refresh. It does not tell you what something is. It tells you that this is the same thing that was born there, whatever has since been learned, corrected, or renamed about it. Anchors are for verifying.
 
-Git uses exactly this architecture. `main` is a sign — a human-readable pointer that moves every time someone pushes a commit. `a3f2b7c9` is an anchor — a hash that never changes because it is derived from the content. The sign floats. The anchor holds. And Git tracks *when signs move* — that is the reflog, a record of every time a pointer changed what it pointed to.
+Git's SHA is the worked case that shows where this parts ways with content-hashing, not an analogy for it. `main` is a sign exactly as EO's signs are: a human-readable pointer that moves every time someone pushes a commit, and Git tracks *when signs move* in its reflog — a record of every time a pointer changed what it pointed to — which is the same discipline EO wants from a sign. But `a3f2b7c9` is a spelling, not a birth: change a byte and the commit is a different hash, a different identity. EO's anchors are the opposite by law — "an address is a birth, not a spelling" (`native/docs/THE-ADDRESS.md` §3.2, invariant A2) — because a referent here can be reread, corrected, or merged and must keep the same anchor throughout. Git cannot express "same thing, corrected understanding"; its identity would re-mint on every refresh. That is the gap the anchor is built to close, not an architecture it borrows.
 
 The eight non-anchor reference types are all signs. The anchor is the one reference type that is frame-independent. The sign/anchor split means the name you use and the entity it refers to are decoupled. This matters in any system where names are political — which is to say, every system that involves humans.
 
@@ -160,11 +160,11 @@ The sign/anchor distinction maps onto the Existence triad:
 
 **SIG → produces the sign.** The first distinction. "This is *this* and not *that.*" The human-readable pointer, the frame-dependent name. SIG draws the difference that makes a referent addressable.
 
-**INS → produces the anchor.** The moment something crosses from potential into the particular — INS (Generating ⤫ Existence) — is the moment the system mints an anchor. INS is the only operator that creates anchors, because INS is the only operator that creates entities.
+**INS → produces the anchor.** The moment something crosses from potential into the particular — INS (Generating ⤫ Existence) — is the moment the system mints an anchor: a birth-id, set once and kept, never a hash recomputed from the entity's content. INS is the only operator that creates anchors, because INS is the only operator that creates entities.
 
 Other operators that appear to produce new entities do so through nested INS operations. SEG partitions a collection into two — each new partition receives its anchor through a contained INS. SYN merges entities into a whole — the merged whole receives its anchor through a contained INS. The anchor-minting responsibility belongs to INS alone; nesting handles the rest.
 
-Every event in the log — regardless of operator type — receives a UUID. That is the *event's* identity: "this transformation happened." The anchor is the *entity's* identity: "this thing now exists." The UUID is bookkeeping. The anchor is ontology.
+Every event the kernel appends is sealed by an act-hash — a SHA-256 chained over `seq`, `prev`, and the act's own canonical payload (`native/docs/THE-ADDRESS.md` §3.3). That is the *event's* identity: "this transformation happened, verifiably, in this order." The anchor is the *entity's* identity: "this thing now exists, and stays this thing." The act-hash is bookkeeping over the log. The anchor is ontology over the referent.
 
 ---
 

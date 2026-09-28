@@ -3,7 +3,7 @@
 **Record ID:** wiki:canonical-example-the-act-face-the-operators  
 **DB ID:** 59  
 **Status:** published  
-**Updated:** 2026-03-26T21:50:03.142Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -17,7 +17,7 @@ The Act face is **Mode × Domain** — the crossing of *how a transformation is 
 | --- | --- |
 | DIFFERENTIATING — separating, bounding, distinguishing | EXISTENCE — being, presence, instantiation |
 | RELATING — connecting, holding in relation, co-presencing | STRUCTURE — organization, relation, system |
-| GENERATING — producing, integrating, transforming | SIGNIFICANCE — meaning, interpretation, value |
+| GENERATING — producing, integrating, transforming | SIGNIFICANCE (named "Interpretation" in the current `eoreader7` implementation, `native/kernel/cube.js` `DOMAINS`) — meaning, interpretation, value |
 
 The nine operators arise from crossing these two axes. The cell address is Mode × Domain.
 

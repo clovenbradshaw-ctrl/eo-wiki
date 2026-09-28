@@ -3,7 +3,7 @@
 **Record ID:** wiki:the-integral-model  
 **DB ID:** 71  
 **Status:** published  
-**Updated:** 2026-04-21T00:43:05.718Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -76,11 +76,11 @@ Horizons are perspectival. There is no God's-eye view. Two Horizons over the sam
 
 The Horizon is a query, not a data structure. It produces no log entry when evaluated; reading is not writing. This dissolves the read/write distinction that CRUD treats as fundamental. There are emissions (operators appended to the log) and projections (horizons computed at read time), and nothing in between.
 
-## The Significance triad as model theory
+## The Interpretation triad as model theory
 
-The integral model's Significance triad — DEF, EVA, REC — takes its glyphs directly from [model theory](https://en.wikipedia.org/wiki/Model_theory), and the glyphs carry their meaning across the substitution.
+The integral model's Interpretation triad — DEF, EVA, REC — takes its glyphs directly from [model theory](https://en.wikipedia.org/wiki/Model_theory), and the glyphs carry their meaning across the substitution. (Named "Interpretation" per the shipped algebra's canonical domain name — `native/kernel/cube.js:13`, `DOMAINS = ["Existence", "Structure", "Interpretation"]`; "Significance" was this domain's superseded working name.)
 
-1. **DEF ⊢ — entailment.** The axiom-setting move. `T ⊢ φ` in model theory says φ is provable from theory T. DEF in the integral model fixes T — what types are admissible, what derivations follow, what the frame will treat as valid. DEF is a Ground operation in the Significance triad because it sets the ground the rest of the triad operates on.
+1. **DEF ⊢ — entailment.** The axiom-setting move. `T ⊢ φ` in model theory says φ is provable from theory T. DEF in the integral model fixes T — what types are admissible, what derivations follow, what the frame will treat as valid. DEF is a Ground operation in the Interpretation triad because it sets the ground the rest of the triad operates on.
 2. **EVA ⊨ — satisfaction.** A relation, not a procedure. `M ⊨ φ` in model theory says the structure M makes φ true. EVA in the integral model records, per candidate state, whether the state satisfies the theory DEF has fixed. EVA is a Figure operation because it figures against the ground DEF set.
 3. **REC ⊛ — frame restructure.** Both ⊢ and ⊨ presuppose a fixed theory. REC changes T. After REC, old models may no longer satisfy and old theorems may no longer derive. REC is a Pattern operation because it modifies the pattern under which ground and figure relate.
 
@@ -96,7 +96,7 @@ The integral model's characteristic computational signature is a **wave fold** �
 
 Combine the three and M-state is necessarily wave-shaped: superposition carried forward through an append-only fold, resolved only at measurement. The Greek letter ψ was chosen as DEF's letter precisely because the wave function is the canonical instance of this pattern; the quantum connection was recognized as structural rather than metaphorical. Strip any of the three commitments and the wave fold disappears with them, and what remains is CRUD with a nine-operator vocabulary on top rather than the integral model.
 
-The [helix](/helix) itself is a second instance of the same signature. Three turns through the same three Mode positions at climbing Domain coordinates (−1, +1, √2) form a covering space over the 3×3 grid. Each turn carries accumulator state from the prior turn into the next; the Significance triad is the Existence triad re-encountered with Structure-mediated awareness in the carry. Same fiber, different base. Wave character in the repetition; fold character in the carry.
+The [helix](/helix) itself is a second instance of the same signature. Three turns through the same three Mode positions at climbing Domain coordinates (−1, +1, √2) form a covering space over the 3×3 grid. Each turn carries accumulator state from the prior turn into the next; the Interpretation triad is the Existence triad re-encountered with Structure-mediated awareness in the carry. Same fiber, different base. Wave character in the repetition; fold character in the carry.
 
 ## Structural consequences
 
@@ -124,11 +124,13 @@ The integral model inherits heavily from existing work and claims novelty only a
 
 **From Git.** Immutable commits (Given-Log), branchable state (Meant-Graph), checked-out views (Horizon), content-addressed identity (anchors). The structural parallel is close enough that Git can be read as a single-domain implementation of the integral model avant la lettre.
 
-**What is genuinely new.** The enforcement of the Given/Meant separation as a substrate invariant. The closed nine-operator algebra as a substrate vocabulary. The model-theoretic ordering of the Significance triad (DEF → EVA → REC as ⊢ → ⊨ → ⊛). The phenomenal address and windowed interpretation as structural components of every datum. The claim that these together constitute a substrate one order of hierarchical complexity above the relational model.
+**What is genuinely new.** The enforcement of the Given/Meant separation as a substrate invariant. The closed nine-operator algebra as a substrate vocabulary. The model-theoretic ordering of the Interpretation triad (DEF → EVA → REC as ⊢ → ⊨ → ⊛). The phenomenal address and windowed interpretation as structural components of every datum. The claim that these together constitute a substrate one order of hierarchical complexity above the relational model.
 
 ## Status
 
-The integral model is the architectural expression of EO. It is currently implemented in [EO///DB](https://github.com/clovenbradshaw-ctrl) (React/Vite/TypeScript PWA with IndexedDB and Matrix E2EE sync), in provEO's spreadsheet view, and in nl-explorer's investigative document reader. None of these implementations is feature-complete against the full architecture; they are domain-specific instantiations that validate parts of the substrate under real workloads.
+The integral model is the architectural expression of EO. It is currently implemented in [EO///DB](https://github.com/clovenbradshaw-ctrl) (React/Vite/TypeScript PWA with IndexedDB and Matrix E2EE sync), in provEO's spreadsheet view, in nl-explorer's investigative document reader, and — a fourth, more architecturally faithful instance — in EOReader 7's own live append-only assertion ledger, `native/kernel/notes.js` (Handle: Arokin): "what a reading was heard to say, as an append-only event stream; the current belief always a projection," medium-blind (`native/kernel/notes.js:12-14`; `README.md:245-246`). None of these implementations is feature-complete against the full architecture; they are domain-specific instantiations that validate parts of the substrate under real workloads.
+
+As an aside on the reader's own internal consistency: `README.md:404-405` contains a stale note claiming "`kernel/notes.js` (Arokin) is not yet built; the row above is reserved, not installed" — a direct read of the file disproves this. The module exists and carries the header quoted above.
 
 The name "integral model" was adopted on 2026-04-20. Prior materials in this wiki describe components of the architecture — the Given-Log, the Meant-Graph, the Horizon, the nine operators, the helix — without naming the whole. This article is the first to name it.
 

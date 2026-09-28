@@ -1,5 +1,7 @@
 # Wiki ⇄ EO Reader 4.2 Sync Punch List
 
+> **Superseded baseline.** This punch list targeted **EOReader 4.2** (prepared 2026-07-13). EOReader has since advanced through 5, 6, 6.1 (frozen 2026-09-15), and now **7**, with a substantially different module layout (`native/kernel/`, `native/organs/`, `native/adapters/` replacing the `src/core/`, `src/surfer/`, `src/enactor/`, etc. faculty tree cited throughout below). This document is left as a historical record — see **[`SYNC-PUNCHLIST-EOREADER7.md`](./SYNC-PUNCHLIST-EOREADER7.md)** for the current sync pass against EOReader 7.
+
 *Prepared 2026-07-13 from a deep reading of `clovenbradshaw-ctrl/eoreader4.2` (all 49 design docs, the full `src/` tree, tests, and probes) against all 69 wiki articles.*
 
 **The headline:** the wiki does not mention the EO Reader anywhere (grep for `eoreader` returns zero hits). Its only implementation trace is one anonymized anecdote in *The Experience Engine* ("a reading engine implementing this specification induced the attribution verb 'says'…"), self-graded as "a proposal carrying one data point." Meanwhile 4.2 is a full working implementation with 140+ engine-behavior tests, dated eval batteries (2026-07), and — most importantly for the wiki — a family of concrete, citable **signal-from-noise mechanisms** that turn EO's asserted claims into measured physics. Several wiki articles are now contradicted; many more can be upgraded from "asserted" to "grounded, with a module citation."

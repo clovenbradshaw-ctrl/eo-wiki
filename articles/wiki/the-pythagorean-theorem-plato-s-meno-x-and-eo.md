@@ -3,7 +3,7 @@
 **Record ID:** wiki:the-pythagorean-theorem-plato-s-meno-x-and-eo  
 **DB ID:** 41  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -119,13 +119,13 @@ After both wrong answers (side 4 → area 16, side 3 → area 9), the boy recogn
 
 ### DEF(⊢)
 
-`EVA(given_length, diagonal)`
+`DEF(given_length, diagonal)`
 
 Socrates draws the diagonal. The frame — build a square on a given length — does not change. The value does: the given length is now the diagonal rather than an integer edge.
 
 ### EVA(⊨)
 
-`DEF(diagonal, [ratio_system, geometric_constructibility])`
+`EVA(diagonal, [ratio_system, geometric_constructibility])`
 
 The boy verifies the square built on the diagonal has area 8. He can see it works. He cannot name the length as a ratio. Both facts hold simultaneously.
 

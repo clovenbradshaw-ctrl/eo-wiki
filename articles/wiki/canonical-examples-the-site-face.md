@@ -3,7 +3,7 @@
 **Record ID:** wiki:canonical-examples-the-site-face  
 **DB ID:** 60  
 **Status:** published  
-**Updated:** 2026-03-19T03:37:25.724Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -15,9 +15,9 @@ The Site face is **Domain × Object** — the crossing of *what level of reality
 
 | Domain axis (Q2) | Object axis (Q3) |
 | --- | --- |
-| EXISTENCE — being, presence, the substrate of the real | CONDITION — ambient background, ground, what is present before anything is picked out |
-| STRUCTURE — organization, relation, system | ENTITY — a specific thing, graspable, nameable, discrete |
-| SIGNIFICANCE — meaning, interpretation, value, the frame | PATTERN — a recurring regularity, a type, a category |
+| EXISTENCE — being, presence, the substrate of the real | CONDITION (Ground) — ambient background, ground, what is present before anything is picked out |
+| STRUCTURE — organization, relation, system | ENTITY (Figure) — a specific thing, graspable, nameable, discrete |
+| SIGNIFICANCE (named "Interpretation" in the current `eoreader7` implementation, `native/kernel/cube.js` `DOMAINS`) — meaning, interpretation, value, the frame | PATTERN — a recurring regularity, a type, a category |
 
 The nine terrain types arise from crossing these two axes. The cell address is Domain × Object.
 

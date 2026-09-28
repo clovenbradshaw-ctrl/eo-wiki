@@ -3,7 +3,7 @@
 **Record ID:** wiki:eo-in-15-min  
 **DB ID:** 47  
 **Status:** draft  
-**Updated:** 2026-03-26T22:20:30.064Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -21,7 +21,7 @@ We have rich vocabularies for states. We have decent vocabularies for actions. W
 
 This isn't a personal limitation. Watch where language runs out: a therapist describing how a client's worldview *shifted*; an ecologist watching a forest cross a tipping point; a physicist encountering a measurement that retroactively restructures the experimental setup; an institution discovering its categories no longer fit the people they were built to describe. In every case, the vocabulary collapses into vague gesture: "things changed," "a shift occurred," "the frame broke."
 
-The gap is worst at the level of meaning — what EO calls *Significance*. We have names for objects and names for operations on objects. We have almost no names for the operations by which one interpretive frame replaces another, or for the structural difference between a value that changed and a category that dissolved.
+The gap is worst at the level of meaning — what EO calls *Interpretation* (an earlier draft called this domain *Significance*; the name in the shipped algebra is Interpretation). We have names for objects and names for operations on objects. We have almost no names for the operations by which one interpretive frame replaces another, or for the structural difference between a value that changed and a category that dissolved.
 
 EO is built from a single observation: this gap is not accidental. Formal systems — databases, logic, bureaucracies, software architectures — are designed around states. They assume the world is already whatever it is. Transformation isn't in the grammar. It falls through.
 
@@ -67,7 +67,7 @@ EO applies this trichotomy across three mathematical registers, each deeper than
 | --- | --- | --- |
 | Existence | 0 · 1 · 2 | Arithmetic. Whether things are. No polarity — at raw existence, things simply are or aren't. |
 | Structure | −1 · +1 · √2 | Geometry. Polarity is introduced. Two opposing unit poles at a right angle generate the irrational diagonal — the emergent third that cannot be reached by adding the first two. |
-| Significance | 2 · √2 · 2^√2 | Transcendental. Coordinates are inherited from prior pattern positions, culminating in a transcendental number. The mathematics of limits. |
+| Interpretation | 2 · √2 · 2^√2 | Transcendental. Coordinates are inherited from prior pattern positions, culminating in a transcendental number. The mathematics of limits. |
 
 The fractal self-similarity of the framework is preserved because the *structural relationship* — Ground enables Figure, Pattern integrates both while remaining irreducible to either — holds at every level. What varies is the mathematical character of that relationship, deepening from arithmetic to geometry to the mathematics of limits as it moves through the dependency sequence.
 
@@ -83,7 +83,7 @@ The formal syntax is `OPERATOR(target, operand)`, with nesting reserved for genu
 | --- | --- | --- | --- |
 | **Existence** | **NUL ∅** — Recognizing or producing absence. The capacity to deliberately not-act. Generative emptiness — not privation but structural openness. | **SIG ○** — Directing attention. Registering that something is *this* and not *that*. The first positive act of signaling. | **INS ●** — Instantiating a concrete entity from a signal. The move from category to particular case. |
 | **Structure** | **SEG ÷** — Drawing boundaries, partitioning, filtering. Every boundary also names what it excludes. | **CON ⋈** — Establishing relationships between differentiated elements. Requires prior segmentation to have anything to connect. | **SYN △** — Generating an emergent whole that is more than the sum of its parts and irreducible to either. |
-| **Significance** | **DEF ⊢** — Establishing what holds within a stable interpretive frame. Set terms, define values. The frame itself does not move. | **EVA ⊨** — Rendering judgment by testing a particular against a general. DEF establishes the terms; EVA assesses whether something satisfies them. | **REC ⊛** — Restructuring the interpretive frame itself when the frame can no longer hold the reality. Not a change *within* the frame but a change *of* it. |
+| **Interpretation** | **DEF ⊢** — Establishing what holds within a stable interpretive frame. Set terms, define values. The frame itself does not move. | **EVA ⊨** — Rendering judgment by testing a particular against a general. DEF establishes the terms; EVA assesses whether something satisfies them. | **REC ⊛** — Restructuring the interpretive frame itself when the frame can no longer hold the reality. Not a change *within* the frame but a change *of* it. |
 
 ### On nesting
 
@@ -149,28 +149,14 @@ The three degrees of freedom deepen in exactly this direction:
 
 - **Existence** (0, 1, 2) — rational, arithmetic. Whether things are.
 - **Structure** (−1, +1, √2) — algebraic irrational. Reachable by a finite geometric operation (the Pythagorean theorem); not by addition alone.
-- **Significance** (2, √2, 2^√2) — transcendental. Reachable only in the limit. The mathematics of meaning is the mathematics of limits.
+- **Interpretation** (2, √2, 2^√2) — transcendental. Reachable only in the limit. The mathematics of meaning is the mathematics of limits.
 
 There is a further structural fact: the infinite tetration √2^√2^√2^⋯ converges to 2 — the Pattern coordinate of the Existence triad. An infinite tower of the emergent third, iterated without bound, collapses back to the ground state. Truth-as-limit, approached infinitely, returns to what was there before any observation began.
 
 This is also why Rule 9 (Defeasibility) is not a methodological preference but a mathematical consequence. If truth is an asymptote, then every finite interpretation is necessarily provisional — not arbitrarily, but because the limit process is infinite. Claiming to have arrived is claiming a curve has touched its asymptote.
 
----## §8 — Truth as limit
+---
 
-EO does not record truth. Every entry in the Given-Log is a **phenomenon** — an appearance of something to a positioned observer within a specific frame. The agent field, the mode of givenness, and the context envelope are not administrative metadata. They are what makes the entry epistemically meaningful: strip them and you don't have a leaner record, you have a different kind of claim — one the system explicitly does not make.
+## §9 — Tested against reality
 
-This is the Kantian distinction made structural: every record is a phenomenon (the thing as it appeared within a frame); the noumenon (the thing-in-itself, independent of all frames) is precisely what the system has no access to and makes no claim about.
-
-Truth, in EO, has the structure of a **limit**. As observations accumulate from more positions and frames are tested and revised through DEF and REC, the Meant-Graph converges toward something. That something is real — it has mathematical existence as a limit — but no finite process reaches it. For any desired precision ε, there exists a depth of converging observation that gets within ε of the limit. The limit is never occupied.
-
-This is not philosophical modesty. It is what the coordinate system encodes. The deepest position in EO's framework carries the coordinate **2^√2** — transcendental by the Gelfond-Schneider theorem. Transcendental numbers are those that cannot be reached by any finite algebraic operation on simpler numbers. They require an infinite limit process. The formal address of truth in EO: real, approached asymptotically, structurally unreachable by any finite sequence of observations.
-
-The three degrees of freedom deepen in exactly this direction:
-
-- **Existence** (0, 1, 2) — rational, arithmetic. Whether things are.
-- **Structure** (−1, +1, √2) — algebraic irrational. Reachable by a finite geometric operation (the Pythagorean theorem); not by addition alone.
-- **Significance** (2, √2, 2^√2) — transcendental. Reachable only in the limit. The mathematics of meaning is the mathematics of limits.
-
-There is a further structural fact: the infinite tetration √2^√2^√2^⋯ converges to 2 — the Pattern coordinate of the Existence triad. An infinite tower of the emergent third, iterated without bound, collapses back to the ground state. Truth-as-limit, approached infinitely, returns to what was there before any observation began.
-
-This is also why Rule 9 (Defeasibility) is not a methodological preference but a mathematical consequence. If truth is an asymptote, then every finite interpretation is necessarily provisional — not arbitrarily, but because the limit process is infinite. Claiming to have arrived is claiming a curve has touched its asymptote.
+The evidence so far is the cross-linguistic verb study. There is a second, independent leg: [EO Reader 7](/the-eo-reader), a working implementation of the operator algebra, whose dated measurements live in [The Evidence](/the-evidence). Its most recent entry is a reading-competency audit (2026-09-23): the reading route actually live on every session turn measures 0.9% recall / 18.5% precision on core subject–verb–object extraction, against 74.0% recall / 73.7% precision for an already-built, already-validated trained parser that sits unwired — confirmed as real grammatical signal, not test artifact, by a scrambled-word-order null (p = 1.9×10⁻⁴³). This is offered as a second, differently-shaped piece of evidence, not a substitute for the lexical study above — and its own weakest number (the live route's) is reported here rather than left out.

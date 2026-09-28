@@ -3,7 +3,7 @@
 **Record ID:** wiki:eo-in-60-min  
 **DB ID:** 48  
 **Status:** draft  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -31,7 +31,7 @@ It helps to name the three tiers where vocabulary operates:
 
 **Tier 2 — Structure:** how things relate. We have good but uneven vocabulary. We can describe connections, boundaries, hierarchies, sequences. We become thinner around synthesis — the emergence of wholes that can't be decomposed into their parts — but we manage.
 
-**Tier 3 — Significance:** what things mean, how meaning shifts, when a frame reframes. Here the vocabulary almost completely fails. We have *interpret*, *understand*, *reframe*, *reconsider*. A few dozen words for an entire dimension of human experience. And when it comes to holding contradiction without resolving it, or to restructuring the interpretive frame itself rather than changing a value within it — we have almost nothing. We narrate around it.
+**Tier 3 — Interpretation** (historically called *Significance*; see the operator-naming registry)**:** what things mean, how meaning shifts, when a frame reframes. Here the vocabulary almost completely fails. We have *interpret*, *understand*, *reframe*, *reconsider*. A few dozen words for an entire dimension of human experience. And when it comes to holding contradiction without resolving it, or to restructuring the interpretive frame itself rather than changing a value within it — we have almost nothing. We narrate around it.
 
 The cross-linguistic evidence makes this precise: in a corpus of 32,289 verbs across 27 languages and 11 language families, DEF (holding contradiction) and REC (restructuring the frame itself) together account for approximately 2% of verb inventories across all languages tested. No language exceeds 5% even after targeted reclassification. Japanese, Sanskrit, and Classical Chinese — the languages most likely to falsify a Western-bias explanation — all fall below 1% for DEF. The impoverishment is universal.
 
@@ -121,7 +121,7 @@ The three coordinate systems across the three triads reflect three mathematical 
 | --- | --- | --- | --- |
 | Existence | 0 · 1 · 2 | Arithmetic | At the level of raw existence, things simply are or aren't. No polarity. No irrationals. The ground axis counts. |
 | Structure | −1 · +1 · √2 | Geometry | Polarity is introduced — opposition and relation are structural requirements. The Pythagorean derivation gives √2. |
-| Significance | 2 · √2 · 2^√2 | Transcendental | Coordinates are inherited from prior Pattern positions. The Gelfond-Schneider theorem proves that 2^√2 is transcendental — it cannot be the root of any polynomial with rational coefficients. |
+| Interpretation | 2 · √2 · 2^√2 | Transcendental | Coordinates are inherited from prior Pattern positions. The Gelfond-Schneider theorem proves that 2^√2 is transcendental — it cannot be the root of any polynomial with rational coefficients. |
 
 The deepening from arithmetic to geometry to transcendental mathematics is not decorative. It reflects that each successive level of the framework is performing the same structural operation in a mathematically richer register. The fractal self-similarity is structural, not numerical: the *relationship* (Ground enables Figure, Pattern integrates both while remaining irreducible to either) is identical at every level. What varies is the mathematical character of that relationship.
 
@@ -145,9 +145,9 @@ The capacity ground is defined by three independent axes:
 
 **Mode** — *how* the operation acts. Three values: Differentiating (0), Relating (1), Generating (2). Mode is the Ground axis of the meta-triad; it uses arithmetic coordinates because it is the foundational axis.
 
-**Domain** — *where* in reality the operation occurs. Three values: Existence (−1), Structure (+1), Significance (√2). Domain is the Figure axis of the meta-triad; it uses geometric coordinates. Polarity appears here — Existence and Structure are opposing operations in space.
+**Domain** — *where* in reality the operation occurs. Three values: Existence (−1), Structure (+1), Interpretation (√2). Domain is the Figure axis of the meta-triad; it uses geometric coordinates. Polarity appears here — Existence and Structure are opposing operations in space.
 
-**Object** — *what kind of thing* is being operated on. Three values: Condition/Ground target (2), Particular/Figure target (√2), Regularity/Pattern target (2^√2). Object is the Pattern axis of the meta-triad; it inherits the Significance triad's coordinates because it occupies the most emergent position.
+**Object** — *what kind of thing* is being operated on. Three values: Condition/Ground target (2), Particular/Figure target (√2), Regularity/Pattern target (2^√2). Object is the Pattern axis of the meta-triad; it inherits the Interpretation triad's coordinates because it occupies the most emergent position.
 
 The nine operators are what you see when you collapse the Object axis — a 3×3 projection onto the Mode × Domain face. Restore the Object axis and each operator expands into three forms, one for each kind of target. Nine operators times three target types equals twenty-seven distinct transformation addresses.
 
@@ -159,10 +159,12 @@ Some landmark addresses:
 
 | Address | Form | What it names |
 | --- | --- | --- |
-| (2, −1, √2) | INS(Entity, Forging) | *Manifestation* — making a specific thing. The densest cell in the corpus: *make, say, run, go, build, do, write, get* |
-| (0, √2, √2) | EVA(Lens, Cutting) | *Reframe* — reinterpreting a specific thing. Tied with (2,−1,√2) as densest. *interpret, reframe, translate, reconsider* |
-| (2, +1, 2) | SYN(Field, Seeding) | *The Desert* — no verbs in any language tested. The universal empty cell. |
-| (2, √2, 2^√2) | REC(Paradigm, Weaving) | *Ecology* — recursion operating on its own regularities. The terminus of the helix. |
+| (2, −1, √2) | INS(Entity, Making) | *Manifestation* — making a specific thing. The densest cell in the corpus: *make, say, run, go, build, do, write, get* |
+| (1, √2, √2) | EVA(Lens, Binding) | *Reframe* — reinterpreting a specific thing. Tied with (2,−1,√2) as densest. *interpret, reframe, translate, reconsider* |
+| (2, +1, 2) | SYN(Field, Cultivating) | *The Desert* — no verbs in any language tested. The universal empty cell. |
+| (2, √2, 2^√2) | REC(Paradigm, Composing) | *Ecology* — recursion operating on its own regularities. The terminus of the helix. |
+
+*Stances corrected 2026-09-28 against the shipped algebra (`native/kernel/cube.js`'s `STANCE_BY_MODE` / `TERRAIN_BY_DOMAIN`): three entries had the wrong stance noun for a Mode/Grain pair that was otherwise right (Forging→Making, Seeding→Cultivating, Weaving→Composing); EVA's Mode index was wrong outright — `cube.js`'s `OP_MODE.EVA` is `Relate` (index 1), and Mode 0 (`Differentiate`) belongs to DEF, not EVA. The address and stance above are corrected accordingly; nothing else about the cell's contents (the verb glosses) has been re-checked against the corpus.*
 
 ### What the distribution tells us
 
@@ -170,9 +172,9 @@ The cross-linguistic verb data is the primary empirical evidence for the framewo
 
 The densest cell in the entire 27-cell system is INS × Figure (position 8, address (2, −1, √2)): making specific things. This is what human language is most equipped to describe. The production of particular entities is the center of linguistic gravity across every language tested.
 
-The second densest cell is EVA × Figure (position 20, address (0, √2, √2)): reinterpreting specific things. Reframing a particular is as common as making one. Human languages are fluent at this.
+The second densest cell is EVA × Figure (position 23, address (1, √2, √2)): reinterpreting specific things. Reframing a particular is as common as making one. Human languages are fluent at this.
 
-As you move into the Significance triad — especially DEF and REC — density drops sharply. DEF and REC together account for approximately 2% of verb inventories across all 27 languages. No language has rich vocabulary for holding contradiction (DEF) or restructuring the frame itself (REC).
+As you move into the Interpretation triad — especially DEF and REC — density drops sharply. DEF and REC together account for approximately 2% of verb inventories across all 27 languages. No language has rich vocabulary for holding contradiction (DEF) or restructuring the frame itself (REC).
 
 This is not accidental. The distribution is a map of where human conceptual space is developed and where it is sparse. EO's nine operators provide formal addresses for the sparse regions — they don't just name the phenomenon, they give it a coordinate in a structure that makes its relationships to other operators visible.
 
@@ -362,13 +364,17 @@ The gaps that don't resolve: the no-cloning theorem (you cannot create an identi
 
 EO's relationship to Hegel is more precise than mere intellectual debt. Hegel can be read as performing, in narrative form, the two-phase decompression that EO performs in formal notation:
 
-**Phase 1 — Recovering the third axis.** Hegel's *Encyclopaedia* traces the same structure across Logic (Existence triad), Nature (Structure triad), and Spirit (Significance triad). This is a triadic structure recovered across three domains — the same move EO makes when it identifies the Mode, Domain, and Object axes as orthogonal.
+**Phase 1 — Recovering the third axis.** Hegel's *Encyclopaedia* traces the same structure across Logic (Existence triad), Nature (Structure triad), and Spirit (Interpretation triad). This is a triadic structure recovered across three domains — the same move EO makes when it identifies the Mode, Domain, and Object axes as orthogonal.
 
 **Phase 2 — Recovering √2.** Hegel's synthesis is the √2 moment: the term that cannot be reduced to either thesis or antithesis, that carries new information, that is produced by their opposition but transcends it. He identifies this correctly.
 
 **The limitation.** Hegel collapses the synthesis back to thesis in the next round. The √2 is generated and then immediately lost — it becomes the −1 from which the next +1 differs. Without a spatial structure in which the √2 has a permanent address, the dialectic keeps producing it and losing it. EO's capacity ground gives it a permanent coordinate: Pattern position, within whatever triad is currently operating.
 
 The argument is not that EO supersedes Hegel. It's that EO provides the spatial structure that Hegel's temporal account was implicitly groping toward.
+
+### Tested against reality: the implementation
+
+Everything above is the lexical-corpus leg of the evidence. There is a second, independent leg: [EO Reader 7](/the-eo-reader), a working implementation of the operator algebra, whose dated measurements are collected in [The Evidence](/the-evidence). The most recent is a reading-competency audit (2026-09-23): the reading route actually live on every session turn measures 0.9% recall / 18.5% precision on core subject–verb–object extraction, against 74.0% recall / 73.7% precision for an already-built, already-validated trained parser that sits unwired — the gap confirmed as real grammatical signal rather than an artifact of the test by a scrambled-word-order null (p = 1.9×10⁻⁴³). The honest reading is not "the implementation proves the framework." It is that a system built on the algebra now produces dated, falsifiable numbers, including ones — like the live route's own low recall — that are unflattering and reported anyway.
 
 ---
 
@@ -393,7 +399,7 @@ The three data structures correspond directly to the three domains:
 | --- | --- | --- | --- |
 | Given-Log | Existence | Whether things are | 1D sequence, ordered by time |
 | Structure-Lattice | Structure | How things connect | Lattice, partially ordered, with composites |
-| Meant-Graph | Significance | What things mean | 3D populated capacity ground (the 27-cell space) |
+| Meant-Graph | Interpretation | What things mean | 3D populated capacity ground (the 27-cell space) |
 
 ### The Given-Log and three NUL states
 
@@ -467,8 +473,6 @@ Rules 1–3 have no equivalent in the relational model. SQL permits `UPDATE` and
 
 ---
 
-## §9 — Adversarial engagement
-
 ## §9 — Truth as limit
 
 The Experience Engine makes a claim that deserves its own section: truth in EO is not a value the system holds. It is a limit the system approaches.
@@ -483,11 +487,11 @@ The answer is the limit that the sequence of situated observations defines — a
 
 The deepest position in EO's coordinate system carries the value **2^√2** — proven transcendental by the Gelfond-Schneider theorem. Transcendental numbers are precisely those that cannot be reached by any finite chain of algebraic operations on rationals. What gets you there is a limit process — an infinite approach.
 
-This is the formal address of what truth occupies in EO: the Pattern position of the Significance triad, coordinate 2^√2. The three degrees of freedom deepen in exactly this direction:
+This is the formal address of what truth occupies in EO: the Pattern position of the Interpretation triad, coordinate 2^√2. The three degrees of freedom deepen in exactly this direction:
 
 - **Existence** (0, 1, 2) — Rational. Whether things are. Directly statable.
 - **Structure** (−1, +1, √2) — Algebraic irrational. Reachable by finite geometric operation (Pythagorean theorem); not by addition alone.
-- **Significance** (2, √2, 2^√2) — Transcendental. Reachable only in the limit. The mathematics of meaning is the mathematics of limits.
+- **Interpretation** (2, √2, 2^√2) — Transcendental. Reachable only in the limit. The mathematics of meaning is the mathematics of limits.
 
 ### The tetration convergence
 
@@ -501,39 +505,7 @@ Defeasibility — Rule 9: no interpretation is globally immune to supersession �
 
 If truth is an asymptote, then every finite interpretation is necessarily provisional. Not arbitrarily so, not as a failure of confidence, but because the limit process is infinite. Dogmatism — the claim that a particular interpretation cannot be superseded — is the claim that a curve has touched its asymptote. The limit structure says it hasn't. Rule 9 is not a norm. It is a theorem about the system's relationship to its own limit.
 
-## §10 — Adversarial engagement
-
-## §9 — Truth as limit
-
-The Experience Engine makes a claim that deserves its own section: truth in EO is not a value the system holds. It is a limit the system approaches.
-
-### The asymptotic structure
-
-Every Given-Log entry is a phenomenon — a situated observation from a specific position in a specific mode. The Meant-Graph accumulates interpretations grounded in those observations. As more observations arrive from more positions and frames are tested through DEF and restructured through REC, the Meant-Graph converges. The question is: converges *toward what*?
-
-The answer is the limit that the sequence of situated observations defines — approached asymptotically, never occupied. The epsilon-delta definition applies exactly: for any desired precision ε, there exists a depth of converging observation δ that gets within ε of the limit. That limit is real — it has mathematical existence — but no finite process reaches it. A claim to have arrived is a claim that a curve has touched its asymptote. The mathematics says it hasn't.
-
-### The transcendental coordinate is not decorative
-
-The deepest position in EO's coordinate system carries the value **2^√2** — proven transcendental by the Gelfond-Schneider theorem. Transcendental numbers are precisely those that cannot be reached by any finite chain of algebraic operations on rationals. What gets you there is a limit process — an infinite approach.
-
-This is the formal address of what truth occupies in EO: the Pattern position of the Significance triad, coordinate 2^√2. The three degrees of freedom deepen in exactly this direction:
-
-- **Existence** (0, 1, 2) — Rational. Whether things are. Directly statable.
-- **Structure** (−1, +1, √2) — Algebraic irrational. Reachable by finite geometric operation (Pythagorean theorem); not by addition alone.
-- **Significance** (2, √2, 2^√2) — Transcendental. Reachable only in the limit. The mathematics of meaning is the mathematics of limits.
-
-### The tetration convergence
-
-There is a further structural fact. The infinite tetration √2^√2^√2^⋯ converges to 2 — the Pattern coordinate of the Existence triad. An infinite tower of the emergent third collapses back to the simplest positive integer in the system. Truth-as-limit, iterated infinitely, returns to the undifferentiated ground state: what was there before observation began.
-
-This is structurally identical to Kant's noumenon: the thing-in-itself is the limit of all possible phenomena. It precedes and exceeds any finite phenomenal record. In the limit, what the Given-Log approaches is what was there before the Given-Log started.
-
-### Why Rule 9 is a theorem, not a preference
-
-Defeasibility — Rule 9: no interpretation is globally immune to supersession — is often read as methodological humility. The asymptotic structure reveals it as something stronger: a mathematical consequence of what truth is.
-
-If truth is an asymptote, then every finite interpretation is necessarily provisional. Not arbitrarily so, not as a failure of confidence, but because the limit process is infinite. Dogmatism — the claim that a particular interpretation cannot be superseded — is the claim that a curve has touched its asymptote. The limit structure says it hasn't. Rule 9 is not a norm. It is a theorem about the system's relationship to its own limit.
+---
 
 ## §10 — Adversarial engagement
 
@@ -563,7 +535,7 @@ The Desert (SYN × Ground) should be empty across all languages, in all lexical 
 
 The helix dependency ordering makes specific predictions: if you find a system that successfully runs CON without having first established SEG — that connects without having drawn boundaries — that's evidence against the dependency claim. These situations should be checkable.
 
-The coordinate derivations make mathematical claims: 2^√2 is transcendental by the Gelfond-Schneider theorem. If the claim that this is the appropriate coordinate for the Significance triad's Pattern position is to be more than a metaphor, there should be consequences that follow from the transcendental nature of that coordinate. What those consequences are has not been fully worked out.
+The coordinate derivations make mathematical claims: 2^√2 is transcendental by the Gelfond-Schneider theorem. If the claim that this is the appropriate coordinate for the Interpretation triad's Pattern position is to be more than a metaphor, there should be consequences that follow from the transcendental nature of that coordinate. What those consequences are has not been fully worked out.
 
 ### Objection 4: Similar frameworks already exist
 
@@ -586,10 +558,6 @@ EO has been developed in substantial part through AI-assisted collaboration. AI 
 The mitigation has been acknowledged: adversarial peer critique from researchers in adjacent fields is the needed next step. That step has not yet been taken at scale. The appropriate epistemic attitude toward EO at this stage is: the structure is internally consistent, empirically grounded in cross-linguistic data, and convergent with multiple independent traditions — and it has not yet been seriously stress-tested by people with different frameworks and an interest in finding the gaps.
 
 ---
-
-## §10 — Development history
-
-## §11 — Development history
 
 ## §11 — Development history
 
@@ -615,10 +583,6 @@ The closure is an empirical finding, not a logical necessity. The framework's po
 
 ---
 
-## §11 — Live edges
-
-## §12 — Live edges
-
 ## §12 — Live edges
 
 These are genuine open questions, not rhetorical gestures toward future work.
@@ -637,13 +601,9 @@ These are genuine open questions, not rhetorical gestures toward future work.
 
 ---
 
-## §12 — Where to go next
-
-**## §13 — Where to go next
-
 ## §13 — Where to go next
 
-If you're arriving from formal systems theory or database design:** Start with the wiki's structural mapping to Codd's model, then the Event Streaming article which addresses the nine-operator algebra as a replacement for open-ended event vocabularies.
+**If you're arriving from formal systems theory or database design:** Start with the wiki's structural mapping to Codd's model, then the Event Streaming article which addresses the nine-operator algebra as a replacement for open-ended event vocabularies.
 
 **If you're arriving from philosophy of mind, phenomenology, or language:** Start with the cross-linguistic verb study (Bivalent Compression and Dimensional Poverty), then the Ground / Figure / Pattern article for the full coordinate derivation.
 

@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** ground, phenomena  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:45.439Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -77,7 +77,7 @@ Emanon territory clusters in the regions of the 27-position capacity ground wher
 
 ### Realm I Emanons (Positions 1–6)
 
-All six positions in Realm I carry the Emanon(∞⤫) designation. All six positions share Mode = 0 (Differentiating — the ground of the identity axis). Identity has not crystallized. Positions 1–3 (NUL) sit on the Existence domain (−1); positions 4–6 (EVA) sit on the Significance domain (√2). This is pure potential territory — the identity axis has not begun to differentiate.
+All six positions in Realm I carry the Emanon(∞⤫) designation. All six positions share Mode = 0 (Differentiating — the ground of the identity axis). Identity has not crystallized. Positions 1–3 (NUL) sit on the Existence domain (−1); positions 4–6 (EVA) sit on the Interpretation domain (√2). This is pure potential territory — the identity axis has not begun to differentiate.
 
 | Position | Address | Operator ⤫ Object | Name |
 | --- | --- | --- | --- |
@@ -168,6 +168,8 @@ Attempts to make formal statements about emanonic systems frequently reach for c
 A confidence score frames the data as **weather forecasting**: "there is a 30% chance this statement is true." The forecasting frame implies a discrete outcome that will either obtain or not, and the number represents uncertainty about which. But emanonic phenomena do not resolve into true or false. "Team chemistry" is not going to converge on a single state that vindicates or refutes the observation. There is no outcome to converge toward. The forecasting instrument is wrong not because it is imprecise but because it is aimed at the wrong kind of target — it treats a ground-dominant phenomenon as a figure awaiting confirmation.
 
 The reification follows from the form, not the value. A confidence score of 0.3 is still a scalar. It still implies that 0.25 or 0.35 would be more or less accurate. It still invites refinement: *should organizational emanons use a different scale than ecological ones? Should the score decay over time?* Each refinement spawns new metrics. The measurement instrument begins to multiply under measurement — the emanon paradox operating one level up within the encoding itself. The confidence score does not measure the emanon. It converts it into a degraded protogon (something with a trackable pattern) or a phantom holon (something stable enough to carry a number), regardless of how low the number is set.
+
+**The EO Reader's measurement organ already refuses this move, as implemented.** `native/organs/measure.js` will not manufacture a bare scalar: a figure offered with no declared way of breaking the material is refused as `no_ground`, and a statistic paired with a perturbation nobody has established a sensitivity for is refused as `unlicensed_pair` (measure.js:33-50, enforced at its `admit()` gate, measure.js:244-283) — precisely the "should organizational emanons use a different scale than ecological ones?" refinement-spiral the emanon paradox predicts, cut off at the door rather than argued down. And where an observation cannot be placed at all — it falls outside every one of the null's broken copies — the organ reports it `censored` rather than scoring it down to a small number: "the honest silence of a witness who cannot place what it saw" (measure.js:958). Confidence-score temptation, resolved in code: refuse the scalar, or name the silence, but do not degrade the emanon into a number either way.
 
 ### Phase-Space Mapping, Not Forecasting
 

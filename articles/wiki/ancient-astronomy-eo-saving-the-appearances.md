@@ -5,7 +5,7 @@
 **Tags:** 301  
 **Keywords:** ptolemaic, astronomy, ptolemy, greece, greek  
 **Status:** published  
-**Updated:** 2026-05-16T01:25:46.843Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -173,3 +173,11 @@ The Ptolemaic standard connects to several structural features of EO discussed e
 **The Khora, the Substrate, and the 10,000 Things**: the relationship between what the grammar can formalize (the substrate), what it cannot formalize (the Khora), and what it is applied to (the 10,000 things). The Ptolemaic standard operates at the substrate level — it tests the grammar's adequacy. Whether the grammar's structure reflects something prior (the Khora) is the Newtonian question.
 
 **Influences and Lineage — Wilson**: Wilson's consilience project is the methodological precedent. EO's cross-domain ambition is not a claim that all domains are the same — it is the prior claim that they are all subject to the same constraints on coherent transformation, and that those constraints generate a shared grammar of appearance.
+
+## 9. Contemporary Corroboration: "Coherence Is Not Correspondence"
+
+The Ptolemaic/Newtonian distinction this article draws — adequacy before truth, coherence before correspondence — is not a one-off analogy to ancient astronomy. It recurs, in almost the same words, as a governing discipline across eoreader7's own 2026-09 theory documents, written independently of this article and about unrelated domains.
+
+THE-NULL-STATES.md states it as the explicit limit of its own null-typology: "Coherence never establishes correspondence. A complete grid of nulls means the instrument can say 'no' at every grain; it does not mean any 'no' is true of the world" (line 72). THE-RING-AT-FULL-WIDTH.md states the identical discipline for its moral-reasoning architecture: "Coherence is not correspondence. The ring can turn norm-consistently and be wrong about the world; the pathos can be deep and deluded; a machine whose books balance perfectly can be perfect about nothing" (lines 557–561). The same formula recurs again in THE-MORAL-CORE.md and THE-MORAL-CORE-AS-A-RING.md. Across a body of doctrine written months after this article, about null-typology and moral reasoning rather than astronomy, the same self-limiting move reappears on its own: a system can be internally adequate — can save its own appearances, in this article's sense — without that adequacy licensing any claim about what is actually true. This is the Ptolemaic standard, restated from the inside by a project that did not set out to restate it.
+
+A related prior-sync item does not get the same treatment. A 2026-07 pass proposed extending this article's standard to causation, citing eoreader4.2's `docs/dag-corpus.md` and `src/surfer/dag/`. That architecture is pre-7 and no longer exists. This pass found no eoreader7 replacement — no dedicated causation-DAG doctrine — to cite in its place, only a passing aside describing perception itself as a counterfactual operation: "a counterfactual intervention, Pearl's do-operator in statistical clothing" (THE-RING-AT-FULL-WIDTH.md, line 46). Causation-grounding remains an open gap in EO's coverage. It is recorded here as a gap, honestly, rather than filled with a citation to code that no longer exists.

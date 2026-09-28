@@ -5,7 +5,7 @@
 **Tags:** 201  
 **Keywords:** register, operator, polish notation, lukasiewicz  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -16,6 +16,8 @@ EO Operator Notation is the formal syntax for expressing transformations in EO. 
 The notation uses a single vocabulary of three symbols — `+`, `−`, `*` — applied at every structural level: arguments, operators, and grain positions within dot paths. A fourth symbol — `_` — marks syntactic traversal without ontological participation, and appears only in dot paths.
 
 The system is progressive. Any slot may be left unmarked. An unmarked slot is not empty — it holds all three positions (−/+/*) in implicit superposition. Marking a slot narrows it. Resolution increases by determination, not by switching systems.
+
+> **Status note (2026-09-28).** Everything below is a **proposed** formal notation, not a description of what `eoreader7` emits. The notation the reader actually produces is a different mechanism — a cube-addressed relation tree rendered by `notationOf()` (`native/the-fold/eot-notation.js`) — with no `±`/`*`/`∥`/`_` vocabulary anywhere in it. See §13, "As Implemented," at the end of this article, and [EOT](/eot) for the pipeline that builds the shipped tree.
 
 ## 0. What This Notation Does
 
@@ -614,6 +616,21 @@ Valid in any slot: type, register, or grain segment.
 | ∥ | Explicit DEF (specified subset) | Explicit DEF (specified subset) | Explicit DEF (specified subset) |
 
 One vocabulary. Three structural levels. Determination as narrowing. Unmarked is full. `_` is empty.
+
+---
+
+## 13. As Implemented: eoreader7's Shipped Notation
+
+Sections 1–12 above describe a proposed notation. What `eoreader7` actually emits is simpler and different in kind: `native/the-fold/eot-notation.js`'s `notationOf()` (lines 70–96) renders a parsed sentence's cube-addressed relation tree, read from its root:
+
+```
+reach  CON·Figure  Tense=Past@REC·Pattern
+  nsubj @SEG·Figure   steamboat  SIG·Figure  Number=Plur@SIG·Pattern
+  obj   @SEG·Figure   Nashville  SIG·Figure
+  obl   @SEG·Ground   1819       DEF·Figure
+```
+
+Each line is a node's lemma, its cube-addressed word class, and any cube-addressed feature or absorbed function-word marker; indentation under a relation label (`nsubj`, `obj`, `obl`, …) is the parse tree the source annotation produced, not a word-order encoding. There is no `±`/`*`/`∥`/`_` vocabulary in this output — type, register, and grain marking as specified in §§1–12 have not been implemented. Producing this tree from raw text depends on a trained parser (`native/adapters/text/english-parser.js`, 95.2 UPOS / 81.2 UAS / 77.0 LAS held-out) that is measured but currently unwired from the live reading route (README.md, "Reading competency audit," 2026-09-23; see [EOT](/eot) for the surface/meaning split and the pipeline stages this depends on).
 
 ---
 

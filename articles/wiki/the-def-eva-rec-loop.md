@@ -3,7 +3,7 @@
 **Record ID:** wiki:the-def-eva-rec-loop  
 **DB ID:** 70  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -25,11 +25,13 @@ The loop: DEF ⊢ → EVA ⊨ → REC ⊛ → DEF ⊢ ...
 
 The loop this article traces — in quantum states, in chemistry, in life, in law, in mathematics — is the **depicted** loop: DEF, EVA, and REC as they appear *in the phenomenon being described*. It is timeless and recomputable. The court rewrote the statute; the Great Vowel Shift restructured English; selection rewrote allele frequencies. These are classified facts about transformations in the world, and reading the same record again classifies them the same way.
 
-The [EO Reader](/the-eo-reader) makes visible a second loop the depicted account hides: the **enacted** loop — a reader's *own* act of establishing a frame, testing each arrival against it, and restructuring when strain accumulates. This loop is temporal and generation-order constitutive: it runs *as* the reading happens, and the same text read only to an earlier point yields a genuinely different reading. Where the depicted loop is a fact about the world, the enacted loop is the reading's own conduct.
+The [EO Reader](/the-eo-reader) makes visible a second loop the depicted account hides: the **enacted** loop — a reader's *own* act of establishing a frame, testing each arrival against it, and restructuring when the frame proves inadequate. This loop is temporal and generation-order constitutive: it runs *as* the reading happens, and the same text read only to an earlier point yields a genuinely different reading. Where the depicted loop is a fact about the world, the enacted loop is the reading's own conduct.
 
-The two must never be conflated, and the implementation enforces the separation structurally (see [The Two Doors](/the-two-doors)). A *depicted* REC — "the court rewrote the definition" — is an exafferent fact the record can witness. An *enacted* REC — the reader restructured its own working frame mid-read — is reafference, the system's own act, `canWitness === false`. Collapsing the two is precisely how a system would launder its own interpretation into a fact; keeping them apart is what lets a reader think without corrupting its record.
+The two must never be conflated. A *depicted* REC — "the court rewrote the definition" — is an exafferent fact the record can witness. An *enacted* REC — the reader restructured its own working frame mid-read — is the reading's own act, not a fact about the world. Collapsing the two is precisely how a system would launder its own interpretation into a fact; keeping them apart is what lets a reader think without corrupting its record. (See [The Two Doors](/the-two-doors) for how the current implementation draws this boundary.)
 
-The enacted loop also carries mechanics the depicted account never needed (`src/core/enacted/loop.js`): an EVA *confirms* when surprise falls below a band derived from the reading's own history, and otherwise feeds a **strain** accumulator; REC fires only on *accumulated* strain — Piaget's accommodation after enough failed assimilations, Lakatos's protective belt yielding only under sustained pressure — never on a single anomaly. The calibration is causal: the band that judges a line is fit only from what came before it, so the future can never set the standard that judged the past. See [Signal from Noise](/signal-from-noise).
+The enacted loop's current shape runs through an explicit **Challenge** stage before witness. The EO Reader's canonical cycle names it directly (`README.md`): `Fold → Orientation → Encounter → Perception → Challenge → Witness → Interrogation → DeltaFold → revised Fold`. Every nominated candidate passes through `challengeCandidates`, which the reader's own `step()` calls between perception and witness; absent a challenger the stage is identity-preserving (`native/kernel/reading.js`). Orientation and priors may nominate candidates at the perception stage, but nomination is not admission — "Orientation and priors may nominate candidates; they never admit observations" (`native/kernel/perception.js`). The shipped challenger enforces that distinction structurally: it re-runs the same extraction on a reshuffled version of the same material, and a candidate that survives only because of one specific arrangement — not because the material itself supports it — does not reappear and is dropped (`native/kernel/perturbation-challenger.js`).
+
+What the loop derives is not a strain accumulator crossing a threshold but three quantities computed from the delta and the fold directly (`native/kernel/dynamics.js`): *surprise* is the delta's own consequential revisions, never mere observation novelty; *tension* is the persistent, unresolved obligation structure the revised fold now holds; *release* fires only when a prior obligation's state changed **and** a witnessed transformation in the delta targeted it. The canonical cycle states these are derived only after transformation, not accumulated toward a fixed band (`README.md`). Where persistence itself is the question — whether a value has settled in sequence rather than merely recurring — `native/kernel/settling.js` measures it against a permutation null (the same steps with their order shuffled) at a declared p-value, not a decay constant. See [Signal from Noise](/signal-from-noise).
 
 ## DEF Depends on SYN
 
@@ -53,11 +55,11 @@ But here's the critical limit: the particle's history is not **encoded separatel
 
 Chemistry adds boundaries, connections, and composition. Molecules form (SYN), they have distinct surfaces and interiors (SEG), they bond and react (CON). A crystal is a real configuration — it's doing SYN with SEG and CON. But the crystal *is* its structure. There's no separation between the pattern and its carrier. Nothing is encoded that could be read, evaluated, or rewritten.
 
-Both Existence and Structure triads are operative, but the Significance triad (DEF, EVA, REC) — are not. The world is rich in individuality, composition, and structure. What's missing is encoding, evaluation, and rewriting.
+Both Existence and Structure triads are operative, but the Interpretation triad (DEF, EVA, REC) — are not. The world is rich in individuality, composition, and structure. What's missing is encoding, evaluation, and rewriting.
 
 ### Interpretation Triad at the Life Threshold (DEF, EVA, REC)
 
-Life is where the Significance triad comes online — where the system's history becomes *encodable*, *evaluable*, and *rewritable.* For the first time, what a system has learned from its interactions can be transmitted to a new system without the original having to be destroyed.
+Life is where the Interpretation triad comes online — where the system's history becomes *encodable*, *evaluable*, and *rewritable.* For the first time, what a system has learned from its interactions can be transmitted to a new system without the original having to be destroyed.
 
 **DEF needs encodability.** A separation between the *rules* and the *material the rules act on.* The pattern must be recorded somewhere other than in the structure itself — an encoding that *instructs* rather than *is.*
 
@@ -153,5 +155,5 @@ The character of any system comes from how hard each transition is. Rigid system
 
 - [The Nine Operators](/the-nine-operators) — DEF, EVA, REC in the full lattice
 - [The EO Reader](/the-eo-reader) · [The Two Doors](/the-two-doors) — where the enacted loop runs, and the firewall that keeps it distinct from the depicted one
-- [Signal from Noise](/signal-from-noise) — the derived band and strain accumulator that drive the enacted REC
-- [The Three Triads](/the-triads) — the Significance triad this loop lives in
+- [Signal from Noise](/signal-from-noise) — the derived surprise/tension/release triad that drives the enacted REC
+- [The Three Triads](/the-triads) — the Interpretation triad this loop lives in

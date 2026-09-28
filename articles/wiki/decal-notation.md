@@ -5,7 +5,7 @@
 **Tags:** 301  
 **Keywords:** operator, ground, figure, pattern  
 **Status:** published  
-**Updated:** 2026-05-16T01:25:47.432Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -166,7 +166,7 @@ Both notations refer to the same 27 positions. The decal is for reading. The coo
 
 NUL−
 
-Void aimed at Ground
+Absence aimed at Ground
 
 [0, −1, 2]
 
@@ -179,7 +179,7 @@ Void
 
 NUL+
 
-Void aimed at Figure
+Absence aimed at Figure
 
 [0, −1, √2]
 
@@ -192,7 +192,7 @@ Entity
 
 NUL*
 
-Void aimed at Pattern
+Absence aimed at Pattern
 
 [0, −1, 2^√2]
 
@@ -355,7 +355,7 @@ Network
 
 DEF−
 
-Alteration aimed at Ground
+Definition aimed at Ground
 
 [0, √2, 2]
 
@@ -365,7 +365,7 @@ Atmosphere
 
 DEF+
 
-Alteration aimed at Figure
+Definition aimed at Figure
 
 [0, √2, √2]
 
@@ -375,7 +375,7 @@ Lens
 
 DEF*
 
-Alteration aimed at Pattern
+Definition aimed at Pattern
 
 [0, √2, 2^√2]
 

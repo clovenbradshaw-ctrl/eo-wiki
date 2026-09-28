@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generated_at": "2026-06-13T21:59:35.254Z",
-  "count": 78,
+  "count": 104,
   "articles": [
     {
       "record_id": "wiki:ancient-astronomy-eo-saving-the-appearances",
@@ -22,6 +22,48 @@
       ],
       "updated_at": "2026-05-16T01:25:46.843Z",
       "path": "articles/wiki/ancient-astronomy-eo-saving-the-appearances.md"
+    },
+    {
+      "record_id": "wiki:apollo-thea-self-healing-loop",
+      "content_type": "wiki",
+      "slug": "apollo-thea-self-healing-loop",
+      "title": "Apollo, eoSwarm, and Thea: the Self-Healing Loop",
+      "db_id": 92,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "homeostasis",
+        "EWMA",
+        "admission gate",
+        "cube operators",
+        "hysteresis",
+        "Heimdall"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/apollo-thea-self-healing-loop.md"
+    },
+    {
+      "record_id": "wiki:bayes-meaning-potential-cascade",
+      "content_type": "wiki",
+      "slug": "bayes-meaning-potential-cascade",
+      "title": "Bayes: Asking First — The Meaning-Potential Cascade",
+      "db_id": 104,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "prior-query.js",
+        "meaning potential",
+        "Halliday register",
+        "fallback vs default",
+        "calibrated inference",
+        "genre voice"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/bayes-meaning-potential-cascade.md"
     },
     {
       "record_id": "wiki:bivalent-compression-and-dimensional-poverty",
@@ -93,6 +135,27 @@
       ],
       "updated_at": "2026-03-26T22:16:38.657Z",
       "path": "articles/wiki/coding-python-and-eo.md"
+    },
+    {
+      "record_id": "wiki:cuvier-what-is-this-code-artifact-reconstruction",
+      "content_type": "wiki",
+      "slug": "cuvier-what-is-this-code-artifact-reconstruction",
+      "title": "Cuvier's Bone: Reconstructing What a Code or Schema Artifact Is From Its Own Bytes",
+      "db_id": 102,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "code artifact reconstruction",
+        "GraphQL schema",
+        "disclosed sampling",
+        "byte-anchored evidence",
+        "witness discipline",
+        "registry drift"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/cuvier-what-is-this-code-artifact-reconstruction.md"
     },
     {
       "record_id": "wiki:decal-notation",
@@ -362,6 +425,49 @@
       "path": "articles/wiki/emergent-ontology-eo.md"
     },
     {
+      "record_id": "wiki:freges-referent-alias-equivalence-class",
+      "content_type": "wiki",
+      "slug": "freges-referent-alias-equivalence-class",
+      "title": "Frege's Referent: Why an Alias Is Never a Nickname",
+      "db_id": 103,
+      "status": "published",
+      "tags": [
+        "201"
+      ],
+      "keywords": [
+        "alias resolution",
+        "equivalence class",
+        "union-find",
+        "coreference",
+        "referent identity",
+        "declared evidence over inferred structure"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/freges-referent-alias-equivalence-class.md"
+    },
+    {
+      "record_id": "wiki:gfp-the-claim-underneath-word-order",
+      "content_type": "wiki",
+      "slug": "gfp-the-claim-underneath-word-order",
+      "title": "GFP: The Claim Underneath Word Order",
+      "db_id": 86,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "GFP",
+        "Talmy",
+        "word order",
+        "WALS",
+        "holon address",
+        "Fisher's exact test",
+        "crosslingual"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/gfp-the-claim-underneath-word-order.md"
+    },
+    {
       "record_id": "experiment:phaseposts",
       "content_type": "experiment",
       "slug": "phaseposts",
@@ -394,6 +500,48 @@
       "path": "articles/wiki/ground-figure-pattern.md"
     },
     {
+      "record_id": "wiki:handles-naming-as-governance",
+      "content_type": "wiki",
+      "slug": "handles-naming-as-governance",
+      "title": "The Handle System: Naming as Governance in EOReader",
+      "db_id": 90,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "handles",
+        "amendment xvii",
+        "naming",
+        "governance",
+        "organ ownership",
+        "coding-lessons"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/handles-naming-as-governance.md"
+    },
+    {
+      "record_id": "wiki:heimdall-out-of-the-sandbox",
+      "content_type": "wiki",
+      "slug": "heimdall-out-of-the-sandbox",
+      "title": "Heimdall, Out of the Sandbox: the Hive-Mind Supervisor",
+      "db_id": 91,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "process supervision",
+        "falsification",
+        "escalation",
+        "self-health",
+        "peer mesh",
+        "hive-mind"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/heimdall-out-of-the-sandbox.md"
+    },
+    {
       "record_id": "wiki:holons",
       "content_type": "wiki",
       "slug": "holons",
@@ -420,6 +568,27 @@
       "keywords": [],
       "updated_at": "2026-03-08T15:22:26.587Z",
       "path": "articles/page/home.md"
+    },
+    {
+      "record_id": "wiki:identity-alternatives-and-the-corroboration-floor",
+      "content_type": "wiki",
+      "slug": "identity-alternatives-and-the-corroboration-floor",
+      "title": "Identity Alternatives and the Corroboration Floor",
+      "db_id": 101,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "identity",
+        "coreference",
+        "corroboration floor",
+        "canonicalization",
+        "witness",
+        "recanonicalization"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/identity-alternatives-and-the-corroboration-floor.md"
     },
     {
       "record_id": "wiki:identity-as-a-change-log",
@@ -466,6 +635,28 @@
       "path": "articles/wiki/ins.md"
     },
     {
+      "record_id": "wiki:kleene-up-physics-of-finding",
+      "content_type": "wiki",
+      "slug": "kleene-up-physics-of-finding",
+      "title": "Kleene-Up: Finding by Address, Not by Pattern",
+      "db_id": 93,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "kleeneUp",
+        "needle and anchor",
+        "regex eviction",
+        "verbatim snip",
+        "drift refusal",
+        "sha256 provenance",
+        "THE SEAM"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/kleene-up-physics-of-finding.md"
+    },
+    {
       "record_id": "wiki:language-is-a-projection",
       "content_type": "wiki",
       "slug": "language-is-a-projection",
@@ -476,6 +667,27 @@
       "keywords": [],
       "updated_at": "2026-05-16T01:25:48.164Z",
       "path": "articles/wiki/language-is-a-projection.md"
+    },
+    {
+      "record_id": "wiki:lavar-reading-grader",
+      "content_type": "wiki",
+      "slug": "lavar-reading-grader",
+      "title": "LaVar: The Frontier-Model Reading Grader",
+      "db_id": 94,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "LaVar",
+        "revision autonomy spiral",
+        "mistake corpus",
+        "McGuffey ladder",
+        "dark referent",
+        "witness discipline"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/lavar-reading-grader.md"
     },
     {
       "record_id": "wiki:mhc-and-eo",
@@ -500,6 +712,28 @@
       "keywords": [],
       "updated_at": "2026-05-16T01:25:48.909Z",
       "path": "articles/wiki/most-ontologies-its-all-entities-eo-entities-are-only-one-type.md"
+    },
+    {
+      "record_id": "wiki:multiplicity-mechanisms",
+      "content_type": "wiki",
+      "slug": "multiplicity-mechanisms",
+      "title": "Five Ways to Run Many: eoreader7's Multiplicity Taxonomy",
+      "db_id": 95,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "multiplicity",
+        "swarm",
+        "walled corroboration",
+        "sham independence",
+        "mechanismOf",
+        "dispatch rule",
+        "corroboration"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/multiplicity-mechanisms.md"
     },
     {
       "record_id": "wiki:mvp-minimum-viable-prompt",
@@ -574,6 +808,48 @@
       ],
       "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/operator-naming-in-emergent-ontology.md"
+    },
+    {
+      "record_id": "wiki:pathos-and-the-re-ground",
+      "content_type": "wiki",
+      "slug": "pathos-and-the-re-ground",
+      "title": "Pathos and the Re-Ground: The Felt Shape That Can Force a New Ground",
+      "db_id": 99,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "pathos",
+        "re-ground",
+        "REC",
+        "experiencer",
+        "pacing",
+        "strain"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/pathos-and-the-re-ground.md"
+    },
+    {
+      "record_id": "wiki:portable-reader-experience-vasana-tala",
+      "content_type": "wiki",
+      "slug": "portable-reader-experience-vasana-tala",
+      "title": "Portable Reader Experience: Vasana, Tala, and What a Reader Carries Between Books",
+      "db_id": 100,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "vasana",
+        "tala",
+        "rhythm prior",
+        "experience prior",
+        "cross-work transfer",
+        "narrative rhythm"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/portable-reader-experience-vasana-tala.md"
     },
     {
       "record_id": "wiki:protogon",
@@ -657,6 +933,29 @@
       "path": "articles/wiki/scope.md"
     },
     {
+      "record_id": "wiki:stigmergic-fact-resolution",
+      "content_type": "wiki",
+      "slug": "stigmergic-fact-resolution",
+      "title": "The Colony Learns: Stigmergic Routing for Time-Sensitive Facts",
+      "db_id": 96,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "stigmergy",
+        "current facts",
+        "hyperlexicon",
+        "kinds and links",
+        "fact gate",
+        "omnilingual",
+        "swarm learning",
+        "referent resolution"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/stigmergic-fact-resolution.md"
+    },
+    {
       "record_id": "experiment:test",
       "content_type": "experiment",
       "slug": "test",
@@ -710,6 +1009,71 @@
       "keywords": [],
       "updated_at": "2026-05-16T01:25:50.137Z",
       "path": "articles/wiki/the-axis-triad-and-its-coordinates.md"
+    },
+    {
+      "record_id": "wiki:the-charter-as-license-eos-moral-core",
+      "content_type": "wiki",
+      "slug": "the-charter-as-license-eos-moral-core",
+      "title": "The Charter as License: EO's Moral Core",
+      "db_id": 87,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "moral core",
+        "charter",
+        "ethos",
+        "license not filter",
+        "shadow trail",
+        "hyperlexicon affordance",
+        "Grotius"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-charter-as-license-eos-moral-core.md"
+    },
+    {
+      "record_id": "wiki:the-covert-cast",
+      "content_type": "wiki",
+      "slug": "the-covert-cast",
+      "title": "The Covert Cast: Terry Gross's Company and the Ban on Naming the Machine",
+      "db_id": 97,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "earned-cast",
+        "covert vocabulary firewall",
+        "trust ladder",
+        "trajectory lens",
+        "Terry Gross archon",
+        "Handle registry drift",
+        "fail-closed cue"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-covert-cast.md"
+    },
+    {
+      "record_id": "wiki:the-cube-as-a-universal-grammar",
+      "content_type": "wiki",
+      "slug": "the-cube-as-a-universal-grammar",
+      "title": "The Cube as a Universal Grammar",
+      "db_id": 85,
+      "status": "published",
+      "tags": [
+        "401"
+      ],
+      "keywords": [
+        "universal dependencies",
+        "universal grammar",
+        "chomsky",
+        "word order",
+        "taxonomy completeness",
+        "parameter setting"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-cube-as-a-universal-grammar.md"
     },
     {
       "record_id": "wiki:the-def-eva-rec-loop",
@@ -777,6 +1141,71 @@
       "keywords": [],
       "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-experience-engine.md"
+    },
+    {
+      "record_id": "wiki:the-folds-craft-discipline",
+      "content_type": "wiki",
+      "slug": "the-folds-craft-discipline",
+      "title": "The Fold's Craft Discipline: Matter, Motion, and the Archons",
+      "db_id": 105,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "admission.js",
+        "matter and motion",
+        "null-derived measurement",
+        "revision spiral archons",
+        "beatsFromGround",
+        "abstain honestly",
+        "referent continuity"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-folds-craft-discipline.md"
+    },
+    {
+      "record_id": "wiki:the-guardrail-organs-witnesses-not-verdicts",
+      "content_type": "wiki",
+      "slug": "the-guardrail-organs-witnesses-not-verdicts",
+      "title": "The Guardrail Organs: Witnesses, Never Verdicts",
+      "db_id": 106,
+      "status": "published",
+      "tags": [
+        "201"
+      ],
+      "keywords": [
+        "witness",
+        "verdict",
+        "security",
+        "PII",
+        "prompt injection",
+        "guardrails",
+        "effect system"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-guardrail-organs-witnesses-not-verdicts.md"
+    },
+    {
+      "record_id": "wiki:the-holograph",
+      "content_type": "wiki",
+      "slug": "the-holograph",
+      "title": "The Holograph: How a Whole Reading Fits in a Few Hundred Tokens",
+      "db_id": 84,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "holograph",
+        "activation retrieval",
+        "RAG",
+        "HRR",
+        "hyperlexicon",
+        "compression"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-holograph.md"
     },
     {
       "record_id": "wiki:the-integral-lineage",
@@ -848,6 +1277,27 @@
       "path": "articles/wiki/the-measurement-paraxoc.md"
     },
     {
+      "record_id": "wiki:the-moral-helix-27-cells-of-moral-development",
+      "content_type": "wiki",
+      "slug": "the-moral-helix-27-cells-of-moral-development",
+      "title": "The Moral Helix: 27 Cells of Moral Development",
+      "db_id": 88,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "moral development",
+        "kohlberg",
+        "rest DIT-2",
+        "helix",
+        "altitude",
+        "spiral dynamics"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-moral-helix-27-cells-of-moral-development.md"
+    },
+    {
       "record_id": "wiki:the-nine-operators",
       "content_type": "wiki",
       "slug": "the-nine-operators",
@@ -860,6 +1310,27 @@
       "keywords": [],
       "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-nine-operators.md"
+    },
+    {
+      "record_id": "wiki:the-null-states",
+      "content_type": "wiki",
+      "slug": "the-null-states",
+      "title": "The Null States: A Grammar of Everything This Instrument Can Say No To",
+      "db_id": 83,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "GAP_TYPES",
+        "apophasis",
+        "void",
+        "meta-null",
+        "declareVoid",
+        "negation-timeline"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-null-states.md"
     },
     {
       "record_id": "wiki:the-observer-problem",
@@ -886,6 +1357,48 @@
       "keywords": [],
       "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/the-pythagorean-theorem-plato-s-meno-x-and-eo.md"
+    },
+    {
+      "record_id": "wiki:the-shape-of-harm-how-eo-reads-and-answers-an-ask",
+      "content_type": "wiki",
+      "slug": "the-shape-of-harm-how-eo-reads-and-answers-an-ask",
+      "title": "The Shape of Harm: How EO Reads and Answers an Ask",
+      "db_id": 89,
+      "status": "published",
+      "tags": [
+        "201"
+      ],
+      "keywords": [
+        "askShape",
+        "interlocutor",
+        "Kierkegaard indirect communication",
+        "foreclosure",
+        "medium-blind",
+        "corroboration"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-shape-of-harm-how-eo-reads-and-answers-an-ask.md"
+    },
+    {
+      "record_id": "wiki:the-story-cube-vonnegut-shapes",
+      "content_type": "wiki",
+      "slug": "the-story-cube-vonnegut-shapes",
+      "title": "The Story Cube: Vonnegut's Eight Shapes, Made Taxonomically Complete",
+      "db_id": 98,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "fortune curve",
+        "story shapes",
+        "topological equivalence",
+        "trajectory taxonomy",
+        "cube algebra",
+        "vonnegut"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-story-cube-vonnegut-shapes.md"
     },
     {
       "record_id": "wiki:the-three-arrows",
@@ -937,6 +1450,29 @@
       "path": "articles/wiki/the-three-faces-of-emergent-ontology.md"
     },
     {
+      "record_id": "wiki:the-three-mathematics",
+      "content_type": "wiki",
+      "slug": "the-three-mathematics",
+      "title": "The Three Mathematics: Arithmetic, Geometry, and Calculus as the Cube's Domains",
+      "db_id": 82,
+      "status": "published",
+      "tags": [
+        "401"
+      ],
+      "keywords": [
+        "arithmetic",
+        "geometry",
+        "calculus",
+        "operator cube",
+        "stance face",
+        "isomorphism",
+        "pre-registration",
+        "OPERATOR_CHAIN"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-three-mathematics.md"
+    },
+    {
       "record_id": "wiki:the-triads",
       "content_type": "wiki",
       "slug": "the-triads",
@@ -972,6 +1508,27 @@
       ],
       "updated_at": "2026-05-16T01:25:52.200Z",
       "path": "articles/wiki/the-triadic-minimum.md"
+    },
+    {
+      "record_id": "wiki:the-ways-of-knowing",
+      "content_type": "wiki",
+      "slug": "the-ways-of-knowing",
+      "title": "The Ways of Knowing: Nine Spokes Around an Empty Hub",
+      "db_id": 81,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "epistemology",
+        "pramana",
+        "triangulation",
+        "corroboration",
+        "apophasis",
+        "oracle evaluation"
+      ],
+      "updated_at": "2026-09-28T00:00:00.000Z",
+      "path": "articles/wiki/the-ways-of-knowing.md"
     },
     {
       "record_id": "wiki:time-as-emergent-dimension",

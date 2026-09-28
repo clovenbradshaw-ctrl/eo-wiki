@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** CRUD  
 **Status:** published  
-**Updated:** 2026-05-16T01:25:52.808Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -27,7 +27,7 @@ Emergent Ontology describes every transformation using three independent project
 
 **The Site Face** — what kind of thing was transformed. Nine terrain types: Void, Entity, Kind, Field, Link, Network, Atmosphere, Lens, Paradigm. The Site Face answers: *what was the target?*
 
-**The Stance Face** — at what grain the transformation landed. Nine stances: Clearing, Dissecting, Unraveling, Tending, Binding, Cultivating, Making, Composing, Forging. The Stance Face answers: *how did it resolve?*
+**The Stance Face** — at what grain the transformation landed. Nine stances: Clearing, Dissecting, Unraveling, Tending, Binding, Tracing, Cultivating, Making, Composing. The Stance Face answers: *how did it resolve?*
 
 A well-described transformation carries all three. "She cleared the old phone number" = DEF (Act) targeting an Entity (Site) that resolved as Clearing (Resolution) — a trajectory from populated to empty. Three dimensions. Three independent pieces of information. All recoverable from a natural-language sentence.
 
@@ -46,7 +46,7 @@ CREATE and READ preserve a coarse Act signal. UPDATE and DELETE preserve nothing
 
 No CRUD verb carries Site information. "An UPDATE happened" says nothing about whether the target was a specific value (Entity), a relationship (Link), an ambient condition (Atmosphere), or a schema (Paradigm).
 
-No CRUD verb carries Resolution information. "An UPDATE happened" says nothing about whether the transformation was Dissecting (a value cut from its predecessor), Clearing (a value released), Binding (a relationship held to its target), or Forging (a new structure produced).
+No CRUD verb carries Resolution information. "An UPDATE happened" says nothing about whether the transformation was Dissecting (a value cut from its predecessor), Clearing (a value released), Binding (a relationship held to its target), or Composing (a new structure produced).
 
 One dimension, lossy. Two dimensions, absent entirely. The audit log is a sequence of 1D labels describing 3D events.
 
@@ -64,7 +64,7 @@ Natural language keeps the three faces separable through different parts of spee
 
 1. **Act Face (verb):** REC — the frame was changed
 2. **Site Face (noun phrase):** "the schema" — Paradigm (Significance × Pattern)
-3. **Stance Face (manner):** "restructured to accommodate" — Forging (producing new integrated structure)
+3. **Stance Face (manner):** "restructured to accommodate" — Composing (producing new integrated structure)
 
 > "They **cleared** the old address when the client moved."
 
@@ -83,7 +83,7 @@ UPDATE is one verb. It covers at least five structurally distinct operations —
 | A field value changed | DEF | Entity → Entity | Dissecting | UPDATE |
 | An entity crossed a category boundary | DEF(SEG) | Entity → Kind | Cultivating | UPDATE |
 | Two sources disagreed; one was silently picked | EVA suppressed | Entity ∥ Entity | (suppressed) | UPDATE |
-| The interpretive frame changed | REC | Paradigm → Paradigm | Forging | UPDATE |
+| The interpretive frame changed | REC | Paradigm → Paradigm | Composing | UPDATE |
 | A previously cleared field was repopulated | INS | Void → Entity | Making | UPDATE |
 
 Five different Acts. Four different Site trajectories. Four different Resolutions. One verb.
@@ -131,7 +131,7 @@ CRUD's four verbs produce three systematic destructions, one per face:
 
 **Site erasure.** Zero information about what kind of thing was affected. Was it a specific value (Entity)? A relationship (Link)? A schema (Paradigm)? An ambient condition (Atmosphere)? The verb cannot say. Every target looks the same.
 
-**Resolution erasure.** Zero information about how the transformation landed. Was a value cut from its predecessor (Dissecting)? Released (Clearing)? Was a new structure forged (Forging)? A relationship held (Binding)? The verb cannot say. Every resolution looks the same.
+**Resolution erasure.** Zero information about how the transformation landed. Was a value cut from its predecessor (Dissecting)? Released (Clearing)? Was a new structure composed (Composing)? A relationship held (Binding)? The verb cannot say. Every resolution looks the same.
 
 The result is **Semantic Homogeneity in Transformation**: all change looks the same on all three dimensions that matter.
 
@@ -241,7 +241,7 @@ GET  /horizon/{target}          → Projection. No log entryPOST /ops/ins       
 | --- |
 | **Act collapse** (nine types → four verbs) | Closed algebra of nine operators. Each transformation gets exactly one type |
 | **Site erasure** (no information about target type) | Three-face notation preserves what kind of thing was affected. Site Face trajectories are readable from the log |
-| **Resolution erasure** (no information about how it landed) | Stance Face stances are recoverable from Act + Site. Clearing, Binding, Forging, Cultivating — all distinguishable |
+| **Resolution erasure** (no information about how it landed) | Stance Face stances are recoverable from Act + Site. Clearing, Binding, Composing, Cultivating — all distinguishable |
 | **History erasure** (UPDATE overwrites, DELETE removes) | Append-only log. Every operator is an entry. Prior states reconstructed by replay |
 | **Flat verb space** (no ordering, no presupposition) | Helix dependency ordering. Operators accumulate capacity |
 | **No evaluation representation** (last-write-wins) | EVA applies projection rules. Multiple DEFs coexist in the log |

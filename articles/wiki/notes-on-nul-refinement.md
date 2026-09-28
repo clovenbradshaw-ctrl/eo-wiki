@@ -2,8 +2,8 @@
 
 **Record ID:** wiki:notes-on-nul-refinement  
 **DB ID:** 64  
-**Status:** published  
-**Updated:** 2026-03-22T05:09:37.982Z  
+**Status:** draft  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -11,7 +11,24 @@
 
 A series of connected observations about NUL's identity produces a cascade of simplifications across the framework. The central move: NUL is observation — the pass-through, the identity function on state. It is not absence, not erasure, not deletion. Absence is produced by the −1 pole of whichever operator established the thing being removed. This dissolves the three-NUL-state problem, eliminates the read/write distinction, and clarifies the relationship between the operator algebra and the Experience Engine.
 
-**Status: Theoretical proposal. Not yet integrated into wiki. Requires review against existing operator definitions, emission decision tree, and Experience Engine specification.**
+**Status: Historical proposal, superseded.** eoreader7 shipped a different, richer answer to the question this document poses. See "Resolution" immediately below; the rest of this document is preserved as the proposal that did not become the doctrine.
+
+## Resolution: what actually shipped (2026-09-28 sync)
+
+This document's central move — collapse absence to the −1 pole of whichever operator established the thing being removed (§2 below) — was not the answer eoreader7 adopted. `native/docs/THE-NULL-STATES.md` (written 2026-09-05, amended the same day) documents a different, more granular resolution: a named census of gap types — `nul/index.js::GAP_TYPES`, 28 of them — arranged across the same nine-operator grid this wiki uses, crossed with three grains (Ground, Figure, Pattern), for 27 cells plus a "hub" class of nulls belonging to no cell (self-referential regress, unreachable models). Two cells — SEG·Figure and DEF·Ground — were empty until an amendment on the same day filled them with `cut:<noteId>` and `declareVoid` / `foldVoids` / `rezeroVoid` / `voidTimeline` respectively (THE-NULL-STATES.md, Amendment 2026-09-05).
+
+The shipped doctrine is governed by six explicit laws, not by a single collapse rule (THE-NULL-STATES.md lines 19–26):
+
+1. A null names its scope — what was searched: the extent, the pool, the cursor, the draws.
+2. A null names what would fill it — its own cancellation condition.
+3. A null is a finding only when the search reached its object — a measured absence, never a failure-to-look mistaken for one.
+4. A null never convicts — absence of evidence is never manufactured into evidence of the negative.
+5. Nulls compose downward — a null at Ground makes every Figure and Pattern built over it a null too (presupposition, not falsity).
+6. The mouth (the generation surface) may relay a declared null and may never declare one on its own.
+
+Where §2 below proposes one mechanism — "every operator that can establish something can withdraw it; the −1 pole produces absence" — the shipped doctrine instead gives each operator × grain cell its own independently named, independently triggered gap type. NUL's own row is the clearest test case, since §2 explicitly argues NUL has no −1 pole: the shipped grid agrees NUL has no reversal pole, but it does not therefore leave NUL's absences to be read off other operators' −1 poles. It gives NUL its own four Ground-grain gaps (`no_ground`, `degenerate_ground`, `incommensurate_extent`, `trending_material`), a Figure-grain gap (`exceeds_witness`), and two Pattern-grain gaps (`made_no_difference`, `slack_ground`) — each with its own scope and its own fill condition, not a generic reading of some other operator's −1 pole. **The −1-pole mechanism in §2 through §7 below is this proposal's losing branch**: an elegant unification that the shipped system did not adopt, in favor of a finer-grained, per-cell typology that a single algebraic rule cannot generate.
+
+The shipped doctrine also states a limit this proposal did not anticipate needing: "Coherence never establishes correspondence. A complete grid of nulls means the instrument can say 'no' at every grain; it does not mean any 'no' is true of the world" (THE-NULL-STATES.md, "What is not claimed"). A complete typology of absence — 28 named types or 9 operators' worth of −1 poles, either one — is not itself a claim about what is actually absent in the world. The same caveat, in nearly the same words, recurs across eoreader7's other 2026-09 doctrine documents (see Ancient Astronomy & EO: Saving the Appearances for the fuller citation trail).
 
 ## 1. NUL is observation
 

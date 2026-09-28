@@ -4,7 +4,7 @@
 **DB ID:** 26  
 **Keywords:** arrow, irreversibility, thermodynamics  
 **Status:** published  
-**Updated:** 2026-03-22T16:57:38.986Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -45,6 +45,8 @@ The Identity axis — the helix NUL → SIG → INS → SEG → CON → SYN → 
 The irreversibility gradient tracks the helix. Early operators reverse relatively cleanly: NUL ↔ Filling is low-entropy work, like toggling a switch. Late operators reverse expensively or not at all: REC ↔ Identity-locking (*nafs al-ammāra*) is nearly impossible — once identity has restructured, the prior identity is not stored somewhere waiting to be restored. It is gone. Trying to reverse REC is like willing a crystal back into liquid. It's not reversal. It's denial dressed as stability.
 
 The gradient is not about probability. It is about the topology of the dependency graph — which paths exist, which have been consumed. A transformation that has run SEG → CON → SYN has reorganized the conditions under which SEG was performed. Reversing SYN does not restore the pre-SYN state — it produces a *new* state that bears the marks of having been synthesized and de-synthesized. The backward path is a different path.
+
+Independent corroboration for the REC-irreversibility claim specifically comes from a domain this article does not otherwise draw on: eoreader7's THE-MORAL-HELIX.md names the same near-irreversibility at its REC·Pattern cell, in its own vocabulary — "the spiral that does not close," with two named failure modes on either side of the one successful path: sclerosis (a paradigm that never collapses) and confabulation (a paradigm that collapses without composing a new one) (THE-MORAL-HELIX.md, lines 519–541). That a moral-development framework, worked out independently and in different terms, converges on the same asymmetry — restructuring is not stored somewhere waiting to be undone, only survived or failed — is evidence for Arrow B from outside physics and outside this article's own citation base.
 
 Independent lines of evidence converge on topological irreversibility without naming it as such. Causal process calculi require that an action can only be undone after all actions it caused have been undone — a dependency-ordering constraint. Evolutionary epistatic ratchets show that subsequent neutral mutations structurally destabilize the ancestral state, making the backward path unavailable regardless of probability. Developmental topology in nonequilibrium systems shows that curl flux makes forward and backward paths mathematically non-equivalent. Path dependence theory shows that network topology locks in early contingencies independently of thermodynamic cost.
 

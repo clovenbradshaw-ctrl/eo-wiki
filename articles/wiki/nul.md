@@ -4,7 +4,7 @@
 **DB ID:** 22  
 **Tags:** operator  
 **Status:** draft  
-**Updated:** 2026-03-26T22:16:47.218Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -48,7 +48,15 @@ In human experience, NUL takes on a third character: the deliberate, sustained c
 
 This is neither a pass-through node nor a biological capacity. It is NUL as practice — non-transformation held open against the pressure to transform. The contemplative traditions have names for this: wu wei, kenosis, śūnyatā. The formal structure is the same operator. The phenomenology is richer because the system sustaining the non-action is aware of what it is not doing.
 
-Not absence as a thing — that is already a distinction (SIG territory). Not the void itself — that is the site (Existence ⤫ Ground on the Site face, with its own phenomenology: the Sanskrit śūnya, the Coptic Nun, the Yoruba àìmọ̀). NUL is the act of withdrawing from the act — whether that withdrawal is a node, a capacity, or a choice.
+### The declared-absent role
+
+*"A subject-less 'Mary did too' leaves no trace at all" — unless something is built to notice the silence.*
+
+Ordinary text extraction treats a gapped clause as a failure rather than an event: `adapters/text/relations.js` either extracts a complete clause or produces nothing, and no gap-typing exists anywhere in that file (`native/kernel/completion.js:15-18`). `native/kernel/completion.js` (Handle: Brahmagupta — "a declared absence is a value, not a gap," `completion.js:12`; `README.md:341`) exists to correct exactly that: `declareAct({schema, expectedRoles, filled})` takes a caller-declared, closed role set for one recurring act and types every expected-but-unfilled role as a first-class event rather than letting it vanish silently (`completion.js:80-106`). The typing is cube-derived, not hand-assigned — `ABSENCE_CELL = cellOf("NUL", "Figure")` (`completion.js:64-65`), confirmed against the real cube as `domain: Existence, terrain: Entity, stance: Dissecting` (`tests/completion.test.js:13-16`). This is the E. coli argument above, read back at the level of grammar: the pipeline has the machinery to fill the role and doesn't, and that non-firing is the datum, not a parse failure.
+
+Resolving the gap is a second, distinct operator, not a continuation of the first: `resolveAbsence()` binds the absence to a winning earlier-filled candidate at `RESOLUTION_CELL = cellOf("CON", "Figure")` (`completion.js:67-68`, confirmed `terrain: Link, stance: Binding` at `tests/completion.test.js:18-21`) — the identical cell ordinary pronoun resolution already occupies in `memory/activation.js` — via `kernel/contest.js`'s own `adjudicate`, with no second scoring rule written for the occasion (`completion.js:34-45, 147-148`). The module's claim to reach beyond text is measured, not merely asserted: `READING-SPEC.md:1456-1464` reports the identical, unmodified functions run over two disjoint schemas — an English VP-ellipsis case and a musical elided-cadence case built from roman-numeral chord symbols — with zero branching on which, checked by grep as well as by the ten cases in `tests/completion.test.js` passing (`READING-SPEC.md:1475`). The same document discloses the limit just as readily: the falsification leg — real material where the typing visibly helps — was never run, and as of that writing the organ is "built, tested, unconsumed," wired to no adapter (`READING-SPEC.md:1465-1471`). And the cell this module claims is not uniquely its own: a second, independent module at the identical `NUL·Figure` cell (`clearance.js`, self-declared, in a sibling `the-fold` repository this wiki has not read directly) does a structurally different act — establishing that a figure clears its ground, rather than typing an unfilled one (`THE-MODULE-CENSUS.md:384, 898`) — a complementary pair at one cell, not a collision.
+
+Not absence as a thing — that is already a distinction (SIG territory). Not the void itself — that is the site (Existence ⤫ Ground on the Site face, with its own phenomenology: the Sanskrit śūnya, the Coptic Nun, the Yoruba àìmọ̀). NUL is the act of withdrawing from the act — whether that withdrawal is a node, a capacity, a choice, or a declared role.
 
 ## Helix position and dependencies
 
@@ -307,7 +315,7 @@ In information theory, zero information is the baseline against which all signal
 
 Without NUL, the system cannot not-act. Every junction must transform. Every input must produce an output. Every field must have a value.
 
-The consequences cascade through the entire helix. If NUL is degraded — ground down from ontological condition to clerical backlog to mandatory field — then the Existence triad degrades: you cannot distinguish between "untouched" and "touched" if the system has no concept of non-touching. The Structure triad degrades: you cannot draw meaningful boundaries (SEG) if you cannot first not draw a boundary (NUL) — because the distinction between bounded and unbounded requires the prior capacity for non-bounding. The Significance triad degrades: you cannot render judgment (EVA) or change frames (REC) if you cannot pause between operations — and pausing is, structurally, NUL inserted into the pipeline between one transformation and the next.
+The consequences cascade through the entire helix. If NUL is degraded — ground down from ontological condition to clerical backlog to mandatory field — then the Existence triad degrades: you cannot distinguish between "untouched" and "touched" if the system has no concept of non-touching. The Structure triad degrades: you cannot draw meaningful boundaries (SEG) if you cannot first not draw a boundary (NUL) — because the distinction between bounded and unbounded requires the prior capacity for non-bounding. The Interpretation triad degrades: you cannot render judgment (EVA) or change frames (REC) if you cannot pause between operations — and pausing is, structurally, NUL inserted into the pipeline between one transformation and the next.
 
 The specific failure modes are visible in institutional practice. A case management system that cannot hold "we have not acted on this" as distinct from "we have acted and found nothing" will produce downstream interventions based on ambiguous data. A medical record system that treats an untouched field as equivalent to a field marked "normal" will miss patients whose conditions have not been evaluated. A financial system that treats non-action as zero will report phantom precision.
 

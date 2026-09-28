@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** triad, trichotomy, ground, figure, three  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -78,7 +78,7 @@ The same three-role structure appears on all three axes:
 | --- | --- | --- |
 | Ground | Existence (−1) | Whether things are — the condition for anything else |
 | Figure | Structure (+1) | How things relate — what stands out once things exist |
-| Pattern | Significance (√2) | What things mean — what holds the structure together over time |
+| Pattern | Interpretation (√2) | What things mean — what holds the structure together over time |
 
 **Ω (Object) — What does the transformation act on?**
 
@@ -119,7 +119,7 @@ Pattern cannot reverse into ground or figure. Pattern is not another object alon
 
 The recurrence of the GFP structure at every level is what EO calls fractal self-similarity. It appears at three scales:
 
-**System level.** The three triads exhibit GFP structure: Existence is the ground (condition for anything to appear), Structure is the figure (what emerges from that ground), Significance is the pattern (what makes it intelligible and persistent).
+**System level.** The three triads exhibit GFP structure: Existence is the ground (condition for anything to appear), Structure is the figure (what emerges from that ground), Interpretation is the pattern (what makes it intelligible and persistent).
 
 **Triad level.** Within each triad, the three operators play the same roles:
 
@@ -127,7 +127,7 @@ The recurrence of the GFP structure at every level is what EO calls fractal self
 | --- | --- | --- | --- |
 | **Existence** | NUL (field of absence) | SIG (salience carved from that field) | INS (instance making it actual) |
 | **Structure** | SEG (differentiated space) | CON (specific connections) | SYN (emergent wholes) |
-| **Significance** | DEF (values in motion) | EVA (specific conflicts) | REC (reframing that resolves them) |
+| **Interpretation** | DEF (values in motion) | EVA (specific conflicts) | REC (reframing that resolves them) |
 
 **Operator level.** Each individual operator has its own internal dialectic — a ground register (−), a figure register (+), and a pattern register (*). Same operator, different Ω-axis target, different intervention.
 
@@ -145,9 +145,9 @@ The three triads do not share a single coordinate system. Each carries the mathe
 | --- | --- | --- | --- | --- |
 | **Existence** | 0 | 1 | 2 | Arithmetic |
 | **Structure** | −1 | +1 | √2 | Geometry |
-| **Significance** | 2 | √2 | 2^√2 | Calculus / Limits |
+| **Interpretation** | 2 | √2 | 2^√2 | Calculus / Limits |
 
-These are the triad-level expression of the axis-level coordinates: the Arithmetic axis (α) coordinates {0, 1, 2} are the Existence triad's. The Geometric axis (η) coordinates {−1, +1, √2} are the Structure triad's. The Transcendental axis (Ω) coordinates {2, √2, 2^√2} are the Significance triad's. The axis and the triad that generates it carry the same mathematical character.
+These are the triad-level expression of the axis-level coordinates: the Arithmetic axis (α) coordinates {0, 1, 2} are the Existence triad's. The Geometric axis (η) coordinates {−1, +1, √2} are the Structure triad's. The Transcendental axis (Ω) coordinates {2, √2, 2^√2} are the Interpretation triad's. The axis and the triad that generates it carry the same mathematical character.
 
 The pattern-position coordinates form a provable progression: 2 (rational), √2 (algebraic irrational), 2^√2 (transcendental by Gelfond–Schneider). Each type is unreachable from the previous type by the previous type's own methods. See *Triad-Specific Coordinate Systems* for the full derivation and signal assessment.
 
@@ -155,7 +155,7 @@ The pattern-position coordinates form a provable progression: 2 (rational), √2
 
 ## Relationship to Prior Traditions
 
-**Gestalt psychology.** The direct ancestor. Gestalt named the figure-ground distinction as constitutive of perception — not a feature of trick images but the minimum structure of seeing anything at all. The Rubin vase demonstrates this: the image resolves as two faces in profile, then flips to a vase, then back. The faces and the vase cannot coexist as figures. One is always ground while the other is figure. Nothing in the dyad explains what holds a particular resolution in place — two poles without a third have no structural memory. Pattern is what Gestalt's stopping point at two could not account for: the relational configuration that stabilizes the ground-figure relation and makes the flip recognizable as a flip between two stable states rather than formless oscillation. EO treats Gestalt perception as one domain where the Triadic Minimum is visible, not as the source of the distinction. The perceptual vocabulary (ground, figure) is inherited; the framework is not.
+**Gestalt psychology.** The direct ancestor. Gestalt named the figure-ground distinction as constitutive of perception — not a feature of trick images but the minimum structure of seeing anything at all. The Rubin vase demonstrates this: the image resolves as two faces in profile, then flips to a vase, then back. The faces and the vase cannot coexist as figures. One is always ground while the other is figure. Nothing in the dyad explains what holds a particular resolution in place — two poles without a third have no structural memory. Pattern is what Gestalt's stopping point at two could not account for: the relational configuration that stabilizes the ground-figure relation and makes the flip recognizable as a flip between two stable states rather than formless oscillation. EO treats Gestalt perception as one domain where the Triadic Minimum is visible, not as the source of the distinction. The perceptual vocabulary (ground, figure) is inherited; the framework is not. The EO Reader's own code carries the debt forward explicitly: `native/kernel/surprise-segments.js` opens with Rubin's own German ("Es ist dieser Unterschied... zwischen Figur und Grund...") as the epigraph for a module that cuts a stream's segments where its own ground was most wrong — see [Signal from Noise](/signal-from-noise) for the implementation.
 
 **Hegel.** Thesis / antithesis / synthesis is the closest philosophical antecedent: ground is the thesis (what is given), figure is the antithesis (what differentiates), pattern is the synthesis (what integrates). EO departs in deriving the trichotomy from combinatorial structure rather than narrating it discursively, and in rejecting metaphysical teleology.
 

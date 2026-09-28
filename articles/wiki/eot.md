@@ -5,7 +5,7 @@
 **Tags:** 201  
 **Keywords:** eot, notation, wire format, locus, sense, provenance, ingestion  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -13,27 +13,32 @@
 
 ---
 
-## Surface syntax with operator recovery
+## The draft-to-rich pipeline
 
-An EOT line carries its operator in its punctuation, and the ingester recovers the operator from the surface — it never has to *infer* which operator a natural-language sentence meant (`src/organs/ingest/eot.js`). This is the escape from the mapping problem that killed Schank's primitives (see [Nine Instructions](/nine-instructions)): you do not guess the road from English to the operators, because the notation *is* the road.
+**(2026-09-28 revision.)** An EOT record is built in three schema-versioned, pure stages — no model call required for any of them:
 
-Two disciplines make it trustworthy rather than merely parseable:
+- **EOTDraft@1** (`native/the-fold/eot-draft.js`) recursively segments a piece into witnessed spans along its own holarchy — whole, parts, points — before any sentence-level parse runs. Every node carries the exact bytes it came from.
+- **EOTRich@1** (`native/kernel/eot-rich.js`) turns a Universal Dependencies annotation of a span into a two-layer record (below).
+- **EOTEnrichment@1** (`native/kernel/eot-enrich.js`) adds three fields no single sentence states — referent, evidence, and ground — computed from records EOTRich@1 already built.
 
-- **Provenance is load-bearing.** A model's note enters through the enactor door (`canWitness:false`); an external import enters through the perceiver door. The door is part of the line, not metadata bolted on afterward (see [The Two Doors](/the-two-doors)).
-- **Nothing inert is emitted silently.** A malformed line becomes a diagnostic, never a dropped fact; the emitter reports what it `skipped` and why (`src/organs/ingest/eot-emit.js`). Honesty about coverage is built into the format.
+## Surface and meaning
 
-## Carrying *where* and *which sense*
+The rich record's central move is its split into two layers (`native/kernel/eot-rich.js` header). **Surface** is the exact bytes, in the exact order, every line kept — lossless by construction, so any later loss stays checkable. **Meaning** is the EOT proper: content words only, as nodes; function words a language spends on case, determination, tense, mood, subordination, and coordination are **absorbed** as cube-addressed markers on the node they serve (the `ABSORBED` relation set: `case, det, aux, cop, mark, cc, clf`; punctuation is surface-only). Every relation between content nodes, and every feature value, carries its own cube address. The meaning layer holds no word order and no token index — node identities are deliberately permuted so nothing downstream can recover surface order by reading an id.
 
-Multimodal reading forced two additions to the format (`docs/multimodal-eot-foundation.md`):
+`native/the-fold/eot-notation.js`'s `notationOf()` (lines 70–96) renders one record's meaning as a tree read from its root — this is EOT as it is actually emitted today, distinct from the ±/*/∥ proposal of [EO Notation](/eo-notation):
 
-- **The `^locus` trailer.** A third trailer sigil beside `@agent` and `~ts`, carrying a W3C Media Fragment (an image region `#xywh=…`, a document block `#page=N`) as an **opaque string** the core never resolves — only the organ that minted it can open it. Because a fragment contains `#` (EOT's own comment sigil), the locus rides *quoted*, round-tripping byte-exact. The geometry that used to live only on a document's spans now rides the event, so it survives serialization and compositing.
-- **The sense axis.** Each event knows which door of the world it came through — sight, hearing, tabular, structural, text (`senseOfModality`). This is what lets two senses **corroborate** the same fact, and it is distinct from *modality* (already taken for realis/irrealis mood).
+```
+reach  CON·Figure  Tense=Past@REC·Pattern
+  nsubj @SEG·Figure   steamboat  SIG·Figure  Number=Plur@SIG·Pattern
+  obj   @SEG·Figure   Nashville  SIG·Figure
+  obl   @SEG·Ground   1819       DEF·Figure
+```
 
-Together these give the witness ladder its top rung: **cross-modal** corroboration (≥2 root origins across ≥2 senses), with a derivation fold so a transcript of a recording is not miscounted as a second, independent witness. See [Signal from Noise](/signal-from-noise).
+Each line is a node's lemma, its cube-addressed word class, and any cube-addressed feature or absorbed marker; nesting under a relation label (`nsubj`, `obj`, `obl`, …) shows how the tree was assembled from the source annotation.
 
-## The checkpoint is in the language
+## The honest gap: two reading routes
 
-Because the surface is typed, defects are properties of the *sentence*, catchable without running anything: a grain-mixed event, a reference before its instantiation, an import of a name never exported. The EOT coder makes these unsamplable at emission (`src/coder/`), and the checkpoint reads the rest off the algebra with a face, an address, and a fix — the *"a grain-mixed event is a sentence the language should not be able to say"* discipline ([Nine Instructions](/nine-instructions); `docs/eo-for-coders.md`). EOT is where EO's claim to be a checkable notation, rather than a suggestive one, is cashed out.
+Producing this tree from raw English depends on a trained parser (`native/adapters/text/english-parser.js`) that is measured but **unwired**: 95.2 UPOS / 81.2 UAS / 77.0 LAS held-out. The reading route actually live on every `session.reader` turn is a different, positional reader (`native/adapters/text/relations-positional.js`), and the two are far apart: 0.9% recall / 18.5% precision for the live route against 74.0% recall / 73.7% precision for the unwired parser — confirmed to be real grammatical reading rather than a scoring artifact by a scrambled-word-order null (p = 1.9×10⁻⁴³) (README.md, "Reading competency audit," 2026-09-23). Without the parser's model file, `notationOf()`'s caller falls back to the draft's raw spans and says so; the pipeline never depends on the tree to produce a piece.
 
 ---
 

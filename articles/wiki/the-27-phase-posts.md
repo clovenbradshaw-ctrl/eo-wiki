@@ -5,19 +5,19 @@
 **Tags:** 101  
 **Keywords:** sanskrit, arabic, greek, operator  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
 # The 27 Forms
 
-The operator encodes Mode × Domain. The Object class appears as a coordinate badge: **-** (Condition) · **+** (Entity) · ***** (Pattern). Each position is fully specified by either `OPERATOR(Object)` or its symbol, and carries a canonical coordinate address (Mode, Domain, Object).
+The operator encodes Mode × Domain. The Object class appears as a coordinate badge: **-** (Condition) · **+** (Figure) · ***** (Pattern) — "Figure" per the shipped `GRAINS` naming (`native/kernel/cube.js`); an earlier revision of this article called this position "Entity," which collided with the unrelated terrain name Entity (`TERRAIN_BY_DOMAIN.Existence.Figure`) and disagreed with [The EO capacity ground](/the-eo-phase-space-cube)'s "Particular." Each position is fully specified by either `OPERATOR(Object)` or its symbol, and carries a canonical coordinate address (Mode, Domain, Object).
 
 **Axis coordinates:**
 
 1. Mode: 0 (Differentiating) · 1 (Relating) · 2 (Generating)
-2. Domain: −1 (Existence) · +1 (Structure) · √2 (Significance)
-3. Object: 2 (Condition) · √2 (Entity) · 2^√2 (Pattern)
+2. Domain: −1 (Existence) · +1 (Structure) · √2 (Significance — named "Interpretation" in the current `eoreader7` implementation, `native/kernel/cube.js` `DOMAINS`)
+3. Object: 2 (Condition) · √2 (Figure) · 2^√2 (Pattern)
 
 ## Complete Sequence
 
@@ -35,19 +35,19 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 | 8 | EVA(Condition) | ⊨- | (1, √2, 2) |
 | 9 | REC(Condition) | ⊛- | (2, √2, 2) |
 
-### Entity (+)   Object = √2
+### Figure (+)   Object = √2
 
 | # Notation Symbol Address (Mode, Domain, Object) |
 | --- |
-| 10 | NUL(Entity) | ∅+ | (0, −1, √2) |
-| 11 | SIG(Entity) | ○+ | (1, −1, √2) |
-| 12 | INS(Entity) | ●+ | (2, −1, √2) |
-| 13 | SEG(Entity) | ｜+ | (0, +1, √2) |
-| 14 | CON(Entity) | ⋈+ | (1, +1, √2) |
-| 15 | SYN(Entity) | △+ | (2, +1, √2) |
-| 16 | DEF(Entity) | ⊢+ | (0, √2, √2) |
-| 17 | EVA(Entity) | ⊨+ | (1, √2, √2) |
-| 18 | REC(Entity) | ⊛+ | (2, √2, √2) |
+| 10 | NUL(Figure) | ∅+ | (0, −1, √2) |
+| 11 | SIG(Figure) | ○+ | (1, −1, √2) |
+| 12 | INS(Figure) | ●+ | (2, −1, √2) |
+| 13 | SEG(Figure) | ｜+ | (0, +1, √2) |
+| 14 | CON(Figure) | ⋈+ | (1, +1, √2) |
+| 15 | SYN(Figure) | △+ | (2, +1, √2) |
+| 16 | DEF(Figure) | ⊢+ | (0, √2, √2) |
+| 17 | EVA(Figure) | ⊨+ | (1, √2, √2) |
+| 18 | REC(Figure) | ⊛+ | (2, √2, √2) |
 
 ### Pattern (*)   Object = 2^√2
 

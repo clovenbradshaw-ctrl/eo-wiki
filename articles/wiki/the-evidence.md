@@ -5,7 +5,7 @@
 **Tags:** 301  
 **Keywords:** evidence, evaluation, falsifier, churn, weld, judgment, results, negatives  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -15,7 +15,7 @@
 
 ## Where the framework's proof stops, the measurements begin
 
-[Nine Instructions](/nine-instructions) makes the structural point: EO's relational-algebra closure result certifies the Existence and Structure operators but is silent on the **Significance triad** — evaluate (EVA), restructure (REC), and the "free" operations of a query algebra, observe (NUL) and attend (SIG). Those are exactly the operators the results below instrument. Proof for the query-algebra neighborhood; falsifier-gated measurement for the significance neighborhood.
+[Nine Instructions](/nine-instructions) makes the structural point: EO's relational-algebra closure result certifies the Existence and Structure operators but is silent on the **Interpretation triad** (historically called the Significance triad) — evaluate (EVA), restructure (REC), and the "free" operations of a query algebra, observe (NUL) and attend (SIG). Those are exactly the operators the results below instrument. Proof for the query-algebra neighborhood; falsifier-gated measurement for the Interpretation neighborhood.
 
 ## Churn: quality lives in a reading, not in the text
 
@@ -71,6 +71,14 @@ The empirical grounding that predates the reader, reported without the overstate
 
 The corpus figures cited variously across the wiki are two different studies: a v1 verb inventory (~32,000 verbs, 41 languages) and a v2 clause study (19,764 clauses, 9,221 consensus). See [The Lexical Analysis](/lexical-analysis) and the v2 results report.
 
+## Reading competency: the live route vs. the unwired parser
+
+A dated audit (2026-09-23, `eoreader7`) measured the reading route actually live on every `session.reader` turn — `native/adapters/text/relations-positional.js` plus a measured English `RoleConfig@1` — at **0.9% recall / 18.5% precision** on core subject–verb–object extraction. Sitting unwired next to it: an already-built, already-validated trained UD parser (`native/adapters/text/english-parser.js`, 95.2 UPOS / 81.2 UAS / 77.0 LAS on held-out data) scoring **74.0% recall / 73.7% precision** on the same task — a scrambled-word-order null confirms the 74% is real grammatical reading rather than an artifact of the scorer (p = 1.9×10⁻⁴³, `native/eval/the-fold/gfp-vs-svo-first.mjs`). At least six materially different relation extractors coexist with no shared scoring, which is why prior "how good are we at reading" answers disagreed across sessions; a shared scoring currency now exists (`native/eval/the-fold/claim-null-scoring.mjs`). The honest summary: the better reader has been built and measured, and is not yet the one running.
+
+## The vision-end-state ledger: a self-correcting audit
+
+`VISION.md` (regenerated 2026-09-27 from the append-only `documents/vision-end-state:1.jsonl`) is itself an instance of the discipline this page asks EO to hold to. A same-day re-verification cycle caught its own standing prompt template describing two steps as "blocked" when git history showed they had already been fixed hours earlier that same day (commit `f56235e`) — a stale claim corrected on re-test rather than repeated. The re-run calibration it then reported came back a genuine null: `calibrated:false` on 82 held-out single-occurrence predictions, high-margin accuracy 0.171 against low-margin accuracy 0.220 — the wrong direction to support the hypothesis, not significant either way (Fisher's exact p = 0.798) — reported as the non-result it is rather than reframed. Across the same day's cycles, direct checks of a shared Ollama `/api/embed` endpoint returned five different diagnoses in sequence (healthy/HTTP 200 → hung/HTTP 000 → HTTP 404 model-not-found → hung/HTTP 000 again → HTTP 501 "start it with `--embeddings`"), each one logged as what was actually measured at that moment rather than collapsed into one summary verdict.
+
 ---
 
 ## How to read this page
@@ -83,5 +91,5 @@ Nothing here is "EO is proven." The honest summary is narrower and stronger: *a 
 
 - [Signal from Noise](/signal-from-noise) — the primitives these results ride on
 - [The EO Reader](/the-eo-reader) — the system measured here
-- [Nine Instructions](/nine-instructions) — why measurement is the right evidence for the Significance triad
+- [Nine Instructions](/nine-instructions) — why measurement is the right evidence for the Interpretation triad
 - [The Lexical Analysis](/lexical-analysis) — the other evidence leg
