@@ -3,11 +3,11 @@
 **Record ID:** wiki:rec  
 **DB ID:** 30  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:47.677Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
-**REC** (⊛, Ω) is the ninth and final operator in [EO](https://en.wikipedia.org/wiki/Ontology_(information_science))'s dependency helix. It occupies the position **Generating × Significance** — the pattern role within the Significance triad. Its glyph is ⊛ ([U+21AC](https://en.wikipedia.org/wiki/Unicode), rightwards arrow with loop), chosen because it visually encodes the operator's structural function: output feeding back as input, the helix bending into a spiral.
+**REC** (⊛, Ω) is the ninth and final operator in [EO](https://en.wikipedia.org/wiki/Ontology_(information_science))'s dependency helix. It occupies the position **Generating × Interpretation** — the pattern role within the Interpretation triad. Its glyph is ⊛ ([U+21AC](https://en.wikipedia.org/wiki/Unicode), rightwards arrow with loop), chosen because it visually encodes the operator's structural function: output feeding back as input, the helix bending into a spiral.
 
 REC is the capacity to restructure the interpretive frame itself — not to change data within a schema, but to change what the schema means. It does not modify values (EVA), hold contradictory values (DEF), or produce emergent wholes (SYN). It changes the conditions under which values, contradictions, and wholes are interpreted. The caterpillar is not a butterfly with different features. It is a different kind of thing.
 
@@ -18,6 +18,12 @@ REC is the capacity to restructure the interpretive frame itself — not to chan
 REC presupposes every other operator in the helix. It cannot fire without NUL (absence-recognition), SIG (distinction), INS (instantiation), SEG (boundary-drawing), CON (connection), SYN (synthesis), DEF (value-setting), and EVA (judgment). The dependency on EVA is structural: REC is triggered by representational insufficiency — the discovery that the current frame cannot accommodate what the data requires — and that insufficiency becomes visible only when EVA has exposed it. A schema appears adequate until an evaluation reveals that it cannot house a datum that is legitimately multiple things at once. Without EVA, the pressure to restructure the frame never builds.
 
 The dependency argument for the helix ordering maps REC to [schema migration](https://en.wikipedia.org/wiki/Schema_migration) and [recursive CTEs](https://en.wikipedia.org/wiki/Hierarchical_and_recursive_queries_in_SQL) in [Codd's relational model](https://en.wikipedia.org/wiki/Relational_model). The REC-presupposes-EVA lemma (revised in proof v2, February 2026) was rebuilt around representational insufficiency rather than motivational appeal: a system restructures its frame not because it *wants* to but because the frame has been shown — through DEF — to be structurally inadequate.
+
+---
+
+## As implemented
+
+The formal properties below (fixed-point semantics, bounded recursion) and the classification grid further down describe REC as EO specifies it; most of that apparatus — the 81-cell sub-grid, the nine input-operator compositions, the cross-linguistic verb-inventory findings — is asserted rather than checked against a shipped system. One narrower slice does have a direct, measurable counterpart. The EO Reader's canonical cycle (`Fold → Orientation → Encounter → Perception → Challenge → Witness → Interrogation → DeltaFold → revised Fold`, `README.md`) derives a **release** only at the last step, after a delta has been folded into the fold: `deriveRelease(delta, beforeFold, afterFold)` (`native/kernel/dynamics.js`) compares each obligation's state before and after, and emits a release only when that state changed **and** a witnessed transformation in the delta targeted it — a closing or reframing of prior structure, not a bare status flip. This grounds REC's general claim — that evaluation results can force a restructuring to register — at the scale of a single obligation inside one reading turn. It does not, by itself, ground the larger apparatus the rest of this article builds.
 
 ---
 
@@ -133,7 +139,7 @@ The three axes (Object × polarity × input operator) are independent, producing
 
 *Status: Empirical. Based on a corpus of 32,289 verbs across 27 languages and 11 language families.*
 
-REC averages approximately 2% of verb inventories across all 27 languages tested. Together with DEF, the two Significance-triad pattern operators account for 0–5% of verb inventories in every language. No language exceeds this range, even after targeted reclassification. Japanese, Sanskrit, and Classical Chinese — the languages most likely to falsify a Western-bias explanation — all fall below 1% for DEF and show comparable poverty for REC.
+REC averages approximately 2% of verb inventories across all 27 languages tested. Together with DEF, the two Interpretation-triad pattern operators account for 0–5% of verb inventories in every language. No language exceeds this range, even after targeted reclassification. Japanese, Sanskrit, and Classical Chinese — the languages most likely to falsify a Western-bias explanation — all fall below 1% for DEF and show comparable poverty for REC.
 
 This is not a cultural finding. It is a species-level finding. Every human language is impoverished in the same place. The capacity to restructure one's own interpretive frame exists — REC appears in every language tested — but the vocabulary for it is vanishingly thin. Humans can *do* recursion in narrow, controlled channels, but the deep version — identity restructuring, frame change, self-organizing schema — sits at the edge of what the species can articulate.
 
@@ -163,7 +169,7 @@ Every operator has a second-pass form:
 | EVA² | Held multiplicity. The contradiction itself preserved as informative. |  |
 | REC² | Recursive self-examination. The grammar speaking about itself speaking about itself — where [Gödel's incompleteness](https://en.wikipedia.org/wiki/G%C3%B6del%27s_incompleteness_theorems) becomes relevant. |  |
 
-The helix does not end after nine steps. It spirals. Each complete cycle raises the register of every operator. But the direction of each arc is fixed — Ground → Figure → Pattern within each triad, Existence → Structure → Significance across triads. What changes between cycles is the contents of the database. The dependency within each cycle is invariant.
+The helix does not end after nine steps. It spirals. Each complete cycle raises the register of every operator. But the direction of each arc is fixed — Ground → Figure → Pattern within each triad, Existence → Structure → Interpretation across triads. What changes between cycles is the contents of the database. The dependency within each cycle is invariant.
 
 There is no tenth operator for the same reason there is no fourth spatial dimension in a spiral staircase. The structure is three positions repeated at increasing height. The height is REC's contribution. The positions are the nine operators. The helix is what you get when you project this upward spiral onto a timeline.
 
@@ -287,7 +293,7 @@ The [Codd](https://en.wikipedia.org/wiki/Edgar_F._Codd) precedent is instructive
 - **The Helix** — the dependency ordering
 - **The 81 Names** — operator composition and the vocabulary of transformation
 - **Bivalent Compression and Dimensional Poverty** — EVA/REC poverty as species-level cognitive limitation
-- **The Three Triads** — Existence, Structure, Significance
+- **The Three Triads** — Existence, Structure, Interpretation
 - **The 27 Forms** — complete phase-space addressing
 - **Operator Naming in EO** — the SIG rename and what operator names are
 - **Cross-Linguistic Findings** — 27-language verb classification data

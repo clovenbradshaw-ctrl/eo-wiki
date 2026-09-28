@@ -4,11 +4,13 @@
 **DB ID:** 20  
 **Keywords:** operators, schema, field, event, operator  
 **Status:** draft  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
 EO provides a closed, nine-operator vocabulary for classifying data transformations. This article covers EO's relationship to existing event sourcing architectures, activity stream standards, and change data capture systems, and describes how EO functions as a semantic layer applicable to any of these systems.
+
+> **Status note (2026-09-28).** This is a design proposal: `eoreader7` has no event-streaming reference implementation, and nothing below cites the running code. The closest existing analogs in the shipped kernel are `OPERATOR_CHAIN` (`native/kernel/cube.js`, lines 87–91 — the canonical operator sequence, derived from the operator/mode/domain tables rather than hand-written) and the EOT record pipeline (`EOTDraft@1` / `EOTRich@1` / `EOTEnrichment@1`; see [EOT](/eot)), which streams a document's transformations as cube-addressed, schema-versioned records but was built for reading text, not for event sourcing. Treat the CDC and CloudEvents mappings below as speculative until an actual event-streaming integration exists.
 
 ---
 
@@ -62,7 +64,7 @@ EO separates these by assigning distinct operators to each transformation type.
 
 ## 3. The EO Operator Set
 
-EO defines nine primitive transformation operators. They are organized into three triads by domain — Existence, Structure, Significance — and are dependency-ordered: each operator's preconditions are satisfied by its predecessors.
+EO defines nine primitive transformation operators. They are organized into three triads by domain — Existence, Structure, Significance (named "Interpretation" in the current `eoreader7` implementation, `native/kernel/cube.js` `DOMAINS`) — and are dependency-ordered: each operator's preconditions are satisfied by its predecessors.
 
 Helix ordering: NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC
 

@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** helix, operator, ai, llm  
 **Status:** published  
-**Updated:** 2026-05-16T01:25:49.158Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -86,7 +86,7 @@ Three axes. Each takes three values (Ground / Figure / Pattern). Each axis asks 
 **Axis 2 — Space** (where does transformation happen?)
 
 - Ground = Existence (whether things are)
-- Figure = Significance (what things mean)
+- Figure = Interpretation (what things mean)
 - Pattern = Structure (how things connect)
 
 **Axis 3 — Time** (what is transformation aimed at?)
@@ -105,13 +105,13 @@ Collapse any one axis and you get a 3⤫3 face. Three faces, three perspectives,
 | --- | --- | --- | --- |
 | **Existence** | Void | Entity | Kind |
 | **Structure** | Field | Link | Network |
-| **Significance** | Atmosphere | Lens | Paradigm |
+| **Interpretation** | Atmosphere | Lens | Paradigm |
 
 **Act Face** (Identity ⤫ Space, collapsing Time) — What are you doing? Nine operations:
 
-|  | Existence | Structure | Significance |
+|  | Existence | Structure | Interpretation |
 | --- | --- | --- | --- |
-| **Differentiating** | NUL ∅ | SEG | | DEF ⊢ |
+| **Differentiating** | NUL ∅ | SEG | DEF ⊢ |
 | **Relating** | SIG ○ | CON ⋈ | EVA ⊨ |
 | **Generating** | INS ● | SYN △ | REC ⊛ |
 

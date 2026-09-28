@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** transformation, relational, operator, space  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -47,7 +47,7 @@ Generating: produce, push outward
 
 Existence: whether things are
 
-Significance: what things mean
+Interpretation: what things mean
 
 Structure: how things connect
 
@@ -83,7 +83,7 @@ The first two axes — Mode and Domain — cross to produce nine primitive trans
 
 **SYN**  — merge into emergent whole
 
-**Significance**
+**Interpretation**
 
 **DEF** — assert what holds within a frame
 
@@ -99,7 +99,7 @@ The nine operators compose into a strict dependency ordering called the **helix*
 
 NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC
 
-This is a dependency map, not a checklist. Existence must be established before Structure can be organized; Structure must exist before Significance can operate on it. Within each triad, operators presuppose ground → figure → pattern: you cannot direct attention (SIG) without first recognizing what is absent (NUL); you cannot connect across boundaries (CON) without first drawing them (SEG); you cannot change the frame (REC) without first encountering the contradictions (DEF) that reveal the frame's insufficiency.
+This is a dependency map, not a checklist. Existence must be established before Structure can be organized; Structure must exist before Interpretation can operate on it. Within each triad, operators presuppose ground → figure → pattern: you cannot direct attention (SIG) without first recognizing what is absent (NUL); you cannot connect across boundaries (CON) without first drawing them (SEG); you cannot change the frame (REC) without first encountering the contradictions (DEF) that reveal the frame's insufficiency.
 
 The helix ordering was narrowed by exhaustive computational testing: of the 1,296 possible orderings of nine operators, the large majority fail non-degeneracy criteria drawn from Codd's relational algebra, and the remainder — differing only in intra-triad arrangement — are eliminated by the presupposition argument (see [The Three Triads](/the-triads) for the two-stage account and exact counts). This test certifies the dependency *ordering*, not the completeness of the nine operators; see [Nine Instructions](/nine-instructions).
 
@@ -163,7 +163,7 @@ Beginning in February 2026, a computational study tested EO's structural claims 
 
 ### Biological grounding
 
-Living systems provide an independent witness to the helix ordering. Reversals of adjacent operators produce not merely logical incoherence but biological impossibility: instantiation before designation corresponds to undifferentiated cell mass; connection before segmentation corresponds to signaling pathways forming before cell boundaries exist; superposition before alternation corresponds to seizure. Developmental biology independently instantiates the helix because embryogenesis *is* the helix: the sequential emergence of distinction (Existence), organization (Structure), and adaptive response (Significance) under selection pressure.
+Living systems provide an independent witness to the helix ordering. Reversals of adjacent operators produce not merely logical incoherence but biological impossibility: instantiation before designation corresponds to undifferentiated cell mass; connection before segmentation corresponds to signaling pathways forming before cell boundaries exist; superposition before alternation corresponds to seizure. Developmental biology independently instantiates the helix because embryogenesis *is* the helix: the sequential emergence of distinction (Existence), organization (Structure), and adaptive response (Interpretation) under selection pressure.
 
 ### Convergent cultural evidence
 
@@ -199,9 +199,9 @@ Meaning is grounded, contextual, and revisable
 
 Notable rules include the Anti-Gaslighting Axiom (Rule 3: raw experience cannot be erased or modified), the Anti-Omniscience Axiom (Rule 4: there is no God's-eye view; all memory availability is mediated by horizon), and the structural commitment to Defeasibility (Rule 9: no interpretation is globally immune to supersession).
 
-Every entry in the Given-Log is a **phenomenon** — an observation made by a specific agent, in a specific mode, within a specific frame — not a claim about observer-independent reality. The system records appearances, not things-in-themselves. Truth, in EO, is the limit that accumulating situated observations approach asymptotically: real, directional, never directly occupied. The deepest coordinate in the framework (2^√2, the Pattern position of the Significance triad) is transcendental by the Gelfond-Schneider theorem — reachable only in the limit, never by finite algebraic means. Rule 9's Defeasibility is not a methodological preference; it is a mathematical consequence of what truth is in a system where truth is a limit.
+Every entry in the Given-Log is a **phenomenon** — an observation made by a specific agent, in a specific mode, within a specific frame — not a claim about observer-independent reality. The system records appearances, not things-in-themselves. Truth, in EO, is the limit that accumulating situated observations approach asymptotically: real, directional, never directly occupied. The deepest coordinate in the framework (2^√2, the Pattern position of the Interpretation triad) is transcendental by the Gelfond-Schneider theorem — reachable only in the limit, never by finite algebraic means. Rule 9's Defeasibility is not a methodological preference; it is a mathematical consequence of what truth is in a system where truth is a limit.
 
-Every entry in the Given-Log is a **phenomenon** — an observation made by a specific agent, in a specific mode, within a specific frame — not a claim about observer-independent reality. The system records appearances, not things-in-themselves. Truth, in EO, is the limit that accumulating situated observations approach asymptotically: real, directional, never directly occupied. The deepest coordinate in the framework (2^√2, the Pattern position of the Significance triad) is transcendental by the Gelfond-Schneider theorem — reachable only in the limit, never by finite algebraic means. Rule 9's Defeasibility is not a methodological preference; it is a mathematical consequence of what truth is in a system where truth is a limit.
+Every entry in the Given-Log is a **phenomenon** — an observation made by a specific agent, in a specific mode, within a specific frame — not a claim about observer-independent reality. The system records appearances, not things-in-themselves. Truth, in EO, is the limit that accumulating situated observations approach asymptotically: real, directional, never directly occupied. The deepest coordinate in the framework (2^√2, the Pattern position of the Interpretation triad) is transcendental by the Gelfond-Schneider theorem — reachable only in the limit, never by finite algebraic means. Rule 9's Defeasibility is not a methodological preference; it is a mathematical consequence of what truth is in a system where truth is a limit.
 
 ## Relationship to other frameworks
 

@@ -3,7 +3,7 @@
 **Record ID:** wiki:identity-as-a-change-log  
 **DB ID:** 66  
 **Status:** published  
-**Updated:** 2026-03-22T18:54:25.343Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -42,6 +42,14 @@ This is not a uniqueness constraint bolted on after the fact. It is what INS *is
 Rule 3 of the Experience Engine: raw experience persists through all operations. The Given-Log cannot be fabricated, backdated, or transplanted. You cannot give entity Y a copy of entity X's history, because that would mean inserting entries that record observations Y did not make, from positions Y did not occupy, at times Y did not exist.
 
 The history is not a description of the entity that could in principle be copied to another container. It is the entity. Copying it is not prohibited by a rule. It is incoherent — like asking for a biography that belongs to two different people.
+
+### A concrete instance in eoreader7
+
+The argument above is made in the pure abstract, with no implementation behind it; eoreader7 supplies a direct, tested one. `native/kernel/notes.js`'s ledger (Handle: Arokin — "after the Yoruba court historians, whose oral tradition kept an append-only record of what was said") states the identity-is-the-log commitment in its own header: notes.js holds "what a reading was heard to say, as an append-only event stream; the current belief always a projection." A note is never edited in place — a later sighting of the same arrangement lands as `SUPERSEDE · SYN`, carrying only what moved (the witness set and the span set, unioned, never replaced) — and the same discipline is stated flatly and pinned in `native/organs/capacities.js`: "Never rewrites an entry (the append-only law; pinned)."
+
+Two schemas make the no-cloning/no-overwrite argument mechanical rather than rhetorical. `native/kernel/hypergraph-projection.js` projects `EOReferentMerge@1` (two referents folded into one, with the folded-away referent kept on record, never deleted) and `EOReferentReassignment@1` (an address moved `from` one referent `to` another, both ends named) as first-class, addressable graph entries rather than in-place edits. `native/tests/addresses-birth.test.js` (lines 110–117) tests both schemas directly against a real 60 KB prefix of a live text, confirming address reassignment is typed apart from merge and that no address flips back and forth once a stable identity rule is in force. The abstract claim above — identity cannot be forged by copying, and cannot be erased, only superseded on the record — is here instantiated as tested code, not left as a domain-invariant assertion.
+
+A second, independent instance of the same no-overwrite discipline turns up in a structurally unrelated store: `native/kernel/corroboration.js`'s `supersedeLesson` (lines 126–140) marks an old occurrence `superseded: true` and appends the corrected lesson beside it rather than over it — "the corrected lesson is the current memory; the superseded one stays on file as its revision history." That the same discipline was reached twice, independently, in two parts of the same codebase built for different purposes, is itself a small piece of evidence for this article's own claim that the constraint is structural rather than domain-specific.
 
 ## The No-Cloning Problem
 

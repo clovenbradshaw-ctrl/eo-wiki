@@ -3,7 +3,7 @@
 **Record ID:** wiki:the-axis-triad-and-its-coordinates  
 **DB ID:** 46  
 **Status:** draft  
-**Updated:** 2026-05-16T01:25:50.137Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -135,7 +135,7 @@ The three faces of the capacity ground are produced by collapsing one axis. Unde
 
 **The Site face (Domain ⤫ Object)** collapses the Mode axis. What is lost: the arithmetic coordinates, directional action. What remains: geometry ⤫ transcendental mathematics. The nine terrains (Void, Entity, Kind, Field, Link, Network, Atmosphere, Lens, Paradigm) live on this face. They describe positions in spatial-temporal reality without any directionality — the state of affairs before anything moves. The Site face is the *agentless* face.
 
-**The Stance face (Mode ⤫ Object)** collapses the Domain axis. What is lost: the geometric coordinates, polarity, spatial territory. What remains: arithmetic ⤫ transcendental mathematics. The nine stances (Clearing, Cutting, Unweaving, Dwelling, Grasping, Tracking, Seeding, Forging, Weaving) live on this face. They describe how an agent is engaging with a temporal target — at what grain, with what directionality — without specifying where in ontological space. The Stance face is the *dislocated* face: directional and temporal, but without territory.
+**The Stance face (Mode ⤫ Object)** collapses the Domain axis. What is lost: the geometric coordinates, polarity, spatial territory. What remains: arithmetic ⤫ transcendental mathematics. The nine stances (Clearing, Dissecting, Unraveling — Differentiate; Tending, Binding, Tracing — Relate; Cultivating, Making, Composing — Generate) live on this face. They describe how an agent is engaging with a temporal target — at what grain, with what directionality — without specifying where in ontological space. The Stance face is the *dislocated* face: directional and temporal, but without territory.
 
 The diagnostic sequence — Site → Act → Resolution — moves from the agentless face (geometry ⤫ transcendental) through the pre-temporal face (arithmetic ⤫ geometry) to the dislocated face (arithmetic ⤫ transcendental). Each transition introduces one mathematical character and removes another. The full circuit touches all three mathematical registers.
 

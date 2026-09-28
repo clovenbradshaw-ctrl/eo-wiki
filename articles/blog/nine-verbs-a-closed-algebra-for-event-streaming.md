@@ -3,7 +3,7 @@
 **Record ID:** blog:nine-verbs-a-closed-algebra-for-event-streaming  
 **DB ID:** 45  
 **Status:** draft  
-**Updated:** 2026-03-26T22:16:46.802Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -257,3 +257,5 @@ Theory is cheap. The question is whether nine operators actually hold up when yo
 There is a working demo — a database build driven entirely by EO event streaming — where you can watch the operators compose in practice. Records get instantiated, boundaries get drawn, values get altered, frames get changed, and the log stays readable throughout because every event is one of nine typed function calls. No `CustomerUpdated`. No `OrderArchived`. Just the operator, its target, and its operand, all the way down.
 
 The demo is at [clovenbradshaw-ctrl.github.io/khora-demo](https://clovenbradshaw-ctrl.github.io/khora-demo). Walk through it. Try to find a transformation it can't express. That's the only test that matters.
+
+**Editorial note (2026-09-28):** this article cites no `eoreader7` module, and the khora-demo above is a separate, standalone artifact, not built from EO's own reference kernel. The nine operators as they exist in a real, tested codebase — not a demo — are `eoreader7`'s `OPERATOR_CHAIN` (`native/kernel/cube.js`, the canonical operator sequence, derived rather than hand-written) and the EOT record pipeline that streams a document's own transformations through them (`EOTDraft@1` / `EOTRich@1` / `EOTEnrichment@1` — see [EOT](/eot) on this wiki, and `eoreader7`'s README for the operator set as shipped). Neither is an event-streaming system; both are the closest existing ground for the claims above.

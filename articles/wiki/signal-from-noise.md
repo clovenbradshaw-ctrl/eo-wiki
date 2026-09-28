@@ -5,7 +5,7 @@
 **Tags:** 301  
 **Keywords:** signal, noise, salience, significance, null, born rule, surprise, corroboration, threshold  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -13,7 +13,7 @@
 
 *The doctrine in one sentence: **wherever the system needs to separate signal from noise, it derives the cut from the material's own chance background rather than setting a threshold by hand — and when meaning cannot be measured, abstention is the honest output.** Propose a structure, measure it against a null, act only past chance. The witness does not decide.*
 
-*Citations are paths into `eoreader4.2`.*
+*Citations are being re-walked from `eoreader4.2`'s faculty-layout paths (`src/core/*`, `src/surfer/*`, `src/enactor/*`, `src/turn/*`, `src/model/*`, `src/perceiver/*`, `src/murmur/*`, `src/weave/*`) to `eoreader7`, which replaces that layout with `native/kernel/*`, `native/organs/*`, and `native/adapters/*` (the-fold, formerly part of the same tree, is now a separate sibling repo — see `LEGACY-EOREADER6.1.md`). This pass completes the re-walk for Primitive 2 and adds one new `eoreader7` citation each to Primitive 1 and the doctrine section below; the `src/...` paths still standing under Primitives 1, 3, and 4 are the retired 4.2 layout and have not yet been re-verified against `eoreader7`.*
 
 ---
 
@@ -27,15 +27,21 @@ It is **leave-one-out** (a candidate never contributes to the bar that judges it
 
 The same primitive is consumed all over the system, which is what makes it a *doctrine* and not a trick: graph-edge pruning (`src/core/project.js`), the point where the surfer arrests on a peak (`src/surfer/surf.js`), whether a field is answerable at all (`src/surfer/answerable.js`), the speech gate (`src/enactor/gate.js`), route/intent crosstalk nulls (`src/turn/intent.js`, `src/turn/meta-route.js`), the chorus's signal cut (`src/surfer/lineup/signal.js`), the prompt's ground-inflation check (`src/model/prompt-checkpoint.js`), and identity/equivalence floors (`src/perceiver/equivalence.js`). One law of measurement, applied everywhere a cut is needed.
 
-## Primitive 2 — the one surprise, two channels
+`eoreader7` adds a second, dated instance of the same anti-threshold idea applied recursively rather than once: `native/kernel/surprise-segments.js` (2026-09-02) segments any stream by its own surprise. GROUND is the prior sedimented so far; FIGURE is the event that departs from it, its surprise measured in bits *before* it arrives; PATTERN is what the boundaries the figures cut become at the next level, where the same three terms apply again. The null is built the same way as Primitive 1's — "the same stream with its order destroyed" — and a boundary is cut only where an event's surprise clears the shuffled stream's own `(1 − α)` quantile (`segmentBySurprise`, lines 78–99). `recursiveSegments` (lines 123–137) applies the cut level over level, turning each level's segments into the next level's tokens, and stops honestly with `no_figures` when a level's surprises never clear its own shuffle-null. The module's epigraph quotes Edgar Rubin's own figure-ground writing directly — *"Es ist dieser Unterschied... zwischen Figur und Grund..."* — naming the doctrine's debt to Gestalt psychology in the code itself; see [Ground / Figure / Pattern](/ground-figure-pattern) for the Rubin-vase discussion this module now grounds with a citation.
 
-There is exactly **one** surprise metric, computed once, and it is deliberately **not** surprisal:
+## Primitive 2 — the one surprise, two channels (and what's built on it)
 
-> `surpriseAt` = `D_KL(posterior ‖ prior)` in bits over a γ-decayed profile — `src/core/surprise.js:63`
+There is exactly **one** Bayesian-surprise metric, and it is deliberately **not** surprisal. `native/kernel/bayes-surprise.js` (2026-09-22) keeps the two apart in its own header — "SURPRISAL... how unexpected x was... BAYES... how much x CHANGED what the reader believes" (lines 6–19) — and computes the Bayesian quantity in closed form over a Dirichlet held per slot:
 
-The distinction is load-bearing. Surprisal (−log p) measures improbability; Bayesian surprise measures *how much belief actually moved*. **TV-snow is maximally improbable yet moves no belief** — so surprisal is the wrong invariant for where a reading's attention should go. Surprisal survives only as a secondary *novelty* channel; the **Bayesian** channel is what the surfer rides (`src/perceiver/reading.js:203-244`). Calibration is **causal**: the bands that judge a line are fit only from surprises seen up to that point — the future cannot set the band that judged an early line.
+> `klAdmit(bv, B)` = `ln B − ln bv + ψ(bv+1) − ψ(B+1)` nats, exactly equal to `KL(Dir(posterior) ‖ Dir(prior))` — `native/kernel/bayes-surprise.js:87-89`
 
-Because there is only one metric, it composes without ever needing a second thing kept in sync:
+**TV-snow is maximally improbable yet moves no belief** — so surprisal is the wrong invariant for where a reading's attention should go; it survives only as a secondary *novelty* channel alongside the Bayesian one, exactly as the article has always argued. Two measured details keep the metric honest. The `ABSENT` sentinel (`:45`) makes a slot's *absence* count as an event: without it, a sonnet arriving after a run of five-line poems moved nothing on its nine new lines, and a change of kind was missed (measured 2026-09-22). And `admit()` (`:113-141`) measures both surprisal and Bayesian surprise against the prior as it stood *before* the admission, then updates it — the same causal-only discipline (the future cannot set the band that judged an earlier line) the article already asserts.
+
+Bayesian surprise is not the whole story once an admission's downstream consequences matter. `native/kernel/consequential-surprise.js` (2026-09-25) partitions the bits an admission moves into **consequential bits** — surprise on slots whose attached ids reach farther through a dependents index than a synthetic-seed null does, at the caller's declared `pValue` — and **local bits**: belief moved, but nothing rested on it (`consequentialSurprise()`, lines 74–120). The dangerous case is reported, never scored: a slot resting on a thinly-corroborated id that is nonetheless load-bearing is flagged `thinButLoadBearing` and never folded into a composite score, because "a composite would be a formula nobody earned."
+
+A third, purely structural sense of "surprise" is kept separate from both of the above: `native/kernel/dynamics.js` derives `deriveSurprise` (which operations touched which graph objects), `deriveTension` (which open obligations interact), and `deriveRelease` (which obligations a delta actually resolved) — lines 13–72. None of these are probabilities; they are the shape of a delta, and the module keeps them apart from the Bayesian and consequential quantities rather than folding all three into one number.
+
+Because there is only one *probabilistic* surprise metric, it composes without ever needing a second thing kept in sync:
 
 - Pointed at the web, it **is** curiosity — best-first over expected information gain, with `bayesBy` (per-dimension KL contribution) naming the next leads (`src/turn/research.js`; see [Going and Looking](/going-and-looking)).
 - Pointed at the system's own draft, it detects **retreads** — repetition is belief sliding back onto ground it already held (`src/surfer/salience.js:123`).
@@ -69,6 +75,8 @@ Gather the four and the shape is one idea:
 4. **Abstain honestly** when meaning cannot be measured — a spelling-space embedder measures nothing, so it raises nothing; a tied referent field returns *"The text does not say."* rather than a guess.
 
 This is why the reader can say **less** than a conventional model and mean **more**: every commitment has passed a measured cut, and every abstention is a first-class, typed outcome ([INDETERMINATE](/nul) is a verdict, not a failure). It is [saving the appearances](/ancient-astronomy-eo-saving-the-appearances) applied to the machine's own speech — contain every observation without remainder, and where you cannot, say so.
+
+`native/organs/measure.js` is the doctrine's flagship instance, refusing exactly the four-step shape by name rather than by convention. Its declaration grammar refuses a figure with no nothing behind it (`no_ground`), an unestablished statistic/perturbation pairing (`unlicensed_pair`), a rank phrased finer than the draws can carry (capped, always), several observations placed against a one-arrival ground (`best_of_n`), and a number left to a default (`undeclared`) — all five stated by name in the module's own header (lines 1–56) and enforced in its `admit()` gate (lines 244–283). And it names a second "abstain honestly" mechanism the four-step list above doesn't yet cover: a **censored** placement — an observed magnitude that sits outside every one of the null's broken copies — is "NOT refused, deliberately" (line 47): surfeit (above the support) and regularity (below it) are reported as findings about the material, and "the two must never be pooled into one 'significant'" (lines 750–758). The renderer holds the same line in its own words — `phrase()` is written to "never [use] the word 'significant' — which names a threshold nobody here declared" (lines 920–928).
 
 For the specific mechanisms that ride on these primitives — the self-read weld, the deep-reading governor, the monologue audit, citation birth — see [The Evidence](/the-evidence), which reports what each has actually measured, negatives included.
 

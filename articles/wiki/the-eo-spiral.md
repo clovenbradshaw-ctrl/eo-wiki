@@ -3,7 +3,7 @@
 **Record ID:** wiki:the-eo-spiral  
 **DB ID:** 69  
 **Status:** published  
-**Updated:** 2026-03-26T21:59:47.250Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -48,6 +48,8 @@ Biology, the individual, and culture are not three separate spirals running in p
 **Figure** is what's active. The living encounter between inherited encoding and reality. The site where evaluation actually happens. Without figure, there is no encounter, no EVA, no possibility of the loop advancing.
 
 **Pattern** is the repeatable form that emerges from many encounters and persists beyond any one of them. The encoding that survives the individual instance.
+
+A worked instance in a software-architecture register: eoreader7's `ethos.js` module is documented internally as exactly this kind of Ground — not a governor sitting in front of the system that could be toggled off, but the substrate the rest of the system is built on. Its own header states the dependency as a load-bearing fact rather than a design preference: "ETHOS COMES BEFORE LOGOS. This is not a gate that sits in front of the generator and can be lifted; it is the ground the reader is BUILT on... remove the ethos → no clearance → getSession() throws → every turn breaks" (`native/organs/ethos.js`, lines 1–16). That is the Ground/Figure relationship stated in engineering terms: Figure (any given turn of reasoning) does not degrade gracefully in Ground's absence, it becomes impossible, because Figure was never independent of Ground to begin with.
 
 This trichotomy operates at every turn:
 
@@ -272,6 +274,20 @@ The EO spiral's contribution is threefold. First, it grounds the ascent in a *sp
 This means the EO spiral is testable in a way the others are not. You can ask of any system: Is the encoding separated from the execution? Is the loop operative? Which turn is it on? What's the resistance profile? What would unwinding look like? These are empirical questions, not interpretive ones.
 
 It also means the EO spiral avoids the teleological trap. There is no "highest stage" to aspire to. Higher turns are not better — they are more fragile, more dependent, and more expensive. The question is never "how do we get to the next level?" The question is: "Is the loop healthy at this level? Is REC operative? Is EVA honest? Is DEF stable enough?"
+
+## Independent Confirmation from eoreader7 (2026-09)
+
+Three internal eoreader7 doctrine documents, written independently of this article and later than it, reproduce and extend its Ground/Figure/Pattern thesis under different names and from a different case (moral development and rhetoric, not biology and culture).
+
+THE-MORAL-HELIX.md (2026-09-13) states its one-sentence thesis in this article's own terms, applied to moral development: "every moral act is one ring of Ground → Figure → Pattern (the seed's own cycle), and each ring's residue is the next ring's ground, so the person who repeatedly composes moral figures compiles a ground that needs no figure-level work and the act moves up the cube" (lines 17–21). It measures altitude against the same family of empirical instruments this article's "Piaget, Kegan, and Constructive Developmental Theory" section discusses above — Kegan's Subject-Object Interview and Loevinger's WUSCT appear by name in its altitude table alongside the DIT-2 and the Model of Hierarchical Complexity battery (lines 550–557).
+
+It also reaches this article's own verdict on Wilber independently: "The lineage has already refused Wilber's synthesis by name (handbook 003, 0.3 — 'an everyone-is-right synthesis is what this project's refutable, demotable grid is NOT')" (lines 578–580) — the same altitude-specific-not-foundational critique this article develops above in "Wilber's Quadrants as Thresholds," arrived at from a moral-development case rather than a Wilber/Aristotle genealogy.
+
+THE-MORAL-CORE-AS-A-RING.md extends the triad rather than merely restating it, mapping Ground/Figure/Pattern onto Aristotle's rhetorical triad: "ETHOS = GROUND = the standing... LOGOS = FIGURE = the argument... PATHOS = PATTERN = the undergoing... the residue that re-grounds" (lines 151–157). This pathos-as-pattern amendment gives Pattern an experiential register this article does not name explicitly: Pattern is not only "the repeatable form that persists" but the *undergoing* carried away from an encounter that becomes the next ring's ground.
+
+THE-WHEEL.md gives the same trichotomy a third name: Ground is the **Void** (the article's own NUL, "the void is an event with a cursor, never a state"), the particulars are **Beings** (after Heidegger's *das Seiende*), and the emergent pattern is the **Fold** ("identity is the fold at a point") (lines 8–19).
+
+None of these three documents cites this article. Their convergence, from moral development and rhetoric rather than biology and culture, on the same three-part Ground/Figure/Pattern structure is corroborating rather than derivative.
 
 ## A Note on Scope
 

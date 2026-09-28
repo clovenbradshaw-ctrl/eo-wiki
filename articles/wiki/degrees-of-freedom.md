@@ -5,7 +5,7 @@
 **Tags:** 201  
 **Keywords:** independence, freedom, knowledge, data, codd  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:45.312Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -40,7 +40,7 @@ Codd's relational model (1970). Describe what you want; the system finds it. Ful
 
 The structural limit is **∞×** (multiplicative infinity): emanonic proliferation when Level 2 tools engage ground-dominant entities. Every attempt to categorize something that resists categorization spawns more categories. This is the formal definition of a "wicked problem" — not an intractable entity but a mismatched relation.
 
-NULL is the structural consequence of Level 2: the price of separating what a thing is from where it lives. Codd designed it as an honest epistemic boundary marker — possibly a Level 3 capacity embedded in a Level 2 architecture. Its institutional degradation into "empty field awaiting data entry" is a Level 2 system grinding down its own Level 3 inheritance.
+NULL is the structural consequence of Level 2: the price of separating what a thing is from where it lives. Codd designed it as an honest epistemic boundary marker — possibly a Level 3 capacity embedded in a Level 2 architecture. Its institutional degradation into "empty field awaiting data entry" is a Level 2 system grinding down its own Level 3 inheritance. (For a fully worked-out, non-degraded typology of absence — one that resolved this Level 3 capacity differently than either NUL or the earlier NUL-refinement proposal anticipated — see Notes on NUL Refinement's cross-reference to eoreader7's `THE-NULL-STATES.md`.)
 
 ### Level 3: Schema independence
 
@@ -49,6 +49,8 @@ The categories themselves become queryable, temporal, and perspectival. The sche
 Level 3 does not reject Level 2. Classification remains necessary. What Level 3 does is **temporalize the Form**: the schema gets a birthday, an author, a jurisdiction, and an expiration condition.
 
 This makes representable what was previously unrepresentable: trajectories (not just snapshots), constitutive relationships (not just links), superposition (coexisting descriptions without forced collapse), and collective sense-making (knowledge governed by the people it describes).
+
+**A worked instance.** eoreader7's charter family — the UDHR, the Earth Charter, and the Universal Declaration of the Rights of Mother Earth — is a shipped Level 3 architecture, not just an abstract description of one. Each charter carries a named giver rather than being hand-invented: the Earth Charter is attributed to "The Earth Charter — Earth Charter Initiative, 2000 (received affordances, cited)" and the Mother Earth declaration to "Universal Declaration of the Rights of Mother Earth — World People's Conference on Climate Change, Cochabamba, 2010" (`native/organs/charter.js` lines 536–565). Each is bound to its own governing text by a content hash rather than a reputation string — "a license is bound to the content it was extracted from" — so a caller cannot mint a license under a fake charter without reproducing the real charter's fingerprint (`charter.js` lines 619–635, the `charterAffordances` binding). And when charters conflict, the conflict is resolved by an explicit entrenchment rank rather than silently: the human-rights charter is rank 1 ("supreme on human matters"), the Earth Charter rank 2, the Mother Earth declaration rank 3 (`charter.js` line 573 assigns rank 1; lines 539 and 555 assign ranks 2 and 3) — the same Kelsen-style discipline `THE-MORAL-CORE.md` documents for resolving conflicts between the charters (lines 218–233). Named giver, content-hash binding, and an adjudicated entrenchment order are exactly the three things Level 2 schemas cannot represent and Level 3 requires.
 
 The structural limit is **∞↻** (recursive infinity): a system that can examine its own frame can examine that examination indefinitely. Whether this is a limit or a constitutive feature is an open question — a system that *couldn't* recurse further would have reached a final frame, which would be a Level 2 claim smuggled back in.
 

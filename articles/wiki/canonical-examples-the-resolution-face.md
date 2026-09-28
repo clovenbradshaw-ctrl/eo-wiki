@@ -3,7 +3,7 @@
 **Record ID:** wiki:canonical-examples-the-resolution-face  
 **DB ID:** 61  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -11,7 +11,7 @@
 
 ---
 
-> **Editorial note (2026-07): correction in progress.** This article previously contained, by a copy error, the body of the [Site face](/canonical-examples-the-site-face) article — the same terrains and the same clause tables, mislabeled. That content has been removed. What follows is the **correct** Resolution/Stance face: its axes and its nine stances, taken from the implementation's canonical table (`src/core/cube.js`, `STANCES`). The per-language *top-exemplars-by-discrimination-margin* tables that the Act and Site face articles carry are **not yet computed for the Stance face** and are marked as pending below rather than borrowed from another face.
+> **Editorial note (2026-07): correction in progress.** This article previously contained, by a copy error, the body of the [Site face](/canonical-examples-the-site-face) article — the same terrains and the same clause tables, mislabeled. That content has been removed. What follows is the **correct** Resolution/Stance face: its axes and its nine stances, taken from the implementation's canonical table (`native/kernel/cube.js`, `STANCE_BY_MODE`). The per-language *top-exemplars-by-discrimination-margin* tables that the Act and Site face articles carry are **not yet computed for the Stance face** and are marked as pending below rather than borrowed from another face.
 
 ---
 
@@ -25,7 +25,7 @@ The Resolution face is **Mode × Object** — the crossing of *how the transform
 
 The nine stances arise from crossing these two axes. The cell address is Mode × Object.
 
-| | **Condition** (Ground) | **Entity** (Figure) | **Pattern** |
+| | **Ground** (Condition) | **Figure** (Entity) | **Pattern** |
 | --- | --- | --- | --- |
 | **Differentiating** | Clearing | Dissecting | Unraveling |
 | **Relating** | Tending | Binding | Tracing |

@@ -4,7 +4,7 @@
 **DB ID:** 43  
 **Tags:** 201  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -22,7 +22,7 @@ A March 2026 mapping of quantum computing languages onto EO's 27-cell capacity g
 
 ### Background
 
-Classical programming languages exhibit the same distributional asymmetry that EO finds in natural languages. Python's grammar-level primitives — approximately 25 distinct statement types including assignment, deletion, definition, branching, iteration, return, yield, exception handling, import, scope management (`global`, `nonlocal`), assertion, `pass`, `break`/`continue`, and pattern matching — cluster heavily in the Existence and Structure triads (INS, SIG, SEG, CON, EVA) and are nearly empty in the Significance triad (DEF, REC). Every `print`, `len`, `open`, and `sorted` is built from those primitives and replaceable from within the language. The test for whether something is a primitive is: can you redefine it from within the language? If no, it is a primitive. If yes, it is a function.
+Classical programming languages exhibit the same distributional asymmetry that EO finds in natural languages. Python's grammar-level primitives — approximately 25 distinct statement types including assignment, deletion, definition, branching, iteration, return, yield, exception handling, import, scope management (`global`, `nonlocal`), assertion, `pass`, `break`/`continue`, and pattern matching — cluster heavily in the Existence and Structure triads (INS, SIG, SEG, CON, EVA) and are nearly empty in the Interpretation triad (DEF, REC). Every `print`, `len`, `open`, and `sorted` is built from those primitives and replaceable from within the language. The test for whether something is a primitive is: can you redefine it from within the language? If no, it is a primitive. If yes, it is a function.
 
 Quantum programming languages show a different distribution.
 
@@ -124,6 +124,8 @@ Quantum decoherence — loss of superposition through environmental interaction 
 
 Non-quantum instances: a person holding a genuine dilemma — not "which restaurant" but "whether to leave" — experiences constant environmental pressure toward collapse. Friends offer advice that favors one resolution. Circumstances shift to make one option more salient. The person's own need for narrative coherence pushes toward a decision. Maintaining the genuine irresolution requires active effort against an environment structured around definite outcomes. A pidgin language in a multilingual community is in DEF between the contributing languages — multiple grammars simultaneously hold. Without active maintenance — through ongoing contact, community use, lack of a dominant lingua franca — it collapses into creolization or absorption. An emerging scientific paradigm holds multiple incompatible interpretive frameworks in tension until institutional pressures (funding, publication, tenure) force resolution into a dominant school. In each case, holding the DEF state is the achievement. Collapse into EVA is the default.
 
+A fourth instance ships as executable state machinery rather than analogy. eoreader7's "void" object (`declareVoid` / `foldVoids` / `rezeroVoid` / `voidTimeline`) is a DEF·Ground object in the strict sense: a declared emptiness held open over a specific, scoped extent — "nothing opened in 1889 in the passages read so far" is the framework's own worked example of the shape (`THE-NULL-STATES.md`, line 52) — that persists as the working state of the system until exactly one disconfirming arrival cancels it irreversibly, re-zeroing the ground as a REC event with the filling arrival named in the record (`THE-NULL-STATES.md`, Amendment 2026-09-05, line 76). Unlike the dilemma or the pidgin, this is not a DEF state degrading under generalized environmental pressure; it is a DEF·Ground object with a single named cancellation condition, cancelled by one arrival — the same collapse-on-one-event structure measurement performs on a superposition, instantiated outside any quantum or biological substrate.
+
 ### Delayed Choice / Quantum Erasure → Given-Log and Meant-Graph
 
 Wheeler's delayed choice experiment and quantum erasure experiments correspond to the Experience Organ's architecture. The Given-Log (what was observed) is append-only. The Meant-Graph (what observations mean) is mutable. Later entries do not edit earlier entries. They change the horizon — the perspectival context through which earlier entries are read.
@@ -174,7 +176,7 @@ Quantum programming languages retain the classical strengths and add:
 4. **Constrained INS** — no-cloning prohibits duplication
 5. **Reversible DEF** — unitarity preserves the terms DEF established until EVA forces resolution
 
-The quantum profile is not uniformly "more" than the classical profile. It is differently distributed — richer in the Significance triad, more constrained in the Existence triad.
+The quantum profile is not uniformly "more" than the classical profile. It is differently distributed — richer in the Interpretation triad, more constrained in the Existence triad.
 
 ### Language Family Operator Profiles
 
@@ -197,7 +199,7 @@ SYN × Ground — the operation of producing the ambient conditions from which s
 
 ## The Experience Engine and Quantum Architecture
 
-The Experience Organ's three components — Given-Log (what happened), Meant-Graph (what it means), and Horizon-Lattice (perspectival context) — correspond to two of EO's three domains clearly. Given-Log maps to Existence (whether things are). Meant-Graph maps to Significance (what things mean). Structure (how things connect) does not have a dedicated data structure in the current specification; its functions are distributed across the Horizon-Lattice.
+The Experience Organ's three components — Given-Log (what happened), Meant-Graph (what it means), and Horizon-Lattice (perspectival context) — correspond to two of EO's three domains clearly. Given-Log maps to Existence (whether things are). Meant-Graph maps to Interpretation (what things mean). Structure (how things connect) does not have a dedicated data structure in the current specification; its functions are distributed across the Horizon-Lattice.
 
 Quantum mechanics requires three corresponding components: the state (wave function), the observable (measurement apparatus), and the Hamiltonian (the structure of connections that determines dynamics). State maps to Given. Observable maps to Meant. The Hamiltonian — how parts of a system are connected independent of state or measurement context — maps to the structural component the Experience Organ may underspecify.
 

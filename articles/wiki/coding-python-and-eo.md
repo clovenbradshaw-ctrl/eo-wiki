@@ -5,7 +5,7 @@
 **Tags:** 401  
 **Keywords:** python, primitives  
 **Status:** draft  
-**Updated:** 2026-03-26T22:16:38.657Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -149,9 +149,9 @@ But in general, Python does not have native facilities for producing emergent wh
 
 **Augmented assignment:** `+=`, `-=`, `*=`, etc. The frame (the variable, the object, the container) persists; the value changes.
 
-**Mutation in general** — `list.append()`, `dict[key] = value` — is EVA. This is most of what running programs actually do, line by line.
+**Mutation in general** — `list.append()`, `dict[key] = value` — is DEF. This is most of what running programs actually do, line by line.
 
-`raise` can be read as EVA on the execution frame: the normal flow is replaced by the exception flow, but the program structure persists.
+`raise` can be read as DEF on the execution frame: the normal flow is replaced by the exception flow, but the program structure persists.
 
 ### EVA (⊨) — Render Judgment
 
@@ -165,7 +165,7 @@ The closest approximations are temporal:
 - **Generators with **`yield` hold "running and paused" simultaneously — the function's state persists while control is elsewhere.
 - `async`**/**`await` holds "started but not finished" as a stable, handleable condition.
 
-But none of these are true EVA. Python cannot represent "this is simultaneously A and B" as a first-class, stable state. The contradiction must always be resolved.
+But none of these are true EVA. Rendering judgment means testing a particular against a general and producing a verdict — not merely delaying resolution. Python can postpone the verdict procedurally, but it always forces one in the end; it has no first-class way to let "this is simultaneously A and B" stand *as* the verdict.
 
 ### REC (⊛) — Change the Frame Itself
 
@@ -191,8 +191,8 @@ These are all REC, but constrained. You can only revise the frame using mechanis
 | **SEG** | Scope, indentation, `try`/`except`, `with` | Solid |
 | **CON** | `import`, `.`, `return`, function calls | Solid |
 | **SYN** | Comprehensions, class inheritance | Weak |
-| **EVA** | Augmented assignment, mutation | Heavy |
-| **DEF** | Temporal approximations only | Nearly empty |
+| **DEF** | Augmented assignment, mutation | Heavy |
+| **EVA** | Temporal approximations only | Nearly empty |
 | **REC** | Metaclasses, dunders, decorators, `exec` | Present but constrained |
 
 ---

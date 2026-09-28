@@ -5,7 +5,7 @@
 **Tags:** 201  
 **Keywords:** phasepost, helix, transformation, phase space  
 **Status:** published  
-**Updated:** 2026-03-26T21:59:48.364Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -14,6 +14,8 @@ The EO capacity ground cube is a three-dimensional continuous capacity ground in
 The capacity ground is not a classification scheme. A form describes what transformations are available to a system given its current context — not what the system is, but what it can do from where it stands. A system does not belong to a form; it is pulled toward one. Two systems at the same form may have arrived by entirely different paths and be headed in different directions. The address tells you the contextual capacity; history and local conditions determine the trajectory. Which trajectory a system takes is contextual — determined by history, constraint, and what operators are already in play. But the space itself is universal: the topology of allowable transitions does not vary by domain, culture, or scale.
 
 ---
+
+> **Editorial note (2026-09-28).** This article layers a numeric/transcendental coordinate apparatus onto the Object axis — Condition = 2, Particular = √2, Regularity = 2^√2, argued via the Gelfond–Schneider theorem — that has no counterpart in the shipped kernel: `native/kernel/cube.js`'s `GRAINS` names the same three positions `Ground`, `Figure`, `Pattern` as plain strings, with no numeric coordinates anywhere in the module. Other wiki articles describing this axis ([Decal Notation](/decal-notation), [The 27 Forms](/the-27-phase-posts)) also use the `Ground`/`Figure`/`Pattern` names. Read the "Condition / Particular / Regularity" vocabulary and its numeric apparatus below as a **speculative layer on top of** the implemented Ground/Figure/Pattern trichotomy, not as the axis's canonical or implemented naming. This article has not otherwise been touched by any implementation-sync pass (`git log` on this file shows only the initial migration commit).
 
 ## The three axes
 

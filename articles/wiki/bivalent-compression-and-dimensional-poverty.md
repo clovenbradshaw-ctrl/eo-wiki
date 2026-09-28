@@ -5,7 +5,7 @@
 **Tags:** 301  
 **Keywords:** axis, dimensional, compression  
 **Status:** published  
-**Updated:** 2026-05-16T01:25:47.156Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -39,7 +39,7 @@ EO's capacity ground is a capacity ground defined by three axes — Mode (Differ
 EO names three such faces:
 
 - **The Act face** (Mode × Domain): produces the nine operators. Shows *what operation is occurring* but not *at what level of specificity*.
-- **The Stance face** (Mode × Object): produces nine stances (Clearing, Dissecting, Binding, Forging, etc.). Shows *the grain of engagement* but not *which domain of reality* is being engaged.
+- **The Stance face** (Mode × Object): produces nine stances (Clearing, Dissecting, Tending, Composing, etc.). Shows *the grain of engagement* but not *which domain of reality* is being engaged.
 - **The Site face** (Domain × Object): produces nine terrain types (Void, Entity, Link, Paradigm, etc.). Shows *where in reality the target sits* but not *what is being done to it*.
 
 The asymmetry between projection and compression is the hardest structural finding in this article:

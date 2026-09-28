@@ -3,7 +3,7 @@
 **Record ID:** blog:eo-in-5-min  
 **DB ID:** 39  
 **Status:** draft  
-**Updated:** 2026-04-21T01:23:15.521Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -47,7 +47,7 @@ Apply the Ground / Figure / Pattern distinction to three domains — whether thi
 | --- | --- | --- | --- |
 | **Existence** | **NUL** — Recognizing absence; the capacity to deliberately not-act | **SIG** — Drawing a distinction; marking *this* and not *that* | **INS** — Instantiating a concrete entity from a distinction |
 | **Structure** | **SEG** — Drawing boundaries; partitioning; filtering | **CON** — Establishing relationships between differentiated elements | **SYN** — An emergent whole irreducible to its parts |
-| **Significance** | **DEF** — Establishing what holds within a stable interpretive frame | **EVA** — Rendering judgment by testing a particular against a general | **REC** — Restructuring the interpretive frame itself when it can no longer hold |
+| **Interpretation** | **DEF** — Establishing what holds within a stable interpretive frame | **EVA** — Rendering judgment by testing a particular against a general | **REC** — Restructuring the interpretive frame itself when it can no longer hold |
 
 ---
 
@@ -73,12 +73,8 @@ Truth, in EO, is a **limit** — the asymptote that an accumulating sequence of 
 
 The mathematics encodes this directly. The deepest coordinate in EO's framework is **2^√2** — a transcendental number, proven so by the Gelfond-Schneider theorem. Transcendental numbers are exactly those unreachable by any finite chain of algebraic operations. They require an infinite limit process. That is the formal address of what truth occupies in this system: real, directional, approached without arrival.
 
-## What EO says about truth
-
-EO doesn't record truth. Every entry in the system is a *phenomenon*: what appeared to a specific agent, in a specific mode, from a specific position. The agent, the mode of givenness, and the context envelope aren't administrative metadata — they are what makes the entry an observation rather than a claim about reality independent of any observer.
-
-Truth, in EO, is a **limit** — the asymptote that an accumulating sequence of situated observations approaches but never reaches. Each new observation from a new position narrows the gap. No finite number of observations arrives.
-
-The mathematics encodes this directly. The deepest coordinate in EO's framework is **2^√2** — a transcendental number, proven so by the Gelfond-Schneider theorem. Transcendental numbers are exactly those unreachable by any finite chain of algebraic operations. They require an infinite limit process. That is the formal address of what truth occupies in this system: real, directional, approached without arrival.
-
 Languages get by on roughly thirty phonemes. Music uses twelve notes. Logic has AND, OR, NOT. **EO proposes that change itself has an irreducible alphabet — and it has nine elements.** Not as a metaphor. As a structural claim about the minimum conditions for anything to become anything else.
+
+---
+
+This much is the theory. It has also been built: [EO Reader 7](/the-eo-reader) is a working implementation of the algebra, and [The Evidence](/the-evidence) is the honest record of what it measures — most recently a reading-competency audit (2026-09-23) finding the live reading route at 0.9% recall / 18.5% precision against 74.0%/73.7% for an already-validated parser that sits unwired. That is the second evidence leg beside the verb study above, reported with its weak numbers included.

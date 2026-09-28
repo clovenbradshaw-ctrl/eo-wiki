@@ -5,7 +5,7 @@
 **Tags:** 201  
 **Keywords:** 101  
 **Status:** published  
-**Updated:** 2026-03-26T22:16:46.558Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -199,6 +199,20 @@ There is a structural affinity between holons and formal systems — databases, 
 This is the tension identified in the emanon article's discussion of encoding: a holonic data system naturally converts everything it touches toward holonic form. Emanonic claims acquire figure-dominant structure (fields, values, scores). Protogonic processes get frozen into stable categories. The system does this not through malice or error but through its own structural character — holons assimilate.
 
 E.O.'s claim system addresses this through entity-type marking (`entity_type: "emanon"`) and structural constraints on permissible operations, attempting to create pockets within the holonic data architecture where non-holonic rules apply. Whether such pockets can be sustained — whether a holon can contain a genuine exception to its own logic — is an open question that applies equally to data systems and to any self-maintaining institution that attempts to preserve space for the unstructured, the emerging, and the ambiguous.
+
+---
+
+## Grounding in the EO Reader
+
+A prior sync pass (SYNC-PUNCHLIST A11, 2026-07-13) flagged that this article never grounds "holon" in the actual EOReader implementation. That gap was never closed: this article's git history holds only two commits since migration, and the later one redefined protogon-as-figure-dominant / holon-as-pattern-dominant for the entity-type table above, not the grounding gap.
+
+EOReader 7's `native/organs/index.js` — labeled "THE SEAM" in its own header — is the clearest candidate for a holon-shaped boundary in the current codebase: one entrance, one set of explicit named exports, through which every organ the-fold's surface calls must pass, "and only from here" (`native/organs/index.js:1-12`). Each organ or kernel module behind that seam carries a "Handle" — a namesake disclosed in a `// Handle: …` line at the top of its own file and indexed in one canonical table (`README.md:250-266`) — giving each organ a stable, citable identity independent of exactly where it physically sits.
+
+What this pass did **not** find is a direct successor to 4.2's per-organ contract enforcement (an `eo-contract.js` manifest per holon, merged by `src/core/contracts.js`, checked for 100% coverage by `tests/contracts.test.js` — see [The EO Reader](/the-eo-reader)). `native/organs/capacities.js` is a data table naming which organ occupies which of the cube's 27 cells, and `native/eval/the-fold/capability-coverage.mjs` measures how much of that space the registry covers; an independent module census found every one of the 27 cells populated by a second, independently-discovered organ on top of the curated registry (`native/docs/THE-MODULE-CENSUS.md:120-134`). This is a **coverage measure**, not a contract-enforcement parallel: nothing found in the current tree merges a per-organ manifest and refuses to run without full coverage the way 4.2's contracts system did. The holonic claim — that each organ is whole at its own scale, tested and swappable on its own — is still visible in the seam-and-Handle structure; the mechanical enforcement of that claim has not been re-confirmed in eoreader7.
+
+### A 2026-09-25 naming-multiplicity incident, one layer down
+
+The wiki's own doctrine of resonant, non-authoritative names (see [Operator Naming in EO](/operator-naming-in-emergent-ontology)) anticipated naming multiplicity at the level of operator vocabulary. A dated incident shows the same failure mode one layer down, at organ ownership rather than operator naming: a session grepped only `archon-holocracy/archons.json` — a sibling repo's worktree-scoped archon registry — for a domain (the English parser), found no match, and proposed spawning a new archon for it. The domain was not unowned: README's own Handle table had already named it (Chomsky), with a second handle (Sullivan) already carrying a corroborating role and an already-run accuracy measurement directly on point. The two registries are real, both are checked in practice, and neither cross-references the other's existence — "a miss in one registry is not a miss in both" (`CODING-LESSONS.md:1844-1879`; the same incident is restated in the Handle table's own preamble, citing "CODING-LESSONS.md #75," `README.md:259-266`).
 
 ---
 

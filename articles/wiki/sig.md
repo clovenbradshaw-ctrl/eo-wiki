@@ -4,7 +4,7 @@
 **DB ID:** 35  
 **Tags:** operator  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -214,6 +214,8 @@ In data systems, SIG is the operator that does not produce enduring log entries.
 The EO///DB manual specifies: "SIG does not carry values. Creating a table is INS. Declaring what it tracks is DEF. The *decision* to create the table was SIG — ephemeral attention in a meeting." SIG is where you are standing in the building, not a wall in the building.
 
 This ephemeral character follows from the appearing reading. Appearance is inherently temporal. It is an event, not a state. "The food arrived." "Someone came." "The flowers showed up." You cannot store an appearance the way you store a created entity. You can only note that it happened.
+
+This is the default, not an absolute. The algebra names one bounded exception, for forward-pointing (cataphoric) reference: a SIG that names something not yet resolvable at the moment it appears — "he" before its antecedent arrives — can be registered as **pending** rather than let evaporate. `openSig` opens such a SIG on the caller's own clock, with a declared `expiresAt` and a caller-supplied `matches` predicate; `checkArrival` then offers each later act to it and returns one of three typed outcomes — `resolved` (a match arrived within the bound, landing at CON·Figure, the same cell every other reference resolution occupies), `open` (still waiting), or `expired` (the bound passed with no match, a disclosed gap rather than a silent drop) (`native/kernel/pending-sig.js`). This is still not an enduring log entry in DEF's sense — a pending SIG carries no value, and it resolves or expires rather than persisting as a fact — but it is a real, named, bounded departure from pure fire-and-forget appearing.
 
 ## The three confusions
 

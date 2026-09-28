@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** triad, operators, existence, domain  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -157,8 +157,11 @@ The three triads admit multiple valid names depending on the context of inquiry.
 | Cooking | Ingredient | Recipe | Technique |
 | Semiotics | Sign | Object | Interpretant |
 | Mode direction | From Absence | Within Presence | Toward Integration |
+| Implementation (`eoreader7`) | Existence | Structure | Interpretation |
 
 Each row is a different SIG operation selecting a different vocabulary. The triads do not change. The angle of approach does.
+
+The implementation row is not one more optional lens: it is the current name in the shipped kernel (`native/kernel/cube.js`, `DOMAINS = ["Existence", "Structure", "Interpretation"]`), and most of the wiki's own operator and cube articles still write "Significance" rather than "Interpretation" for this triad. Both names are used across this wiki; this row records what the running code calls it.
 
 ---
 

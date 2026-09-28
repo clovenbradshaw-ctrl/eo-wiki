@@ -4,11 +4,11 @@
 **DB ID:** 10  
 **Tags:** 101  
 **Status:** published  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
-**EO** proposes nine **transformation operators** — atomic kinds of change that, in combination, are claimed to be sufficient to describe any transformation in any domain. They are organized into a 3⤫3 lattice: three triads (Existence, Structure, Significance) crossed with three modes (Differentiating, Relating, Generating), each instantiating a ground/figure/pattern role.
+**EO** proposes nine **transformation operators** — atomic kinds of change that, in combination, are claimed to be sufficient to describe any transformation in any domain. They are organized into a 3⤫3 lattice: three triads (Existence, Structure, Significance — the current `eoreader7` implementation names this third triad "Interpretation"; `native/kernel/cube.js`, `DOMAINS`) crossed with three modes (Differentiating, Relating, Generating), each instantiating a ground/figure/pattern role.
 
 The operators are best understood not as steps in a process but as **capacities** — things a system becomes able to do. The helix ordering (NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC) is the order in which these capacities become available. Each capacity presupposes the ones before it: you cannot draw a distinction without the prior capacity for non-action; you cannot connect without the prior capacity to draw boundaries. The helix is a dependency of enablement, not a recipe you execute.
 
@@ -22,7 +22,7 @@ The nine operators are one of three projections of EO's 3⤫3⤫3 phase-space ca
 
 - **The Act face** (Mode ⤫ Domain): produces the nine operators. Asks *what transformation is happening.*
 - **The Site face** (Domain ⤫ Object): produces nine terrain types (Void, Entity, Kind, Field, Link, Network, Atmosphere, Lens, Paradigm). Asks *where in reality is the target.*
-- **The Stance face** (Mode ⤫ Object): produces nine stances (Clearing, Dissecting, Binding, Forging, etc.). Asks *at what grain are you engaging.*
+- **The Stance face** (Mode ⤫ Object): produces nine stances — Clearing, Dissecting, Unraveling (Differentiating); Tending, Binding, Tracing (Relating); Cultivating, Making, Composing (Generating). Asks *at what grain are you engaging.*
 
 The operators are **acts,** not locations. They name what a system *does* at a junction in a pipeline of transformations. The sites name the *terrain* where those acts occur. The resolutions name the *stance* the actor takes. The three faces are complementary projections of the same 27-cell structure. The operator alone tells you the what. The site tells you the where. The resolution tells you the how. All three together — captured in the three-face notation operator(Site, Resolution) — fully encode the capacity ground's three dimensions.
 

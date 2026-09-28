@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** operator, position  
 **Status:** draft  
-**Updated:** 2026-07-14T00:00:00.000Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -19,7 +19,7 @@ None of these systems was finalized in a single pass. The naming history of the 
 
 ## Background
 
-EO's nine operators emerge from crossing two axes of the framework's 3⤫3⤫3 lattice: **Mode** (Differentiating, Relating, Generating) and **Domain** (Existence, Structure, Significance). This produces the **Act face**, one of three 3⤫3 projections of the full 27-cell capacity ground.
+EO's nine operators emerge from crossing two axes of the framework's 3⤫3⤫3 lattice: **Mode** (Differentiating, Relating, Generating) and **Domain** (Existence, Structure, Interpretation — see the naming-registry entry below; the domain was previously called Significance). This produces the **Act face**, one of three 3⤫3 projections of the full 27-cell capacity ground.
 
 Each operator occupies a fixed coordinate. The operator at Relating ⤫ Existence — second in the dependency helix — has the abbreviation **SIG**. It is the only operator whose full English name has been revised twice in the framework's development, and which faces a possible third revision. This revision history is documented below not primarily as a record of terminological housekeeping, but because it surfaced a question about what operator names *are* — a question with implications across the framework.
 
@@ -224,6 +224,18 @@ The Field site (Structure ⤫ Ground) is the emptiest site in every language tes
 If naming is a compound operation rather than a primitive, it does not disappear from EO — it relocates. It moves from being an operator (position two in the helix) to being a *composition* of operators: SIG → SEG → CON → INS, a pipeline that takes raw salience and produces a bound linguistic entity. The operator at position two becomes something more primitive than naming — the bare registration of salience that makes naming *possible* but does not require it.
 
 ---
+
+## Registry Updates
+
+Dated reconciliation entries, per this article's role as the wiki's canonical rename registry (SYNC-PUNCHLIST A9).
+
+**2026-09-28 — Significance → Interpretation (Domain axis).** The Domain axis's third value is **Interpretation**, not Significance, per the shipped algebra's own constant (`native/kernel/cube.js:13`, `DOMAINS = ["Existence", "Structure", "Interpretation"]`). [The Three Faces of EO](/the-three-faces-of-emergent-ontology) already uses "Interpretation" correctly; this article and [The Integral Model](/the-integral-model) are reconciled to match as of this date. "Significance" remains live elsewhere in this article as a *candidate expansion for the SIG operator abbreviation* (§SIG (Proposed, March 2026)) — a distinct, unrelated use of the word that this reconciliation does not touch.
+
+**2026-09-28 — ALT and SUP are retired, historical operator names.** `ALT` and `SUP` are not canonical operators in the shipped algebra (`native/kernel/cube.js:62-67,93`, the ALT/SUP-era comment and `isCurrentOperator`; `README.md:204-208`, "ALT and SUP are not canonical operators"). This restates, from the implementation's own current vantage, the prior sync pass's A2 finding that the alias direction runs SUP → EVA, ALT → DEF. `native/tests/conformance/native-boundary.test.mjs:21-29` asserts this mechanically (`fromAlgebra.has("ALT") === false` and `has("SUP") === false`). Any future mention of ALT or SUP elsewhere in this wiki should be framed as retired and historical, never as a live operator name.
+
+### A Counter-Illustration, One Layer Down (2026-09-25)
+
+The resonant-signifier thesis above concerns operator and site names, which carry no authority of their own. A dated incident shows a structurally similar problem one layer down — at organ ownership rather than operator naming — with a real operational cost: a session grepped only `archon-holocracy/archons.json` (a sibling repo's worktree-scoped archon registry) for a domain (the English parser), found no match, and proposed spawning a new archon for it. The domain was not unowned: eoreader7's own README "Handles (Amendment XVII)" table had already named it. The two registries are real, both are checked in practice, and neither cross-references the other's existence — checking only one and reporting "no owner anywhere" is exactly the failure this incident names (`CODING-LESSONS.md:1844-1879`). See also [Holons](/holons) for the same incident in fuller context.
 
 ## See Also
 

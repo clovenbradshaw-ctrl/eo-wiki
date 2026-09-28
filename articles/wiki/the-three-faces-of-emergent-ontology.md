@@ -5,7 +5,7 @@
 **Tags:** 101  
 **Keywords:** pattern, figure, ground, identity, time, space  
 **Status:** published  
-**Updated:** 2026-05-16T01:25:51.708Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -162,7 +162,7 @@ Collapse the Identity axis (Mode) and you get the terrain face. What arena are y
 
 Void
 
-Thing
+Entity
 
 Kind
 
@@ -195,11 +195,11 @@ The nine sites are phenomenological addresses. Before any operator fires, before
 
 **Void** (Existence ⤫ Ground): The ambient substrate of being. Team "chemistry." Market "confidence." If it multiplies when you measure it, you're in Void.
 
-**Thing** (Existence ⤫ Figure): A specific existent. This person, this object, this event. Language is richest here and cognition most comfortable — which is precisely why most institutional analyses default here regardless of where the actual problem lives.
+**Entity** (Existence ⤫ Figure): A specific existent. This person, this object, this event. Language is richest here and cognition most comfortable — which is precisely why most institutional analyses default here regardless of where the actual problem lives.
 
 **Kind** (Existence ⤫ Pattern): A type, category, or species. Not any particular dog but the concept "dog."
 
-**Field** (Structure ⤫ Ground): The ambient environment of relation. The relational substrate nobody names but everyone navigates. The implicit rules of the room. Field is where most organizational problems actually live; Thing is where most organizational interventions are aimed.
+**Field** (Structure ⤫ Ground): The ambient environment of relation. The relational substrate nobody names but everyone navigates. The implicit rules of the room. Field is where most organizational problems actually live; Entity is where most organizational interventions are aimed.
 
 **Link** (Structure ⤫ Figure): A specific connection. This bond, this dependency, this supply chain.
 
@@ -213,7 +213,7 @@ The nine sites are phenomenological addresses. Before any operator fires, before
 
 The Site face is the crossing of Space with Time: what arena, aimed at what temporal target. It collapses Identity — which means it cannot tell you what is *happening* at a site, only what *kind of thing* is there. A Field is a Field regardless of whether it's being cultivated, dissected, or left alone. The Site face is path-independent, like a thermodynamic state variable: the address doesn't carry a history of how you arrived.
 
-**The diagnostic rule:** Most people default to Thing — a specific existent — because that's where language is richest and cognition is most comfortable. But the actual problem usually lives in Field, Atmosphere, or Void — the Ground row. These are exactly the sites that language underserves and institutions cannot see. If it multiplies when you try to measure it, you're in Ground territory. If it holds still when you name it, you're in Figure territory. If it recurs without anyone planning it, you're in Pattern territory.
+**The diagnostic rule:** Most people default to Entity — a specific existent — because that's where language is richest and cognition is most comfortable. But the actual problem usually lives in Field, Atmosphere, or Void — the Ground row. These are exactly the sites that language underserves and institutions cannot see. If it multiplies when you try to measure it, you're in Ground territory. If it holds still when you name it, you're in Figure territory. If it recurs without anyone planning it, you're in Pattern territory.
 
 ## The Stance Face: Identity ⤫ Time
 
@@ -323,6 +323,10 @@ Full specification: phasepost address = ⟨Identity, Space, Time⟩ = ⟨Mode, D
 A transformation fully specified in the 27-cell cube has a unique site, a unique act, and a unique resolution. All three projections are consistent with the single underlying phasepost address. The faces are the shadows; the cube is the object.
 
 The diagnostic notation `operator(Site, Resolution)` encodes all three cube dimensions simultaneously. The operator names the Act (Identity ⤫ Space). The Site names the address (Space ⤫ Time). The Resolution names the grain (Identity ⤫ Time). Together, the three faces recover all three axes of the cube without redundancy.
+
+### As implemented
+
+This is no longer only diagnostic theory. EOReader 7's `native/kernel/cube.js` ships MODES, DOMAINS, and GRAINS as these same three three-valued axes, and its `cellOf(op, grain)` mechanically derives a cell's terrain and stance by table lookup — `TERRAIN_BY_DOMAIN[domain][grain]` and `STANCE_BY_MODE[mode][grain]` — from tables that match this article's Site and Stance faces cell for cell, once the Entity/Thing correction above is applied: every stance name (Clearing/Dissecting/Unraveling, Tending/Binding/Tracing, Cultivating/Making/Composing) and every Structure/Interpretation terrain name (Field/Link/Network, Atmosphere/Lens/Paradigm) matches verbatim (`native/kernel/cube.js:12-14,40-50,54-60`).
 
 ## Summary
 

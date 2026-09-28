@@ -4,7 +4,7 @@
 **DB ID:** 22  
 **Tags:** operator  
 **Status:** draft  
-**Updated:** 2026-03-26T22:16:47.218Z  
+**Updated:** 2026-09-28T00:00:00.000Z  
 
 ---
 
@@ -307,7 +307,7 @@ In information theory, zero information is the baseline against which all signal
 
 Without NUL, the system cannot not-act. Every junction must transform. Every input must produce an output. Every field must have a value.
 
-The consequences cascade through the entire helix. If NUL is degraded — ground down from ontological condition to clerical backlog to mandatory field — then the Existence triad degrades: you cannot distinguish between "untouched" and "touched" if the system has no concept of non-touching. The Structure triad degrades: you cannot draw meaningful boundaries (SEG) if you cannot first not draw a boundary (NUL) — because the distinction between bounded and unbounded requires the prior capacity for non-bounding. The Significance triad degrades: you cannot render judgment (EVA) or change frames (REC) if you cannot pause between operations — and pausing is, structurally, NUL inserted into the pipeline between one transformation and the next.
+The consequences cascade through the entire helix. If NUL is degraded — ground down from ontological condition to clerical backlog to mandatory field — then the Existence triad degrades: you cannot distinguish between "untouched" and "touched" if the system has no concept of non-touching. The Structure triad degrades: you cannot draw meaningful boundaries (SEG) if you cannot first not draw a boundary (NUL) — because the distinction between bounded and unbounded requires the prior capacity for non-bounding. The Interpretation triad degrades: you cannot render judgment (EVA) or change frames (REC) if you cannot pause between operations — and pausing is, structurally, NUL inserted into the pipeline between one transformation and the next.
 
 The specific failure modes are visible in institutional practice. A case management system that cannot hold "we have not acted on this" as distinct from "we have acted and found nothing" will produce downstream interventions based on ambiguous data. A medical record system that treats an untouched field as equivalent to a field marked "normal" will miss patients whose conditions have not been evaluated. A financial system that treats non-action as zero will report phantom precision.
 
