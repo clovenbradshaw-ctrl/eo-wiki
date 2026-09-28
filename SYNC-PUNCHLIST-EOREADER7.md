@@ -88,6 +88,56 @@ No findings were reported against the remaining nine files in this cluster's own
 
 ---
 
+## Part C: Net-new articles (2026-09-28, second pass)
+
+**A different kind of pass.** Every cluster above is reconciliation: start from an existing wiki claim, re-walk it against the current `eoreader7` tree, and fix, hedge, or historicize it. This pass inverts the method. Rather than starting from wiki claims and checking them against the code, it started from the code — specifically, from the full Handle/archon roster (`README.md`'s Handle table) and a module-by-module walk of `native/kernel/`, `native/organs/`, `native/adapters/`, `native/eval/`, and `native/the-fold/` — and asked, for each Handle and each load-bearing module, whether the wiki said anything about it at all. Most didn't. Twenty-six net-new articles were published to close that gap. (Flagging a discrepancy plainly rather than burying it: the handoff that queued this batch described it as twenty-five articles; the verified count on disk, in the publish stage's own report, and now in `articles/index.json` is twenty-six — `db_id`s 81 through 106 inclusive, all present, no duplicates, no gaps. The prose miscounted; the data didn't.) Four additional fold-in edits threaded newly-surfaced doctrine into already-published articles whose existing argument it extended directly, rather than standing up a new page for it. Grouped by theme:
+
+**Epistemology and the Shape of the Instrument**
+- *The Ways of Knowing: Nine Spokes Around an Empty Hub* (`the-ways-of-knowing`) — the pramana-style catalogue of how this instrument is allowed to come to know something, and why every spoke terminates on an empty hub rather than a ground truth.
+- *The Null States: A Grammar of Everything This Instrument Can Say No To* (`the-null-states`) — `GAP_TYPES` as a closed, governed census of refusal, not a fuzzy catch-all.
+- *The Holograph: How a Whole Reading Fits in a Few Hundred Tokens* (`the-holograph`) — the HRR-style activation-retrieval compression that lets a whole reading be carried and retrieved without re-reading it.
+- *The Three Mathematics: Arithmetic, Geometry, and Calculus as the Cube's Domains* (`the-three-mathematics`) — why the operator cube's three domains are an isomorphism to three actual branches of mathematics, not an arbitrary trio.
+- *The Cube as a Universal Grammar* (`the-cube-as-a-universal-grammar`) — the operator cube tested against Universal Dependencies and Chomskyan word-order typology as a completeness claim, not a metaphor.
+- *GFP: The Claim Underneath Word Order* (`gfp-the-claim-underneath-word-order`) — Ground/Figure/Pattern as the crosslinguistic invariant that word order is one surface realization of, checked against WALS.
+
+**Ethics and the Moral Core**
+- *The Charter as License: EO's Moral Core* (`the-charter-as-license-eos-moral-core`) — why the charter functions as a license the system operates under, not a content filter bolted on top.
+- *The Moral Helix: 27 Cells of Moral Development* (`the-moral-helix-27-cells-of-moral-development`) — Kohlberg and the REST DIT-2 mapped onto the 27-cell cube as a developmental-altitude model.
+- *The Shape of Harm: How EO Reads and Answers an Ask* (`the-shape-of-harm-how-eo-reads-and-answers-an-ask`) — `askShape` and the medium-blind, interlocutor-first discipline for reading what a request is actually asking before answering it.
+
+**Architecture, Governance, and Craft Discipline**
+- *The Handle System: Naming as Governance in EOReader* (`handles-naming-as-governance`) — why every organ gets a proper name and what that buys as an ownership and accountability mechanism, not decoration.
+- *The Fold's Craft Discipline: Matter, Motion, and the Archons* (`the-folds-craft-discipline`) — `admission.js`'s null-derived measurement and the discipline of abstaining honestly rather than measuring what isn't there.
+- *The Guardrail Organs: Witnesses, Never Verdicts* (`the-guardrail-organs-witnesses-not-verdicts`) — the security/PII/prompt-injection organs as an effect system that reports, and is never allowed to rule.
+
+**Process Supervision and Self-Healing**
+- *Heimdall, Out of the Sandbox: the Hive-Mind Supervisor* (`heimdall-out-of-the-sandbox`) — falsification-driven process supervision and escalation across a peer mesh.
+- *Apollo, eoSwarm, and Thea: the Self-Healing Loop* (`apollo-thea-self-healing-loop`) — the EWMA/hysteresis admission gate that lets the system detect and correct its own drift.
+
+**Finding, Verification, and Multiplicity**
+- *Kleene-Up: Finding by Address, Not by Pattern* (`kleene-up-physics-of-finding`) — needle-and-anchor retrieval by birth-address, with regex pattern-matching deliberately evicted as a finding mechanism.
+- *LaVar: The Frontier-Model Reading Grader* (`lavar-reading-grader`) — the mistake corpus and revision-autonomy spiral behind grading a reading against a McGuffey-style ladder.
+- *Five Ways to Run Many: eoreader7's Multiplicity Taxonomy* (`multiplicity-mechanisms`) — walled corroboration versus sham independence, and the dispatch rule that decides which of the five mechanisms applies.
+- *The Colony Learns: Stigmergic Routing for Time-Sensitive Facts* (`stigmergic-fact-resolution`) — swarm-learned routing for facts that go stale, modeled on stigmergy rather than a lookup table.
+
+**Reference, Identity, and Reconstruction**
+- *Identity Alternatives and the Corroboration Floor* (`identity-alternatives-and-the-corroboration-floor`) — how much corroboration a canonicalization needs before an identity claim is allowed to stick.
+- *Cuvier's Bone: Reconstructing What a Code or Schema Artifact Is From Its Own Bytes* (`cuvier-what-is-this-code-artifact-reconstruction`) — byte-anchored reconstruction of an unfamiliar artifact's structure, disclosed sampling and all.
+- *Frege's Referent: Why an Alias Is Never a Nickname* (`freges-referent-alias-equivalence-class`) — alias resolution as a union-find equivalence class over declared evidence, not an informal synonym list.
+
+**Register, Voice, and the Reading Experience**
+- *Bayes: Asking First — The Meaning-Potential Cascade* (`bayes-meaning-potential-cascade`) — `prior-query.js`'s calibrated fallback-versus-default logic for picking a genre voice before reading.
+- *The Covert Cast: Terry Gross's Company and the Ban on Naming the Machine* (`the-covert-cast`) — the covert vocabulary firewall and trust ladder behind an earned-cast voice that never names the machine underneath it.
+- *The Story Cube: Vonnegut's Eight Shapes, Made Taxonomically Complete* (`the-story-cube-vonnegut-shapes`) — Vonnegut's fortune curves reworked into a topologically complete trajectory taxonomy.
+- *Pathos and the Re-Ground: The Felt Shape That Can Force a New Ground* (`pathos-and-the-re-ground`) — when felt, pacing-driven strain is strong enough to force a re-grounding rather than merely coloring the read.
+- *Portable Reader Experience: Vasana, Tala, and What a Reader Carries Between Books* (`portable-reader-experience-vasana-tala`) — the rhythm and experience priors a reader carries across works, not just within one.
+
+**The four fold-ins.** `signal-from-noise.md` gained two paragraphs: a third instance of the anti-threshold cue-admission doctrine, drawn from `morph-cues.js`'s three-nulls-in-series check (including a disclosed negative result on a z-score-to-binomial-surprise fix), and `hard-meaning.mjs`'s deterministic, model-free pre-gate that decides whether a field is even readable before any null-fitting doctrine applies — `FLOORS` (lines 26-50) names the signals, `detectHardMeaning()` (lines 129-177) holds the actual numeric thresholds, a distinction the proposed draft had conflated and this pass corrected before applying, alongside an off-by-one line citation (110, not 111) for "void history." `influences-and-lineage.md` gained a new "The Canon as Ground, Not Epigraph" section showing that three influences already discussed elsewhere on the page (Tao Te Ching, the Gospel of Sri Ramakrishna, Nāgārjuna) are sha256-verified `canon/` files `eoreader7` reads by byte offset at load, not just quoted sources — all five canon file hashes and the `refutation` mechanic's pinned offsets (29278–29314) were independently re-verified against `native/conformance/canon-ground.test.mjs:75` before publishing, and a silently-elided clause in a proposed quotation was caught and restored verbatim. `the-eo-spiral.md` gained a paragraph tying its existing Koestler/holon argument to a real code instance: the-fold's `loop-check.js` and `skeleton-loop.js` name their own structure "the spiral," cite Koestler's Tempus/Hora watchmakers directly (`CODING-LESSONS.md` lesson #68), and commit to Hora by undoing any loop that regresses against the floor below it — a citation-line error in the proposed draft (15-17) was corrected to the real span (13-15) before applying, and an added-italics error in a quoted book title was removed. `nul.md` gained a new "The declared-absent role" subsection grounding NUL·Figure in `native/kernel/completion.js` (Handle: Brahmagupta), showing a gapped clause can be typed as a first-class NUL event via `declareAct()`/`ABSENCE_CELL`, with resolution as a distinct CON·Figure operation reusing the existing contest-adjudication machinery rather than a new scoring rule — `node --test tests/completion.test.js` was independently re-run and confirmed 10/10 passing before this one was applied verbatim, no corrections needed.
+
+All 26 articles carry `Status: published` and `Updated: 2026-09-28T00:00:00.000Z` in frontmatter and are indexed in `articles/index.json`. All four fold-in target files already carried today's date in `Updated:` before this note was added, so none needed bumping; none of the four had their `Status:` field touched (three `published`, one — `nul.md` — `draft`, each left exactly as found).
+
+---
+
 ## Still open / deferred
 
 **From Operators, Cube, Notation, EOT & Event Streaming:**
