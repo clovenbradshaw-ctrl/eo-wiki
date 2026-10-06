@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generated_at": "2026-06-13T21:59:35.254Z",
-  "count": 78,
+  "count": 79,
   "articles": [
     {
       "record_id": "wiki:ancient-astronomy-eo-saving-the-appearances",
@@ -1199,6 +1199,28 @@
       ],
       "updated_at": "2026-07-14T00:00:00.000Z",
       "path": "articles/wiki/eot.md"
+    },
+    {
+      "record_id": "wiki:identity-and-definition",
+      "content_type": "wiki",
+      "slug": "identity-and-definition",
+      "title": "Identity and Definition: One Fold, Two Ends",
+      "db_id": 81,
+      "status": "published",
+      "tags": [
+        "301"
+      ],
+      "keywords": [
+        "identity",
+        "definition",
+        "fold",
+        "for-whom",
+        "perspective",
+        "prior",
+        "neighborhood"
+      ],
+      "updated_at": "2026-10-06T00:00:00.000Z",
+      "path": "articles/wiki/identity-and-definition.md"
     }
   ]
 }
