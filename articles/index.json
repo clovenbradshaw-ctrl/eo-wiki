@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generated_at": "2026-06-13T21:59:35.254Z",
-  "count": 79,
+  "count": 80,
   "articles": [
     {
       "record_id": "wiki:ancient-astronomy-eo-saving-the-appearances",
@@ -1221,6 +1221,28 @@
       ],
       "updated_at": "2026-10-06T00:00:00.000Z",
       "path": "articles/wiki/identity-and-definition.md"
+    },
+    {
+      "record_id": "wiki:definitions",
+      "content_type": "wiki",
+      "slug": "definitions",
+      "title": "Definitions",
+      "db_id": 82,
+      "status": "published",
+      "tags": [
+        "101"
+      ],
+      "keywords": [
+        "definitions",
+        "glossary",
+        "terms",
+        "vocabulary",
+        "operators",
+        "entity types",
+        "EO Reader"
+      ],
+      "updated_at": "2026-10-06T00:00:00.000Z",
+      "path": "articles/wiki/definitions.md"
     }
   ]
 }
