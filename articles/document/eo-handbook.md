@@ -174,7 +174,7 @@ None of these readings are required. The manual is designed to be self-contained
 
 ### What you will encounter
 
-**Nine three-letter operator codes** — NUL, SIG, INS, SEG, CON, SYN, DEF, EVA, REC. These are the framework's primitive vocabulary. They name the nine kinds of transformation. Each has a glyph (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛), a Greek letter, and a coordinate address. You will learn them as the manual unfolds. They are not abbreviations — they are handles for positions in a structure.
+**Nine three-letter operator codes** — NUL, SIG, INS, SEG, CON, SYN, DEF, EVA, REC. These are the framework's primitive vocabulary. They name the nine kinds of transformation. Each has a glyph (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ◉), a Greek letter, and a coordinate address. You will learn them as the manual unfolds. They are not abbreviations — they are handles for positions in a structure.
 
 **EO Notation.** The notation uses dot paths and prefix operations: `DEF(family.martinez.organizing_principle, "youngest child's diagnosis")` means "the Martinez family's organizing principle has been defined as the youngest child's diagnosis." The operator comes first, then the target, then the operand — the same structure as `SUM(A1:A10)` in a spreadsheet. If you followed the formal notation crash course in §0.4, you can read EO notation. Part II covers the full system.
 
@@ -332,7 +332,7 @@ For annotation, logging, and natural-language analysis:
 | SYN | △ | U+25B3 | Triangle — first closed form, synthesis |
 | DEF | ⊢ | U+22A2 | Turnstile — entailment, what follows |
 | EVA | ⊨ | U+22A8 | Models relation — satisfaction, judgment |
-| REC | ⊛ | U+229B | Circled asterisk — recursion, self-reference |
+| REC | ◉ | U+25C9 | Hollow ring around a filled circle — a new open frame (○) holding the instantiated trail (●) |
 
 ## 2.3 Greek Notation
 
@@ -424,7 +424,7 @@ EVA(Entity, Binding)This says: the operator is evaluation; the terrain is an ent
 
 | Context Notation |
 | --- |
-| Annotating logs, field notes, data lineage | Practitioner glyphs (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛) |
+| Annotating logs, field notes, data lineage | Practitioner glyphs (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ◉) |
 | Algebra, formal derivations | Greek (ν σ α κ ε η δ ψ Ω) |
 | Writing about operators in prose | Three-letter codes (NUL, SIG, INS...) |
 | Locating a phenomenon in the substrate | Phasepost address ⟨−1, +1, √2⟩ |
@@ -444,7 +444,7 @@ EVA(Entity, Binding)This says: the operator is evaluation; the terrain is an ent
 | 6 | SYN | △ | η | Structure | Pattern | Produce emergent whole |
 | 7 | DEF | ⊢ | δ | Significance | Ground | Define what holds within frame |
 | 8 | EVA | ⊨ | ψ | Significance | Figure | Evaluate against definitions |
-| 9 | REC | ⊛ | Ω | Significance | Pattern | Restructure the frame itself |
+| 9 | REC | ◉ | Ω | Significance | Pattern | Restructure the frame itself |
 
 # Part III — The Triadic Minimum
 
@@ -510,7 +510,7 @@ Every 2×2 framework in the history of ideas is a 3×3 with five cells missing. 
 
 ## 3.5 Why Three Dimensions Suffice
 
-The 27th position of the substrate is REC (⊛) — the operator that feeds output back as input. This is the recursion threshold: the point at which the system becomes capable of operating on its own operations.
+The 27th position of the substrate is REC (◉) — the operator that feeds output back as input. This is the recursion threshold: the point at which the system becomes capable of operating on its own operations.
 
 This is why a fourth dimension is unnecessary as a primitive. Three dimensions produce 27 positions. The 27th position enables the system to re-traverse the same three dimensions at increasing depth. What the first pass through the helix produces naively — NUL as simple observation, SIG as bare attention — the second pass produces with awareness of the full cycle: NUL² as deliberate observation (mindfulness), SIG² as situated assertion. The operators are the same. The register is different.
 
@@ -902,7 +902,7 @@ The formula itself is an EVA: `EVA(client.phone, "latest")`. Changing the formul
 
 ## 6.10 REC — Recontextualization
 
-⊛ / Ω / Significance × Generate
+◉ / Ω / Significance × Generate
 
 > *A grammar that cannot speak about itself will never know when it is lying.*
 
@@ -1277,7 +1277,7 @@ The comments field may still be needed — not for what the structured fields mi
 
 **Protogon:** Figure-dominant entity type. Identity crystallizing, actively becoming.
 
-**REC (⊛, Ω):** Recontextualization. Restructuring the interpretive frame itself. The pattern of the Significance triad.
+**REC (◉, Ω):** Recontextualization. Restructuring the interpretive frame itself. The pattern of the Significance triad.
 
 **SEG (｜, κ):** Segmentation. Drawing boundaries. Also the fundamental query operator (WHERE, GROUP BY). The ground of the Structure triad.
 

@@ -115,7 +115,7 @@ In EO terms, the phaseposts are not operator transitions — they are **Object a
 
 The MHC's 16 orders are therefore the *internal structure* of three separate helix instantiations, one per column. The phaseposts are the column transitions; the internal orders are the operators coming online within each column.
 
-This reading predicts something testable: the same operator type should appear three times in development, once per column, at progressively higher MHC orders. REC(⊛), for instance, would first appear when an infant develops object permanence-style recursion (Condition column, sensorimotor phase), reappear when a concrete thinker develops systematic reasoning (Entity column, formal phase), and appear again when a postformal thinker constructs cross-paradigmatic synthesis (Pattern column, postformal phase). Same operator, different object class, different MHC order.
+This reading predicts something testable: the same operator type should appear three times in development, once per column, at progressively higher MHC orders. REC(◉), for instance, would first appear when an infant develops object permanence-style recursion (Condition column, sensorimotor phase), reappear when a concrete thinker develops systematic reasoning (Entity column, formal phase), and appear again when a postformal thinker constructs cross-paradigmatic synthesis (Pattern column, postformal phase). Same operator, different object class, different MHC order.
 
 ### The Axioms as Dependency Ordering
 
@@ -135,7 +135,7 @@ The MHC's empirically confirmed quantal gaps between stages — no overlap, equa
 
 The MHC and E.O. are not the same framework, and the convergence is partial.
 
-The MHC is a *developmental* theory: it describes the sequence in which organisms acquire the capacity to perform increasingly complex tasks over a lifetime. E.O. is not developmental; its helix describes a dependency ordering on transformation-types, not an acquisition sequence. A system can instantiate REC(⊛) without having previously "developed through" the lower operators — the helix is a logical dependency, not a maturational trajectory.
+The MHC is a *developmental* theory: it describes the sequence in which organisms acquire the capacity to perform increasingly complex tasks over a lifetime. E.O. is not developmental; its helix describes a dependency ordering on transformation-types, not an acquisition sequence. A system can instantiate REC(◉) without having previously "developed through" the lower operators — the helix is a logical dependency, not a maturational trajectory.
 
 The MHC scores *task complexity*; E.O. scores *transformation type*. These are related but distinct, and mapping the two coordinate systems onto each other is not straightforward. A single high-MHC-order task may involve multiple E.O. operators applied across several positions in the 27-cell space.
 

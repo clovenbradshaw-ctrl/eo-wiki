@@ -51,7 +51,7 @@ Atomic kinds of change, claimed to suffice to describe any transformation. Best 
 | **SYN** | △ | Structure | Pattern | Produce emergent wholes. |
 | **DEF** | ⊢ | Significance | Ground | Establish what holds within a stable interpretive frame. |
 | **EVA** | ⊨ | Significance | Figure | Render judgment by testing a particular against a general. |
-| **REC** | ⊛ | Significance | Pattern | Restructure the frame itself. See [REC](/rec). |
+| **REC** | ◉ | Significance | Pattern | Restructure the frame itself. See [REC](/rec). |
 
 **Triad.** A group of three operators that co-arise as one transformation within a domain: Existence (NUL, SIG, INS), Structure (SEG, CON, SYN), Significance (DEF, EVA, REC). The triad, not the single operator, is the smallest complete unit of domain-level change. See [The Three Triads](/the-triads).
 
@@ -138,6 +138,8 @@ The EO Reader is the framework running as software. See [The EO Reader](/the-eo-
 ## Terms retired or not to be confused
 
 **Formerly DEF / EVA (Alternation / Superposition).** Older articles used these names for DEF and EVA. The current meanings are those in the table above.
+
+**⊛ (circled asterisk).** REC's former glyph, replaced by ◉: a ring around a filled circle, the new open frame holding the instantiated trail. See [Operator Naming](/operator-naming-in-emergent-ontology).
 
 **Void, Clearing, NUL.** Three different things. NUL is an operator, Void is a Site, Clearing is a Stance.
 

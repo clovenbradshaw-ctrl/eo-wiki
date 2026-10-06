@@ -167,7 +167,7 @@ The closest approximations are temporal:
 
 But none of these are true EVA. Python cannot represent "this is simultaneously A and B" as a first-class, stable state. The contradiction must always be resolved.
 
-### REC (⊛) — Change the Frame Itself
+### REC (◉) — Change the Frame Itself
 
 **Metaclasses** (`class Meta(type)`) let you change what `class` means.
 

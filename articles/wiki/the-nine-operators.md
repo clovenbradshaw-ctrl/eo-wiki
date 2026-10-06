@@ -46,7 +46,7 @@ The operators are **acts,** not locations. They name what a system *does* at a j
 | 6 | SYN | △ | η | Structure | Pattern | Produce emergent wholes |
 | 7 | DEF | ⊢ | δ | Significance | Ground | Establish what holds within a stable interpretive frame |
 | 8 | EVA | ⊨ | ψ | Significance | Figure | Render judgment by testing a particular against a general |
-| 9 | REC | ⊛ | Ω | Significance | Pattern | Restructure the frame itself |
+| 9 | REC | ◉ | Ω | Significance | Pattern | Restructure the frame itself |
 
 ---
 
@@ -296,7 +296,7 @@ The operator comes first, followed by its target (what is being transformed) and
 
 In mathematical contexts, a Greek letter notation is also used: ν (NUL), σ (SIG), α (INS), κ (SEG), ε (CON), η (SYN), δ (DEF), ψ (EVA), Ω (REC).
 
-Each operator also has a practitioner glyph (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛) used in compact notation.
+Each operator also has a practitioner glyph (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ◉) used in compact notation.
 
 ---
 

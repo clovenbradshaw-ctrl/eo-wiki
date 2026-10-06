@@ -7,7 +7,7 @@
 
 ---
 
-**REC** (⊛, Ω) is the ninth and final operator in [EO](https://en.wikipedia.org/wiki/Ontology_(information_science))'s dependency helix. It occupies the position **Generating × Significance** — the pattern role within the Significance triad. Its glyph is ⊛ ([U+21AC](https://en.wikipedia.org/wiki/Unicode), rightwards arrow with loop), chosen because it visually encodes the operator's structural function: output feeding back as input, the helix bending into a spiral.
+**REC** (◉, Ω) is the ninth and final operator in [EO](https://en.wikipedia.org/wiki/Ontology_(information_science))'s dependency helix. It occupies the position **Generating × Significance** — the pattern role within the Significance triad. Its glyph is ◉ ([U+21AC](https://en.wikipedia.org/wiki/Unicode), rightwards arrow with loop), chosen because it visually encodes the operator's structural function: output feeding back as input, the helix bending into a spiral.
 
 REC is the capacity to restructure the interpretive frame itself — not to change data within a schema, but to change what the schema means. It does not modify values (EVA), hold contradictory values (DEF), or produce emergent wholes (SYN). It changes the conditions under which values, contradictions, and wholes are interpreted. The caterpillar is not a butterfly with different features. It is a different kind of thing.
 

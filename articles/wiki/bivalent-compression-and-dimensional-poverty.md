@@ -21,7 +21,7 @@ This article organizes findings and claims into three tiers: empirical results d
 
 The cross-linguistic verb data establishes that certain transformation operators are universally impoverished in human languages:
 
-- **EVA (evaluation) and REC (⊛, recursion)** together account for approximately 2% of verb inventories across all 27 languages tested. No language exceeds 5% even after targeted reclassification. Japanese, Sanskrit, and Classical Chinese — the languages most likely to falsify a Western-bias explanation — all fall below 1% for DEF.
+- **EVA (evaluation) and REC (◉, recursion)** together account for approximately 2% of verb inventories across all 27 languages tested. No language exceeds 5% even after targeted reclassification. Japanese, Sanskrit, and Classical Chinese — the languages most likely to falsify a Western-bias explanation — all fall below 1% for DEF.
 - **DEF (alternation) averages 16.2%.** Human languages are fluent at reframing — seeing something from a different angle — but impoverished at holding contradiction (DEF) or restructuring foundations (REC).
 - **The empty cell at SYN × Ground** contains zero verbs across all languages in the corpus. No attested human language has a verb meaning "synthesize a condition." This absence is treated as data, not sampling artifact.
 - **English DEF vocabulary is disguised as NUL.** A reclassification audit identified 14 verbs classified under NUL (void, negation, deletion) that are structurally DEF: *hide, deny, censor, pause, suppress, repress, ignore, overlook, interrupt, neglect, stifle, disregard, blackline, unreport*. These verbs denote simultaneous presence and absence — an operation that requires holding contradiction — but English categorizes them as negation because the nearest available conceptual bin is NUL.
@@ -86,7 +86,7 @@ The compression lattice maps onto a progression in data architecture:
 | Flatland (2D) | Relational model (Codd, SQL) | Two degrees: query-based spatial freedom, no temporal axis |
 | Spaceland (3D) | EO's full capacity ground | Three degrees: reflexive reasoning about the framework itself |
 
-The hierarchical model is bivalent in the most literal sense: a record either exists at a position in the tree or it does not. Codd's relational model adds a second degree of freedom — any attribute, any join, any angle of inquiry — but operates in an eternal present. It can hold ambiguity on a single variable (via NULL) but cannot hold two contradictory structural readings of the same system simultaneously. It has no DEF. It has no REC (⊛).
+The hierarchical model is bivalent in the most literal sense: a record either exists at a position in the tree or it does not. Codd's relational model adds a second degree of freedom — any attribute, any join, any angle of inquiry — but operates in an eternal present. It can hold ambiguity on a single variable (via NULL) but cannot hold two contradictory structural readings of the same system simultaneously. It has no DEF. It has no REC (◉).
 
 ---
 
@@ -194,7 +194,7 @@ Whether the universal poverty of DEF and REC vocabulary reflects a *contingent* 
 
 ### Whether Notation Can Compensate for Lexical Poverty
 
-Whether notation systems — EO's form addresses, operator composition syntax, the ∥ and ⊛ glyphs — can partially compensate for the absence of natural-language vocabulary for three-dimensional operations is an empirical question. If they can, they would function as prosthetic vocabulary for the third dimension: external encodings that give √2 an address in systems where the natural language has none. Whether this constitutes genuine dimensional access or merely a more elaborate form of narration is untested.
+Whether notation systems — EO's form addresses, operator composition syntax, the ∥ and ◉ glyphs — can partially compensate for the absence of natural-language vocabulary for three-dimensional operations is an empirical question. If they can, they would function as prosthetic vocabulary for the third dimension: external encodings that give √2 an address in systems where the natural language has none. Whether this constitutes genuine dimensional access or merely a more elaborate form of narration is untested.
 
 ### Dimensional Assignments to Historical Thinkers
 

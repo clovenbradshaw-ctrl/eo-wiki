@@ -113,7 +113,7 @@ Collapse any one axis and you get a 3⤫3 face. Three faces, three perspectives,
 | --- | --- | --- | --- |
 | **Differentiating** | NUL ∅ | SEG | | DEF ⊢ |
 | **Relating** | SIG ○ | CON ⋈ | EVA ⊨ |
-| **Generating** | INS ● | SYN △ | REC ⊛ |
+| **Generating** | INS ● | SYN △ | REC ◉ |
 
 **Stance Face** (Identity ⤫ Time, collapsing Space) — How does it land? Nine grains:
 

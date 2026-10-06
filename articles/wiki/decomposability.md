@@ -140,7 +140,7 @@ Decomposability tells you what holds at each scope. The holonic threshold tells 
 
 ### 6.1 REC as the Scope-Crossing Operator
 
-REC (⊛) is the operator that changes what things mean. It does not change data; it changes the frame through which data is interpreted. At any single scope, REC is the most powerful and most dangerous operator — everything downstream gets reinterpreted.
+REC (◉) is the operator that changes what things mean. It does not change data; it changes the frame through which data is interpreted. At any single scope, REC is the most powerful and most dangerous operator — everything downstream gets reinterpreted.
 
 But REC has a special relationship to scope that the other eight operators do not. When a system achieves REC *across* scopes — when the output of its operations at one scope feeds back as the interpretive frame for its operations at another scope — the system becomes self-referential across scopes. That is the holonic threshold. The system is no longer just operating at multiple scopes independently. It is using its own multi-scope existence as the condition of its own persistence.
 
@@ -156,7 +156,7 @@ Below the Curie temperature, the self-referential coupling catches. Domains form
 
 Above the Curie temperature, thermal noise prevents the self-referential coupling from taking hold. The scopes are decoupled. Each scope has its own business.
 
-At the critical point *exactly*, the system holds the holonic condition without resolving it. This is why it is DEF — not merely because two causal directions coexist, but because the system is in superposition between *achieving* and *not achieving* recursive self-maintenance across scopes. The cross-scope superposition diagnosed in §4.4 is, at a deeper level, an unresolved ⊛.
+At the critical point *exactly*, the system holds the holonic condition without resolving it. This is why it is DEF — not merely because two causal directions coexist, but because the system is in superposition between *achieving* and *not achieving* recursive self-maintenance across scopes. The cross-scope superposition diagnosed in §4.4 is, at a deeper level, an unresolved ◉.
 
 The specific sequence — cross-scope DEF resolving by SEG (symmetry-breaking partition that selects a dominant direction) — may characterize a structural class of phenomena broader than phase transitions. The onset of collective behavior in flocking, the emergence of consensus in distributed systems, the crystallization of a paradigm from competing interpretations — any system where bidirectional cross-scope mediation holds temporarily and then collapses into either a stable multi-scope architecture or decoupled independence. This is a hypothesis, not a finding.
 

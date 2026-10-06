@@ -1248,7 +1248,7 @@ function renderDelta(idx) {
       <span class="state-val">${nulCount} events — semantic collapse in vanilla</span>
     </div>
     <div class="state-row" style="border:none;padding:1px 0;">
-      <span class="state-key" style="color:var(--rec);min-width:0;margin-right:8px;">⊛ REC</span>
+      <span class="state-key" style="color:var(--rec);min-width:0;margin-right:8px;">◉ REC</span>
       <span class="state-val">${recCount} events — replay integrity broken</span>
     </div>`;
 }

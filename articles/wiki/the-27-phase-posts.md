@@ -33,7 +33,7 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 | 6 | SYN(Condition) | △- | (2, +1, 2) |
 | 7 | DEF(Condition) | ⊢- | (0, √2, 2) |
 | 8 | EVA(Condition) | ⊨- | (1, √2, 2) |
-| 9 | REC(Condition) | ⊛- | (2, √2, 2) |
+| 9 | REC(Condition) | ◉- | (2, √2, 2) |
 
 ### Entity (+)   Object = √2
 
@@ -47,7 +47,7 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 | 15 | SYN(Entity) | △+ | (2, +1, √2) |
 | 16 | DEF(Entity) | ⊢+ | (0, √2, √2) |
 | 17 | EVA(Entity) | ⊨+ | (1, √2, √2) |
-| 18 | REC(Entity) | ⊛+ | (2, √2, √2) |
+| 18 | REC(Entity) | ◉+ | (2, √2, √2) |
 
 ### Pattern (*)   Object = 2^√2
 
@@ -61,7 +61,7 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 | 24 | SYN(Pattern) | △* | (2, +1, 2^√2) |
 | 25 | DEF(Pattern) | ⊢* | (0, √2, 2^√2) |
 | 26 | EVA(Pattern) | ⊨* | (1, √2, 2^√2) |
-| 27 | REC(Pattern) | ⊛* | (2, √2, 2^√2) |
+| 27 | REC(Pattern) | ◉* | (2, √2, 2^√2) |
 
 ## What Each Position Means
 
@@ -115,9 +115,9 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 
 **REC — recursing**
 
-1. ⊛- (2, √2, 2) — a condition takes itself as its own ground; recursive ambient self-reference
-2. ⊛+ (2, √2, √2) — an entity models itself; reflexive self-awareness
-3. ⊛* (2, √2, 2^√2) — a pattern encompasses its own patterning; recursive systemic self-organization
+1. ◉- (2, √2, 2) — a condition takes itself as its own ground; recursive ambient self-reference
+2. ◉+ (2, √2, √2) — an entity models itself; reflexive self-awareness
+3. ◉* (2, √2, 2^√2) — a pattern encompasses its own patterning; recursive systemic self-organization
 
 ## Note on SEG Symbol
 

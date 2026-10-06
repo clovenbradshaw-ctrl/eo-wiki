@@ -93,7 +93,7 @@ The levels correspond to E.O.'s fundamental triad at the scale of engagement: Le
 ## Open questions
 
 1. **Are the infinities properties of levels or of crossings between levels?** ∞× arises specifically when Level 2 engages ground-dominant entities, not as a limit of Level 2 as such.
-2. **Is ∞**⊛**a limit or a feature?** If constitutive rather than limiting, the three infinities are not structurally parallel.
+2. **Is ∞**◉**a limit or a feature?** If constitutive rather than limiting, the three infinities are not structurally parallel.
 3. **Is there a Level 4?** Level 3's constraint (recursive depth) may be identical to its capacity, making it the terminal level. This is speculative.
 
 ## See also
@@ -105,4 +105,4 @@ The levels correspond to E.O.'s fundamental triad at the scale of engagement: Le
 - NULL (relational model)
 - Data independence (Codd, 1970)
 - εἶναι / γενέσσαι distinction
-- The three infinities (∞~, ∞×, ∞⊛)
+- The three infinities (∞~, ∞×, ∞◉)

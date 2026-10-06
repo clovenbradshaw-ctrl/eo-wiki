@@ -503,7 +503,7 @@ The top-level expression captures the cross-grain mediation (what caused what ac
 | SYN | △ | η | Structure | Generating | Synthesize into whole |
 | DEF | ⊢ | δ | Significance | Differentiating | Assert/define what holds |
 | EVA | ⊨ | ψ | Significance | Relating | Render judgment |
-| REC | ⊛ | Ω | Significance | Generating | Recursive revision |
+| REC | ◉ | Ω | Significance | Generating | Recursive revision |
 
 Helix ordering:
 
@@ -619,6 +619,6 @@ One vocabulary. Three structural levels. Determination as narrowing. Unmarked is
 
 *Revision History*
 
-- **v2.0**: Full restructure. Added: Progressive Activation with Tao Te Ching worked example (§2), The One Vocabulary (§3), Determination and Superposition correcting unmarked semantics (§6), Targeting and Grain with `−`/`+`/`*`/`_` grain markers (§7), Cross-Grain Expressions (§8), Horizontal and Vertical Nesting (§9). Corrected unmarked from "axis not activated" to "implicit superposition of all three positions." Distinguished `_` (non-participation, dot paths only) from unmarked (full superposition). Unified grain markers with type vocabulary. Operator table updated to SIG (from DES), EVA glyph to ⊨, REC glyph to ⊛.
+- **v2.0**: Full restructure. Added: Progressive Activation with Tao Te Ching worked example (§2), The One Vocabulary (§3), Determination and Superposition correcting unmarked semantics (§6), Targeting and Grain with `−`/`+`/`*`/`_` grain markers (§7), Cross-Grain Expressions (§8), Horizontal and Vertical Nesting (§9). Corrected unmarked from "axis not activated" to "implicit superposition of all three positions." Distinguished `_` (non-participation, dot paths only) from unmarked (full superposition). Unified grain markers with type vocabulary. Operator table updated to SIG (from DES), EVA glyph to ⊨, REC glyph to ◉.
 - **v1.5**: Global replace ⊕ → ∥. Global replace θ → σ. Global replace DES → SIG.
 - **v1.0**: Initial publication.

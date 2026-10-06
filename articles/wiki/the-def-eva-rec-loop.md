@@ -17,9 +17,9 @@ Operators 7, 8, and 9 don't just occupy the third row of the grid — they form 
 
 **EVA (⊨)** checks whether data satisfies the definition. It is the semantic bridge — model-theoretic satisfaction. EVA doesn't generate structure or rewrite anything. It tests: *does this configuration count as that type?* The turnstile points from proof to truth.
 
-**REC (⊛)** is what happens when evaluation results force the definitions to be rewritten. This is the crucial insight: REC is not a function calling itself. REC is the operator where a system's encounter with its own data becomes the condition for restructuring its own categories. The evaluation discovers something the definition didn't anticipate, and that discovery feeds back into the defining structure.
+**REC (◉)** is what happens when evaluation results force the definitions to be rewritten. This is the crucial insight: REC is not a function calling itself. REC is the operator where a system's encounter with its own data becomes the condition for restructuring its own categories. The evaluation discovers something the definition didn't anticipate, and that discovery feeds back into the defining structure.
 
-The loop: DEF ⊢ → EVA ⊨ → REC ⊛ → DEF ⊢ ...
+The loop: DEF ⊢ → EVA ⊨ → REC ◉ → DEF ⊢ ...
 
 ## Two Loops: Depicted and Enacted
 
@@ -109,7 +109,7 @@ The DEF–EVA–REC loop recovers the three pillars of mathematical logic:
 
 1. **DEF ⊢ = Proof Theory** (Hilbert, Gentzen). Axioms, inference rules, formal derivation.
 2. **EVA ⊨ = Model Theory** (Tarski). Satisfaction, truth-in-a-structure.
-3. **REC ⊛ = Fixed-Point Theory** (Gödel, Kleene, Lawvere). Where proof and truth become self-referential.
+3. **REC ◉ = Fixed-Point Theory** (Gödel, Kleene, Lawvere). Where proof and truth become self-referential.
 
 The deep results of logic are precisely about the transitions between these three:
 

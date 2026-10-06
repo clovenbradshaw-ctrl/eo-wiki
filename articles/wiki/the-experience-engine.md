@@ -186,7 +186,7 @@ Nine rules govern the system, organized in three triads that mirror the operator
 
 *The recursion does not regress without end. It terminates in the medium constants: parameters that are contents of no engine because they are the shape of the tuple itself. Everything above that floor is convention, and every convention can name the ledger event that admitted it.*
 
-*This section is Rule 9 made mechanical. Rule 9 scopes rule revision to the framework layer through versioned ⊛REC. In implementation, that versioned ⊛REC is an ordinary emission into the inner engine's Given-Log. The architecture eats its own dogfood because both layers cook from the same recipe.*
+*This section is Rule 9 made mechanical. Rule 9 scopes rule revision to the framework layer through versioned ◉REC. In implementation, that versioned ◉REC is an ordinary emission into the inner engine's Given-Log. The architecture eats its own dogfood because both layers cook from the same recipe.*
 
 **Epistemic status.* The correspondence between the three stores and the three triads is established by the reverse derivation of the operators from the tuple. The recursion clause is empirically suggestive on a single witness, the induced attribution verb above. The test that would move it: induce conventions across a multilingual corpus and check whether the inner engine exhibits the same triadic structure the outer one does. Until that test runs, this section is a proposal carrying one data point.*
 

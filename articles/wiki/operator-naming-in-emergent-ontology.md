@@ -119,7 +119,7 @@ Across all three names — and across the pre-naming Airtable phase where the po
 
 ### Practitioner Glyphs
 
-The practitioner glyph system is **∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛** — one mark per operator, made authoritative in the implementation (`src/core/operators.js`) so every surface draws the same mark for a given act and a graph edge never disagrees with a legend chip. The marks read by domain column: Existence **∅ ○ ●**, Structure **｜ ⋈ △**, Interpretation **⊢ ⊨ ⊛**. Glyphs were selected for visual iconicity:
+The practitioner glyph system is **∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ◉** — one mark per operator, made authoritative in the implementation (`src/core/operators.js`) so every surface draws the same mark for a given act and a graph edge never disagrees with a legend chip. The marks read by domain column: Existence **∅ ○ ●**, Structure **｜ ⋈ △**, Interpretation **⊢ ⊨ ◉**. Glyphs were selected for visual iconicity:
 
 - **∅** (empty set) for NUL: the void as a well-defined mathematical object.
 - **○** (open circle) for SIG: attention directed but not yet filled — a point of registration, something becoming salient against a ground, prior to any boundary being drawn around it.
@@ -129,9 +129,9 @@ The practitioner glyph system is **∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛** — one
 - **△** (triangle) for SYN: parts rising into an emergent whole.
 - **⊢** (turnstile) for DEF: entailment — what follows given the terms; a definition asserted.
 - **⊨** (double turnstile) for EVA: satisfaction — testing whether a structure models a formula.
-- **⊛** (rightwards arrow with loop) for REC: output feeding back as input, the helix bending into a spiral.
+- **◉** (a ring around a filled circle) for REC: the move up a level that keeps its trail. When a reading is falsified and retraced, nothing is erased; the run is kept as instantiated record (●, the solid centre), and the frame that now holds it is a new layer that is registered but not yet filled in (○, the open ring). It is built from the marks for SIG and INS on purpose: the next pass opens as a fresh SIG around what the last pass instantiated.
 
-**Superseded glyphs**, kept for reading older material: ⊡ (was SIG, now ○); △ (was INS — now SYN's mark, INS is ●); ⤫ (was CON, now ⋈); ∨ (was SYN, now △); ∿ (was DEF, now ⊢); ∥ (was EVA, now ⊨). The earlier set drifted from the implementation; the marks above are the ones the shipped reader draws.
+**Superseded glyphs**, kept for reading older material: ⊡ (was SIG, now ○); △ (was INS — now SYN's mark, INS is ●); ⤫ (was CON, now ⋈); ∨ (was SYN, now △); ∿ (was DEF, now ⊢); ∥ (was EVA, now ⊨); ⊛ (circled asterisk, U+229B; was REC, now ◉ — the old rationale, "rightwards arrow with loop," described a different character). The earlier set drifted from the implementation; the marks above are the ones the shipped reader draws.
 
 ### Greek Letters
 

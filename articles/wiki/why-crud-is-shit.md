@@ -177,7 +177,7 @@ Three domains × three modes = nine operators. Each names a unique combination o
 
 **EVA** (⊨) — *Evaluation.* Render judgment by testing a particular against a general. DEF establishes the terms; EVA assesses whether something satisfies them. The glyph is ⊨ (the satisfaction relation). An immune cell testing a molecule against its self/non-self definition is performing EVA. In data systems, EVA is the projection rule that determines what the Horizon shows when multiple DEFs exist on the same path.
 
-**REC** (⊛) — *Recontextualization.* Transform the interpretive frame itself. Not a change within the frame but a change of the frame. A caterpillar is not a butterfly with different features — it is a different kind of thing. REC fires when DEF's terms and EVA's judgments prove inadequate — when the problem is not the content or the assessment but the frame within which both operate.
+**REC** (◉) — *Recontextualization.* Transform the interpretive frame itself. Not a change within the frame but a change of the frame. A caterpillar is not a butterfly with different features — it is a different kind of thing. REC fires when DEF's terms and EVA's judgments prove inadequate — when the problem is not the content or the assessment but the frame within which both operate.
 
 ### Absence is a trajectory, not an operator
 

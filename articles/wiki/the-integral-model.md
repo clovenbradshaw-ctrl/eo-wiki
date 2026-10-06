@@ -82,7 +82,7 @@ The integral model's Significance triad — DEF, EVA, REC — takes its glyphs d
 
 1. **DEF ⊢ — entailment.** The axiom-setting move. `T ⊢ φ` in model theory says φ is provable from theory T. DEF in the integral model fixes T — what types are admissible, what derivations follow, what the frame will treat as valid. DEF is a Ground operation in the Significance triad because it sets the ground the rest of the triad operates on.
 2. **EVA ⊨ — satisfaction.** A relation, not a procedure. `M ⊨ φ` in model theory says the structure M makes φ true. EVA in the integral model records, per candidate state, whether the state satisfies the theory DEF has fixed. EVA is a Figure operation because it figures against the ground DEF set.
-3. **REC ⊛ — frame restructure.** Both ⊢ and ⊨ presuppose a fixed theory. REC changes T. After REC, old models may no longer satisfy and old theorems may no longer derive. REC is a Pattern operation because it modifies the pattern under which ground and figure relate.
+3. **REC ◉ — frame restructure.** Both ⊢ and ⊨ presuppose a fixed theory. REC changes T. After REC, old models may no longer satisfy and old theorems may no longer derive. REC is a Pattern operation because it modifies the pattern under which ground and figure relate.
 
 The 7 → 8 → 9 ordering is exactly: axioms → satisfaction → frame change. The relational model writes none of the three to the log. UPDATE conflates all three into a single verb and discards the distinction. The integral model emits all three as separate events with independent provenance, and every domain question that turns on "was this an EVA or a REC?" becomes answerable rather than lost.
 
@@ -124,7 +124,7 @@ The integral model inherits heavily from existing work and claims novelty only a
 
 **From Git.** Immutable commits (Given-Log), branchable state (Meant-Graph), checked-out views (Horizon), content-addressed identity (anchors). The structural parallel is close enough that Git can be read as a single-domain implementation of the integral model avant la lettre.
 
-**What is genuinely new.** The enforcement of the Given/Meant separation as a substrate invariant. The closed nine-operator algebra as a substrate vocabulary. The model-theoretic ordering of the Significance triad (DEF → EVA → REC as ⊢ → ⊨ → ⊛). The phenomenal address and windowed interpretation as structural components of every datum. The claim that these together constitute a substrate one order of hierarchical complexity above the relational model.
+**What is genuinely new.** The enforcement of the Given/Meant separation as a substrate invariant. The closed nine-operator algebra as a substrate vocabulary. The model-theoretic ordering of the Significance triad (DEF → EVA → REC as ⊢ → ⊨ → ◉). The phenomenal address and windowed interpretation as structural components of every datum. The claim that these together constitute a substrate one order of hierarchical complexity above the relational model.
 
 ## Status
 

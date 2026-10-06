@@ -129,7 +129,7 @@ Socrates draws the diagonal. The frame — build a square on a given length — 
 
 The boy verifies the square built on the diagonal has area 8. He can see it works. He cannot name the length as a ratio. Both facts hold simultaneously.
 
-### REC(⊛)
+### REC(◉)
 
 `REC(SIG(length, ratio_expressible))`
 

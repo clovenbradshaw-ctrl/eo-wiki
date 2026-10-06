@@ -141,7 +141,7 @@ INS
 
 SYN
 
-REC (⊛)
+REC (◉)
 
 |  |
 |  |
@@ -308,7 +308,7 @@ The three faces split into two kinds.
 
 The **Site face** has no Identity axis. No Mode means no engine — no directionality, no arrow, no process. The Site face is a state description: nine addresses in the phase space of significance. A Field is a Field regardless of what operations produced it. Like thermodynamic state variables — temperature, pressure, entropy — the Site face is path-independent. It describes where a system *is*, not how it got there.
 
-The **Act** and **Stance faces** both contain the Identity axis. Identity is the engine — the source of directionality. Any face that contains Identity describes a process: something with direction, something that can in principle run forward and backward. And like thermodynamic processes, the reversals cost something. Disconnection is not the neutral return to a pre-connected state. Uncreation leaves traces. The cost increases along the helix — early operators (NUL, SIG, INS) reverse relatively cleanly; late operators (EVA, REC ⊛) reverse expensively or not at all.
+The **Act** and **Stance faces** both contain the Identity axis. Identity is the engine — the source of directionality. Any face that contains Identity describes a process: something with direction, something that can in principle run forward and backward. And like thermodynamic processes, the reversals cost something. Disconnection is not the neutral return to a pre-connected state. Uncreation leaves traces. The cost increases along the helix — early operators (NUL, SIG, INS) reverse relatively cleanly; late operators (EVA, REC ◉) reverse expensively or not at all.
 
 The Site face can't reverse because reversal requires an arrow, and arrows require an engine. What the Site face *can* do is shift between Concealed, Disclosed, and Transparent — not by running a process but by the observer gaining resolution on a state that was always there. This is measurement, not transformation. And like measurement in thermodynamics, it has its own costs: disclosing a concealed Field requires attention, language, practice, and institutional capacity. Moving from not-knowing to knowing is work.
 

@@ -90,7 +90,7 @@ Three dialectics, each with three positions, crossing orthogonally, produce a 3 
 
 ### 3.3 The Recursion Threshold: Why Three Dimensions Suffice
 
-The 27th position of EO's capacity ground is REC (⊛) — the operator that feeds output back as input. This is the recursion threshold: the point at which the system becomes capable of operating on its own operations. Identity restructures. The framework includes its own updatability as a structural feature.
+The 27th position of EO's capacity ground is REC (◉) — the operator that feeds output back as input. This is the recursion threshold: the point at which the system becomes capable of operating on its own operations. Identity restructures. The framework includes its own updatability as a structural feature.
 
 This is why a fourth dimension is unnecessary as a primitive. Three dimensions produce 27 positions. The 27th position enables the system to re-traverse the same three dimensions at increasing depth. What the first pass through the helix produces naively — NUL as simple absence, SIG as bare distinction — the second pass produces with awareness of the full cycle: NUL² as deliberate emptiness (the Buddhist śūnyatā), SIG² as situated assertion (the claim schema). The operators are the same. The register is different.
 
@@ -177,7 +177,7 @@ EO's second operator, SIG (σ), occupies the Figure position of the Existence tr
 
 SIG performs the operation of minimal sign-initiation: the moment a difference in the world becomes a difference *for a system*. This is not a cognitive or linguistic act. A chemoreceptor on a bacterium's surface responding to a sugar gradient is performing SIG: something registers as *not-that*, where before there was undifferentiated medium.
 
-SIG is not Peirce's Thirdness. It is the threshold operator at which the Secondness of brute collision first acquires sign-character — the position in the helix where the preconditions for semiosis are established. Full Thirdness, in Peirce's sense, requires the entire Significance triad (DEF, EVA, REC ⊛) to be in place. SIG is the first move toward that register, not its completion.
+SIG is not Peirce's Thirdness. It is the threshold operator at which the Secondness of brute collision first acquires sign-character — the position in the helix where the preconditions for semiosis are established. Full Thirdness, in Peirce's sense, requires the entire Significance triad (DEF, EVA, REC ◉) to be in place. SIG is the first move toward that register, not its completion.
 
 ### 6.3 Łukasiewicz, Aristotle, and Three-Valued Logic
 
@@ -267,13 +267,13 @@ The nine operators are organized into three co-constitutive triads corresponding
 | --- | --- | --- |
 | Existence | NUL, SIG (σ), INS | Ground, Figure, Pattern of being |
 | Structure | SEG, CON, SYN | Ground, Figure, Pattern of connection |
-| Significance | EVA, DEF, REC (⊛) | Ground, Figure, Pattern of meaning |
+| Significance | EVA, DEF, REC (◉) | Ground, Figure, Pattern of meaning |
 
 NUL is the Ground of the Existence triad — the void, the pre-distinction field, the condition that makes the first distinction possible. NUL is below the Triadic Minimum in one precise sense: it is the term that precedes the triad's first move. The Triadic Minimum names the minimum for transformation; NUL names what transformation departs from.
 
 SIG (σ) is the Figure of the Existence triad — the first cut, the minimal sign-initiation. Its full name and notation derive from σημεῖον: the ancient Greek term for the mark that functions as third, the sign that holds a relation together. SIG is not the sign relation fully realized; it is the operator that establishes the precondition for sign relations to begin.
 
-REC (⊛) — the Pattern of the Significance triad — is the operator at which recursion is formalized: output feeding back as input, the helix bending into a spiral. The ⊛ glyph encodes this directly: the rightwards arrow with loop, visually representing the output feeding back as a new input. REC is the operator that makes the 27-cell capacity ground self-referential, and therefore the operator that makes additional primitive dimensions unnecessary.
+REC (◉) — the Pattern of the Significance triad — is the operator at which recursion is formalized: output feeding back as input, the helix bending into a spiral. The ◉ glyph encodes this directly: the rightwards arrow with loop, visually representing the output feeding back as a new input. REC is the operator that makes the 27-cell capacity ground self-referential, and therefore the operator that makes additional primitive dimensions unnecessary.
 
 ### 10.3 The Three Faces
 
@@ -347,7 +347,7 @@ The empty cell is predicted by the framework, not anomalous to it. The operation
 
 The Tao Te Ching's *wu wei* (non-action) is the closest natural-language approximation. "The Tao that can be named is not the eternal Tao" states the same constraint from the interpretive direction: naming the ambient generative Ground converts it into a Figure, destroying the property being named. The empty cell is the structural signature of this limit within EO's capacity ground.
 
-REC (⊛) ⤫ Ground is nearly as sparse, with *incubate* as English's only occupant. Together, these two cells mark the region where language goes silent: generating conditions at higher ontological levels. Whether this emptiness reflects a fundamental cognitive limitation or a contingent gap in human agency — one that new kinds of actors (AI systems, ecological designers, platform architects) might begin to fill — is an open question.
+REC (◉) ⤫ Ground is nearly as sparse, with *incubate* as English's only occupant. Together, these two cells mark the region where language goes silent: generating conditions at higher ontological levels. Whether this emptiness reflects a fundamental cognitive limitation or a contingent gap in human agency — one that new kinds of actors (AI systems, ecological designers, platform architects) might begin to fill — is an open question.
 
 ## 14. Status
 

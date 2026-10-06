@@ -12,7 +12,7 @@ The arrow of time is not one arrow. It is three arrows from three sources, each 
 
 ## The Reframing
 
-If Time is the emergent √2 of the Identity ⤫ Space meta-triad (see Time as Emergent Dimension), then time does not have a direction of its own. Time is the product, not the engine. What has a direction is **Identity** — the helix's dependency ordering, the logical presupposition chain NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC (⊛). The "arrow of time" is the arrow of Identity, projected through Space onto the emergent temporal dimension.
+If Time is the emergent √2 of the Identity ⤫ Space meta-triad (see Time as Emergent Dimension), then time does not have a direction of its own. Time is the product, not the engine. What has a direction is **Identity** — the helix's dependency ordering, the logical presupposition chain NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC (◉). The "arrow of time" is the arrow of Identity, projected through Space onto the emergent temporal dimension.
 
 Time inherits directionality from its generating conditions. It does not produce it.
 
@@ -40,7 +40,7 @@ This is the arrow thermodynamics cannot see.
 
 Some transformations are irreversible not because the reverse is improbable, but because the backward path does not exist in the dependency graph. The preconditions for the reverse operation were consumed or reorganized by the forward one. This is irreversibility from graph topology, categorically distinct from probability.
 
-The Identity axis — the helix NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC (⊛) — has a strict dependency ordering proved against Codd's functional dependency closure criterion. Each operator presupposes the prior ones. You cannot CON what has not been SEG'd. You cannot REC without the full stack in place. These are not statistical constraints. They are structural constraints — a matter of what operations are *available* given what has already run.
+The Identity axis — the helix NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC (◉) — has a strict dependency ordering proved against Codd's functional dependency closure criterion. Each operator presupposes the prior ones. You cannot CON what has not been SEG'd. You cannot REC without the full stack in place. These are not statistical constraints. They are structural constraints — a matter of what operations are *available* given what has already run.
 
 The irreversibility gradient tracks the helix. Early operators reverse relatively cleanly: NUL ↔ Filling is low-entropy work, like toggling a switch. Late operators reverse expensively or not at all: REC ↔ Identity-locking (*nafs al-ammāra*) is nearly impossible — once identity has restructured, the prior identity is not stored somewhere waiting to be restored. It is gone. Trying to reverse REC is like willing a crystal back into liquid. It's not reversal. It's denial dressed as stability.
 

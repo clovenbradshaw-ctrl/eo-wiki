@@ -76,7 +76,7 @@ Helix ordering: NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → 
 | 6 | SYN | △ | η | Structure | Produce a derived whole; aggregate |
 | 7 | DEF | ⊢ | δ | Significance | Establish what holds within a stable interpretive frame |
 | 8 | EVA | ⊨ | ψ | Significance | Render judgment by testing a particular against a general |
-| 9 | REC | ⊛ | Ω | Significance | Transform the interpretive frame itself |
+| 9 | REC | ◉ | Ω | Significance | Transform the interpretive frame itself |
 
 ### Operator Definitions
 
