@@ -201,7 +201,7 @@ This article organizes findings and claims into three tiers: empirical results d
 
 The cross-linguistic verb data establishes that certain transformation operators are universally impoverished in human languages:
 
-- **EVA (evaluation) and REC (⊛, recursion)** together account for approximately 2% of verb inventories across all 27 languages tested. No language exceeds 5% even after targeted reclassification. Japanese, Sanskrit, and Classical Chinese — the languages most likely to falsify a Western-bias explanation — all fall below 1% for DEF.
+- **EVA (evaluation) and REC (◉, recursion)** together account for approximately 2% of verb inventories across all 27 languages tested. No language exceeds 5% even after targeted reclassification. Japanese, Sanskrit, and Classical Chinese — the languages most likely to falsify a Western-bias explanation — all fall below 1% for DEF.
 - **DEF (alternation) averages 16.2%.** Human languages are fluent at reframing — seeing something from a different angle — but impoverished at holding contradiction (DEF) or restructuring foundations (REC).
 - **The empty cell at SYN × Ground** contains zero verbs across all languages in the corpus. No attested human language has a verb meaning "synthesize a condition." This absence is treated as data, not sampling artifact.
 - **English DEF vocabulary is disguised as NUL.** A reclassification audit identified 14 verbs classified under NUL (void, negation, deletion) that are structurally DEF: *hide, deny, censor, pause, suppress, repress, ignore, overlook, interrupt, neglect, stifle, disregard, blackline, unreport*. These verbs denote simultaneous presence and absence — an operation that requires holding contradiction — but English categorizes them as negation because the nearest available conceptual bin is NUL.
@@ -266,7 +266,7 @@ The compression lattice maps onto a progression in data architecture:
 | Flatland (2D) | Relational model (Codd, SQL) | Two degrees: query-based spatial freedom, no temporal axis |
 | Spaceland (3D) | EO's full capacity ground | Three degrees: reflexive reasoning about the framework itself |
 
-The hierarchical model is bivalent in the most literal sense: a record either exists at a position in the tree or it does not. Codd's relational model adds a second degree of freedom — any attribute, any join, any angle of inquiry — but operates in an eternal present. It can hold ambiguity on a single variable (via NULL) but cannot hold two contradictory structural readings of the same system simultaneously. It has no DEF. It has no REC (⊛).
+The hierarchical model is bivalent in the most literal sense: a record either exists at a position in the tree or it does not. Codd's relational model adds a second degree of freedom — any attribute, any join, any angle of inquiry — but operates in an eternal present. It can hold ambiguity on a single variable (via NULL) but cannot hold two contradictory structural readings of the same system simultaneously. It has no DEF. It has no REC (◉).
 
 ---
 
@@ -374,7 +374,7 @@ Whether the universal poverty of DEF and REC vocabulary reflects a *contingent* 
 
 ### Whether Notation Can Compensate for Lexical Poverty
 
-Whether notation systems — EO's form addresses, operator composition syntax, the ∥ and ⊛ glyphs — can partially compensate for the absence of natural-language vocabulary for three-dimensional operations is an empirical question. If they can, they would function as prosthetic vocabulary for the third dimension: external encodings that give √2 an address in systems where the natural language has none. Whether this constitutes genuine dimensional access or merely a more elaborate form of narration is untested.
+Whether notation systems — EO's form addresses, operator composition syntax, the ∥ and ◉ glyphs — can partially compensate for the absence of natural-language vocabulary for three-dimensional operations is an empirical question. If they can, they would function as prosthetic vocabulary for the third dimension: external encodings that give √2 an address in systems where the natural language has none. Whether this constitutes genuine dimensional access or merely a more elaborate form of narration is untested.
 
 ### Dimensional Assignments to Historical Thinkers
 
@@ -1454,7 +1454,7 @@ The closest approximations are temporal:
 
 But none of these are true EVA. Python cannot represent "this is simultaneously A and B" as a first-class, stable state. The contradiction must always be resolved.
 
-### REC (⊛) — Change the Frame Itself
+### REC (◉) — Change the Frame Itself
 
 **Metaclasses** (`class Meta(type)`) let you change what `class` means.
 
@@ -2144,7 +2144,7 @@ Decomposability tells you what holds at each scope. The holonic threshold tells 
 
 ### 6.1 REC as the Scope-Crossing Operator
 
-REC (⊛) is the operator that changes what things mean. It does not change data; it changes the frame through which data is interpreted. At any single scope, REC is the most powerful and most dangerous operator — everything downstream gets reinterpreted.
+REC (◉) is the operator that changes what things mean. It does not change data; it changes the frame through which data is interpreted. At any single scope, REC is the most powerful and most dangerous operator — everything downstream gets reinterpreted.
 
 But REC has a special relationship to scope that the other eight operators do not. When a system achieves REC *across* scopes — when the output of its operations at one scope feeds back as the interpretive frame for its operations at another scope — the system becomes self-referential across scopes. That is the holonic threshold. The system is no longer just operating at multiple scopes independently. It is using its own multi-scope existence as the condition of its own persistence.
 
@@ -2160,7 +2160,7 @@ Below the Curie temperature, the self-referential coupling catches. Domains form
 
 Above the Curie temperature, thermal noise prevents the self-referential coupling from taking hold. The scopes are decoupled. Each scope has its own business.
 
-At the critical point *exactly*, the system holds the holonic condition without resolving it. This is why it is DEF — not merely because two causal directions coexist, but because the system is in superposition between *achieving* and *not achieving* recursive self-maintenance across scopes. The cross-scope superposition diagnosed in §4.4 is, at a deeper level, an unresolved ⊛.
+At the critical point *exactly*, the system holds the holonic condition without resolving it. This is why it is DEF — not merely because two causal directions coexist, but because the system is in superposition between *achieving* and *not achieving* recursive self-maintenance across scopes. The cross-scope superposition diagnosed in §4.4 is, at a deeper level, an unresolved ◉.
 
 The specific sequence — cross-scope DEF resolving by SEG (symmetry-breaking partition that selects a dominant direction) — may characterize a structural class of phenomena broader than phase transitions. The onset of collective behavior in flocking, the emergence of consensus in distributed systems, the crystallization of a paradigm from competing interpretations — any system where bidirectional cross-scope mediation holds temporarily and then collapses into either a stable multi-scope architecture or decoupled independence. This is a hypothesis, not a finding.
 
@@ -2292,7 +2292,7 @@ Atomic kinds of change, claimed to suffice to describe any transformation. Best 
 | **SYN** | △ | Structure | Pattern | Produce emergent wholes. |
 | **DEF** | ⊢ | Significance | Ground | Establish what holds within a stable interpretive frame. |
 | **EVA** | ⊨ | Significance | Figure | Render judgment by testing a particular against a general. |
-| **REC** | ⊛ | Significance | Pattern | Restructure the frame itself. See [REC](/rec). |
+| **REC** | ◉ | Significance | Pattern | Restructure the frame itself. See [REC](/rec). |
 
 **Triad.** A group of three operators that co-arise as one transformation within a domain: Existence (NUL, SIG, INS), Structure (SEG, CON, SYN), Significance (DEF, EVA, REC). The triad, not the single operator, is the smallest complete unit of domain-level change. See [The Three Triads](/the-triads).
 
@@ -2379,6 +2379,8 @@ The EO Reader is the framework running as software. See [The EO Reader](/the-eo-
 ## Terms retired or not to be confused
 
 **Formerly DEF / EVA (Alternation / Superposition).** Older articles used these names for DEF and EVA. The current meanings are those in the table above.
+
+**⊛ (circled asterisk).** REC's former glyph, replaced by ◉: a ring around a filled circle, the new open frame holding the instantiated trail. See [Operator Naming](/operator-naming-in-emergent-ontology).
 
 **Void, Clearing, NUL.** Three different things. NUL is an operator, Void is a Site, Clearing is a Stance.
 
@@ -2485,7 +2487,7 @@ The levels correspond to E.O.'s fundamental triad at the scale of engagement: Le
 ## Open questions
 
 1. **Are the infinities properties of levels or of crossings between levels?** ∞× arises specifically when Level 2 engages ground-dominant entities, not as a limit of Level 2 as such.
-2. **Is ∞**⊛**a limit or a feature?** If constitutive rather than limiting, the three infinities are not structurally parallel.
+2. **Is ∞**◉**a limit or a feature?** If constitutive rather than limiting, the three infinities are not structurally parallel.
 3. **Is there a Level 4?** Level 3's constraint (recursive depth) may be identical to its capacity, making it the terminal level. This is speculative.
 
 ## See also
@@ -2497,7 +2499,7 @@ The levels correspond to E.O.'s fundamental triad at the scale of engagement: Le
 - NULL (relational model)
 - Data independence (Codd, 1970)
 - εἶναι / γενέσσαι distinction
-- The three infinities (∞~, ∞×, ∞⊛)
+- The three infinities (∞~, ∞×, ∞◉)
 
 ---
 
@@ -3219,7 +3221,7 @@ Helix ordering: NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → 
 | 6 | SYN | △ | η | Structure | Produce a derived whole; aggregate |
 | 7 | DEF | ⊢ | δ | Significance | Establish what holds within a stable interpretive frame |
 | 8 | EVA | ⊨ | ψ | Significance | Render judgment by testing a particular against a general |
-| 9 | REC | ⊛ | Ω | Significance | Transform the interpretive frame itself |
+| 9 | REC | ◉ | Ω | Significance | Transform the interpretive frame itself |
 
 ### Operator Definitions
 
@@ -4131,7 +4133,7 @@ None of these readings are required. The manual is designed to be self-contained
 
 ### What you will encounter
 
-**Nine three-letter operator codes** — NUL, SIG, INS, SEG, CON, SYN, DEF, EVA, REC. These are the framework's primitive vocabulary. They name the nine kinds of transformation. Each has a glyph (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛), a Greek letter, and a coordinate address. You will learn them as the manual unfolds. They are not abbreviations — they are handles for positions in a structure.
+**Nine three-letter operator codes** — NUL, SIG, INS, SEG, CON, SYN, DEF, EVA, REC. These are the framework's primitive vocabulary. They name the nine kinds of transformation. Each has a glyph (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ◉), a Greek letter, and a coordinate address. You will learn them as the manual unfolds. They are not abbreviations — they are handles for positions in a structure.
 
 **EO Notation.** The notation uses dot paths and prefix operations: `DEF(family.martinez.organizing_principle, "youngest child's diagnosis")` means "the Martinez family's organizing principle has been defined as the youngest child's diagnosis." The operator comes first, then the target, then the operand — the same structure as `SUM(A1:A10)` in a spreadsheet. If you followed the formal notation crash course in §0.4, you can read EO notation. Part II covers the full system.
 
@@ -4289,7 +4291,7 @@ For annotation, logging, and natural-language analysis:
 | SYN | △ | U+25B3 | Triangle — first closed form, synthesis |
 | DEF | ⊢ | U+22A2 | Turnstile — entailment, what follows |
 | EVA | ⊨ | U+22A8 | Models relation — satisfaction, judgment |
-| REC | ⊛ | U+229B | Circled asterisk — recursion, self-reference |
+| REC | ◉ | U+25C9 | Hollow ring around a filled circle — a new open frame (○) holding the instantiated trail (●) |
 
 ## 2.3 Greek Notation
 
@@ -4381,7 +4383,7 @@ EVA(Entity, Binding)This says: the operator is evaluation; the terrain is an ent
 
 | Context Notation |
 | --- |
-| Annotating logs, field notes, data lineage | Practitioner glyphs (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛) |
+| Annotating logs, field notes, data lineage | Practitioner glyphs (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ◉) |
 | Algebra, formal derivations | Greek (ν σ α κ ε η δ ψ Ω) |
 | Writing about operators in prose | Three-letter codes (NUL, SIG, INS...) |
 | Locating a phenomenon in the substrate | Phasepost address ⟨−1, +1, √2⟩ |
@@ -4401,7 +4403,7 @@ EVA(Entity, Binding)This says: the operator is evaluation; the terrain is an ent
 | 6 | SYN | △ | η | Structure | Pattern | Produce emergent whole |
 | 7 | DEF | ⊢ | δ | Significance | Ground | Define what holds within frame |
 | 8 | EVA | ⊨ | ψ | Significance | Figure | Evaluate against definitions |
-| 9 | REC | ⊛ | Ω | Significance | Pattern | Restructure the frame itself |
+| 9 | REC | ◉ | Ω | Significance | Pattern | Restructure the frame itself |
 
 # Part III — The Triadic Minimum
 
@@ -4467,7 +4469,7 @@ Every 2×2 framework in the history of ideas is a 3×3 with five cells missing. 
 
 ## 3.5 Why Three Dimensions Suffice
 
-The 27th position of the substrate is REC (⊛) — the operator that feeds output back as input. This is the recursion threshold: the point at which the system becomes capable of operating on its own operations.
+The 27th position of the substrate is REC (◉) — the operator that feeds output back as input. This is the recursion threshold: the point at which the system becomes capable of operating on its own operations.
 
 This is why a fourth dimension is unnecessary as a primitive. Three dimensions produce 27 positions. The 27th position enables the system to re-traverse the same three dimensions at increasing depth. What the first pass through the helix produces naively — NUL as simple observation, SIG as bare attention — the second pass produces with awareness of the full cycle: NUL² as deliberate observation (mindfulness), SIG² as situated assertion. The operators are the same. The register is different.
 
@@ -4859,7 +4861,7 @@ The formula itself is an EVA: `EVA(client.phone, "latest")`. Changing the formul
 
 ## 6.10 REC — Recontextualization
 
-⊛ / Ω / Significance × Generate
+◉ / Ω / Significance × Generate
 
 > *A grammar that cannot speak about itself will never know when it is lying.*
 
@@ -5234,7 +5236,7 @@ The comments field may still be needed — not for what the structured fields mi
 
 **Protogon:** Figure-dominant entity type. Identity crystallizing, actively becoming.
 
-**REC (⊛, Ω):** Recontextualization. Restructuring the interpretive frame itself. The pattern of the Significance triad.
+**REC (◉, Ω):** Recontextualization. Restructuring the interpretive frame itself. The pattern of the Significance triad.
 
 **SEG (｜, κ):** Segmentation. Drawing boundaries. Also the fundamental query operator (WHERE, GROUP BY). The ground of the Structure triad.
 
@@ -5331,7 +5333,7 @@ The formal syntax is `OPERATOR(target, operand)`, with nesting reserved for genu
 | --- | --- | --- | --- |
 | **Existence** | **NUL ∅** — Recognizing or producing absence. The capacity to deliberately not-act. Generative emptiness — not privation but structural openness. | **SIG ○** — Directing attention. Registering that something is *this* and not *that*. The first positive act of signaling. | **INS ●** — Instantiating a concrete entity from a signal. The move from category to particular case. |
 | **Structure** | **SEG ÷** — Drawing boundaries, partitioning, filtering. Every boundary also names what it excludes. | **CON ⋈** — Establishing relationships between differentiated elements. Requires prior segmentation to have anything to connect. | **SYN △** — Generating an emergent whole that is more than the sum of its parts and irreducible to either. |
-| **Significance** | **DEF ⊢** — Establishing what holds within a stable interpretive frame. Set terms, define values. The frame itself does not move. | **EVA ⊨** — Rendering judgment by testing a particular against a general. DEF establishes the terms; EVA assesses whether something satisfies them. | **REC ⊛** — Restructuring the interpretive frame itself when the frame can no longer hold the reality. Not a change *within* the frame but a change *of* it. |
+| **Significance** | **DEF ⊢** — Establishing what holds within a stable interpretive frame. Set terms, define values. The frame itself does not move. | **EVA ⊨** — Rendering judgment by testing a particular against a general. DEF establishes the terms; EVA assesses whether something satisfies them. | **REC ◉** — Restructuring the interpretive frame itself when the frame can no longer hold the reality. Not a change *within* the frame but a change *of* it. |
 
 ### On nesting
 
@@ -7158,7 +7160,7 @@ The top-level expression captures the cross-grain mediation (what caused what ac
 | SYN | △ | η | Structure | Generating | Synthesize into whole |
 | DEF | ⊢ | δ | Significance | Differentiating | Assert/define what holds |
 | EVA | ⊨ | ψ | Significance | Relating | Render judgment |
-| REC | ⊛ | Ω | Significance | Generating | Recursive revision |
+| REC | ◉ | Ω | Significance | Generating | Recursive revision |
 
 Helix ordering:
 
@@ -7274,7 +7276,7 @@ One vocabulary. Three structural levels. Determination as narrowing. Unmarked is
 
 *Revision History*
 
-- **v2.0**: Full restructure. Added: Progressive Activation with Tao Te Ching worked example (§2), The One Vocabulary (§3), Determination and Superposition correcting unmarked semantics (§6), Targeting and Grain with `−`/`+`/`*`/`_` grain markers (§7), Cross-Grain Expressions (§8), Horizontal and Vertical Nesting (§9). Corrected unmarked from "axis not activated" to "implicit superposition of all three positions." Distinguished `_` (non-participation, dot paths only) from unmarked (full superposition). Unified grain markers with type vocabulary. Operator table updated to SIG (from DES), EVA glyph to ⊨, REC glyph to ⊛.
+- **v2.0**: Full restructure. Added: Progressive Activation with Tao Te Ching worked example (§2), The One Vocabulary (§3), Determination and Superposition correcting unmarked semantics (§6), Targeting and Grain with `−`/`+`/`*`/`_` grain markers (§7), Cross-Grain Expressions (§8), Horizontal and Vertical Nesting (§9). Corrected unmarked from "axis not activated" to "implicit superposition of all three positions." Distinguished `_` (non-participation, dot paths only) from unmarked (full superposition). Unified grain markers with type vocabulary. Operator table updated to SIG (from DES), EVA glyph to ⊨, REC glyph to ◉.
 - **v1.5**: Global replace ⊕ → ∥. Global replace θ → σ. Global replace DES → SIG.
 - **v1.0**: Initial publication.
 
@@ -8897,7 +8899,7 @@ function renderDelta(idx) {
       <span class="state-val">${nulCount} events — semantic collapse in vanilla</span>
     </div>
     <div class="state-row" style="border:none;padding:1px 0;">
-      <span class="state-key" style="color:var(--rec);min-width:0;margin-right:8px;">⊛ REC</span>
+      <span class="state-key" style="color:var(--rec);min-width:0;margin-right:8px;">◉ REC</span>
       <span class="state-val">${recCount} events — replay integrity broken</span>
     </div>`;
 }
@@ -12624,7 +12626,7 @@ In EO terms, the phaseposts are not operator transitions — they are **Object a
 
 The MHC's 16 orders are therefore the *internal structure* of three separate helix instantiations, one per column. The phaseposts are the column transitions; the internal orders are the operators coming online within each column.
 
-This reading predicts something testable: the same operator type should appear three times in development, once per column, at progressively higher MHC orders. REC(⊛), for instance, would first appear when an infant develops object permanence-style recursion (Condition column, sensorimotor phase), reappear when a concrete thinker develops systematic reasoning (Entity column, formal phase), and appear again when a postformal thinker constructs cross-paradigmatic synthesis (Pattern column, postformal phase). Same operator, different object class, different MHC order.
+This reading predicts something testable: the same operator type should appear three times in development, once per column, at progressively higher MHC orders. REC(◉), for instance, would first appear when an infant develops object permanence-style recursion (Condition column, sensorimotor phase), reappear when a concrete thinker develops systematic reasoning (Entity column, formal phase), and appear again when a postformal thinker constructs cross-paradigmatic synthesis (Pattern column, postformal phase). Same operator, different object class, different MHC order.
 
 ### The Axioms as Dependency Ordering
 
@@ -12644,7 +12646,7 @@ The MHC's empirically confirmed quantal gaps between stages — no overlap, equa
 
 The MHC and E.O. are not the same framework, and the convergence is partial.
 
-The MHC is a *developmental* theory: it describes the sequence in which organisms acquire the capacity to perform increasingly complex tasks over a lifetime. E.O. is not developmental; its helix describes a dependency ordering on transformation-types, not an acquisition sequence. A system can instantiate REC(⊛) without having previously "developed through" the lower operators — the helix is a logical dependency, not a maturational trajectory.
+The MHC is a *developmental* theory: it describes the sequence in which organisms acquire the capacity to perform increasingly complex tasks over a lifetime. E.O. is not developmental; its helix describes a dependency ordering on transformation-types, not an acquisition sequence. A system can instantiate REC(◉) without having previously "developed through" the lower operators — the helix is a logical dependency, not a maturational trajectory.
 
 The MHC scores *task complexity*; E.O. scores *transformation type*. These are related but distinct, and mapping the two coordinate systems onto each other is not straightforward. A single high-MHC-order task may involve multiple E.O. operators applied across several positions in the 27-cell space.
 
@@ -12924,7 +12926,7 @@ Collapse any one axis and you get a 3⤫3 face. Three faces, three perspectives,
 | --- | --- | --- | --- |
 | **Differentiating** | NUL ∅ | SEG | | DEF ⊢ |
 | **Relating** | SIG ○ | CON ⋈ | EVA ⊨ |
-| **Generating** | INS ● | SYN △ | REC ⊛ |
+| **Generating** | INS ● | SYN △ | REC ◉ |
 
 **Stance Face** (Identity ⤫ Time, collapsing Space) — How does it land? Nine grains:
 
@@ -14446,7 +14448,7 @@ Across all three names — and across the pre-naming Airtable phase where the po
 
 ### Practitioner Glyphs
 
-The practitioner glyph system is **∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛** — one mark per operator, made authoritative in the implementation (`src/core/operators.js`) so every surface draws the same mark for a given act and a graph edge never disagrees with a legend chip. The marks read by domain column: Existence **∅ ○ ●**, Structure **｜ ⋈ △**, Interpretation **⊢ ⊨ ⊛**. Glyphs were selected for visual iconicity:
+The practitioner glyph system is **∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ◉** — one mark per operator, made authoritative in the implementation (`src/core/operators.js`) so every surface draws the same mark for a given act and a graph edge never disagrees with a legend chip. The marks read by domain column: Existence **∅ ○ ●**, Structure **｜ ⋈ △**, Interpretation **⊢ ⊨ ◉**. Glyphs were selected for visual iconicity:
 
 - **∅** (empty set) for NUL: the void as a well-defined mathematical object.
 - **○** (open circle) for SIG: attention directed but not yet filled — a point of registration, something becoming salient against a ground, prior to any boundary being drawn around it.
@@ -14456,9 +14458,9 @@ The practitioner glyph system is **∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛** — one
 - **△** (triangle) for SYN: parts rising into an emergent whole.
 - **⊢** (turnstile) for DEF: entailment — what follows given the terms; a definition asserted.
 - **⊨** (double turnstile) for EVA: satisfaction — testing whether a structure models a formula.
-- **⊛** (rightwards arrow with loop) for REC: output feeding back as input, the helix bending into a spiral.
+- **◉** (a ring around a filled circle) for REC: the move up a level that keeps its trail. When a reading is falsified and retraced, nothing is erased; the run is kept as instantiated record (●, the solid centre), and the frame that now holds it is a new layer that is registered but not yet filled in (○, the open ring). It is built from the marks for SIG and INS on purpose: the next pass opens as a fresh SIG around what the last pass instantiated.
 
-**Superseded glyphs**, kept for reading older material: ⊡ (was SIG, now ○); △ (was INS — now SYN's mark, INS is ●); ⤫ (was CON, now ⋈); ∨ (was SYN, now △); ∿ (was DEF, now ⊢); ∥ (was EVA, now ⊨). The earlier set drifted from the implementation; the marks above are the ones the shipped reader draws.
+**Superseded glyphs**, kept for reading older material: ⊡ (was SIG, now ○); △ (was INS — now SYN's mark, INS is ●); ⤫ (was CON, now ⋈); ∨ (was SYN, now △); ∿ (was DEF, now ⊢); ∥ (was EVA, now ⊨); ⊛ (circled asterisk, U+229B; was REC, now ◉ — the old rationale, "rightwards arrow with loop," described a different character). The earlier set drifted from the implementation; the marks above are the ones the shipped reader draws.
 
 ### Greek Letters
 
@@ -14989,7 +14991,7 @@ This asymmetry is noted as an open question. If EO's three domains are irreducib
 
 ---
 
-**REC** (⊛, Ω) is the ninth and final operator in [EO](https://en.wikipedia.org/wiki/Ontology_(information_science))'s dependency helix. It occupies the position **Generating × Significance** — the pattern role within the Significance triad. Its glyph is ⊛ ([U+21AC](https://en.wikipedia.org/wiki/Unicode), rightwards arrow with loop), chosen because it visually encodes the operator's structural function: output feeding back as input, the helix bending into a spiral.
+**REC** (◉, Ω) is the ninth and final operator in [EO](https://en.wikipedia.org/wiki/Ontology_(information_science))'s dependency helix. It occupies the position **Generating × Significance** — the pattern role within the Significance triad. Its glyph is ◉ ([U+21AC](https://en.wikipedia.org/wiki/Unicode), rightwards arrow with loop), chosen because it visually encodes the operator's structural function: output feeding back as input, the helix bending into a spiral.
 
 REC is the capacity to restructure the interpretive frame itself — not to change data within a schema, but to change what the schema means. It does not modify values (EVA), hold contradictory values (DEF), or produce emergent wholes (SYN). It changes the conditions under which values, contradictions, and wholes are interpreted. The caterpillar is not a butterfly with different features. It is a different kind of thing.
 
@@ -16180,7 +16182,7 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 | 6 | SYN(Condition) | △- | (2, +1, 2) |
 | 7 | DEF(Condition) | ⊢- | (0, √2, 2) |
 | 8 | EVA(Condition) | ⊨- | (1, √2, 2) |
-| 9 | REC(Condition) | ⊛- | (2, √2, 2) |
+| 9 | REC(Condition) | ◉- | (2, √2, 2) |
 
 ### Entity (+)   Object = √2
 
@@ -16194,7 +16196,7 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 | 15 | SYN(Entity) | △+ | (2, +1, √2) |
 | 16 | DEF(Entity) | ⊢+ | (0, √2, √2) |
 | 17 | EVA(Entity) | ⊨+ | (1, √2, √2) |
-| 18 | REC(Entity) | ⊛+ | (2, √2, √2) |
+| 18 | REC(Entity) | ◉+ | (2, √2, √2) |
 
 ### Pattern (*)   Object = 2^√2
 
@@ -16208,7 +16210,7 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 | 24 | SYN(Pattern) | △* | (2, +1, 2^√2) |
 | 25 | DEF(Pattern) | ⊢* | (0, √2, 2^√2) |
 | 26 | EVA(Pattern) | ⊨* | (1, √2, 2^√2) |
-| 27 | REC(Pattern) | ⊛* | (2, √2, 2^√2) |
+| 27 | REC(Pattern) | ◉* | (2, √2, 2^√2) |
 
 ## What Each Position Means
 
@@ -16262,9 +16264,9 @@ The operator encodes Mode × Domain. The Object class appears as a coordinate ba
 
 **REC — recursing**
 
-1. ⊛- (2, √2, 2) — a condition takes itself as its own ground; recursive ambient self-reference
-2. ⊛+ (2, √2, √2) — an entity models itself; reflexive self-awareness
-3. ⊛* (2, √2, 2^√2) — a pattern encompasses its own patterning; recursive systemic self-organization
+1. ◉- (2, √2, 2) — a condition takes itself as its own ground; recursive ambient self-reference
+2. ◉+ (2, √2, √2) — an entity models itself; reflexive self-awareness
+3. ◉* (2, √2, 2^√2) — a pattern encompasses its own patterning; recursive systemic self-organization
 
 ## Note on SEG Symbol
 
@@ -16467,9 +16469,9 @@ Operators 7, 8, and 9 don't just occupy the third row of the grid — they form 
 
 **EVA (⊨)** checks whether data satisfies the definition. It is the semantic bridge — model-theoretic satisfaction. EVA doesn't generate structure or rewrite anything. It tests: *does this configuration count as that type?* The turnstile points from proof to truth.
 
-**REC (⊛)** is what happens when evaluation results force the definitions to be rewritten. This is the crucial insight: REC is not a function calling itself. REC is the operator where a system's encounter with its own data becomes the condition for restructuring its own categories. The evaluation discovers something the definition didn't anticipate, and that discovery feeds back into the defining structure.
+**REC (◉)** is what happens when evaluation results force the definitions to be rewritten. This is the crucial insight: REC is not a function calling itself. REC is the operator where a system's encounter with its own data becomes the condition for restructuring its own categories. The evaluation discovers something the definition didn't anticipate, and that discovery feeds back into the defining structure.
 
-The loop: DEF ⊢ → EVA ⊨ → REC ⊛ → DEF ⊢ ...
+The loop: DEF ⊢ → EVA ⊨ → REC ◉ → DEF ⊢ ...
 
 ## Two Loops: Depicted and Enacted
 
@@ -16559,7 +16561,7 @@ The DEF–EVA–REC loop recovers the three pillars of mathematical logic:
 
 1. **DEF ⊢ = Proof Theory** (Hilbert, Gentzen). Axioms, inference rules, formal derivation.
 2. **EVA ⊨ = Model Theory** (Tarski). Satisfaction, truth-in-a-structure.
-3. **REC ⊛ = Fixed-Point Theory** (Gödel, Kleene, Lawvere). Where proof and truth become self-referential.
+3. **REC ◉ = Fixed-Point Theory** (Gödel, Kleene, Lawvere). Where proof and truth become self-referential.
 
 The deep results of logic are precisely about the transitions between these three:
 
@@ -17767,7 +17769,7 @@ Nine rules govern the system, organized in three triads that mirror the operator
 
 *The recursion does not regress without end. It terminates in the medium constants: parameters that are contents of no engine because they are the shape of the tuple itself. Everything above that floor is convention, and every convention can name the ledger event that admitted it.*
 
-*This section is Rule 9 made mechanical. Rule 9 scopes rule revision to the framework layer through versioned ⊛REC. In implementation, that versioned ⊛REC is an ordinary emission into the inner engine's Given-Log. The architecture eats its own dogfood because both layers cook from the same recipe.*
+*This section is Rule 9 made mechanical. Rule 9 scopes rule revision to the framework layer through versioned ◉REC. In implementation, that versioned ◉REC is an ordinary emission into the inner engine's Given-Log. The architecture eats its own dogfood because both layers cook from the same recipe.*
 
 **Epistemic status.* The correspondence between the three stores and the three triads is established by the reverse derivation of the operators from the tuple. The recursion clause is empirically suggestive on a single witness, the induced attribution verb above. The test that would move it: induce conventions across a multilingual corpus and check whether the inner engine exhibits the same triadic structure the outer one does. Until that test runs, this section is a proposal carrying one data point.*
 
@@ -18358,7 +18360,7 @@ The integral model's Significance triad — DEF, EVA, REC — takes its glyphs d
 
 1. **DEF ⊢ — entailment.** The axiom-setting move. `T ⊢ φ` in model theory says φ is provable from theory T. DEF in the integral model fixes T — what types are admissible, what derivations follow, what the frame will treat as valid. DEF is a Ground operation in the Significance triad because it sets the ground the rest of the triad operates on.
 2. **EVA ⊨ — satisfaction.** A relation, not a procedure. `M ⊨ φ` in model theory says the structure M makes φ true. EVA in the integral model records, per candidate state, whether the state satisfies the theory DEF has fixed. EVA is a Figure operation because it figures against the ground DEF set.
-3. **REC ⊛ — frame restructure.** Both ⊢ and ⊨ presuppose a fixed theory. REC changes T. After REC, old models may no longer satisfy and old theorems may no longer derive. REC is a Pattern operation because it modifies the pattern under which ground and figure relate.
+3. **REC ◉ — frame restructure.** Both ⊢ and ⊨ presuppose a fixed theory. REC changes T. After REC, old models may no longer satisfy and old theorems may no longer derive. REC is a Pattern operation because it modifies the pattern under which ground and figure relate.
 
 The 7 → 8 → 9 ordering is exactly: axioms → satisfaction → frame change. The relational model writes none of the three to the log. UPDATE conflates all three into a single verb and discards the distinction. The integral model emits all three as separate events with independent provenance, and every domain question that turns on "was this an EVA or a REC?" becomes answerable rather than lost.
 
@@ -18400,7 +18402,7 @@ The integral model inherits heavily from existing work and claims novelty only a
 
 **From Git.** Immutable commits (Given-Log), branchable state (Meant-Graph), checked-out views (Horizon), content-addressed identity (anchors). The structural parallel is close enough that Git can be read as a single-domain implementation of the integral model avant la lettre.
 
-**What is genuinely new.** The enforcement of the Given/Meant separation as a substrate invariant. The closed nine-operator algebra as a substrate vocabulary. The model-theoretic ordering of the Significance triad (DEF → EVA → REC as ⊢ → ⊨ → ⊛). The phenomenal address and windowed interpretation as structural components of every datum. The claim that these together constitute a substrate one order of hierarchical complexity above the relational model.
+**What is genuinely new.** The enforcement of the Given/Meant separation as a substrate invariant. The closed nine-operator algebra as a substrate vocabulary. The model-theoretic ordering of the Significance triad (DEF → EVA → REC as ⊢ → ⊨ → ◉). The phenomenal address and windowed interpretation as structural components of every datum. The claim that these together constitute a substrate one order of hierarchical complexity above the relational model.
 
 ## Status
 
@@ -19032,7 +19034,7 @@ The operators are **acts,** not locations. They name what a system *does* at a j
 | 6 | SYN | △ | η | Structure | Pattern | Produce emergent wholes |
 | 7 | DEF | ⊢ | δ | Significance | Ground | Establish what holds within a stable interpretive frame |
 | 8 | EVA | ⊨ | ψ | Significance | Figure | Render judgment by testing a particular against a general |
-| 9 | REC | ⊛ | Ω | Significance | Pattern | Restructure the frame itself |
+| 9 | REC | ◉ | Ω | Significance | Pattern | Restructure the frame itself |
 
 ---
 
@@ -19282,7 +19284,7 @@ The operator comes first, followed by its target (what is being transformed) and
 
 In mathematical contexts, a Greek letter notation is also used: ν (NUL), σ (SIG), α (INS), κ (SEG), ε (CON), η (SYN), δ (DEF), ψ (EVA), Ω (REC).
 
-Each operator also has a practitioner glyph (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ⊛) used in compact notation.
+Each operator also has a practitioner glyph (∅ ○ ● ｜ ⋈ △ ⊢ ⊨ ◉) used in compact notation.
 
 ---
 
@@ -19519,7 +19521,7 @@ Socrates draws the diagonal. The frame — build a square on a given length — 
 
 The boy verifies the square built on the diagonal has area 8. He can see it works. He cannot name the length as a ratio. Both facts hold simultaneously.
 
-### REC(⊛)
+### REC(◉)
 
 `REC(SIG(length, ratio_expressible))`
 
@@ -19620,7 +19622,7 @@ The arrow of time is not one arrow. It is three arrows from three sources, each 
 
 ## The Reframing
 
-If Time is the emergent √2 of the Identity ⤫ Space meta-triad (see Time as Emergent Dimension), then time does not have a direction of its own. Time is the product, not the engine. What has a direction is **Identity** — the helix's dependency ordering, the logical presupposition chain NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC (⊛). The "arrow of time" is the arrow of Identity, projected through Space onto the emergent temporal dimension.
+If Time is the emergent √2 of the Identity ⤫ Space meta-triad (see Time as Emergent Dimension), then time does not have a direction of its own. Time is the product, not the engine. What has a direction is **Identity** — the helix's dependency ordering, the logical presupposition chain NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC (◉). The "arrow of time" is the arrow of Identity, projected through Space onto the emergent temporal dimension.
 
 Time inherits directionality from its generating conditions. It does not produce it.
 
@@ -19648,7 +19650,7 @@ This is the arrow thermodynamics cannot see.
 
 Some transformations are irreversible not because the reverse is improbable, but because the backward path does not exist in the dependency graph. The preconditions for the reverse operation were consumed or reorganized by the forward one. This is irreversibility from graph topology, categorically distinct from probability.
 
-The Identity axis — the helix NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC (⊛) — has a strict dependency ordering proved against Codd's functional dependency closure criterion. Each operator presupposes the prior ones. You cannot CON what has not been SEG'd. You cannot REC without the full stack in place. These are not statistical constraints. They are structural constraints — a matter of what operations are *available* given what has already run.
+The Identity axis — the helix NUL → SIG → INS → SEG → CON → SYN → DEF → EVA → REC (◉) — has a strict dependency ordering proved against Codd's functional dependency closure criterion. Each operator presupposes the prior ones. You cannot CON what has not been SEG'd. You cannot REC without the full stack in place. These are not statistical constraints. They are structural constraints — a matter of what operations are *available* given what has already run.
 
 The irreversibility gradient tracks the helix. Early operators reverse relatively cleanly: NUL ↔ Filling is low-entropy work, like toggling a switch. Late operators reverse expensively or not at all: REC ↔ Identity-locking (*nafs al-ammāra*) is nearly impossible — once identity has restructured, the prior identity is not stored somewhere waiting to be restored. It is gone. Trying to reverse REC is like willing a crystal back into liquid. It's not reversal. It's denial dressed as stability.
 
@@ -19988,7 +19990,7 @@ INS
 
 SYN
 
-REC (⊛)
+REC (◉)
 
 |  |
 |  |
@@ -20155,7 +20157,7 @@ The three faces split into two kinds.
 
 The **Site face** has no Identity axis. No Mode means no engine — no directionality, no arrow, no process. The Site face is a state description: nine addresses in the phase space of significance. A Field is a Field regardless of what operations produced it. Like thermodynamic state variables — temperature, pressure, entropy — the Site face is path-independent. It describes where a system *is*, not how it got there.
 
-The **Act** and **Stance faces** both contain the Identity axis. Identity is the engine — the source of directionality. Any face that contains Identity describes a process: something with direction, something that can in principle run forward and backward. And like thermodynamic processes, the reversals cost something. Disconnection is not the neutral return to a pre-connected state. Uncreation leaves traces. The cost increases along the helix — early operators (NUL, SIG, INS) reverse relatively cleanly; late operators (EVA, REC ⊛) reverse expensively or not at all.
+The **Act** and **Stance faces** both contain the Identity axis. Identity is the engine — the source of directionality. Any face that contains Identity describes a process: something with direction, something that can in principle run forward and backward. And like thermodynamic processes, the reversals cost something. Disconnection is not the neutral return to a pre-connected state. Uncreation leaves traces. The cost increases along the helix — early operators (NUL, SIG, INS) reverse relatively cleanly; late operators (EVA, REC ◉) reverse expensively or not at all.
 
 The Site face can't reverse because reversal requires an arrow, and arrows require an engine. What the Site face *can* do is shift between Concealed, Disclosed, and Transparent — not by running a process but by the observer gaining resolution on a state that was always there. This is measurement, not transformation. And like measurement in thermodynamics, it has its own costs: disclosing a concealed Field requires attention, language, practice, and institutional capacity. Moving from not-knowing to knowing is work.
 
@@ -20469,7 +20471,7 @@ Three dialectics, each with three positions, crossing orthogonally, produce a 3 
 
 ### 3.3 The Recursion Threshold: Why Three Dimensions Suffice
 
-The 27th position of EO's capacity ground is REC (⊛) — the operator that feeds output back as input. This is the recursion threshold: the point at which the system becomes capable of operating on its own operations. Identity restructures. The framework includes its own updatability as a structural feature.
+The 27th position of EO's capacity ground is REC (◉) — the operator that feeds output back as input. This is the recursion threshold: the point at which the system becomes capable of operating on its own operations. Identity restructures. The framework includes its own updatability as a structural feature.
 
 This is why a fourth dimension is unnecessary as a primitive. Three dimensions produce 27 positions. The 27th position enables the system to re-traverse the same three dimensions at increasing depth. What the first pass through the helix produces naively — NUL as simple absence, SIG as bare distinction — the second pass produces with awareness of the full cycle: NUL² as deliberate emptiness (the Buddhist śūnyatā), SIG² as situated assertion (the claim schema). The operators are the same. The register is different.
 
@@ -20556,7 +20558,7 @@ EO's second operator, SIG (σ), occupies the Figure position of the Existence tr
 
 SIG performs the operation of minimal sign-initiation: the moment a difference in the world becomes a difference *for a system*. This is not a cognitive or linguistic act. A chemoreceptor on a bacterium's surface responding to a sugar gradient is performing SIG: something registers as *not-that*, where before there was undifferentiated medium.
 
-SIG is not Peirce's Thirdness. It is the threshold operator at which the Secondness of brute collision first acquires sign-character — the position in the helix where the preconditions for semiosis are established. Full Thirdness, in Peirce's sense, requires the entire Significance triad (DEF, EVA, REC ⊛) to be in place. SIG is the first move toward that register, not its completion.
+SIG is not Peirce's Thirdness. It is the threshold operator at which the Secondness of brute collision first acquires sign-character — the position in the helix where the preconditions for semiosis are established. Full Thirdness, in Peirce's sense, requires the entire Significance triad (DEF, EVA, REC ◉) to be in place. SIG is the first move toward that register, not its completion.
 
 ### 6.3 Łukasiewicz, Aristotle, and Three-Valued Logic
 
@@ -20646,13 +20648,13 @@ The nine operators are organized into three co-constitutive triads corresponding
 | --- | --- | --- |
 | Existence | NUL, SIG (σ), INS | Ground, Figure, Pattern of being |
 | Structure | SEG, CON, SYN | Ground, Figure, Pattern of connection |
-| Significance | EVA, DEF, REC (⊛) | Ground, Figure, Pattern of meaning |
+| Significance | EVA, DEF, REC (◉) | Ground, Figure, Pattern of meaning |
 
 NUL is the Ground of the Existence triad — the void, the pre-distinction field, the condition that makes the first distinction possible. NUL is below the Triadic Minimum in one precise sense: it is the term that precedes the triad's first move. The Triadic Minimum names the minimum for transformation; NUL names what transformation departs from.
 
 SIG (σ) is the Figure of the Existence triad — the first cut, the minimal sign-initiation. Its full name and notation derive from σημεῖον: the ancient Greek term for the mark that functions as third, the sign that holds a relation together. SIG is not the sign relation fully realized; it is the operator that establishes the precondition for sign relations to begin.
 
-REC (⊛) — the Pattern of the Significance triad — is the operator at which recursion is formalized: output feeding back as input, the helix bending into a spiral. The ⊛ glyph encodes this directly: the rightwards arrow with loop, visually representing the output feeding back as a new input. REC is the operator that makes the 27-cell capacity ground self-referential, and therefore the operator that makes additional primitive dimensions unnecessary.
+REC (◉) — the Pattern of the Significance triad — is the operator at which recursion is formalized: output feeding back as input, the helix bending into a spiral. The ◉ glyph encodes this directly: the rightwards arrow with loop, visually representing the output feeding back as a new input. REC is the operator that makes the 27-cell capacity ground self-referential, and therefore the operator that makes additional primitive dimensions unnecessary.
 
 ### 10.3 The Three Faces
 
@@ -20726,7 +20728,7 @@ The empty cell is predicted by the framework, not anomalous to it. The operation
 
 The Tao Te Ching's *wu wei* (non-action) is the closest natural-language approximation. "The Tao that can be named is not the eternal Tao" states the same constraint from the interpretive direction: naming the ambient generative Ground converts it into a Figure, destroying the property being named. The empty cell is the structural signature of this limit within EO's capacity ground.
 
-REC (⊛) ⤫ Ground is nearly as sparse, with *incubate* as English's only occupant. Together, these two cells mark the region where language goes silent: generating conditions at higher ontological levels. Whether this emptiness reflects a fundamental cognitive limitation or a contingent gap in human agency — one that new kinds of actors (AI systems, ecological designers, platform architects) might begin to fill — is an open question.
+REC (◉) ⤫ Ground is nearly as sparse, with *incubate* as English's only occupant. Together, these two cells mark the region where language goes silent: generating conditions at higher ontological levels. Whether this emptiness reflects a fundamental cognitive limitation or a contingent gap in human agency — one that new kinds of actors (AI systems, ecological designers, platform architects) might begin to fill — is an open question.
 
 ## 14. Status
 
@@ -21176,7 +21178,7 @@ Three domains × three modes = nine operators. Each names a unique combination o
 
 **EVA** (⊨) — *Evaluation.* Render judgment by testing a particular against a general. DEF establishes the terms; EVA assesses whether something satisfies them. The glyph is ⊨ (the satisfaction relation). An immune cell testing a molecule against its self/non-self definition is performing EVA. In data systems, EVA is the projection rule that determines what the Horizon shows when multiple DEFs exist on the same path.
 
-**REC** (⊛) — *Recontextualization.* Transform the interpretive frame itself. Not a change within the frame but a change of the frame. A caterpillar is not a butterfly with different features — it is a different kind of thing. REC fires when DEF's terms and EVA's judgments prove inadequate — when the problem is not the content or the assessment but the frame within which both operate.
+**REC** (◉) — *Recontextualization.* Transform the interpretive frame itself. Not a change within the frame but a change of the frame. A caterpillar is not a butterfly with different features — it is a different kind of thing. REC fires when DEF's terms and EVA's judgments prove inadequate — when the problem is not the content or the assessment but the frame within which both operate.
 
 ### Absence is a trajectory, not an operator
 
